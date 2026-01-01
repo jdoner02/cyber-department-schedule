@@ -63,9 +63,9 @@ export type PersonaIcon = PersonaEmoji;
  *
  * Where:
  * - YYYY = 4-digit year
- * - QQ = Quarter code: 10=Fall, 20=Winter, 30=Spring, 40=Summer
+ * - QQ = Quarter code: 10=Winter, 20=Spring, 30=Summer, 40=Fall
  *
- * Example: "202510" = Fall 2025
+ * Example: "202510" = Winter 2025
  *
  * EDUCATIONAL NOTE: We use a string type alias rather than a branded type
  * for simplicity. In production, you might use a branded type for stronger

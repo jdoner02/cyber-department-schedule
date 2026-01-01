@@ -7,12 +7,12 @@
  *
  * EDUCATIONAL NOTES:
  * - EWU uses a quarter system: Fall, Winter, Spring, Summer
- * - Term codes follow Banner format: YYYYQQ (e.g., "202510" = Fall 2025)
+ * - Term codes follow Banner format: YYYYQQ (e.g., "202540" = Fall 2025)
  * - The QQ suffix indicates the quarter:
- *   - 10 = Fall (September - December)
- *   - 20 = Winter (January - March)
- *   - 30 = Spring (April - June)
- *   - 40 = Summer (July - August)
+ *   - 10 = Winter (January - March)
+ *   - 20 = Spring (April - June)
+ *   - 30 = Summer (July - August)
+ *   - 40 = Fall (September - December)
  *
  * DESIGN PATTERN: Utility Module
  * - Pure functions for term manipulation
@@ -34,10 +34,10 @@ export type AcademicQuarter = Quarter;
  * The order matters - we use it for comparison and iteration.
  */
 export const QUARTER_CODES = {
-  fall: '10',
-  winter: '20',
-  spring: '30',
-  summer: '40',
+  winter: '10',
+  spring: '20',
+  summer: '30',
+  fall: '40',
 } as const;
 
 /**
@@ -51,9 +51,9 @@ export const QUARTER_NAMES: Record<AcademicQuarter, string> = {
 };
 
 /**
- * Quarter order for iteration (academic year starts in Fall)
+ * Quarter order for iteration (chronological within a calendar year)
  */
-export const QUARTER_ORDER: AcademicQuarter[] = ['fall', 'winter', 'spring', 'summer'];
+export const QUARTER_ORDER: AcademicQuarter[] = ['winter', 'spring', 'summer', 'fall'];
 
 /**
  * Typical credit loads per quarter
@@ -77,8 +77,8 @@ export const CREDIT_LIMITS = {
  * @throws Error if term code format is invalid
  *
  * @example
- * parseTerm("202510") // => { year: 2025, quarter: 'fall' }
- * parseTerm("202420") // => { year: 2024, quarter: 'winter' }
+ * parseTerm("202510") // => { year: 2025, quarter: 'winter' }
+ * parseTerm("202540") // => { year: 2025, quarter: 'fall' }
  */
 export function parseTerm(termCode: AcademicTerm): { year: number; quarter: AcademicQuarter } {
   if (!/^\d{6}$/.test(termCode)) {
@@ -111,8 +111,8 @@ export function parseTerm(termCode: AcademicTerm): { year: number; quarter: Acad
  * @returns Banner format term code
  *
  * @example
- * createTerm(2025, 'fall') // => "202510"
- * createTerm(2024, 'spring') // => "202430"
+ * createTerm(2025, 'winter') // => "202510"
+ * createTerm(2024, 'fall') // => "202440"
  */
 export function createTerm(year: number, quarter: AcademicQuarter): AcademicTerm {
   if (year < 2000 || year > 2100) {
@@ -130,8 +130,8 @@ export function createTerm(year: number, quarter: AcademicQuarter): AcademicTerm
  * @returns Formatted string like "Fall 2025"
  *
  * @example
- * formatTerm("202510") // => "Fall 2025"
- * formatTerm("202430") // => "Spring 2024"
+ * formatTerm("202510") // => "Winter 2025"
+ * formatTerm("202540") // => "Fall 2025"
  */
 export function formatTerm(termCode: AcademicTerm): string {
   const { year, quarter } = parseTerm(termCode);
@@ -152,8 +152,8 @@ export function formatTerm(termCode: AcademicTerm): string {
  * @returns Negative if termA is earlier, positive if later, 0 if same
  *
  * @example
- * compareTerms("202510", "202520") // => -1 (Fall before Winter)
- * compareTerms("202530", "202510") // => 1 (Spring after Fall)
+ * compareTerms("202510", "202520") // => -1 (Winter before Spring)
+ * compareTerms("202540", "202510") // => 1 (Fall after Winter)
  * compareTerms("202510", "202510") // => 0 (same term)
  */
 export function compareTerms(termA: AcademicTerm, termB: AcademicTerm): number {
@@ -186,16 +186,16 @@ export function isTermAfter(termA: AcademicTerm, termB: AcademicTerm): boolean {
  * @returns The following term code
  *
  * @example
- * getNextTerm("202510") // => "202520" (Fall -> Winter)
- * getNextTerm("202540") // => "202610" (Summer -> Fall next year)
+ * getNextTerm("202520") // => "202530" (Spring -> Summer)
+ * getNextTerm("202540") // => "202610" (Fall -> Winter next year)
  */
 export function getNextTerm(termCode: AcademicTerm): AcademicTerm {
   const { year, quarter } = parseTerm(termCode);
   const currentIndex = QUARTER_ORDER.indexOf(quarter);
 
   if (currentIndex === QUARTER_ORDER.length - 1) {
-    // Summer -> Fall of next year
-    return createTerm(year + 1, 'fall');
+    // Fall -> Winter of next year
+    return createTerm(year + 1, 'winter');
   }
 
   // Move to next quarter in same year
@@ -209,16 +209,16 @@ export function getNextTerm(termCode: AcademicTerm): AcademicTerm {
  * @returns The preceding term code
  *
  * @example
- * getPreviousTerm("202520") // => "202510" (Winter -> Fall)
- * getPreviousTerm("202510") // => "202440" (Fall -> Summer previous year)
+ * getPreviousTerm("202520") // => "202510" (Spring -> Winter)
+ * getPreviousTerm("202510") // => "202440" (Winter -> Fall previous year)
  */
 export function getPreviousTerm(termCode: AcademicTerm): AcademicTerm {
   const { year, quarter } = parseTerm(termCode);
   const currentIndex = QUARTER_ORDER.indexOf(quarter);
 
   if (currentIndex === 0) {
-    // Fall -> Summer of previous year
-    return createTerm(year - 1, 'summer');
+    // Winter -> Fall of previous year
+    return createTerm(year - 1, 'fall');
   }
 
   // Move to previous quarter in same year

@@ -13,7 +13,8 @@ import {
 } from 'recharts';
 import { useCourses, useSchedule } from '../contexts/ScheduleContext';
 import { SUBJECT_COLORS, DELIVERY_COLORS } from '../constants/colors';
-import { Download, Users, BookOpen, Building, Clock } from 'lucide-react';
+import { Download, Users, BookOpen, Building, Clock, Info } from 'lucide-react';
+import { computeScheduleAnalytics } from '../services/scheduleAnalytics';
 
 export default function Analytics() {
   const courses = useCourses();
@@ -21,104 +22,32 @@ export default function Analytics() {
 
   // Calculate analytics data
   const analytics = useMemo(() => {
-    // Subject distribution
-    const subjectData = state.subjects.map((subject) => {
-      const subjectCourses = courses.filter((c) => c.subject === subject);
-      const totalEnrollment = subjectCourses.reduce(
-        (sum, c) => sum + c.enrollment.current,
-        0
-      );
-      const totalCapacity = subjectCourses.reduce(
-        (sum, c) => sum + c.enrollment.maximum,
-        0
-      );
-      return {
-        name: subject,
-        courses: subjectCourses.length,
-        enrollment: totalEnrollment,
-        capacity: totalCapacity,
-        available: totalCapacity - totalEnrollment,
-        fill: SUBJECT_COLORS[subject].bg,
-      };
+    return computeScheduleAnalytics({
+      courses,
+      instructors: state.instructors,
+      subjects: state.subjects,
     });
-
-    // Delivery method distribution
-    const deliveryData = ['F2F', 'Online', 'Hybrid', 'Arranged'].map((method) => {
-      const methodCourses = courses.filter((c) => c.delivery === method);
-      return {
-        name: method === 'F2F' ? 'Face-to-Face' : method,
-        value: methodCourses.length,
-        fill: DELIVERY_COLORS[method as keyof typeof DELIVERY_COLORS].bg,
-      };
-    }).filter((d) => d.value > 0);
-
-    // Faculty workload
-    const facultyWorkload = state.instructors
-      .map((instructor) => {
-        const instructorCourses = courses.filter(
-          (c) => c.instructor?.email === instructor.email
-        );
-        const totalCredits = instructorCourses.reduce((sum, c) => sum + c.credits, 0);
-        return {
-          name: instructor.lastName,
-          fullName: instructor.displayName,
-          courses: instructorCourses.length,
-          credits: totalCredits,
-        };
-      })
-      .filter((f) => f.courses > 0)
-      .sort((a, b) => b.courses - a.courses)
-      .slice(0, 10);
-
-    // Time distribution
-    const timeDistribution = [
-      { name: '7-9 AM', courses: 0 },
-      { name: '9-11 AM', courses: 0 },
-      { name: '11AM-1PM', courses: 0 },
-      { name: '1-3 PM', courses: 0 },
-      { name: '3-5 PM', courses: 0 },
-      { name: '5-7 PM', courses: 0 },
-      { name: '7-9 PM', courses: 0 },
-    ];
-
-    courses.forEach((course) => {
-      course.meetings.forEach((meeting) => {
-        const startHour = Math.floor(meeting.startMinutes / 60);
-        if (startHour >= 7 && startHour < 9) timeDistribution[0].courses++;
-        else if (startHour >= 9 && startHour < 11) timeDistribution[1].courses++;
-        else if (startHour >= 11 && startHour < 13) timeDistribution[2].courses++;
-        else if (startHour >= 13 && startHour < 15) timeDistribution[3].courses++;
-        else if (startHour >= 15 && startHour < 17) timeDistribution[4].courses++;
-        else if (startHour >= 17 && startHour < 19) timeDistribution[5].courses++;
-        else if (startHour >= 19 && startHour < 21) timeDistribution[6].courses++;
-      });
-    });
-
-    // Summary stats
-    const totalEnrollment = courses.reduce((sum, c) => sum + c.enrollment.current, 0);
-    const totalCapacity = courses.reduce((sum, c) => sum + c.enrollment.maximum, 0);
-    const totalCredits = courses.reduce((sum, c) => sum + c.credits, 0);
-    const avgClassSize =
-      courses.length > 0
-        ? Math.round(totalEnrollment / courses.filter((c) => c.enrollment.current > 0).length)
-        : 0;
-
-    return {
-      subjectData,
-      deliveryData,
-      facultyWorkload,
-      timeDistribution,
-      summary: {
-        totalCourses: courses.length,
-        totalEnrollment,
-        totalCapacity,
-        totalCredits,
-        avgClassSize,
-        utilizationRate: totalCapacity > 0 ? Math.round((totalEnrollment / totalCapacity) * 100) : 0,
-        instructorCount: state.instructors.length,
-      },
-    };
   }, [courses, state.subjects, state.instructors]);
+
+  const numberFormatter = useMemo(() => new Intl.NumberFormat(), []);
+
+  const termLabel = useMemo(() => {
+    if (!analytics.term.primary) return 'No term loaded';
+    const { code, description } = analytics.term.primary;
+    return `${description} (${code})`;
+  }, [analytics.term.primary]);
+
+  const deliveryChartData = useMemo(
+    () =>
+      analytics.delivery
+        .map((delivery) => ({
+          name: delivery.method === 'F2F' ? 'Face-to-Face' : delivery.method,
+          value: delivery.courseCount,
+          fill: DELIVERY_COLORS[delivery.method].bg,
+        }))
+        .filter((d) => d.value > 0),
+    [analytics.delivery]
+  );
 
   // Export data as CSV
   const handleExport = () => {
@@ -151,7 +80,7 @@ export default function Analytics() {
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Analytics Dashboard</h1>
           <p className="text-gray-600 mt-1">
-            Comprehensive schedule analytics and reporting
+            Term: {analytics.term.isMultiTerm ? 'Multiple terms loaded' : termLabel}
           </p>
         </div>
         <button onClick={handleExport} className="btn btn-primary">
@@ -160,45 +89,78 @@ export default function Analytics() {
         </button>
       </div>
 
+      {/* Data quality / enrollment availability */}
+      {analytics.summary.totalCourses > 0 && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+          <div className="flex items-start gap-3">
+            <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+            <div className="text-sm">
+              <p className="text-blue-800 font-medium mb-1">How to read these numbers</p>
+              {analytics.enrollmentStatus === 'allZero' ? (
+                <p className="text-blue-700 mb-0">
+                  Enrollment is currently reported as <strong>0</strong> across all sections. For many future terms,
+                  Banner publishes seat capacity before registration opens, so <strong>Enrolled</strong> and{' '}
+                  <strong>Seat Fill Rate</strong> may not be meaningful yet.
+                </p>
+              ) : (
+                <p className="text-blue-700 mb-0">
+                  Enrollment is reported for this term. Sections with non-zero enrollment:{' '}
+                  <strong>
+                    {numberFormatter.format(analytics.summary.coursesWithReportedEnrollment)}
+                  </strong>
+                  /{numberFormatter.format(analytics.summary.totalCourses)}.
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Summary cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
         <div className="card p-4 text-center">
           <BookOpen className="w-6 h-6 text-ewu-red mx-auto mb-2" />
           <div className="text-2xl font-bold text-gray-900">
-            {analytics.summary.totalCourses}
+            {numberFormatter.format(analytics.summary.totalCourses)}
           </div>
           <div className="text-xs text-gray-500 uppercase tracking-wider">Courses</div>
         </div>
         <div className="card p-4 text-center">
           <Users className="w-6 h-6 text-blue-600 mx-auto mb-2" />
           <div className="text-2xl font-bold text-gray-900">
-            {analytics.summary.totalEnrollment}
+            {numberFormatter.format(analytics.summary.totalEnrollment)}
           </div>
-          <div className="text-xs text-gray-500 uppercase tracking-wider">Enrolled</div>
+          <div className="text-xs text-gray-500 uppercase tracking-wider">Seats Filled</div>
+          {analytics.enrollmentStatus === 'allZero' && (
+            <div className="mt-1 text-[11px] text-blue-700">Not published yet</div>
+          )}
         </div>
         <div className="card p-4 text-center">
           <Building className="w-6 h-6 text-green-600 mx-auto mb-2" />
           <div className="text-2xl font-bold text-gray-900">
-            {analytics.summary.totalCapacity}
+            {numberFormatter.format(analytics.summary.totalCapacity)}
           </div>
-          <div className="text-xs text-gray-500 uppercase tracking-wider">Capacity</div>
+          <div className="text-xs text-gray-500 uppercase tracking-wider">Seats Offered</div>
         </div>
         <div className="card p-4 text-center">
           <Clock className="w-6 h-6 text-purple-600 mx-auto mb-2" />
           <div className="text-2xl font-bold text-gray-900">
-            {analytics.summary.totalCredits}
+            {numberFormatter.format(analytics.summary.totalCredits)}
           </div>
-          <div className="text-xs text-gray-500 uppercase tracking-wider">Credits</div>
+          <div className="text-xs text-gray-500 uppercase tracking-wider">Total Credits</div>
         </div>
         <div className="card p-4 text-center">
           <div className="text-2xl font-bold text-gray-900">
             {analytics.summary.utilizationRate}%
           </div>
-          <div className="text-xs text-gray-500 uppercase tracking-wider">Utilization</div>
+          <div className="text-xs text-gray-500 uppercase tracking-wider">Seat Fill Rate</div>
+          {analytics.enrollmentStatus === 'allZero' && (
+            <div className="mt-1 text-[11px] text-blue-700">Not published yet</div>
+          )}
         </div>
         <div className="card p-4 text-center">
           <div className="text-2xl font-bold text-gray-900">
-            {analytics.summary.instructorCount}
+            {numberFormatter.format(analytics.summary.instructorCount)}
           </div>
           <div className="text-xs text-gray-500 uppercase tracking-wider">Instructors</div>
         </div>
@@ -206,25 +168,64 @@ export default function Analytics() {
 
       {/* Charts grid */}
       <div className="grid lg:grid-cols-2 gap-6">
-        {/* Subject enrollment */}
+        {/* Subject seats */}
         <div className="card">
           <div className="card-header">
-            <h3 className="font-semibold text-gray-900">Enrollment by Subject</h3>
+            <h3 className="font-semibold text-gray-900">
+              {analytics.enrollmentStatus === 'allZero'
+                ? 'Seat Capacity by Subject'
+                : 'Seats Filled vs Remaining by Subject'}
+            </h3>
           </div>
           <div className="card-body">
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={analytics.subjectData} layout="vertical">
+              <BarChart data={analytics.subjects} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" />
-                <YAxis dataKey="name" type="category" width={60} />
+                <YAxis dataKey="subject" type="category" width={60} />
                 <Tooltip
-                  formatter={(value, name) => [
-                    value,
-                    name === 'enrollment' ? 'Enrolled' : 'Capacity',
-                  ]}
+                  content={({ active, payload }) => {
+                    if (!active || !payload || payload.length === 0) return null;
+                    const row = payload[0].payload as (typeof analytics.subjects)[number];
+                    const capacity = row.capacity;
+                    const enrollment = row.enrollment;
+                    const available = row.available;
+                    const fillRate = capacity > 0 ? Math.round((enrollment / capacity) * 100) : 0;
+
+                    return (
+                      <div className="bg-white p-3 shadow-lg rounded-lg border">
+                        <p className="font-medium">{row.subject}</p>
+                        <p className="text-sm text-gray-600">
+                          Seats offered: {numberFormatter.format(capacity)}
+                        </p>
+                        <p className="text-sm text-gray-600">
+                          Seats filled: {numberFormatter.format(enrollment)}
+                        </p>
+                        <p className="text-sm text-gray-600">
+                          Seats remaining: {numberFormatter.format(available)}
+                        </p>
+                        <p className="text-sm text-gray-600">Fill rate: {fillRate}%</p>
+                        {analytics.enrollmentStatus === 'allZero' && (
+                          <p className="text-xs text-blue-700 mt-2 mb-0">
+                            Enrollment may not be published yet for this term.
+                          </p>
+                        )}
+                      </div>
+                    );
+                  }}
                 />
-                <Bar dataKey="enrollment" fill="#A4232E" name="Enrolled" />
-                <Bar dataKey="capacity" fill="#E5E7EB" name="Capacity" />
+                {analytics.enrollmentStatus === 'allZero' ? (
+                  <Bar dataKey="capacity" name="Seats offered">
+                    {analytics.subjects.map((entry) => (
+                      <Cell key={`capacity-${entry.subject}`} fill={SUBJECT_COLORS[entry.subject].bg} />
+                    ))}
+                  </Bar>
+                ) : (
+                  <>
+                    <Bar dataKey="enrollment" stackId="seats" fill="#A4232E" name="Seats filled" />
+                    <Bar dataKey="available" stackId="seats" fill="#E5E7EB" name="Seats remaining" />
+                  </>
+                )}
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -239,7 +240,7 @@ export default function Analytics() {
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
-                  data={analytics.deliveryData}
+                  data={deliveryChartData}
                   cx="50%"
                   cy="50%"
                   labelLine={false}
@@ -249,7 +250,7 @@ export default function Analytics() {
                   outerRadius={100}
                   dataKey="value"
                 >
-                  {analytics.deliveryData.map((entry, index) => (
+                  {deliveryChartData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.fill} />
                   ))}
                 </Pie>
@@ -327,48 +328,64 @@ export default function Analytics() {
                   Courses
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Enrolled
+                  Seats Filled
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Capacity
+                  Seats Offered
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Available
+                  Seats Remaining
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Utilization
+                  Fill Rate
                 </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {analytics.subjectData.map((subject) => (
-                <tr key={subject.name} className="hover:bg-gray-50">
+              {analytics.subjects.map((subject) => (
+                <tr key={subject.subject} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span
                       className="px-2 py-1 rounded text-white text-sm font-medium"
-                      style={{ backgroundColor: subject.fill }}
+                      style={{ backgroundColor: SUBJECT_COLORS[subject.subject].bg }}
                     >
-                      {subject.name}
+                      {subject.subject}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-right text-gray-900">{subject.courses}</td>
-                  <td className="px-6 py-4 text-right text-gray-900">{subject.enrollment}</td>
-                  <td className="px-6 py-4 text-right text-gray-900">{subject.capacity}</td>
-                  <td className="px-6 py-4 text-right text-gray-900">{subject.available}</td>
+                  <td className="px-6 py-4 text-right text-gray-900">
+                    {numberFormatter.format(subject.courseCount)}
+                  </td>
+                  <td className="px-6 py-4 text-right text-gray-900">
+                    {analytics.enrollmentStatus === 'allZero' ? (
+                      <span className="text-gray-400">—</span>
+                    ) : (
+                      numberFormatter.format(subject.enrollment)
+                    )}
+                  </td>
+                  <td className="px-6 py-4 text-right text-gray-900">
+                    {numberFormatter.format(subject.capacity)}
+                  </td>
+                  <td className="px-6 py-4 text-right text-gray-900">
+                    {numberFormatter.format(subject.available)}
+                  </td>
                   <td className="px-6 py-4 text-right">
-                    <span
-                      className={`font-medium ${
-                        subject.capacity > 0
-                          ? Math.round((subject.enrollment / subject.capacity) * 100) > 80
-                            ? 'text-red-600'
-                            : 'text-green-600'
-                          : 'text-gray-400'
-                      }`}
-                    >
-                      {subject.capacity > 0
-                        ? `${Math.round((subject.enrollment / subject.capacity) * 100)}%`
-                        : 'N/A'}
-                    </span>
+                    {analytics.enrollmentStatus === 'allZero' ? (
+                      <span className="text-gray-400 font-medium">—</span>
+                    ) : (
+                      <span
+                        className={`font-medium ${
+                          subject.capacity > 0
+                            ? Math.round((subject.enrollment / subject.capacity) * 100) > 80
+                              ? 'text-red-600'
+                              : 'text-green-600'
+                            : 'text-gray-400'
+                        }`}
+                      >
+                        {subject.capacity > 0
+                          ? `${Math.round((subject.enrollment / subject.capacity) * 100)}%`
+                          : 'N/A'}
+                      </span>
+                    )}
                   </td>
                 </tr>
               ))}
