@@ -1,8 +1,11 @@
-import { X, Clock, MapPin, User, Users, BookOpen, Calendar, Mail, StickyNote } from 'lucide-react';
+import { X, Clock, MapPin, User, Users, BookOpen, Calendar, Mail, StickyNote, Info } from 'lucide-react';
+import { useMemo } from 'react';
 import type { Course } from '../../types/schedule';
 import { SUBJECT_COLORS } from '../../constants/colors';
 import { formatTimeRange } from '../../constants/timeSlots';
 import { DAYS_OF_WEEK } from '../../constants/timeSlots';
+import { useAcademicCalendarEvents } from '../../contexts/AcademicCalendarContext';
+import { findRegistrationOpensEvent } from '../../services/academicCalendar';
 
 interface CourseDetailModalProps {
   course: Course;
@@ -11,6 +14,32 @@ interface CourseDetailModalProps {
 
 export default function CourseDetailModal({ course, onClose }: CourseDetailModalProps) {
   const colors = SUBJECT_COLORS[course.subject];
+  const calendarEvents = useAcademicCalendarEvents();
+
+  const registrationInfo = useMemo(() => {
+    const event = findRegistrationOpensEvent(calendarEvents, course.term);
+    if (!event) return null;
+    const date = new Date(event.startDate);
+    if (Number.isNaN(date.getTime())) return null;
+    return { event, date };
+  }, [calendarEvents, course.term]);
+
+  const registrationDateLabel = useMemo(() => {
+    if (!registrationInfo) return null;
+    return new Intl.DateTimeFormat(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }).format(registrationInfo.date);
+  }, [registrationInfo]);
+
+  const isBeforeRegistration = useMemo(() => {
+    if (!registrationInfo) return false;
+    return new Date().getTime() < registrationInfo.date.getTime();
+  }, [registrationInfo]);
+
+  const isEnrollmentLikelyUnavailable =
+    course.enrollment.current === 0 && isBeforeRegistration && registrationDateLabel !== null;
 
   // Format days for display
   const formatDays = (days: Course['meetings'][0]['days']) => {
@@ -21,6 +50,10 @@ export default function CourseDetailModal({ course, onClose }: CourseDetailModal
 
   // Calculate enrollment status
   const enrollmentStatus = () => {
+    if (isEnrollmentLikelyUnavailable) {
+      return { label: 'Not Published', color: 'text-blue-700 bg-blue-50' };
+    }
+
     const percent = course.enrollment.utilizationPercent;
 
     if (percent >= 100) return { label: 'Full', color: 'text-red-600 bg-red-50' };
@@ -83,15 +116,29 @@ export default function CourseDetailModal({ course, onClose }: CourseDetailModal
             </div>
             <div className="text-center p-3 bg-gray-50 rounded-lg">
               <div className="text-2xl font-bold text-gray-900">
-                {course.enrollment.current}/{course.enrollment.maximum}
+                {isEnrollmentLikelyUnavailable ? (
+                  <span className="text-gray-400">—</span>
+                ) : (
+                  course.enrollment.current
+                )}
+                /{course.enrollment.maximum}
               </div>
-              <div className="text-xs text-gray-500 uppercase tracking-wider">Enrolled</div>
+              <div className="text-xs text-gray-500 uppercase tracking-wider">Seats Filled</div>
             </div>
             <div className="text-center p-3 bg-gray-50 rounded-lg">
               <div className="text-2xl font-bold text-gray-900">{course.enrollment.available}</div>
               <div className="text-xs text-gray-500 uppercase tracking-wider">Seats Left</div>
             </div>
           </div>
+
+          {isEnrollmentLikelyUnavailable && registrationDateLabel && (
+            <div className="p-3 sm:p-4 bg-blue-50 border border-blue-200 rounded-lg flex items-start gap-3">
+              <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-blue-800">
+                Enrollment is not expected yet for this term. Registration opens <strong>{registrationDateLabel}</strong>.
+              </div>
+            </div>
+          )}
 
           {/* Instructor */}
           {course.instructor && (
@@ -214,4 +261,3 @@ export default function CourseDetailModal({ course, onClose }: CourseDetailModal
     </div>
   );
 }
-

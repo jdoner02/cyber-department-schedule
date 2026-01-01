@@ -300,6 +300,25 @@ export default function Settings() {
 }`}
               </pre>
             </div>
+
+            <div className="p-4 bg-gray-50 rounded-lg">
+              <h3 className="font-medium text-gray-900 mb-2">Academic Calendar Feed</h3>
+              <p className="text-sm text-gray-600 mb-3">
+                The dashboard also uses EWU’s academic calendar RSS feed (mirrored locally for GitHub Pages).
+              </p>
+              <div className="space-y-2 text-sm text-gray-700">
+                <div className="flex items-center gap-2">
+                  <span className="font-medium">Local file:</span>
+                  <code className="text-xs bg-gray-200 px-2 py-1 rounded font-mono">
+                    public/data/academic-calendar-quarter.rss
+                  </code>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="font-medium">Refresh command:</span>
+                  <code className="text-xs bg-gray-200 px-2 py-1 rounded font-mono">npm run fetch:calendar</code>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

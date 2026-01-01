@@ -15,10 +15,13 @@ import { useCourses, useSchedule } from '../contexts/ScheduleContext';
 import { SUBJECT_COLORS, DELIVERY_COLORS } from '../constants/colors';
 import { Download, Users, BookOpen, Building, Clock, Info } from 'lucide-react';
 import { computeScheduleAnalytics } from '../services/scheduleAnalytics';
+import { useAcademicCalendarEvents } from '../contexts/AcademicCalendarContext';
+import { findRegistrationOpensEvent } from '../services/academicCalendar';
 
 export default function Analytics() {
   const courses = useCourses();
   const { state } = useSchedule();
+  const calendarEvents = useAcademicCalendarEvents();
 
   // Calculate analytics data
   const analytics = useMemo(() => {
@@ -36,6 +39,30 @@ export default function Analytics() {
     const { code, description } = analytics.term.primary;
     return `${description} (${code})`;
   }, [analytics.term.primary]);
+
+  const registrationInfo = useMemo(() => {
+    const termCode = analytics.term.primary?.code ?? null;
+    if (!termCode) return null;
+    const event = findRegistrationOpensEvent(calendarEvents, termCode);
+    if (!event) return null;
+    const date = new Date(event.startDate);
+    if (Number.isNaN(date.getTime())) return null;
+    return { event, date };
+  }, [analytics.term.primary?.code, calendarEvents]);
+
+  const registrationDateLabel = useMemo(() => {
+    if (!registrationInfo) return null;
+    return new Intl.DateTimeFormat(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }).format(registrationInfo.date);
+  }, [registrationInfo]);
+
+  const isBeforeRegistration = useMemo(() => {
+    if (!registrationInfo) return false;
+    return new Date().getTime() < registrationInfo.date.getTime();
+  }, [registrationInfo]);
 
   const deliveryChartData = useMemo(
     () =>
@@ -98,9 +125,19 @@ export default function Analytics() {
               <p className="text-blue-800 font-medium mb-1">How to read these numbers</p>
               {analytics.enrollmentStatus === 'allZero' ? (
                 <p className="text-blue-700 mb-0">
-                  Enrollment is currently reported as <strong>0</strong> across all sections. For many future terms,
-                  Banner publishes seat capacity before registration opens, so <strong>Enrolled</strong> and{' '}
-                  <strong>Seat Fill Rate</strong> may not be meaningful yet.
+                  {isBeforeRegistration && registrationDateLabel ? (
+                    <>
+                      Registration opens on <strong>{registrationDateLabel}</strong>. Until then, Banner often publishes
+                      seat capacity before enrollment counts are available, so <strong>Seats Filled</strong> and{' '}
+                      <strong>Seat Fill Rate</strong> are intentionally hidden here to avoid confusion.
+                    </>
+                  ) : (
+                    <>
+                      Enrollment is currently reported as <strong>0</strong> across all sections. For many future terms,
+                      Banner publishes seat capacity before enrollment counts are available, so <strong>Seats Filled</strong> and{' '}
+                      <strong>Seat Fill Rate</strong> may not be meaningful yet.
+                    </>
+                  )}
                 </p>
               ) : (
                 <p className="text-blue-700 mb-0">
@@ -128,11 +165,19 @@ export default function Analytics() {
         <div className="card p-4 text-center">
           <Users className="w-6 h-6 text-blue-600 mx-auto mb-2" />
           <div className="text-2xl font-bold text-gray-900">
-            {numberFormatter.format(analytics.summary.totalEnrollment)}
+            {analytics.enrollmentStatus === 'allZero' && isBeforeRegistration ? (
+              <span className="text-gray-400">—</span>
+            ) : (
+              numberFormatter.format(analytics.summary.totalEnrollment)
+            )}
           </div>
           <div className="text-xs text-gray-500 uppercase tracking-wider">Seats Filled</div>
           {analytics.enrollmentStatus === 'allZero' && (
-            <div className="mt-1 text-[11px] text-blue-700">Not published yet</div>
+            <div className="mt-1 text-[11px] text-blue-700">
+              {isBeforeRegistration && registrationDateLabel
+                ? `Registration opens ${registrationDateLabel}`
+                : 'Not published yet'}
+            </div>
           )}
         </div>
         <div className="card p-4 text-center">
@@ -151,11 +196,19 @@ export default function Analytics() {
         </div>
         <div className="card p-4 text-center">
           <div className="text-2xl font-bold text-gray-900">
-            {analytics.summary.utilizationRate}%
+            {analytics.enrollmentStatus === 'allZero' && isBeforeRegistration ? (
+              <span className="text-gray-400">—</span>
+            ) : (
+              `${analytics.summary.utilizationRate}%`
+            )}
           </div>
           <div className="text-xs text-gray-500 uppercase tracking-wider">Seat Fill Rate</div>
           {analytics.enrollmentStatus === 'allZero' && (
-            <div className="mt-1 text-[11px] text-blue-700">Not published yet</div>
+            <div className="mt-1 text-[11px] text-blue-700">
+              {isBeforeRegistration && registrationDateLabel
+                ? `Registration opens ${registrationDateLabel}`
+                : 'Not published yet'}
+            </div>
           )}
         </div>
         <div className="card p-4 text-center">
@@ -207,7 +260,9 @@ export default function Analytics() {
                         <p className="text-sm text-gray-600">Fill rate: {fillRate}%</p>
                         {analytics.enrollmentStatus === 'allZero' && (
                           <p className="text-xs text-blue-700 mt-2 mb-0">
-                            Enrollment may not be published yet for this term.
+                            {isBeforeRegistration && registrationDateLabel
+                              ? `Registration opens ${registrationDateLabel}; enrollment may not be published yet.`
+                              : 'Enrollment may not be published yet for this term.'}
                           </p>
                         )}
                       </div>

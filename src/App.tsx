@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ScheduleProvider } from './contexts/ScheduleContext';
 import { FilterProvider } from './contexts/FilterContext';
 import { StudentProvider } from './contexts/StudentContext';
+import { AcademicCalendarProvider } from './contexts/AcademicCalendarContext';
 import Layout from './components/common/Layout';
 import Dashboard from './pages/Dashboard';
 import Conflicts from './pages/Conflicts';
@@ -16,24 +17,26 @@ function App() {
 
   return (
     <BrowserRouter basename={basePath}>
-      <ScheduleProvider>
-        <FilterProvider>
-          <StudentProvider>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route index element={<Dashboard />} />
-                <Route path="conflicts" element={<Conflicts />} />
-                <Route path="notes" element={<Notes />} />
-                <Route path="analytics" element={<Analytics />} />
-                <Route path="students" element={<Students />} />
-                <Route path="docs" element={<Documentation />} />
-                <Route path="docs/:section" element={<Documentation />} />
-                <Route path="settings" element={<Settings />} />
-              </Route>
-            </Routes>
-          </StudentProvider>
-        </FilterProvider>
-      </ScheduleProvider>
+      <AcademicCalendarProvider>
+        <ScheduleProvider>
+          <FilterProvider>
+            <StudentProvider>
+              <Routes>
+                <Route path="/" element={<Layout />}>
+                  <Route index element={<Dashboard />} />
+                  <Route path="conflicts" element={<Conflicts />} />
+                  <Route path="notes" element={<Notes />} />
+                  <Route path="analytics" element={<Analytics />} />
+                  <Route path="students" element={<Students />} />
+                  <Route path="docs" element={<Documentation />} />
+                  <Route path="docs/:section" element={<Documentation />} />
+                  <Route path="settings" element={<Settings />} />
+                </Route>
+              </Routes>
+            </StudentProvider>
+          </FilterProvider>
+        </ScheduleProvider>
+      </AcademicCalendarProvider>
     </BrowserRouter>
   );
 }

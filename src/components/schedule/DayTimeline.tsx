@@ -1,9 +1,11 @@
 import { useMemo } from 'react';
-import { Clock, MapPin, User, AlertTriangle, Users, Layers } from 'lucide-react';
+import { Clock, MapPin, User, AlertTriangle, Users, Layers, Info } from 'lucide-react';
 import type { Course, DayOfWeek } from '../../types/schedule';
 import type { StackedCourseInfo } from '../../services/stackedCourseDetector';
 import { SUBJECT_COLORS } from '../../constants/colors';
 import { minutesToDisplayTime, DAYS_OF_WEEK } from '../../constants/timeSlots';
+import { useAcademicCalendarEvents } from '../../contexts/AcademicCalendarContext';
+import { findRegistrationOpensEvent } from '../../services/academicCalendar';
 
 interface DayTimelineProps {
   courses: Course[];
@@ -31,6 +33,8 @@ export default function DayTimeline({
   onCourseClick,
   stackedPairs,
 }: DayTimelineProps) {
+  const calendarEvents = useAcademicCalendarEvents();
+
   // Get courses for selected day, sorted by start time
   const dayCourses = useMemo(() => {
     const result: TimelineCourse[] = [];
@@ -55,6 +59,34 @@ export default function DayTimeline({
   // Get day display name
   const dayDisplay = DAYS_OF_WEEK.find((d) => d.key === selectedDay)?.display || selectedDay;
 
+  const termCode = courses[0]?.term ?? null;
+  const hasAnyEnrollment = courses.some((c) => c.enrollment.current > 0);
+
+  const registrationInfo = useMemo(() => {
+    if (!termCode) return null;
+    const event = findRegistrationOpensEvent(calendarEvents, termCode);
+    if (!event) return null;
+    const date = new Date(event.startDate);
+    if (Number.isNaN(date.getTime())) return null;
+    return { event, date };
+  }, [calendarEvents, termCode]);
+
+  const registrationDateLabel = useMemo(() => {
+    if (!registrationInfo) return null;
+    return new Intl.DateTimeFormat(undefined, {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    }).format(registrationInfo.date);
+  }, [registrationInfo]);
+
+  const isBeforeRegistration = useMemo(() => {
+    if (!registrationInfo) return false;
+    return new Date().getTime() < registrationInfo.date.getTime();
+  }, [registrationInfo]);
+
+  const hideEnrollmentMetrics = courses.length > 0 && !hasAnyEnrollment && isBeforeRegistration && registrationDateLabel !== null;
+
   if (dayCourses.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
@@ -78,6 +110,17 @@ export default function DayTimeline({
           {dayCourses.length} class{dayCourses.length !== 1 ? 'es' : ''}
         </span>
       </div>
+
+      {hideEnrollmentMetrics && registrationDateLabel && (
+        <div className="px-2">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 flex items-start gap-2">
+            <Info className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
+            <div className="text-sm text-blue-800">
+              Enrollment counts will appear after registration opens <strong>{registrationDateLabel}</strong>.
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Timeline items */}
       {dayCourses.map(({ course, meeting }, index) => {
@@ -154,18 +197,29 @@ export default function DayTimeline({
                 <div className="flex items-center gap-1.5 text-xs text-gray-500">
                   <Users className="w-3.5 h-3.5" />
                   <span>
-                    {course.enrollment.current}/{course.enrollment.maximum}
+                    {hideEnrollmentMetrics ? (
+                      <span className="text-gray-400">—</span>
+                    ) : (
+                      course.enrollment.current
+                    )}
+                    /{course.enrollment.maximum}
                   </span>
                 </div>
                 <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
                   <div
                     className={`h-full rounded-full transition-all ${
-                      isFull ? 'bg-red-500' : enrollmentPercent > 80 ? 'bg-yellow-500' : 'bg-green-500'
+                      hideEnrollmentMetrics
+                        ? 'bg-gray-300'
+                        : isFull
+                          ? 'bg-red-500'
+                          : enrollmentPercent > 80
+                            ? 'bg-yellow-500'
+                            : 'bg-green-500'
                     }`}
-                    style={{ width: `${Math.min(enrollmentPercent, 100)}%` }}
+                    style={{ width: `${Math.min(hideEnrollmentMetrics ? 0 : enrollmentPercent, 100)}%` }}
                   />
                 </div>
-                {isFull && (
+                {isFull && !hideEnrollmentMetrics && (
                   <span className="text-xs font-medium text-red-600">FULL</span>
                 )}
               </div>

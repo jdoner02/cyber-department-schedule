@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { Users, TrendingUp, AlertCircle, BookOpen, Clock, GraduationCap } from 'lucide-react';
 import type { Course } from '../../types/schedule';
+import { useAcademicCalendarEvents } from '../../contexts/AcademicCalendarContext';
+import { findRegistrationOpensEvent } from '../../services/academicCalendar';
 
 interface QuickInsightsProps {
   courses: Course[];
@@ -18,8 +20,37 @@ interface InstructorWorkload {
  * Apple-quality design with key metrics at a glance
  */
 export default function QuickInsights({ courses }: QuickInsightsProps) {
+  const calendarEvents = useAcademicCalendarEvents();
+
+  const termCode = courses[0]?.term ?? null;
+
+  const registrationInfo = useMemo(() => {
+    if (!termCode) return null;
+    const event = findRegistrationOpensEvent(calendarEvents, termCode);
+    if (!event) return null;
+    const date = new Date(event.startDate);
+    if (Number.isNaN(date.getTime())) return null;
+    return { event, date };
+  }, [calendarEvents, termCode]);
+
+  const registrationDateLabel = useMemo(() => {
+    if (!registrationInfo) return null;
+    return new Intl.DateTimeFormat(undefined, {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    }).format(registrationInfo.date);
+  }, [registrationInfo]);
+
+  const isBeforeRegistration = useMemo(() => {
+    if (!registrationInfo) return false;
+    return new Date().getTime() < registrationInfo.date.getTime();
+  }, [registrationInfo]);
+
   // Calculate all metrics
   const metrics = useMemo(() => {
+    const hasAnyEnrollment = courses.some((c) => c.enrollment.current > 0);
+
     // Total enrollment stats
     const totalEnrolled = courses.reduce((sum, c) => sum + c.enrollment.current, 0);
     const totalCapacity = courses.reduce((sum, c) => sum + c.enrollment.maximum, 0);
@@ -75,6 +106,7 @@ export default function QuickInsights({ courses }: QuickInsightsProps) {
       totalEnrolled,
       totalCapacity,
       capacityPercent,
+      hasAnyEnrollment,
       fullCourses,
       lowEnrollmentCourses,
       busiestInstructor,
@@ -85,8 +117,19 @@ export default function QuickInsights({ courses }: QuickInsightsProps) {
     };
   }, [courses]);
 
+  const hideEnrollmentMetrics = metrics.totalCourses > 0 && !metrics.hasAnyEnrollment && isBeforeRegistration;
+
   return (
     <div className="space-y-4">
+      {hideEnrollmentMetrics && registrationDateLabel && (
+        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4">
+          <div className="text-sm text-blue-800">
+            <strong>Enrollment not expected yet:</strong> Registration opens {registrationDateLabel}. Until then, Banner
+            typically publishes seat capacity before enrollment counts.
+          </div>
+        </div>
+      )}
+
       {/* Primary metrics row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {/* Total Sections */}
@@ -107,8 +150,10 @@ export default function QuickInsights({ courses }: QuickInsightsProps) {
               <TrendingUp className="w-4 h-4 text-green-600" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-gray-900">{metrics.capacityPercent}%</div>
-          <div className="text-sm text-gray-500">Capacity</div>
+          <div className="text-2xl font-bold text-gray-900">
+            {hideEnrollmentMetrics ? <span className="text-gray-400">—</span> : `${metrics.capacityPercent}%`}
+          </div>
+          <div className="text-sm text-gray-500">Seat Fill</div>
         </div>
 
         {/* Faculty Count */}
@@ -129,8 +174,10 @@ export default function QuickInsights({ courses }: QuickInsightsProps) {
               <GraduationCap className="w-4 h-4 text-amber-600" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-gray-900">{metrics.totalEnrolled}</div>
-          <div className="text-sm text-gray-500">Enrolled</div>
+          <div className="text-2xl font-bold text-gray-900">
+            {hideEnrollmentMetrics ? <span className="text-gray-400">—</span> : metrics.totalEnrolled}
+          </div>
+          <div className="text-sm text-gray-500">Seats Filled</div>
         </div>
       </div>
 

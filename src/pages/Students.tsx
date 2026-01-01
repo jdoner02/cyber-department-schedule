@@ -24,6 +24,7 @@ import type { StudentPersona } from '../types/advising';
 import PersonaList from '../components/advising/PersonaList';
 import { getAvailablePrograms } from '../services/catalogParser';
 import { formatTerm } from '../constants/academicTerms';
+import RegistrationPrepCard from '../components/advising/RegistrationPrepCard';
 
 /**
  * Students page - main advising dashboard
@@ -59,6 +60,11 @@ export default function Students() {
             Never enter real student information. Data is stored locally in your browser.
           </div>
         </div>
+      </div>
+
+      {/* Action Center: Registration prep */}
+      <div className="px-4 py-4 sm:px-6">
+        <RegistrationPrepCard />
       </div>
 
       {/* Main Content Area */}

@@ -6,6 +6,7 @@ import DayTimeline from '../components/schedule/DayTimeline';
 import CourseDetailModal from '../components/schedule/CourseDetailModal';
 import ConflictAlerts from '../components/executive/ConflictAlerts';
 import QuickInsights from '../components/executive/QuickInsights';
+import AcademicCalendarCard from '../components/calendar/AcademicCalendarCard';
 import { Loader2, Calendar, Settings, Filter } from 'lucide-react';
 import type { Course, DayOfWeek } from '../types/schedule';
 
@@ -83,7 +84,8 @@ export default function Dashboard() {
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Schedule Overview</h1>
           <p className="text-sm text-gray-500 mt-0.5">
-            Spring Quarter 2026 • {displayCourses.length} sections
+            {state.courses[0]?.termDescription ?? 'Term'}{state.courses[0]?.term ? ` (${state.courses[0].term})` : ''} •{' '}
+            {displayCourses.length} sections
           </p>
         </div>
         <button
@@ -125,6 +127,9 @@ export default function Dashboard() {
 
       {/* Quick Insights - PRIORITY 3 */}
       <QuickInsights courses={displayCourses} />
+
+      {/* Academic Calendar - key dates and reminders */}
+      <AcademicCalendarCard />
 
       {/* Day Schedule - PRIORITY 2 */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
