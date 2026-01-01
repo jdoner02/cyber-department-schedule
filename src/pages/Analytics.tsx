@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import {
   BarChart,
   Bar,
@@ -14,15 +14,28 @@ import {
 import { useCourses, useSchedule } from '../contexts/ScheduleContext';
 import { SUBJECT_COLORS, DELIVERY_COLORS } from '../constants/colors';
 import { Download, Users, BookOpen, Building, Clock, Info } from 'lucide-react';
-import { computeScheduleAnalytics } from '../services/scheduleAnalytics';
+import { computeScheduleAnalytics, TIME_DISTRIBUTION_BUCKETS } from '../services/scheduleAnalytics';
 import { useAcademicCalendarEvents } from '../contexts/AcademicCalendarContext';
 import { findRegistrationOpensEvent } from '../services/academicCalendar';
 import { downloadText } from '../utils/download';
+import type { Course, DeliveryMethod, SubjectCode } from '../types/schedule';
+import CourseDetailModal from '../components/schedule/CourseDetailModal';
+import AnalyticsDrilldownModal, { type AnalyticsDrilldown } from '../components/analytics/AnalyticsDrilldownModal';
+
+function extractChartPayload<T extends object>(value: unknown): T | null {
+  if (!value || typeof value !== 'object') return null;
+  if (!('payload' in value)) return null;
+  const payload = (value as { payload?: unknown }).payload;
+  if (!payload || typeof payload !== 'object') return null;
+  return payload as T;
+}
 
 export default function Analytics() {
   const courses = useCourses();
   const { state } = useSchedule();
   const calendarEvents = useAcademicCalendarEvents();
+  const [drilldown, setDrilldown] = useState<AnalyticsDrilldown | null>(null);
+  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
 
   // Calculate analytics data
   const analytics = useMemo(() => {
@@ -69,12 +82,26 @@ export default function Analytics() {
     () =>
       analytics.delivery
         .map((delivery) => ({
+          method: delivery.method as DeliveryMethod,
           name: delivery.method === 'F2F' ? 'Face-to-Face' : delivery.method,
           value: delivery.courseCount,
           fill: DELIVERY_COLORS[delivery.method].bg,
         }))
         .filter((d) => d.value > 0),
     [analytics.delivery]
+  );
+
+  const timeDistributionChartData = useMemo(
+    () =>
+      analytics.timeDistribution.map((bucket, index) => {
+        const config = TIME_DISTRIBUTION_BUCKETS[index];
+        return {
+          ...bucket,
+          startHour: config?.startHour ?? 0,
+          endHour: config?.endHour ?? 0,
+        };
+      }),
+    [analytics.timeDistribution]
   );
 
   // Export data as CSV
@@ -228,60 +255,92 @@ export default function Analytics() {
                 ? 'Seat Capacity by Subject'
                 : 'Seats Filled vs Remaining by Subject'}
             </h3>
+            <p className="text-xs text-gray-500 mt-1">Tip: click a bar to see the underlying sections.</p>
           </div>
           <div className="card-body">
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={analytics.subjects} layout="vertical">
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" />
-                <YAxis dataKey="subject" type="category" width={60} />
-                <Tooltip
-                  content={({ active, payload }) => {
-                    if (!active || !payload || payload.length === 0) return null;
-                    const row = payload[0].payload as (typeof analytics.subjects)[number];
-                    const capacity = row.capacity;
-                    const enrollment = row.enrollment;
-                    const available = row.available;
-                    const fillRate = capacity > 0 ? Math.round((enrollment / capacity) * 100) : 0;
+            <div className="[&_.recharts-bar-rectangle]:cursor-pointer">
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={analytics.subjects} layout="vertical">
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis type="number" />
+                  <YAxis dataKey="subject" type="category" width={60} />
+                  <Tooltip
+                    content={({ active, payload }) => {
+                      if (!active || !payload || payload.length === 0) return null;
+                      const row = payload[0].payload as (typeof analytics.subjects)[number];
+                      const capacity = row.capacity;
+                      const enrollment = row.enrollment;
+                      const available = row.available;
+                      const fillRate = capacity > 0 ? Math.round((enrollment / capacity) * 100) : 0;
 
-                    return (
-                      <div className="bg-white p-3 shadow-lg rounded-lg border">
-                        <p className="font-medium">{row.subject}</p>
-                        <p className="text-sm text-gray-600">
-                          Seats offered: {numberFormatter.format(capacity)}
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          Seats filled: {numberFormatter.format(enrollment)}
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          Seats remaining: {numberFormatter.format(available)}
-                        </p>
-                        <p className="text-sm text-gray-600">Fill rate: {fillRate}%</p>
-                        {analytics.enrollmentStatus === 'allZero' && (
-                          <p className="text-xs text-blue-700 mt-2 mb-0">
-                            {isBeforeRegistration && registrationDateLabel
-                              ? `Registration opens ${registrationDateLabel}; enrollment may not be published yet.`
-                              : 'Enrollment may not be published yet for this term.'}
+                      return (
+                        <div className="bg-white p-3 shadow-lg rounded-lg border">
+                          <p className="font-medium">{row.subject}</p>
+                          <p className="text-sm text-gray-600">
+                            Seats offered: {numberFormatter.format(capacity)}
                           </p>
-                        )}
-                      </div>
-                    );
-                  }}
-                />
-                {analytics.enrollmentStatus === 'allZero' ? (
-                  <Bar dataKey="capacity" name="Seats offered">
-                    {analytics.subjects.map((entry) => (
-                      <Cell key={`capacity-${entry.subject}`} fill={SUBJECT_COLORS[entry.subject].bg} />
-                    ))}
-                  </Bar>
-                ) : (
-                  <>
-                    <Bar dataKey="enrollment" stackId="seats" fill="#A4232E" name="Seats filled" />
-                    <Bar dataKey="available" stackId="seats" fill="#E5E7EB" name="Seats remaining" />
-                  </>
-                )}
-              </BarChart>
-            </ResponsiveContainer>
+                          <p className="text-sm text-gray-600">
+                            Seats filled: {numberFormatter.format(enrollment)}
+                          </p>
+                          <p className="text-sm text-gray-600">
+                            Seats remaining: {numberFormatter.format(available)}
+                          </p>
+                          <p className="text-sm text-gray-600">Fill rate: {fillRate}%</p>
+                          {analytics.enrollmentStatus === 'allZero' && (
+                            <p className="text-xs text-blue-700 mt-2 mb-0">
+                              {isBeforeRegistration && registrationDateLabel
+                                ? `Registration opens ${registrationDateLabel}; enrollment may not be published yet.`
+                                : 'Enrollment may not be published yet for this term.'}
+                            </p>
+                          )}
+                          <p className="text-xs text-gray-500 mt-2 mb-0">Click to drill down.</p>
+                        </div>
+                      );
+                    }}
+                  />
+                  {analytics.enrollmentStatus === 'allZero' ? (
+                    <Bar
+                      dataKey="capacity"
+                      name="Seats offered"
+                      onClick={(data) => {
+                        const payload = extractChartPayload<{ subject: SubjectCode }>(data);
+                        if (!payload) return;
+                        setDrilldown({ kind: 'subject', subject: payload.subject });
+                      }}
+                    >
+                      {analytics.subjects.map((entry) => (
+                        <Cell key={`capacity-${entry.subject}`} fill={SUBJECT_COLORS[entry.subject].bg} />
+                      ))}
+                    </Bar>
+                  ) : (
+                    <>
+                      <Bar
+                        dataKey="enrollment"
+                        stackId="seats"
+                        fill="#A4232E"
+                        name="Seats filled"
+                        onClick={(data) => {
+                          const payload = extractChartPayload<{ subject: SubjectCode }>(data);
+                          if (!payload) return;
+                          setDrilldown({ kind: 'subject', subject: payload.subject });
+                        }}
+                      />
+                      <Bar
+                        dataKey="available"
+                        stackId="seats"
+                        fill="#E5E7EB"
+                        name="Seats remaining"
+                        onClick={(data) => {
+                          const payload = extractChartPayload<{ subject: SubjectCode }>(data);
+                          if (!payload) return;
+                          setDrilldown({ kind: 'subject', subject: payload.subject });
+                        }}
+                      />
+                    </>
+                  )}
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
 
@@ -289,28 +348,50 @@ export default function Analytics() {
         <div className="card">
           <div className="card-header">
             <h3 className="font-semibold text-gray-900">Delivery Method Distribution</h3>
+            <p className="text-xs text-gray-500 mt-1">Tip: click a slice to see the underlying sections.</p>
           </div>
           <div className="card-body">
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={deliveryChartData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={({ name, percent }) =>
-                    `${name} (${(percent * 100).toFixed(0)}%)`
-                  }
-                  outerRadius={100}
-                  dataKey="value"
-                >
-                  {deliveryChartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.fill} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
+            <div className="[&_.recharts-pie-sector]:cursor-pointer [&_.recharts-sector]:cursor-pointer">
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={deliveryChartData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={({ name, percent }) =>
+                      `${name} (${(percent * 100).toFixed(0)}%)`
+                    }
+                    outerRadius={100}
+                    dataKey="value"
+                    onClick={(data) => {
+                      const payload = extractChartPayload<{ method: DeliveryMethod }>(data);
+                      if (!payload) return;
+                      setDrilldown({ kind: 'delivery', method: payload.method });
+                    }}
+                  >
+                    {deliveryChartData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.fill} />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    content={({ active, payload }) => {
+                      if (!active || !payload || payload.length === 0) return null;
+                      const row = payload[0].payload as (typeof deliveryChartData)[number];
+                      return (
+                        <div className="bg-white p-3 shadow-lg rounded-lg border">
+                          <p className="font-medium">{row.name}</p>
+                          <p className="text-sm text-gray-600">
+                            Sections: {numberFormatter.format(row.value)}
+                          </p>
+                          <p className="text-xs text-gray-500 mt-2 mb-0">Click to drill down.</p>
+                        </div>
+                      );
+                    }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
 
@@ -318,32 +399,45 @@ export default function Analytics() {
         <div className="card">
           <div className="card-header">
             <h3 className="font-semibold text-gray-900">Faculty Workload (Top 10)</h3>
+            <p className="text-xs text-gray-500 mt-1">Tip: click a bar to see that instructor’s sections.</p>
           </div>
           <div className="card-body">
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={analytics.facultyWorkload}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip
-                  content={({ active, payload }) => {
-                    if (active && payload && payload.length) {
-                      const data = payload[0].payload;
-                      return (
-                        <div className="bg-white p-3 shadow-lg rounded-lg border">
-                          <p className="font-medium">{data.fullName}</p>
-                          <p className="text-sm text-gray-600">
-                            {data.courses} courses • {data.credits} credits
-                          </p>
-                        </div>
-                      );
-                    }
-                    return null;
-                  }}
-                />
-                <Bar dataKey="courses" fill="#2563EB" name="Courses" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="[&_.recharts-bar-rectangle]:cursor-pointer">
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={analytics.facultyWorkload}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip
+                    content={({ active, payload }) => {
+                      if (active && payload && payload.length) {
+                        const data = payload[0].payload;
+                        return (
+                          <div className="bg-white p-3 shadow-lg rounded-lg border">
+                            <p className="font-medium">{data.fullName}</p>
+                            <p className="text-sm text-gray-600">
+                              {data.courses} courses • {data.credits} credits
+                            </p>
+                            <p className="text-xs text-gray-500 mt-2 mb-0">Click to drill down.</p>
+                          </div>
+                        );
+                      }
+                      return null;
+                    }}
+                  />
+                  <Bar
+                    dataKey="courses"
+                    fill="#2563EB"
+                    name="Courses"
+                    onClick={(data) => {
+                      const payload = extractChartPayload<{ email: string; fullName: string }>(data);
+                      if (!payload) return;
+                      setDrilldown({ kind: 'faculty', email: payload.email, fullName: payload.fullName });
+                    }}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
 
@@ -351,17 +445,46 @@ export default function Analytics() {
         <div className="card">
           <div className="card-header">
             <h3 className="font-semibold text-gray-900">Course Time Distribution</h3>
+            <p className="text-xs text-gray-500 mt-1">Tip: click a bar to see meeting blocks in that time bucket.</p>
           </div>
           <div className="card-body">
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={analytics.timeDistribution}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="courses" fill="#059669" name="Courses" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="[&_.recharts-bar-rectangle]:cursor-pointer">
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={timeDistributionChartData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip
+                    content={({ active, payload }) => {
+                      if (!active || !payload || payload.length === 0) return null;
+                      const row = payload[0].payload as (typeof timeDistributionChartData)[number];
+                      return (
+                        <div className="bg-white p-3 shadow-lg rounded-lg border">
+                          <p className="font-medium">{row.name}</p>
+                          <p className="text-sm text-gray-600">
+                            Meeting blocks: {numberFormatter.format(row.courses)}
+                          </p>
+                          <p className="text-xs text-gray-500 mt-2 mb-0">Click to drill down.</p>
+                        </div>
+                      );
+                    }}
+                  />
+                  <Bar
+                    dataKey="courses"
+                    fill="#059669"
+                    name="Meeting blocks"
+                    onClick={(data) => {
+                      const payload = extractChartPayload<{ name: string; startHour: number; endHour: number }>(data);
+                      if (!payload) return;
+                      setDrilldown({
+                        kind: 'timeBucket',
+                        bucket: { name: payload.name, startHour: payload.startHour, endHour: payload.endHour },
+                      });
+                    }}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
       </div>
@@ -399,12 +522,13 @@ export default function Analytics() {
               {analytics.subjects.map((subject) => (
                 <tr key={subject.subject} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span
-                      className="px-2 py-1 rounded text-white text-sm font-medium"
+                    <button
+                      onClick={() => setDrilldown({ kind: 'subject', subject: subject.subject })}
+                      className="px-2 py-1 rounded text-white text-sm font-medium hover:opacity-90"
                       style={{ backgroundColor: SUBJECT_COLORS[subject.subject].bg }}
                     >
                       {subject.subject}
-                    </span>
+                    </button>
                   </td>
                   <td className="px-6 py-4 text-right text-gray-900">
                     {numberFormatter.format(subject.courseCount)}
@@ -447,6 +571,20 @@ export default function Analytics() {
           </table>
         </div>
       </div>
+
+      <AnalyticsDrilldownModal
+        drilldown={drilldown}
+        onClose={() => setDrilldown(null)}
+        courses={courses}
+        enrollmentStatus={analytics.enrollmentStatus}
+        registrationDateLabel={registrationDateLabel}
+        isBeforeRegistration={isBeforeRegistration}
+        onOpenCourse={(course) => setSelectedCourse(course)}
+      />
+
+      {selectedCourse && (
+        <CourseDetailModal course={selectedCourse} onClose={() => setSelectedCourse(null)} />
+      )}
     </div>
   );
 }

@@ -65,7 +65,7 @@ export default function CourseDetailModal({ course, onClose }: CourseDetailModal
 
   return (
     <div
-      className="modal-overlay animate-fade-in"
+      className="modal-overlay z-50 animate-fade-in"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}

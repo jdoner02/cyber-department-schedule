@@ -22,6 +22,7 @@ export interface DeliverySummary {
 }
 
 export interface FacultyWorkloadSummary {
+  email: string;
   name: string;
   fullName: string;
   courses: number;
@@ -67,6 +68,8 @@ const TIME_BUCKETS: Array<{ name: string; startHour: number; endHour: number }> 
   { name: '5-7 PM', startHour: 17, endHour: 19 },
   { name: '7-9 PM', startHour: 19, endHour: 21 },
 ];
+
+export const TIME_DISTRIBUTION_BUCKETS = TIME_BUCKETS;
 
 function createSubjectMap(subjects: SubjectCode[]): Map<SubjectCode, SubjectSummary> {
   const subjectMap = new Map<SubjectCode, SubjectSummary>();
@@ -142,6 +145,7 @@ function addCourseToWorkloadMap(
 
   const key = course.instructor.email;
   const existing = workloadMap.get(key) ?? {
+    email: key,
     name: course.instructor.lastName,
     fullName: course.instructor.displayName,
     courses: 0,
