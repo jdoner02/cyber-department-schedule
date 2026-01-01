@@ -30,6 +30,8 @@
 import { JSDOM } from 'jsdom';
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import type { CourseRequirement, DegreeProgram, ElectiveGroup } from '../src/types/advising';
+import { CATALOG_PROGRAMS } from '../src/constants/catalogPrograms';
 
 // =============================================================================
 // CONFIGURATION
@@ -43,93 +45,12 @@ const OUTPUT_DIR = path.join(process.cwd(), 'src/data/catalog/programs');
 const REQUEST_DELAY = 1000;
 
 // Programs to scrape with their catalog URLs
-const PROGRAMS = [
-  {
-    slug: 'computer-science-cyber-operations-bs',
-    name: 'Computer Science - Cyber Operations, BS',
-    url: `${STEM_BASE}/computer-science-cyber-operations-bs/`,
-    degreeType: 'BS' as const,
-  },
-  {
-    slug: 'computer-science-bs',
-    name: 'Computer Science, BS',
-    url: `${STEM_BASE}/computer-science-bs/`,
-    degreeType: 'BS' as const,
-  },
-  {
-    slug: 'computer-science-bcs',
-    name: 'Computer Science, BCS',
-    url: `${STEM_BASE}/computer-science-bcs/`,
-    degreeType: 'BCS' as const,
-  },
-  {
-    slug: 'cyber-operations-bs',
-    name: 'Cyber Operations, BS',
-    url: `${STEM_BASE}/cyber-operations-bs/`,
-    degreeType: 'BS' as const,
-  },
-  {
-    slug: 'electrical-engineering-bs',
-    name: 'Electrical Engineering, BS',
-    url: `${STEM_BASE}/electrical-engineering-bs/`,
-    degreeType: 'BS' as const,
-  },
-  {
-    slug: 'cybersecurity-minor',
-    name: 'Cybersecurity Minor',
-    url: `${STEM_BASE}/cybersecurity-minor/`,
-    degreeType: 'Minor' as const,
-  },
-  {
-    slug: 'computer-science-ms',
-    name: 'Computer Science, MS',
-    url: `${STEM_BASE}/computer-science-ms/`,
-    degreeType: 'MS' as const,
-  },
-];
+type ProgramConfig = (typeof CATALOG_PROGRAMS)[number] & { url: string };
 
-// =============================================================================
-// TYPES (subset of advising.ts for this script)
-// =============================================================================
-
-interface CourseRequirement {
-  courseCode: string;
-  title: string;
-  credits: number;
-  type: 'core' | 'major-required' | 'major-elective' | 'support' | 'lab' | 'gen-ed' | 'capstone';
-  prerequisites: string[];
-  corequisites: string[];
-  minimumGrade: string;
-  typicalQuarters: string[];
-  typicalCampuses: string[];
-  notes?: string;
-}
-
-interface ElectiveGroup {
-  id: string;
-  name: string;
-  description: string;
-  requiredCount: number;
-  requiredCredits: number;
-  courses: CourseRequirement[];
-}
-
-interface DegreeProgram {
-  slug: string;
-  name: string;
-  degreeType: 'BS' | 'BA' | 'BCS' | 'MS' | 'Minor' | 'Certificate';
-  department: string;
-  totalCredits: number;
-  minimumGPA: number;
-  minimumMajorGPA?: number;
-  coreCourses: CourseRequirement[];
-  electiveGroups: ElectiveGroup[];
-  supportCourses: CourseRequirement[];
-  specialRequirements: string[];
-  catalogUrl: string;
-  catalogYear: string;
-  lastUpdated: string;
-}
+const PROGRAMS: ProgramConfig[] = CATALOG_PROGRAMS.map((program) => ({
+  ...program,
+  url: `${STEM_BASE}/${program.slug}/`,
+}));
 
 // =============================================================================
 // UTILITY FUNCTIONS

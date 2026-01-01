@@ -40,15 +40,16 @@ import type {
 } from '../types/advising';
 import { DEFAULT_EMOJI } from '../components/advising/EmojiPicker';
 import { getCurrentTerm, addQuarters } from '../constants/academicTerms';
+import { STORAGE_KEYS } from '../constants/storageKeys';
 
 // =============================================================================
 // CONSTANTS
 // =============================================================================
 
-const STORAGE_KEY = 'ewu-student-personas';
+const STORAGE_KEY = STORAGE_KEYS.studentPersonas;
 
 // Privacy reminder shown on first use
-const PRIVACY_REMINDER_KEY = 'ewu-privacy-reminder-shown';
+const PRIVACY_REMINDER_KEY = STORAGE_KEYS.privacyReminderShown;
 
 // =============================================================================
 // INITIAL STATE
@@ -155,7 +156,6 @@ function studentReducer(state: StudentState, action: StudentAction): StudentStat
   switch (action.type) {
     case 'ADD_PERSONA': {
       const newPersonas = [...state.personas, action.payload];
-      saveToStorage(newPersonas);
       return {
         ...state,
         personas: newPersonas,
@@ -172,7 +172,6 @@ function studentReducer(state: StudentState, action: StudentAction): StudentStat
         ...action.payload,
         updatedAt: new Date().toISOString(),
       };
-      saveToStorage(newPersonas);
       return {
         ...state,
         personas: newPersonas,
@@ -181,12 +180,18 @@ function studentReducer(state: StudentState, action: StudentAction): StudentStat
 
     case 'DELETE_PERSONA': {
       const newPersonas = state.personas.filter((p) => p.id !== action.payload);
-      saveToStorage(newPersonas);
       return {
         ...state,
         personas: newPersonas,
         selectedPersonaId:
           state.selectedPersonaId === action.payload ? null : state.selectedPersonaId,
+      };
+    }
+
+    case 'SELECT_PERSONA': {
+      return {
+        ...state,
+        selectedPersonaId: action.payload,
       };
     }
 
@@ -218,7 +223,6 @@ function studentReducer(state: StudentState, action: StudentAction): StudentStat
         completedCourses: updatedCourses,
         updatedAt: new Date().toISOString(),
       };
-      saveToStorage(newPersonas);
       return {
         ...state,
         personas: newPersonas,
@@ -248,7 +252,6 @@ function studentReducer(state: StudentState, action: StudentAction): StudentStat
         completedCourses: updatedCourses,
         updatedAt: new Date().toISOString(),
       };
-      saveToStorage(newPersonas);
       return {
         ...state,
         personas: newPersonas,
@@ -271,7 +274,6 @@ function studentReducer(state: StudentState, action: StudentAction): StudentStat
         completedCourses: updatedCourses,
         updatedAt: new Date().toISOString(),
       };
-      saveToStorage(newPersonas);
       return {
         ...state,
         personas: newPersonas,
@@ -289,7 +291,6 @@ function studentReducer(state: StudentState, action: StudentAction): StudentStat
         currentCourses: courses,
         updatedAt: new Date().toISOString(),
       };
-      saveToStorage(newPersonas);
       return {
         ...state,
         personas: newPersonas,
@@ -305,7 +306,6 @@ function studentReducer(state: StudentState, action: StudentAction): StudentStat
     }
 
     case 'CLEAR_ALL': {
-      saveToStorage([]);
       return {
         ...initialState,
         loading: false,
@@ -359,6 +359,12 @@ export function StudentProvider({ children }: StudentProviderProps) {
     dispatch({ type: 'LOAD_STATE', payload: saved });
   }, []);
 
+  // Persist personas to localStorage after initial load
+  useEffect(() => {
+    if (state.loading) return;
+    saveToStorage(state.personas);
+  }, [state.loading, state.personas]);
+
   // Selected persona computed value
   const selectedPersona = useMemo(() => {
     if (!state.selectedPersonaId) return null;
@@ -405,13 +411,15 @@ export function StudentProvider({ children }: StudentProviderProps) {
 
   // Convenience method: Select persona
   const selectPersona = useCallback((id: string | null) => {
-    // We don't dispatch an action for selection - it's managed via selectedPersonaId
-    // For now, we'll update by finding and "updating" the persona
-    // In a more complex app, this would be a separate action
-    if (id && state.personas.find((p) => p.id === id)) {
-      // Just trigger a re-render with the new selection
-      dispatch({ type: 'LOAD_STATE', payload: state.personas });
+    if (id === null) {
+      dispatch({ type: 'SELECT_PERSONA', payload: null });
+      return;
     }
+
+    // Only allow selecting valid IDs
+    const exists = state.personas.some((p) => p.id === id);
+    if (!exists) return;
+    dispatch({ type: 'SELECT_PERSONA', payload: id });
   }, [state.personas]);
 
   // Course management methods

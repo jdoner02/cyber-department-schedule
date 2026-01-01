@@ -1,4 +1,5 @@
 import type { Course } from '../types/schedule';
+import { hasTimeOverlap, haveSameInstructor, haveSameRoom } from './courseComparison';
 
 /**
  * Information about a stacked course pair (e.g., CSCD 400 + CSCD 500)
@@ -58,48 +59,6 @@ export function isStackedPair(course1: Course, course2: Course): boolean {
   return true;
 }
 
-/**
- * Checks if two courses have time overlap
- */
-function hasTimeOverlap(course1: Course, course2: Course): boolean {
-  for (const m1 of course1.meetings) {
-    for (const m2 of course2.meetings) {
-      // Check for common days
-      const commonDays = m1.days.filter(d => m2.days.includes(d));
-      if (commonDays.length === 0) continue;
-
-      // Check for time overlap
-      if (m1.startMinutes < m2.endMinutes && m2.startMinutes < m1.endMinutes) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
-/**
- * Checks if two courses share a room
- */
-function hasSameRoom(course1: Course, course2: Course): boolean {
-  for (const m1 of course1.meetings) {
-    for (const m2 of course2.meetings) {
-      if (m1.building && m1.room && m2.building && m2.room) {
-        if (m1.building === m2.building && m1.room === m2.room) {
-          return true;
-        }
-      }
-    }
-  }
-  return false;
-}
-
-/**
- * Checks if two courses have the same instructor
- */
-function hasSameInstructor(course1: Course, course2: Course): boolean {
-  if (!course1.instructor || !course2.instructor) return false;
-  return course1.instructor.email === course2.instructor.email;
-}
 
 /**
  * Finds all stacked course pairs in the given courses
@@ -134,9 +93,9 @@ export function findStackedPairs(courses: Course[]): Map<string, StackedCourseIn
           stackedLevel: getCourseLevel(stackedCourse.courseNumber),
           enrollmentDiff: stackedCourse.enrollment.current - baseCourse.enrollment.current,
           capacityDiff: stackedCourse.enrollment.maximum - baseCourse.enrollment.maximum,
-          sameInstructor: hasSameInstructor(baseCourse, stackedCourse),
+          sameInstructor: haveSameInstructor(baseCourse, stackedCourse),
           sameTime: hasTimeOverlap(baseCourse, stackedCourse),
-          sameRoom: hasSameRoom(baseCourse, stackedCourse),
+          sameRoom: haveSameRoom(baseCourse, stackedCourse),
         };
 
         stackedPairs.set(baseCourse.crn, info);

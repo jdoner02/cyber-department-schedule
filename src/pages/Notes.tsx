@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { StickyNote, Plus, Search, Trash2, Edit2, Save, X, Tag } from 'lucide-react';
 import { useCourses } from '../contexts/ScheduleContext';
+import { STORAGE_KEYS } from '../constants/storageKeys';
+import { downloadJson } from '../utils/download';
 
 interface Note {
   id: string;
@@ -16,7 +18,7 @@ interface Note {
   updatedAt: string;
 }
 
-const STORAGE_KEY = 'ewu-schedule-notes';
+const STORAGE_KEY = STORAGE_KEYS.scheduleNotes;
 
 export default function Notes() {
   const courses = useCourses();
@@ -121,15 +123,7 @@ export default function Notes() {
 
   // Export notes
   const handleExport = () => {
-    const blob = new Blob([JSON.stringify(notes, null, 2)], {
-      type: 'application/json',
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `ewu-notes-${new Date().toISOString().split('T')[0]}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+    downloadJson(notes, `ewu-notes-${new Date().toISOString().split('T')[0]}.json`);
   };
 
   const priorityColors = {

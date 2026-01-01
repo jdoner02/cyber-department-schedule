@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { Search, Upload, Download, RefreshCw, Printer } from 'lucide-react';
 import { useSchedule } from '../../contexts/ScheduleContext';
 import { useFilters } from '../../contexts/FilterContext';
+import { downloadJson } from '../../utils/download';
 
 export default function Header() {
   const { state, loadFromFile, refreshData } = useSchedule();
@@ -34,18 +35,7 @@ export default function Header() {
       courseCount: state.courses.length,
       courses: state.courses,
     };
-
-    const blob = new Blob([JSON.stringify(exportData, null, 2)], {
-      type: 'application/json',
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `ewu-schedule-export-${new Date().toISOString().split('T')[0]}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    downloadJson(exportData, `ewu-schedule-export-${new Date().toISOString().split('T')[0]}.json`);
   };
 
   const handlePrint = () => {

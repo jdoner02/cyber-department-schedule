@@ -14,6 +14,8 @@ import {
   HardDrive,
 } from 'lucide-react';
 import { useSchedule } from '../contexts/ScheduleContext';
+import { STORAGE_KEYS } from '../constants/storageKeys';
+import { downloadJson } from '../utils/download';
 
 export default function Settings() {
   const { state, loadFromFile } = useSchedule();
@@ -40,40 +42,26 @@ export default function Settings() {
         source: state.dataSource,
         lastUpdated: state.lastUpdated?.toISOString(),
       },
-      notes: JSON.parse(localStorage.getItem('ewu-schedule-notes') || '[]'),
-      filters: JSON.parse(localStorage.getItem('ewu-cyber-schedule-filters') || '{}'),
-      presets: JSON.parse(localStorage.getItem('ewu-cyber-schedule-presets') || '[]'),
+      notes: JSON.parse(localStorage.getItem(STORAGE_KEYS.scheduleNotes) || '[]'),
+      filters: JSON.parse(localStorage.getItem(STORAGE_KEYS.scheduleFilters) || '{}'),
+      presets: JSON.parse(localStorage.getItem(STORAGE_KEYS.schedulePresets) || '[]'),
     };
-
-    const blob = new Blob([JSON.stringify(exportData, null, 2)], {
-      type: 'application/json',
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `ewu-schedule-backup-${new Date().toISOString().split('T')[0]}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+    downloadJson(
+      exportData,
+      `ewu-schedule-backup-${new Date().toISOString().split('T')[0]}.json`
+    );
   };
 
   const handleExportNotes = () => {
-    const notes = JSON.parse(localStorage.getItem('ewu-schedule-notes') || '[]');
-    const blob = new Blob([JSON.stringify(notes, null, 2)], {
-      type: 'application/json',
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `ewu-schedule-notes-${new Date().toISOString().split('T')[0]}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+    const notes = JSON.parse(localStorage.getItem(STORAGE_KEYS.scheduleNotes) || '[]');
+    downloadJson(notes, `ewu-schedule-notes-${new Date().toISOString().split('T')[0]}.json`);
   };
 
   const handleClearLocalData = () => {
-    localStorage.removeItem('ewu-schedule-notes');
-    localStorage.removeItem('ewu-cyber-schedule-filters');
-    localStorage.removeItem('ewu-cyber-schedule-presets');
-    localStorage.removeItem('ewu-schedule-students');
+    localStorage.removeItem(STORAGE_KEYS.scheduleNotes);
+    localStorage.removeItem(STORAGE_KEYS.scheduleFilters);
+    localStorage.removeItem(STORAGE_KEYS.schedulePresets);
+    localStorage.removeItem(STORAGE_KEYS.studentPersonas);
     setShowClearConfirm(false);
     window.location.reload();
   };
@@ -92,8 +80,8 @@ export default function Settings() {
       window.location.protocol === 'file:');
 
   // Count localStorage items
-  const notesCount = JSON.parse(localStorage.getItem('ewu-schedule-notes') || '[]').length;
-  const presetsCount = JSON.parse(localStorage.getItem('ewu-cyber-schedule-presets') || '[]').length;
+  const notesCount = JSON.parse(localStorage.getItem(STORAGE_KEYS.scheduleNotes) || '[]').length;
+  const presetsCount = JSON.parse(localStorage.getItem(STORAGE_KEYS.schedulePresets) || '[]').length;
 
   return (
     <div>

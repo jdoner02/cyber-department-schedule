@@ -18,19 +18,15 @@
  */
 
 import type { DegreeProgram, CourseRequirement } from '../types/advising';
+import { CATALOG_PROGRAMS } from '../constants/catalogPrograms';
 
 // Cache for loaded programs
 const programCache = new Map<string, DegreeProgram>();
 
 // Index of available programs
-const AVAILABLE_PROGRAMS: { slug: string; name: string; degreeType: string }[] = [
-  { slug: 'computer-science-cyber-operations-bs', name: 'Computer Science - Cyber Operations, BS', degreeType: 'BS' },
-  { slug: 'computer-science-bs', name: 'Computer Science, BS', degreeType: 'BS' },
-  { slug: 'computer-science-bcs', name: 'Computer Science, BCS', degreeType: 'BCS' },
-  { slug: 'cyber-operations-bs', name: 'Cyber Operations, BS', degreeType: 'BS' },
-  { slug: 'cybersecurity-minor', name: 'Cybersecurity Minor', degreeType: 'Minor' },
-  { slug: 'computer-science-ms', name: 'Computer Science, MS', degreeType: 'MS' },
-];
+const AVAILABLE_PROGRAMS = CATALOG_PROGRAMS
+  .filter((program) => program.includeInAdvising !== false)
+  .map(({ includeInAdvising: _includeInAdvising, ...program }) => program);
 
 /**
  * Load a degree program by its slug

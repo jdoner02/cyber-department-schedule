@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useReducer, ReactNode, useMemo, useEffect } from 'react';
 import type { ScheduleFilters, SubjectCode, DayOfWeek, DeliveryMethod, CampusType, Course, ColorByOption } from '../types/schedule';
 import { useCourses } from './ScheduleContext';
+import { STORAGE_KEYS } from '../constants/storageKeys';
+import { SCHEDULE_END_HOUR, SCHEDULE_START_HOUR } from '../constants/timeSlots';
 
 // Storage keys
-const STORAGE_KEY = 'ewu-cyber-schedule-filters';
-const PRESETS_STORAGE_KEY = 'ewu-cyber-schedule-presets';
+const STORAGE_KEY = STORAGE_KEYS.scheduleFilters;
+const PRESETS_STORAGE_KEY = STORAGE_KEYS.schedulePresets;
 
 // Quick filter presets
 export interface FilterPreset {
@@ -53,7 +55,7 @@ const defaultFilters: ScheduleFilters = {
   subjects: ['CSCD', 'CYBR'], // Default to department courses
   instructors: [],
   days: [],
-  timeRange: { start: 7 * 60, end: 22 * 60 }, // 7 AM to 10 PM
+  timeRange: { start: SCHEDULE_START_HOUR * 60, end: SCHEDULE_END_HOUR * 60 }, // 7 AM to 10 PM
   delivery: [],
   campus: [],
   showConflictsOnly: false,
@@ -286,9 +288,6 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
         isBuiltIn: false,
       };
       const newPresets = [...state.presets, newPreset];
-      // Save custom presets to localStorage
-      const customOnly = newPresets.filter(p => !p.isBuiltIn);
-      localStorage.setItem(PRESETS_STORAGE_KEY, JSON.stringify(customOnly));
       return {
         ...state,
         presets: newPresets,
@@ -298,8 +297,6 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
 
     case 'DELETE_PRESET': {
       const newPresets = state.presets.filter(p => p.id !== action.payload);
-      const customOnly = newPresets.filter(p => !p.isBuiltIn);
-      localStorage.setItem(PRESETS_STORAGE_KEY, JSON.stringify(customOnly));
       return {
         ...state,
         presets: newPresets,
@@ -341,57 +338,89 @@ interface FilterProviderProps {
 }
 
 // Apply filters to courses
-function applyFilters(courses: Course[], filters: ScheduleFilters): Course[] {
-  return courses.filter((course) => {
-    // Subject filter
-    if (filters.subjects.length > 0 && !filters.subjects.includes(course.subject)) {
-      return false;
-    }
+type CourseFilterSpec = {
+  id:
+    | 'subjects'
+    | 'instructors'
+    | 'days'
+    | 'timeRange'
+    | 'delivery'
+    | 'campus'
+    | 'conflictsOnly'
+    | 'searchQuery';
+  isEnabled: (filters: ScheduleFilters) => boolean;
+  isActive: (filters: ScheduleFilters) => boolean;
+  countsTowardActive: boolean;
+  matches: (course: Course, filters: ScheduleFilters) => boolean;
+};
 
-    // Instructor filter
-    if (filters.instructors.length > 0) {
-      if (!course.instructor || !filters.instructors.includes(course.instructor.email)) {
-        return false;
-      }
-    }
-
-    // Day filter
-    if (filters.days.length > 0) {
+const COURSE_FILTER_SPECS: CourseFilterSpec[] = [
+  {
+    id: 'subjects',
+    isEnabled: (filters) => filters.subjects.length > 0,
+    isActive: (filters) => filters.subjects.length > 0,
+    countsTowardActive: true,
+    matches: (course, filters) => filters.subjects.includes(course.subject),
+  },
+  {
+    id: 'instructors',
+    isEnabled: (filters) => filters.instructors.length > 0,
+    isActive: (filters) => filters.instructors.length > 0,
+    countsTowardActive: true,
+    matches: (course, filters) =>
+      Boolean(course.instructor) && filters.instructors.includes(course.instructor!.email),
+  },
+  {
+    id: 'days',
+    isEnabled: (filters) => filters.days.length > 0,
+    isActive: (filters) => filters.days.length > 0,
+    countsTowardActive: true,
+    matches: (course, filters) => {
       const courseDays = course.meetings.flatMap((m) => m.days);
-      if (!filters.days.some((day) => courseDays.includes(day))) {
-        return false;
-      }
-    }
-
-    // Time range filter
-    if (course.meetings.length > 0) {
-      const hasValidTime = course.meetings.some(
-        (m) =>
-          m.startMinutes >= filters.timeRange.start &&
-          m.endMinutes <= filters.timeRange.end
+      return filters.days.some((day) => courseDays.includes(day));
+    },
+  },
+  {
+    id: 'timeRange',
+    isEnabled: () => true,
+    isActive: (filters) =>
+      filters.timeRange.start !== defaultFilters.timeRange.start ||
+      filters.timeRange.end !== defaultFilters.timeRange.end,
+    countsTowardActive: false,
+    matches: (course, filters) => {
+      if (course.meetings.length === 0) return true;
+      return course.meetings.some(
+        (m) => m.startMinutes >= filters.timeRange.start && m.endMinutes <= filters.timeRange.end
       );
-      if (!hasValidTime) {
-        return false;
-      }
-    }
-
-    // Delivery filter
-    if (filters.delivery.length > 0 && !filters.delivery.includes(course.delivery)) {
-      return false;
-    }
-
-    // Campus filter
-    if (filters.campus.length > 0 && !filters.campus.includes(course.campus)) {
-      return false;
-    }
-
-    // Conflicts only filter
-    if (filters.showConflictsOnly && !course.hasConflicts) {
-      return false;
-    }
-
-    // Search query filter
-    if (filters.searchQuery) {
+    },
+  },
+  {
+    id: 'delivery',
+    isEnabled: (filters) => filters.delivery.length > 0,
+    isActive: (filters) => filters.delivery.length > 0,
+    countsTowardActive: true,
+    matches: (course, filters) => filters.delivery.includes(course.delivery),
+  },
+  {
+    id: 'campus',
+    isEnabled: (filters) => filters.campus.length > 0,
+    isActive: (filters) => filters.campus.length > 0,
+    countsTowardActive: true,
+    matches: (course, filters) => filters.campus.includes(course.campus),
+  },
+  {
+    id: 'conflictsOnly',
+    isEnabled: (filters) => filters.showConflictsOnly,
+    isActive: (filters) => filters.showConflictsOnly,
+    countsTowardActive: true,
+    matches: (course) => Boolean(course.hasConflicts),
+  },
+  {
+    id: 'searchQuery',
+    isEnabled: (filters) => Boolean(filters.searchQuery),
+    isActive: (filters) => Boolean(filters.searchQuery),
+    countsTowardActive: true,
+    matches: (course, filters) => {
       const query = filters.searchQuery.toLowerCase();
       const searchableText = [
         course.displayCode,
@@ -401,14 +430,21 @@ function applyFilters(courses: Course[], filters: ScheduleFilters): Course[] {
       ]
         .join(' ')
         .toLowerCase();
+      return searchableText.includes(query);
+    },
+  },
+];
 
-      if (!searchableText.includes(query)) {
-        return false;
-      }
-    }
+function applyFilters(courses: Course[], filters: ScheduleFilters): Course[] {
+  return courses.filter((course) =>
+    COURSE_FILTER_SPECS.every((spec) => !spec.isEnabled(filters) || spec.matches(course, filters))
+  );
+}
 
-    return true;
-  });
+function countActiveFilters(filters: ScheduleFilters): number {
+  return COURSE_FILTER_SPECS.filter(
+    (spec) => spec.countsTowardActive && spec.isActive(filters)
+  ).length;
 }
 
 // Provider component
@@ -425,8 +461,22 @@ export function FilterProvider({ children }: FilterProviderProps) {
       selectedDay: state.selectedDay,
       activePresetId: state.activePresetId,
     };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+    } catch (e) {
+      console.error('Failed to save filter state:', e);
+    }
   }, [state.filters, state.colorBy, state.viewMode, state.selectedDay, state.activePresetId]);
+
+  // Persist custom presets to localStorage whenever presets change
+  useEffect(() => {
+    try {
+      const customOnly = state.presets.filter((p) => !p.isBuiltIn);
+      localStorage.setItem(PRESETS_STORAGE_KEY, JSON.stringify(customOnly));
+    } catch (e) {
+      console.error('Failed to save presets:', e);
+    }
+  }, [state.presets]);
 
   // Compute filtered courses
   const filteredCourses = useMemo(() => {
@@ -435,15 +485,7 @@ export function FilterProvider({ children }: FilterProviderProps) {
 
   // Count active filters
   const activeFilterCount = useMemo(() => {
-    let count = 0;
-    if (state.filters.subjects.length > 0) count++;
-    if (state.filters.instructors.length > 0) count++;
-    if (state.filters.days.length > 0) count++;
-    if (state.filters.delivery.length > 0) count++;
-    if (state.filters.campus.length > 0) count++;
-    if (state.filters.showConflictsOnly) count++;
-    if (state.filters.searchQuery) count++;
-    return count;
+    return countActiveFilters(state.filters);
   }, [state.filters]);
 
   // Helper functions

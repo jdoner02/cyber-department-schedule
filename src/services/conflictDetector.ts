@@ -1,5 +1,10 @@
 import type { Course, DayOfWeek } from '../types/schedule';
 import { isStackedPair } from './stackedCourseDetector';
+import {
+  haveSameInstructor,
+  findTimeOverlap,
+  findRoomConflict,
+} from './courseComparison';
 
 export interface Conflict {
   id: string;
@@ -121,81 +126,7 @@ export function detectAllConflicts(
   return conflicts;
 }
 
-/**
- * Check if two courses have the same instructor
- */
-export function haveSameInstructor(course1: Course, course2: Course): boolean {
-  if (!course1.instructor || !course2.instructor) {
-    return false;
-  }
-  return course1.instructor.email === course2.instructor.email;
-}
-
-/**
- * Find time overlap between two courses
- */
-export function findTimeOverlap(
-  course1: Course,
-  course2: Course
-): { day: DayOfWeek; start: number; end: number } | null {
-  for (const m1 of course1.meetings) {
-    for (const m2 of course2.meetings) {
-      // Find common days
-      const commonDays = m1.days.filter((d) => m2.days.includes(d));
-
-      for (const day of commonDays) {
-        // Check if times overlap
-        // Overlap exists if: start1 < end2 AND start2 < end1
-        if (m1.startMinutes < m2.endMinutes && m2.startMinutes < m1.endMinutes) {
-          return {
-            day,
-            start: Math.max(m1.startMinutes, m2.startMinutes),
-            end: Math.min(m1.endMinutes, m2.endMinutes),
-          };
-        }
-      }
-    }
-  }
-  return null;
-}
-
-/**
- * Find room conflicts between two courses
- */
-export function findRoomConflict(
-  course1: Course,
-  course2: Course
-): { day: DayOfWeek; start: number; end: number; location: string } | null {
-  for (const m1 of course1.meetings) {
-    for (const m2 of course2.meetings) {
-      // Check if same room (both have building and room, and they match)
-      if (
-        m1.building &&
-        m1.room &&
-        m2.building &&
-        m2.room &&
-        m1.building === m2.building &&
-        m1.room === m2.room
-      ) {
-        // Find common days
-        const commonDays = m1.days.filter((d) => m2.days.includes(d));
-
-        for (const day of commonDays) {
-          // Check if times overlap
-          if (m1.startMinutes < m2.endMinutes && m2.startMinutes < m1.endMinutes) {
-            return {
-              day,
-              start: Math.max(m1.startMinutes, m2.startMinutes),
-              end: Math.min(m1.endMinutes, m2.endMinutes),
-              location: `${m1.building} ${m1.room}`,
-            };
-          }
-        }
-      }
-    }
-  }
-  return null;
-}
+export { haveSameInstructor, findTimeOverlap, findRoomConflict };
 
 /**
  * Get conflicts for a specific course

@@ -68,6 +68,106 @@ const TIME_BUCKETS: Array<{ name: string; startHour: number; endHour: number }> 
   { name: '7-9 PM', startHour: 19, endHour: 21 },
 ];
 
+function createSubjectMap(subjects: SubjectCode[]): Map<SubjectCode, SubjectSummary> {
+  const subjectMap = new Map<SubjectCode, SubjectSummary>();
+  subjects.forEach((subject) => {
+    subjectMap.set(subject, {
+      subject,
+      courseCount: 0,
+      enrollment: 0,
+      capacity: 0,
+      available: 0,
+    });
+  });
+  return subjectMap;
+}
+
+function createDeliveryMap(): Map<DeliveryMethod, DeliverySummary> {
+  const deliveryMap = new Map<DeliveryMethod, DeliverySummary>();
+  DELIVERY_METHODS.forEach((method) => {
+    deliveryMap.set(method, { method, courseCount: 0 });
+  });
+  return deliveryMap;
+}
+
+function createTimeDistribution(): TimeDistributionBucket[] {
+  return TIME_BUCKETS.map((bucket) => ({ name: bucket.name, courses: 0 }));
+}
+
+function addCourseToTermMap(termMap: Map<string, TermSummary>, course: Course): void {
+  const existing = termMap.get(course.term);
+  if (existing) {
+    existing.courseCount += 1;
+    return;
+  }
+
+  termMap.set(course.term, {
+    code: course.term,
+    description: course.termDescription,
+    courseCount: 1,
+  });
+}
+
+function addCourseToSubjectMap(subjectMap: Map<SubjectCode, SubjectSummary>, course: Course): void {
+  const subject = subjectMap.get(course.subject) ?? {
+    subject: course.subject,
+    courseCount: 0,
+    enrollment: 0,
+    capacity: 0,
+    available: 0,
+  };
+
+  subject.courseCount += 1;
+  subject.enrollment += course.enrollment.current;
+  subject.capacity += course.enrollment.maximum;
+  subject.available += course.enrollment.maximum - course.enrollment.current;
+  subjectMap.set(course.subject, subject);
+}
+
+function addCourseToDeliveryMap(deliveryMap: Map<DeliveryMethod, DeliverySummary>, course: Course): void {
+  const delivery = deliveryMap.get(course.delivery) ?? {
+    method: course.delivery,
+    courseCount: 0,
+  };
+
+  delivery.courseCount += 1;
+  deliveryMap.set(course.delivery, delivery);
+}
+
+function addCourseToWorkloadMap(
+  workloadMap: Map<string, FacultyWorkloadSummary>,
+  course: Course
+): void {
+  if (!course.instructor) return;
+
+  const key = course.instructor.email;
+  const existing = workloadMap.get(key) ?? {
+    name: course.instructor.lastName,
+    fullName: course.instructor.displayName,
+    courses: 0,
+    credits: 0,
+  };
+
+  existing.courses += 1;
+  existing.credits += course.credits;
+  workloadMap.set(key, existing);
+}
+
+function addCourseToTimeDistribution(
+  timeDistribution: TimeDistributionBucket[],
+  course: Course
+): void {
+  course.meetings.forEach((meeting) => {
+    const startHour = Math.floor(meeting.startMinutes / 60);
+    const bucketIndex = TIME_BUCKETS.findIndex(
+      (bucket) => startHour >= bucket.startHour && startHour < bucket.endHour
+    );
+    if (bucketIndex !== -1) {
+      timeDistribution[bucketIndex].courses += 1;
+    }
+  });
+}
+
 export function computeScheduleAnalytics({
   courses,
   instructors,
@@ -80,27 +180,10 @@ export function computeScheduleAnalytics({
   const totalCourses = courses.length;
 
   const termMap = new Map<string, TermSummary>();
-  const subjectMap = new Map<SubjectCode, SubjectSummary>();
-  const deliveryMap = new Map<DeliveryMethod, DeliverySummary>();
+  const subjectMap = createSubjectMap(subjects);
+  const deliveryMap = createDeliveryMap();
   const workloadMap = new Map<string, FacultyWorkloadSummary>();
-  const timeDistribution: TimeDistributionBucket[] = TIME_BUCKETS.map((bucket) => ({
-    name: bucket.name,
-    courses: 0,
-  }));
-
-  subjects.forEach((subject) => {
-    subjectMap.set(subject, {
-      subject,
-      courseCount: 0,
-      enrollment: 0,
-      capacity: 0,
-      available: 0,
-    });
-  });
-
-  DELIVERY_METHODS.forEach((method) => {
-    deliveryMap.set(method, { method, courseCount: 0 });
-  });
+  const timeDistribution = createTimeDistribution();
 
   let totalEnrollment = 0;
   let totalCapacity = 0;
@@ -108,17 +191,7 @@ export function computeScheduleAnalytics({
   let coursesWithReportedEnrollment = 0;
 
   courses.forEach((course) => {
-    // Term summary
-    const existingTerm = termMap.get(course.term);
-    if (existingTerm) {
-      existingTerm.courseCount += 1;
-    } else {
-      termMap.set(course.term, {
-        code: course.term,
-        description: course.termDescription,
-        courseCount: 1,
-      });
-    }
+    addCourseToTermMap(termMap, course);
 
     // Enrollment summary
     totalEnrollment += course.enrollment.current;
@@ -126,53 +199,10 @@ export function computeScheduleAnalytics({
     totalCredits += course.credits;
     if (course.enrollment.current > 0) coursesWithReportedEnrollment += 1;
 
-    // Subject summary
-    const subject = subjectMap.get(course.subject) ?? {
-      subject: course.subject,
-      courseCount: 0,
-      enrollment: 0,
-      capacity: 0,
-      available: 0,
-    };
-
-    subject.courseCount += 1;
-    subject.enrollment += course.enrollment.current;
-    subject.capacity += course.enrollment.maximum;
-    subject.available += course.enrollment.maximum - course.enrollment.current;
-    subjectMap.set(course.subject, subject);
-
-    // Delivery method summary
-    const delivery = deliveryMap.get(course.delivery) ?? {
-      method: course.delivery,
-      courseCount: 0,
-    };
-    delivery.courseCount += 1;
-    deliveryMap.set(course.delivery, delivery);
-
-    // Faculty workload summary
-    if (course.instructor) {
-      const key = course.instructor.email;
-      const existing = workloadMap.get(key) ?? {
-        name: course.instructor.lastName,
-        fullName: course.instructor.displayName,
-        courses: 0,
-        credits: 0,
-      };
-      existing.courses += 1;
-      existing.credits += course.credits;
-      workloadMap.set(key, existing);
-    }
-
-    // Time distribution summary (counts meetings, not unique sections)
-    course.meetings.forEach((meeting) => {
-      const startHour = Math.floor(meeting.startMinutes / 60);
-      const bucketIndex = TIME_BUCKETS.findIndex(
-        (bucket) => startHour >= bucket.startHour && startHour < bucket.endHour
-      );
-      if (bucketIndex !== -1) {
-        timeDistribution[bucketIndex].courses += 1;
-      }
-    });
+    addCourseToSubjectMap(subjectMap, course);
+    addCourseToDeliveryMap(deliveryMap, course);
+    addCourseToWorkloadMap(workloadMap, course);
+    addCourseToTimeDistribution(timeDistribution, course);
   });
 
   const terms = Array.from(termMap.values()).sort((a, b) => {
@@ -229,4 +259,3 @@ export function computeScheduleAnalytics({
     timeDistribution,
   };
 }
-

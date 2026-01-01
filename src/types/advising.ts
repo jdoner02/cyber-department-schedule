@@ -746,6 +746,7 @@ export type StudentAction =
   | { type: 'ADD_PERSONA'; payload: StudentPersona }
   | { type: 'UPDATE_PERSONA'; payload: StudentPersona }
   | { type: 'DELETE_PERSONA'; payload: string } // payload is persona ID
+  | { type: 'SELECT_PERSONA'; payload: string | null }
   | { type: 'ADD_COMPLETED_COURSE'; payload: { personaId: string; course: CompletedCourse } }
   | { type: 'UPDATE_COURSE'; payload: { personaId: string; courseCode: string; updates: Partial<CompletedCourse> } }
   | { type: 'REMOVE_COURSE'; payload: { personaId: string; courseCode: string } }
