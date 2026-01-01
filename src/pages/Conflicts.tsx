@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { AlertTriangle, CheckCircle, Clock, User, MapPin } from 'lucide-react';
-import { useSchedule, useScheduleLoading } from '../contexts/ScheduleContext';
+import { useScheduleLoading } from '../contexts/ScheduleContext';
+import { useFilteredConflicts } from '../contexts/FilterContext';
 import { DAYS_OF_WEEK, formatTimeRange } from '../constants/timeSlots';
 import {
   getInstructorConflicts,
@@ -8,19 +9,19 @@ import {
 } from '../services/conflictDetector';
 
 export default function Conflicts() {
-  const { state } = useSchedule();
   const { loading, error } = useScheduleLoading();
+  const filteredConflicts = useFilteredConflicts();
 
   const conflicts = useMemo(() => {
     const dayIndex = Object.fromEntries(DAYS_OF_WEEK.map((d, i) => [d.key, i] as const));
-    return [...state.conflicts].sort((a, b) => {
+    return [...filteredConflicts].sort((a, b) => {
       const dayDelta = (dayIndex[a.day] ?? 99) - (dayIndex[b.day] ?? 99);
       if (dayDelta !== 0) return dayDelta;
       const timeDelta = a.overlapStart - b.overlapStart;
       if (timeDelta !== 0) return timeDelta;
       return a.type.localeCompare(b.type);
     });
-  }, [state.conflicts]);
+  }, [filteredConflicts]);
 
   const instructorConflicts = useMemo(() => getInstructorConflicts(conflicts), [conflicts]);
   const roomConflicts = useMemo(() => getRoomConflicts(conflicts), [conflicts]);

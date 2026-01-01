@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useSchedule, useScheduleLoading } from '../contexts/ScheduleContext';
-import { useFilteredCourses, useViewMode } from '../contexts/FilterContext';
+import { useFilteredCourses, useFilteredConflicts, useViewMode } from '../contexts/FilterContext';
 import MobileDayTabs from '../components/schedule/MobileDayTabs';
 import DayTimeline from '../components/schedule/DayTimeline';
 import CourseDetailModal from '../components/schedule/CourseDetailModal';
@@ -20,6 +20,7 @@ export default function Dashboard() {
   const { loading, error } = useScheduleLoading();
   const { state, availableTerms, selectedTermCode, selectTerm } = useSchedule();
   const filteredCourses = useFilteredCourses();
+  const filteredConflicts = useFilteredConflicts();
   const { selectedDay, setSelectedDay } = useViewMode();
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [showFilters, setShowFilters] = useState(false);
@@ -139,9 +140,9 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Conflict Alerts - PRIORITY 1 */}
+      {/* Conflict Alerts - PRIORITY 1 (filtered to match current subject filter) */}
       <ConflictAlerts
-        conflicts={state.conflicts}
+        conflicts={filteredConflicts}
         onConflictTap={(conflict) => {
           // Could navigate to the conflict or expand details
           console.log('Conflict tapped:', conflict);

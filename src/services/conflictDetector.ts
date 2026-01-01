@@ -44,6 +44,19 @@ function isArrangedCourse(course: Course): boolean {
 }
 
 /**
+ * Check if a room conflict should be skipped (e.g., online courses don't have physical rooms)
+ */
+function shouldSkipRoomConflict(course1: Course, course2: Course): boolean {
+  // Skip room conflicts for online courses (no physical room to conflict)
+  if (course1.delivery === 'Online' || course2.delivery === 'Online') return true;
+  // Skip if either course has TBA/ARR room
+  const hasArrangedRoom = (c: Course) =>
+    c.meetings.some(m => !m.building || !m.room || m.building === 'ARR' || m.room === 'WEB');
+  if (hasArrangedRoom(course1) || hasArrangedRoom(course2)) return true;
+  return false;
+}
+
+/**
  * Check if two courses appear to be lab corequisites
  * (lecture + lab taught by same instructor at overlapping/adjacent times)
  */
@@ -130,8 +143,9 @@ export function detectAllConflicts(
         }
       }
 
-      // Check room conflicts (stacked courses sharing a room is also intentional)
-      if (!(options.hideStackedCourses && isStackedPair(course1, course2))) {
+      // Check room conflicts (skip stacked courses and online/arranged courses)
+      if (!(options.hideStackedCourses && isStackedPair(course1, course2)) &&
+          !shouldSkipRoomConflict(course1, course2)) {
         const roomConflict = findRoomConflict(course1, course2);
         if (roomConflict) {
           conflicts.push({

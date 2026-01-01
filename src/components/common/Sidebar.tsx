@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { useSchedule } from '../../contexts/ScheduleContext';
+import { useFilteredConflicts } from '../../contexts/FilterContext';
 
 interface NavItem {
   path: string;
@@ -30,8 +31,9 @@ interface SidebarProps {
 export default function Sidebar({ onNavigate }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
   const { state } = useSchedule();
+  const filteredConflicts = useFilteredConflicts();
 
-  const conflictCount = state.conflicts.length;
+  const conflictCount = filteredConflicts.length;
 
   const navItems: NavItem[] = [
     {

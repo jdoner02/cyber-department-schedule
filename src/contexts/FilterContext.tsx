@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useReducer, ReactNode, useMemo, useEffect } from 'react';
 import type { ScheduleFilters, SubjectCode, DayOfWeek, DeliveryMethod, CampusType, Course, ColorByOption } from '../types/schedule';
-import { useCourses } from './ScheduleContext';
+import { useCourses, useSchedule } from './ScheduleContext';
 import { STORAGE_KEYS } from '../constants/storageKeys';
+import type { Conflict } from '../services/conflictDetector';
 import { SCHEDULE_END_HOUR, SCHEDULE_START_HOUR } from '../constants/timeSlots';
 
 // Storage keys
@@ -554,4 +555,20 @@ export function usePresets() {
     saveCurrentAsPreset,
     deletePreset,
   };
+}
+
+/**
+ * Hook to get conflicts filtered to only include courses matching current filter
+ * A conflict is included only if BOTH courses are in the filtered set
+ */
+export function useFilteredConflicts(): Conflict[] {
+  const { filteredCourses } = useFilters();
+  const { state } = useSchedule();
+
+  return useMemo(() => {
+    const filteredIds = new Set(filteredCourses.map(c => c.id));
+    return state.conflicts.filter(
+      conflict => filteredIds.has(conflict.course1.id) && filteredIds.has(conflict.course2.id)
+    );
+  }, [filteredCourses, state.conflicts]);
 }
