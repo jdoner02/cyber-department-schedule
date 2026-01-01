@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalog": {
+    "institution": "Eastern Washington University",
+    "edition": "2025-2026",
+    "college": "College of Science, Technology, Engineering & Mathematics (CSTEM)",
+    "department": "Mathematics",
+    "subjectCode": "MATH",
+    "source": {
+      "listing_url": "https://catalog.ewu.edu/course-listings/math/",
+      "retrieved_at": "2025-08-15",
+      "deep_link_pattern": "https://catalog.ewu.edu/search/?P=MATH%20{NUMBER}",
+      "notes": "Extracted via minimal scraper using regex patterns. Manual verification recommended."
+    },
+    "fields": [
+      "code",
+      "number",
+      "title",
+      "credits",
+      "description_summary",
+      "notes",
+      "prerequisites",
+      "corequisites",
+      "links"
+    ],
+    "courses": [
+      {
+        "code": "MATH 200",
+        "number": 200,
+        "title": "FINITE MATHEMATICS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 200",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20200",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 208",
+        "number": 208,
+        "title": "MATHEMATICS FOR ELEMENTARY TEACHERS I",
+        "credits": "5",
+        "description_summary": "Course description for MATH 208",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20208",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 209",
+        "number": 209,
+        "title": "MATHEMATICS FOR ELEMENTARY TEACHERS II",
+        "credits": "4",
+        "description_summary": "Course description for MATH 209",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20209",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 210",
+        "number": 210,
+        "title": "MATHEMATICS FOR ELEMENTARY TEACHERS III",
+        "credits": "4",
+        "description_summary": "Course description for MATH 210",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20210",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 217",
+        "number": 217,
+        "title": "INTRODUCTION TO LATEX",
+        "credits": "1",
+        "description_summary": "Course description for MATH 217",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20217",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 225",
+        "number": 225,
+        "title": "FOUNDATIONS OF MATHEMATICS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 225",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20225",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 231",
+        "number": 231,
+        "title": "LINEAR ALGEBRA",
+        "credits": "5",
+        "description_summary": "Course description for MATH 231",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20231",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 241",
+        "number": 241,
+        "title": "CALCULUS IV",
+        "credits": "5",
+        "description_summary": "Course description for MATH 241",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20241",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 296",
+        "number": 296,
+        "title": "EXPERIMENTAL",
+        "credits": "1-5",
+        "description_summary": "Course description for MATH 296",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20296",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 299",
+        "number": 299,
+        "title": "SPECIAL STUDIES",
+        "credits": "1-5",
+        "description_summary": "Course description for MATH 299",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20299",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      }
+    ],
+    "level_filter": "200-level",
+    "course_count": 10
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalog": {
+    "institution": "Eastern Washington University",
+    "edition": "2025-2026",
+    "college": "College of Science, Technology, Engineering & Mathematics (CSTEM)",
+    "department": "Physics",
+    "subjectCode": "PHYS",
+    "source": {
+      "listing_url": "https://catalog.ewu.edu/course-listings/phys/",
+      "retrieved_at": "2025-08-15",
+      "deep_link_pattern": "https://catalog.ewu.edu/search/?P=PHYS%20{NUMBER}",
+      "notes": "Extracted via minimal scraper using regex patterns. Manual verification recommended."
+    },
+    "fields": [
+      "code",
+      "number",
+      "title",
+      "credits",
+      "description_summary",
+      "notes",
+      "prerequisites",
+      "corequisites",
+      "links"
+    ],
+    "courses": [
+      {
+        "code": "PHYS 401",
+        "number": 401,
+        "title": "ELECTROMAGNETISM I",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 401",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20401",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 402",
+        "number": 402,
+        "title": "ELECTROMAGNETISM II",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 402",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20402",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 411",
+        "number": 411,
+        "title": "CLASSICAL THERMODYNAMICS",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 411",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20411",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 415",
+        "number": 415,
+        "title": "QUANTUM FUNDAMENTALS FOR COMPUTING AND CRYPTOGRAPHY",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 415",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20415",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 421",
+        "number": 421,
+        "title": "COMPUTATIONAL PHYSICS",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 421",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20421",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 424",
+        "number": 424,
+        "title": "ASTROPHYSICS",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 424",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20424",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 431",
+        "number": 431,
+        "title": "SOLID STATE DEVICES PHYSICS",
+        "credits": "3",
+        "description_summary": "Course description for PHYS 431",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20431",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 451",
+        "number": 451,
+        "title": "OPTICS",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 451",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20451",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 491",
+        "number": 491,
+        "title": "SENIOR THESIS",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 491",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20491",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 495",
+        "number": 495,
+        "title": "INTERNSHIP",
+        "credits": "1-5",
+        "description_summary": "Course description for PHYS 495",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20495",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 496",
+        "number": 496,
+        "title": "EXPERIMENTAL COURSE",
+        "credits": "1-5",
+        "description_summary": "Course description for PHYS 496",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20496",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 497",
+        "number": 497,
+        "title": "WORKSHOP, SHORT COURSE, CONFERENCE, SEMINAR",
+        "credits": "1-6",
+        "description_summary": "Course description for PHYS 497",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20497",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 498",
+        "number": 498,
+        "title": "SEMINAR",
+        "credits": "1-2",
+        "description_summary": "Course description for PHYS 498",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20498",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 499",
+        "number": 499,
+        "title": "DIRECTED STUDY",
+        "credits": "1-5",
+        "description_summary": "Course description for PHYS 499",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20499",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      }
+    ],
+    "level_filter": "400-level",
+    "course_count": 14
+  }
+}

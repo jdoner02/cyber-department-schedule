@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalog": {
+    "institution": "Eastern Washington University",
+    "edition": "2025-2026",
+    "college": "College of Science, Technology, Engineering & Mathematics (CSTEM)",
+    "department": "Physics",
+    "subjectCode": "PHYS",
+    "source": {
+      "listing_url": "https://catalog.ewu.edu/course-listings/phys/",
+      "retrieved_at": "2025-08-15",
+      "deep_link_pattern": "https://catalog.ewu.edu/search/?P=PHYS%20{NUMBER}",
+      "notes": "Extracted via minimal scraper using regex patterns. Manual verification recommended."
+    },
+    "fields": [
+      "code",
+      "number",
+      "title",
+      "credits",
+      "description_summary",
+      "notes",
+      "prerequisites",
+      "corequisites",
+      "links"
+    ],
+    "courses": [
+      {
+        "code": "PHYS 100",
+        "number": 100,
+        "title": "PHYSICAL SCIENCE I",
+        "credits": "5",
+        "description_summary": "Course description for PHYS 100",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20100",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 110",
+        "number": 110,
+        "title": "ENERGY, SOCIETY AND THE ENVIRONMENT",
+        "credits": "5",
+        "description_summary": "Course description for PHYS 110",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20110",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 115",
+        "number": 115,
+        "title": "INVESTIGATING PHYSICAL SCIENCE",
+        "credits": "5",
+        "description_summary": "Course description for PHYS 115",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20115",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 120",
+        "number": 120,
+        "title": "HONORS EXPERIENCE: NATURAL SCIENCE",
+        "credits": "5",
+        "description_summary": "Course description for PHYS 120",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20120",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 121",
+        "number": 121,
+        "title": "DESCRIPTIVE ASTRONOMY",
+        "credits": "5",
+        "description_summary": "Course description for PHYS 121",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20121",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 126",
+        "number": 126,
+        "title": "MAKING SENSE OF THE COSMOS",
+        "credits": "5",
+        "description_summary": "Course description for PHYS 126",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20126",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 131",
+        "number": 131,
+        "title": "INTRODUCTORY PHYSICS I",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 131",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20131",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 132",
+        "number": 132,
+        "title": "INTRODUCTORY PHYSICS II",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 132",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20132",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 133",
+        "number": 133,
+        "title": "INTRODUCTORY PHYSICS III",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 133",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20133",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 151",
+        "number": 151,
+        "title": "GENERAL PHYSICS I",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 151",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20151",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 152",
+        "number": 152,
+        "title": "GENERAL PHYSICS II",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 152",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20152",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 153",
+        "number": 153,
+        "title": "GENERAL PHYSICS III",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 153",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20153",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 161",
+        "number": 161,
+        "title": "MECHANICS LABORATORY",
+        "credits": "1",
+        "description_summary": "Course description for PHYS 161",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20161",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 162",
+        "number": 162,
+        "title": "HEAT AND OPTICS LABORATORY",
+        "credits": "1",
+        "description_summary": "Course description for PHYS 162",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20162",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 163",
+        "number": 163,
+        "title": "ELECTRONICS LABORATORY I",
+        "credits": "1",
+        "description_summary": "Course description for PHYS 163",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20163",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 196",
+        "number": 196,
+        "title": "EXPERIMENTAL COURSE",
+        "credits": "1-5",
+        "description_summary": "Course description for PHYS 196",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20196",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      }
+    ],
+    "level_filter": "100-level",
+    "course_count": 16
+  }
+}

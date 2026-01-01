@@ -1,0 +1,321 @@
+{
+  "slug": "computer-science-cyber-operations-bs",
+  "name": "Computer Science - Cyber Operations, BS",
+  "degreeType": "BS",
+  "department": "Computer Science & Electrical Engineering",
+  "totalCredits": 120,
+  "minimumGPA": 2.0,
+  "minimumMajorGPA": 2.25,
+  "coreCourses": [
+    {
+      "courseCode": "CSCD 210",
+      "title": "Programming Principles I",
+      "credits": 4,
+      "type": "core",
+      "prerequisites": [],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "winter", "spring"],
+      "typicalCampuses": ["Cheney"],
+      "notes": "Entry point for CS majors. Covers Java programming fundamentals."
+    },
+    {
+      "courseCode": "CSCD 211",
+      "title": "Programming Principles II",
+      "credits": 4,
+      "type": "core",
+      "prerequisites": ["CSCD 210"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "winter", "spring"],
+      "typicalCampuses": ["Cheney"],
+      "notes": "Object-oriented programming, inheritance, polymorphism."
+    },
+    {
+      "courseCode": "CSCD 240",
+      "title": "C and Unix",
+      "credits": 4,
+      "type": "core",
+      "prerequisites": ["CSCD 210"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "winter"],
+      "typicalCampuses": ["Cheney"],
+      "notes": "Essential for low-level systems programming and cybersecurity."
+    },
+    {
+      "courseCode": "CSCD 300",
+      "title": "Data Structures",
+      "credits": 4,
+      "type": "core",
+      "prerequisites": ["CSCD 211"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "winter", "spring"],
+      "typicalCampuses": ["Cheney"],
+      "notes": "Critical course for algorithms and technical interviews."
+    },
+    {
+      "courseCode": "CSCD 305",
+      "title": "Introduction to Database Systems",
+      "credits": 4,
+      "type": "core",
+      "prerequisites": ["CSCD 211"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "spring"],
+      "typicalCampuses": ["Cheney", "Online"]
+    },
+    {
+      "courseCode": "CSCD 320",
+      "title": "Algorithms",
+      "credits": 4,
+      "type": "core",
+      "prerequisites": ["CSCD 300", "MATH 225"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["winter", "spring"],
+      "typicalCampuses": ["Cheney"],
+      "notes": "Algorithm analysis, complexity theory, optimization."
+    },
+    {
+      "courseCode": "CSCD 330",
+      "title": "Network Programming",
+      "credits": 4,
+      "type": "core",
+      "prerequisites": ["CSCD 300"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "winter"],
+      "typicalCampuses": ["Cheney"],
+      "notes": "Socket programming, protocols, essential for cyber operations."
+    },
+    {
+      "courseCode": "CSCD 350",
+      "title": "Software Engineering",
+      "credits": 4,
+      "type": "core",
+      "prerequisites": ["CSCD 300"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "spring"],
+      "typicalCampuses": ["Cheney"]
+    },
+    {
+      "courseCode": "CSCD 420",
+      "title": "Computer Architecture",
+      "credits": 4,
+      "type": "core",
+      "prerequisites": ["CSCD 240", "CSCD 300"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall"],
+      "typicalCampuses": ["Cheney"],
+      "notes": "Understanding hardware for reverse engineering and security."
+    },
+    {
+      "courseCode": "CSCD 427",
+      "title": "Operating Systems",
+      "credits": 4,
+      "type": "core",
+      "prerequisites": ["CSCD 300", "CSCD 240"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["winter"],
+      "typicalCampuses": ["Cheney"],
+      "notes": "Process management, memory, file systems. Key for system security."
+    }
+  ],
+  "electiveGroups": [
+    {
+      "id": "cyber-electives",
+      "name": "Cybersecurity Electives",
+      "description": "Choose 2 additional cybersecurity or advanced CS courses",
+      "requiredCount": 2,
+      "requiredCredits": 8,
+      "courses": [
+        {
+          "courseCode": "CYBR 320",
+          "title": "Malware Analysis",
+          "credits": 4,
+          "type": "major-elective",
+          "prerequisites": ["CYBR 210", "CSCD 240"],
+          "corequisites": [],
+          "minimumGrade": "C",
+          "typicalQuarters": ["spring"],
+          "typicalCampuses": ["Cheney"]
+        },
+        {
+          "courseCode": "CYBR 350",
+          "title": "Secure Software Development",
+          "credits": 4,
+          "type": "major-elective",
+          "prerequisites": ["CSCD 350", "CYBR 210"],
+          "corequisites": [],
+          "minimumGrade": "C",
+          "typicalQuarters": ["winter"],
+          "typicalCampuses": ["Cheney"]
+        },
+        {
+          "courseCode": "CSCD 434",
+          "title": "Web Development",
+          "credits": 4,
+          "type": "major-elective",
+          "prerequisites": ["CSCD 300"],
+          "corequisites": [],
+          "minimumGrade": "C",
+          "typicalQuarters": ["spring"],
+          "typicalCampuses": ["Cheney", "Online"]
+        },
+        {
+          "courseCode": "CSCD 467",
+          "title": "Machine Learning",
+          "credits": 4,
+          "type": "major-elective",
+          "prerequisites": ["CSCD 300", "MATH 231"],
+          "corequisites": [],
+          "minimumGrade": "C",
+          "typicalQuarters": ["spring"],
+          "typicalCampuses": ["Cheney"]
+        }
+      ]
+    }
+  ],
+  "supportCourses": [
+    {
+      "courseCode": "MATH 161",
+      "title": "Calculus I",
+      "credits": 5,
+      "type": "support",
+      "prerequisites": [],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "winter", "spring"],
+      "typicalCampuses": ["Cheney"]
+    },
+    {
+      "courseCode": "MATH 162",
+      "title": "Calculus II",
+      "credits": 5,
+      "type": "support",
+      "prerequisites": ["MATH 161"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "winter", "spring"],
+      "typicalCampuses": ["Cheney"]
+    },
+    {
+      "courseCode": "MATH 225",
+      "title": "Discrete Mathematics",
+      "credits": 5,
+      "type": "support",
+      "prerequisites": ["MATH 161"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "winter"],
+      "typicalCampuses": ["Cheney"],
+      "notes": "Critical for algorithm analysis and cryptography."
+    },
+    {
+      "courseCode": "MATH 231",
+      "title": "Linear Algebra",
+      "credits": 4,
+      "type": "support",
+      "prerequisites": ["MATH 161"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["winter", "spring"],
+      "typicalCampuses": ["Cheney"]
+    },
+    {
+      "courseCode": "MATH 380",
+      "title": "Probability and Statistics",
+      "credits": 5,
+      "type": "support",
+      "prerequisites": ["MATH 162"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "spring"],
+      "typicalCampuses": ["Cheney"]
+    },
+    {
+      "courseCode": "CYBR 100",
+      "title": "Introduction to Cybersecurity",
+      "credits": 4,
+      "type": "support",
+      "prerequisites": [],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "winter", "spring"],
+      "typicalCampuses": ["Cheney", "Online"],
+      "notes": "Entry point for cybersecurity track. Can be taken first quarter."
+    },
+    {
+      "courseCode": "CYBR 210",
+      "title": "Network Security Fundamentals",
+      "credits": 4,
+      "type": "support",
+      "prerequisites": ["CYBR 100"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["winter", "spring"],
+      "typicalCampuses": ["Cheney"]
+    },
+    {
+      "courseCode": "CYBR 310",
+      "title": "Ethical Hacking and Penetration Testing",
+      "credits": 4,
+      "type": "major-required",
+      "prerequisites": ["CYBR 210", "CSCD 300"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "spring"],
+      "typicalCampuses": ["Cheney"],
+      "notes": "Hands-on offensive security techniques."
+    },
+    {
+      "courseCode": "CYBR 340",
+      "title": "Digital Forensics",
+      "credits": 4,
+      "type": "major-required",
+      "prerequisites": ["CYBR 210"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["winter"],
+      "typicalCampuses": ["Cheney"],
+      "notes": "Evidence collection, analysis, and legal considerations."
+    },
+    {
+      "courseCode": "CYBR 440",
+      "title": "Advanced Network Security",
+      "credits": 4,
+      "type": "major-required",
+      "prerequisites": ["CYBR 310"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall"],
+      "typicalCampuses": ["Cheney"]
+    },
+    {
+      "courseCode": "CYBR 490",
+      "title": "Cybersecurity Capstone",
+      "credits": 4,
+      "type": "capstone",
+      "prerequisites": ["CYBR 310", "CYBR 340", "CSCD 350"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["spring"],
+      "typicalCampuses": ["Cheney"],
+      "notes": "Team-based capstone project. Taken in final year."
+    }
+  ],
+  "specialRequirements": [
+    "Complete EWU General Education Requirements",
+    "Maintain 2.25 GPA in major courses",
+    "Complete all prerequisite chains before capstone",
+    "Background check may be required for certain internships"
+  ],
+  "catalogUrl": "https://catalog.ewu.edu/stem/cs-ee/computer-science-cyber-operations-bs/",
+  "catalogYear": "2024-2025",
+  "lastUpdated": "2024-12-31T00:00:00.000Z"
+}

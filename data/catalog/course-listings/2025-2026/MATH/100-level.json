@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalog": {
+    "institution": "Eastern Washington University",
+    "edition": "2025-2026",
+    "college": "College of Science, Technology, Engineering & Mathematics (CSTEM)",
+    "department": "Mathematics",
+    "subjectCode": "MATH",
+    "source": {
+      "listing_url": "https://catalog.ewu.edu/course-listings/math/",
+      "retrieved_at": "2025-08-15",
+      "deep_link_pattern": "https://catalog.ewu.edu/search/?P=MATH%20{NUMBER}",
+      "notes": "Extracted via minimal scraper using regex patterns. Manual verification recommended."
+    },
+    "fields": [
+      "code",
+      "number",
+      "title",
+      "credits",
+      "description_summary",
+      "notes",
+      "prerequisites",
+      "corequisites",
+      "links"
+    ],
+    "courses": [
+      {
+        "code": "MATH 107",
+        "number": 107,
+        "title": "MATHEMATICAL REASONING",
+        "credits": "5",
+        "description_summary": "Course description for MATH 107",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20107",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 114",
+        "number": 114,
+        "title": "ALGEBRA CONCEPTS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 114",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20114",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 121",
+        "number": 121,
+        "title": "INTRODUCTORY STATISTICS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 121",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20121",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 130",
+        "number": 130,
+        "title": "ESSENTIALS FOR MATH REASONING",
+        "credits": "3",
+        "description_summary": "Course description for MATH 130",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20130",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 131",
+        "number": 131,
+        "title": "ESSENTIALS FOR ALGEBRA CONCEPTS",
+        "credits": "3",
+        "description_summary": "Course description for MATH 131",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20131",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 132",
+        "number": 132,
+        "title": "ESSENTIALS FOR FINITE MATH",
+        "credits": "3",
+        "description_summary": "Course description for MATH 132",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20132",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 141",
+        "number": 141,
+        "title": "PRECALCULUS I",
+        "credits": "5",
+        "description_summary": "Course description for MATH 141",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20141",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 142",
+        "number": 142,
+        "title": "PRECALCULUS MATH II",
+        "credits": "5",
+        "description_summary": "Course description for MATH 142",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20142",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 161",
+        "number": 161,
+        "title": "CALCULUS I",
+        "credits": "5",
+        "description_summary": "Course description for MATH 161",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20161",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 162",
+        "number": 162,
+        "title": "CALCULUS II",
+        "credits": "5",
+        "description_summary": "Course description for MATH 162",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20162",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 163",
+        "number": 163,
+        "title": "CALCULUS III",
+        "credits": "5",
+        "description_summary": "Course description for MATH 163",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20163",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 170",
+        "number": 170,
+        "title": "GEOMETRY AND ART",
+        "credits": "5",
+        "description_summary": "Course description for MATH 170",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20170",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 196",
+        "number": 196,
+        "title": "EXPERIMENTAL",
+        "credits": "1-5",
+        "description_summary": "Course description for MATH 196",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20196",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      }
+    ],
+    "level_filter": "100-level",
+    "course_count": 13
+  }
+}

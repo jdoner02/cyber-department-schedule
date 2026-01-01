@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalog": {
+    "institution": "Eastern Washington University",
+    "edition": "2025-2026",
+    "college": "College of Science, Technology, Engineering & Mathematics (CSTEM)",
+    "department": "Mathematics",
+    "subjectCode": "MATH",
+    "source": {
+      "listing_url": "https://catalog.ewu.edu/course-listings/math/",
+      "retrieved_at": "2025-08-15",
+      "deep_link_pattern": "https://catalog.ewu.edu/search/?P=MATH%20{NUMBER}",
+      "notes": "Extracted via minimal scraper using regex patterns. Manual verification recommended."
+    },
+    "fields": [
+      "code",
+      "number",
+      "title",
+      "credits",
+      "description_summary",
+      "notes",
+      "prerequisites",
+      "corequisites",
+      "links"
+    ],
+    "courses": [
+      {
+        "code": "MATH 600",
+        "number": 600,
+        "title": "THESIS",
+        "credits": "1-15",
+        "description_summary": "Course description for MATH 600",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20600",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 601",
+        "number": 601,
+        "title": "RESEARCH REPORT",
+        "credits": "1-15",
+        "description_summary": "Course description for MATH 601",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20601",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 696",
+        "number": 696,
+        "title": "APPLIED MATHEMATICS INTERNSHIP",
+        "credits": "1-10",
+        "description_summary": "Course description for MATH 696",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20696",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      }
+    ],
+    "level_filter": "600-level",
+    "course_count": 3
+  }
+}

@@ -4,6 +4,7 @@ import {
   AlertTriangle,
   StickyNote,
   BarChart3,
+  TrendingUp,
   FileText,
   Settings,
   GraduationCap,
@@ -54,6 +55,11 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
       path: '/analytics',
       label: 'Analytics',
       icon: <BarChart3 className="w-5 h-5" />,
+    },
+    {
+      path: '/trends',
+      label: 'Trends',
+      icon: <TrendingUp className="w-5 h-5" />,
     },
     {
       path: '/docs',

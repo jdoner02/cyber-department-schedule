@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalog": {
+    "institution": "Eastern Washington University",
+    "edition": "2025-2026",
+    "college": "College of Science, Technology, Engineering & Mathematics (CSTEM)",
+    "department": "Physics",
+    "subjectCode": "PHYS",
+    "source": {
+      "listing_url": "https://catalog.ewu.edu/course-listings/phys/",
+      "retrieved_at": "2025-08-15",
+      "deep_link_pattern": "https://catalog.ewu.edu/search/?P=PHYS%20{NUMBER}",
+      "notes": "Extracted via minimal scraper using regex patterns. Manual verification recommended."
+    },
+    "fields": [
+      "code",
+      "number",
+      "title",
+      "credits",
+      "description_summary",
+      "notes",
+      "prerequisites",
+      "corequisites",
+      "links"
+    ],
+    "courses": [
+      {
+        "code": "PHYS 311",
+        "number": 311,
+        "title": "ESTIMATION IN PHYSICS",
+        "credits": "1",
+        "description_summary": "Course description for PHYS 311",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20311",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 321",
+        "number": 321,
+        "title": "ADVANCED PHYSICS LABORATORY I",
+        "credits": "3",
+        "description_summary": "Course description for PHYS 321",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20321",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 322",
+        "number": 322,
+        "title": "ADVANCED PHYSICS LABORATORY II",
+        "credits": "3",
+        "description_summary": "Course description for PHYS 322",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20322",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 361",
+        "number": 361,
+        "title": "CLASSICAL MECHANICS I",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 361",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20361",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 362",
+        "number": 362,
+        "title": "CLASSICAL MECHANICS II",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 362",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20362",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 363",
+        "number": 363,
+        "title": "RELATIVITY",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 363",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20363",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 371",
+        "number": 371,
+        "title": "QUANTUM PHYSICS I: INTRODUCTION",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 371",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20371",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 372",
+        "number": 372,
+        "title": "QUANTUM PHYSICS II: ATOMIC",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 372",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20372",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 395",
+        "number": 395,
+        "title": "FIELDWORK",
+        "credits": "1-5",
+        "description_summary": "Course description for PHYS 395",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20395",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 396",
+        "number": 396,
+        "title": "EXPERIMENTAL COURSE",
+        "credits": "1-6",
+        "description_summary": "Course description for PHYS 396",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20396",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      }
+    ],
+    "level_filter": "300-level",
+    "course_count": 10
+  }
+}

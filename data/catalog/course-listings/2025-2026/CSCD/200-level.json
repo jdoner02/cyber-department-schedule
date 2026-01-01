@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalog": {
+    "institution": "Eastern Washington University",
+    "edition": "2025-2026",
+    "college": "College of Science, Technology, Engineering & Mathematics (CSTEM)",
+    "department": "Computer Science",
+    "subjectCode": "CSCD",
+    "source": {
+      "listing_url": "https://catalog.ewu.edu/course-listings/cscd/",
+      "retrieved_at": "2025-08-15",
+      "deep_link_pattern": "https://catalog.ewu.edu/search/?P=CSCD%20{NUMBER}",
+      "notes": "Official course data comes from the EWU catalog. Use the search deep link as the canonical per-course URL. Avoid relying on in-page anchors, which are not stable."
+    },
+    "fields": [
+      "code",
+      "number",
+      "title",
+      "credits",
+      "description_summary",
+      "notes",
+      "prerequisites",
+      "corequisites",
+      "links"
+    ],
+    "courses": [
+      {
+        "code": "CSCD 202",
+        "number": 202,
+        "title": "COMPUTING ETHICS",
+        "credits": "4",
+        "prerequisites": "ENGL 101.",
+        "notes": "Satisfies a BACR for humanities and arts.",
+        "description_summary": "Computing in society: ethical frameworks, impacts on individuals, organizations, and culture.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20202",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 210",
+        "number": 210,
+        "title": "PROGRAMMING PRINCIPLES I",
+        "credits": "5",
+        "prerequisites": "MATH 114 \u2265 C and CSCD 110.",
+        "notes": "Concurrent registration in MATH 141 or higher highly recommended; prior programming may satisfy CSCD 110.",
+        "description_summary": "Programming fundamentals: data types, control flow, methods, arrays, file I/O; project-based.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20210",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 211",
+        "number": 211,
+        "title": "PROGRAMMING PRINCIPLES II",
+        "credits": "5",
+        "prerequisites": "CSCD 210 \u2265 C+ and MATH 141 \u2265 C.",
+        "notes": "Concurrent registration in MATH 142 or higher highly recommended.",
+        "description_summary": "Object-oriented programming: composition, recursion, abstraction, inheritance, interfaces, lists, exceptions.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20211",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 240",
+        "number": 240,
+        "title": "C AND UNIX PROGRAMMING",
+        "credits": "5",
+        "prerequisites": "CSCD 210 \u2265 C+ or EENG 163 \u2265 C.",
+        "description_summary": "UNIX development tools and C programming: pointers, structs, arrays, system calls; projects required.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20240",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 260",
+        "number": 260,
+        "title": "ARCHITECTURE AND ORGANIZATION",
+        "credits": "3",
+        "prerequisites": "CSCD 240 \u2265 C+; EENG 160 \u2265 C.",
+        "corequisites": "CSCD 260L.",
+        "description_summary": "Digital computer design: number systems, Boolean algebra, digital circuits, microprocessor ISA; includes assembly.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20260",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 260L",
+        "number": 260,
+        "title": "ARCHITECTURE AND ORGANIZATION LAB",
+        "credits": "1",
+        "prerequisites": "CSCD 240 \u2265 C+; EENG 160 \u2265 C.",
+        "corequisites": "CSCD 260.",
+        "description_summary": "Lab companion to CSCD 260.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20260L",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 296",
+        "number": 296,
+        "title": "EXPERIMENTAL COURSE",
+        "credits": "1-5",
+        "description_summary": "Variable topic offering for new or trial content.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20296",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 299",
+        "number": 299,
+        "title": "SPECIAL STUDIES",
+        "credits": "1-5",
+        "prerequisites": "Permission of instructor, department chair and college dean.",
+        "description_summary": "Topics vary based on student and faculty interest.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20299",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      }
+    ],
+    "level_filter": "200-level",
+    "course_count": 8
+  }
+}

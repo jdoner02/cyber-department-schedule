@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import Conflicts from './pages/Conflicts';
 import Notes from './pages/Notes';
 import Analytics from './pages/Analytics';
+import Trends from './pages/Trends';
 import Documentation from './pages/Documentation';
 import Settings from './pages/Settings';
 import Students from './pages/Students';
@@ -25,12 +26,13 @@ function App() {
                 <Route path="/" element={<Layout />}>
                   <Route index element={<Dashboard />} />
                   <Route path="conflicts" element={<Conflicts />} />
-                  <Route path="notes" element={<Notes />} />
-                  <Route path="analytics" element={<Analytics />} />
-                  <Route path="students" element={<Students />} />
-                  <Route path="docs" element={<Documentation />} />
-                  <Route path="docs/:section" element={<Documentation />} />
-                  <Route path="settings" element={<Settings />} />
+                <Route path="notes" element={<Notes />} />
+                <Route path="analytics" element={<Analytics />} />
+                <Route path="trends" element={<Trends />} />
+                <Route path="students" element={<Students />} />
+                <Route path="docs" element={<Documentation />} />
+                <Route path="docs/:section" element={<Documentation />} />
+                <Route path="settings" element={<Settings />} />
                 </Route>
               </Routes>
             </StudentProvider>

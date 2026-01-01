@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalog": {
+    "institution": "Eastern Washington University",
+    "edition": "2025-2026",
+    "college": "College of Science, Technology, Engineering & Mathematics (CSTEM)",
+    "department": "Computer Science",
+    "subjectCode": "CSCD",
+    "source": {
+      "listing_url": "https://catalog.ewu.edu/course-listings/cscd/",
+      "retrieved_at": "2025-08-15",
+      "deep_link_pattern": "https://catalog.ewu.edu/search/?P=CSCD%20{NUMBER}",
+      "notes": "Official course data comes from the EWU catalog. Use the search deep link as the canonical per-course URL. Avoid relying on in-page anchors, which are not stable."
+    },
+    "fields": [
+      "code",
+      "number",
+      "title",
+      "credits",
+      "description_summary",
+      "notes",
+      "prerequisites",
+      "corequisites",
+      "links"
+    ],
+    "courses": [
+      {
+        "code": "CSCD 595",
+        "number": 595,
+        "title": "PROFESSIONAL INTERNSHIP",
+        "credits": "2-16",
+        "prerequisites": "Permission of instructor, department chair and college dean.",
+        "description_summary": "Graduate-level professional internship experience.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20595",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 596",
+        "number": 596,
+        "title": "EXPERIMENTAL COURSE",
+        "credits": "2-5",
+        "description_summary": "Graduate variable topic offering for new or trial content.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20596",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 598",
+        "number": 598,
+        "title": "SEMINAR",
+        "credits": "1-5",
+        "description_summary": "Graduate seminar in specialized CS topics.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20598",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 599",
+        "number": 599,
+        "title": "DIRECTED STUDY",
+        "credits": "1-6",
+        "prerequisites": "Permission of instructor, department chair and college dean.",
+        "description_summary": "Graduate directed study under faculty supervision.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20599",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      }
+    ],
+    "level_filter": "500-level",
+    "course_count": 4
+  }
+}

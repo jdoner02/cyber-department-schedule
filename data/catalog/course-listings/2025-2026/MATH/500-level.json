@@ -1,0 +1,251 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalog": {
+    "institution": "Eastern Washington University",
+    "edition": "2025-2026",
+    "college": "College of Science, Technology, Engineering & Mathematics (CSTEM)",
+    "department": "Mathematics",
+    "subjectCode": "MATH",
+    "source": {
+      "listing_url": "https://catalog.ewu.edu/course-listings/math/",
+      "retrieved_at": "2025-08-15",
+      "deep_link_pattern": "https://catalog.ewu.edu/search/?P=MATH%20{NUMBER}",
+      "notes": "Extracted via minimal scraper using regex patterns. Manual verification recommended."
+    },
+    "fields": [
+      "code",
+      "number",
+      "title",
+      "credits",
+      "description_summary",
+      "notes",
+      "prerequisites",
+      "corequisites",
+      "links"
+    ],
+    "courses": [
+      {
+        "code": "MATH 513",
+        "number": 513,
+        "title": "DATA ANALYSIS AND PROBABILITY FOR TEACHERS",
+        "credits": "3",
+        "description_summary": "Course description for MATH 513",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20513",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 516",
+        "number": 516,
+        "title": "CALCULUS FOR MIDDLE LEVEL TEACHERS",
+        "credits": "4",
+        "description_summary": "Course description for MATH 516",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20516",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 530",
+        "number": 530,
+        "title": "APPLIED MATHEMATICS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 530",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20530",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 531",
+        "number": 531,
+        "title": "APPLIED GROUP THEORY",
+        "credits": "5",
+        "description_summary": "Course description for MATH 531",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20531",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 534",
+        "number": 534,
+        "title": "METHODS OF DISCRETE MATHEMATICS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 534",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20534",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 535",
+        "number": 535,
+        "title": "CRYPTOGRAPHY",
+        "credits": "5",
+        "description_summary": "Course description for MATH 535",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20535",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 539",
+        "number": 539,
+        "title": "TOPICS IN MATHEMATICS",
+        "credits": "1-5",
+        "description_summary": "Course description for MATH 539",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20539",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 541",
+        "number": 541,
+        "title": "ADVANCED PDE WITH APPLICATION",
+        "credits": "5",
+        "description_summary": "Course description for MATH 541",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20541",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 544",
+        "number": 544,
+        "title": "NUMERICAL LINEAR ALGEBRA",
+        "credits": "5",
+        "description_summary": "Course description for MATH 544",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20544",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 545",
+        "number": 545,
+        "title": "METHODS OF COMPUTATIONAL MODELING",
+        "credits": "5",
+        "description_summary": "Course description for MATH 545",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20545",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 547",
+        "number": 547,
+        "title": "NON-LINEAR DYNAMICS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 547",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20547",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 548",
+        "number": 548,
+        "title": "ADVANCED PARTIAL DIFFERENTIAL EQUATIONS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 548",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20548",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 550",
+        "number": 550,
+        "title": "MATHEMATICAL BIOLOGY",
+        "credits": "5",
+        "description_summary": "Course description for MATH 550",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20550",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 561",
+        "number": 561,
+        "title": "CONTINUOUS OPTIMIZATION",
+        "credits": "5",
+        "description_summary": "Course description for MATH 561",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20561",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 573",
+        "number": 573,
+        "title": "TOPICS IN APPLIED MATHEMATICS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 573",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20573",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 581",
+        "number": 581,
+        "title": "APPLIED COMPLEX ANALYSIS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 581",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20581",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 585",
+        "number": 585,
+        "title": "APPLIED LINEAR STATISTICAL MODELING",
+        "credits": "5",
+        "description_summary": "Course description for MATH 585",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20585",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 586",
+        "number": 586,
+        "title": "ADVANCED TOPICS IN STATISTICS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 586",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20586",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 596",
+        "number": 596,
+        "title": "EXPERIMENTAL COURSE",
+        "credits": "1-5",
+        "description_summary": "Course description for MATH 596",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20596",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 599",
+        "number": 599,
+        "title": "DIRECTED STUDY",
+        "credits": "1-6",
+        "description_summary": "Course description for MATH 599",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20599",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      }
+    ],
+    "level_filter": "500-level",
+    "course_count": 20
+  }
+}

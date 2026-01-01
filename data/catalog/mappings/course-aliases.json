@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-01-01",
+  "purpose": "Canonical course identity mapping for cross-term trend tracking when course subject codes change (e.g., CSCD -> CYBR) or when courses are cross-listed under multiple subjects.",
+  "entries": [
+    {
+      "canonicalCourseCode": "CYBR 330",
+      "aliases": ["CSCD 330"],
+      "type": "subject-transition",
+      "confidence": "high",
+      "notes": "Requested special-case: CYBR 330 was historically offered as CSCD 330. Treat as one course for longitudinal reporting (Dr. Steiner tracking)."
+    },
+    {
+      "canonicalCourseCode": "CYBR 303",
+      "aliases": ["CSCD 303"],
+      "type": "cross-listed-subjects",
+      "confidence": "high",
+      "notes": "Same number/title across subjects and appears as a Banner crossList group in some terms."
+    },
+    {
+      "canonicalCourseCode": "CYBR 434",
+      "aliases": ["CSCD 434"],
+      "type": "cross-listed-subjects",
+      "confidence": "high",
+      "notes": "NETWORK SECURITY appears under both CSCD and CYBR in schedule snapshots."
+    },
+    {
+      "canonicalCourseCode": "CYBR 437",
+      "aliases": ["CSCD 437"],
+      "type": "cross-listed-subjects",
+      "confidence": "high",
+      "notes": "SECURE CODING appears under both CSCD and CYBR in schedule snapshots."
+    },
+    {
+      "canonicalCourseCode": "CYBR 488",
+      "aliases": ["CSCD 488"],
+      "type": "cross-listed-subjects",
+      "confidence": "high",
+      "notes": "SENIOR PROJECT appears under both CSCD and CYBR in schedule snapshots."
+    },
+    {
+      "canonicalCourseCode": "CYBR 490",
+      "aliases": ["CSCD 490"],
+      "type": "cross-listed-subjects",
+      "confidence": "high",
+      "notes": "SENIOR CAPSTONE appears under both CSCD and CYBR in schedule snapshots."
+    },
+    {
+      "canonicalCourseCode": "CYBR 495",
+      "aliases": ["CSCD 495"],
+      "type": "cross-listed-subjects",
+      "confidence": "high",
+      "notes": "INTERNSHIP appears under both CSCD and CYBR in schedule snapshots."
+    },
+    {
+      "canonicalCourseCode": "CYBR 534",
+      "aliases": ["CSCD 534"],
+      "type": "cross-listed-subjects",
+      "confidence": "high",
+      "notes": "NETWORK SECURITY (500-level) appears under both CSCD and CYBR in schedule snapshots."
+    },
+    {
+      "canonicalCourseCode": "CYBR 537",
+      "aliases": ["CSCD 537"],
+      "type": "cross-listed-subjects",
+      "confidence": "high",
+      "notes": "SECURE CODING (500-level) appears under both CSCD and CYBR in schedule snapshots."
+    },
+    {
+      "canonicalCourseCode": "CYBR 600",
+      "aliases": ["CSCD 600"],
+      "type": "cross-listed-subjects",
+      "confidence": "medium",
+      "notes": "THESIS appears under both CSCD and CYBR in schedule snapshots."
+    },
+    {
+      "canonicalCourseCode": "CYBR 601",
+      "aliases": ["CSCD 601"],
+      "type": "cross-listed-subjects",
+      "confidence": "medium",
+      "notes": "RESEARCH REPORT / GRADUATE RESEARCH REPORT appears under both CSCD and CYBR in schedule snapshots."
+    }
+  ]
+}
+

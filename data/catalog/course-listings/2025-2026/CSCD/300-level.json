@@ -1,0 +1,285 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalog": {
+    "institution": "Eastern Washington University",
+    "edition": "2025-2026",
+    "college": "College of Science, Technology, Engineering & Mathematics (CSTEM)",
+    "department": "Computer Science",
+    "subjectCode": "CSCD",
+    "source": {
+      "listing_url": "https://catalog.ewu.edu/course-listings/cscd/",
+      "retrieved_at": "2025-08-15",
+      "deep_link_pattern": "https://catalog.ewu.edu/search/?P=CSCD%20{NUMBER}",
+      "notes": "Official course data comes from the EWU catalog. Use the search deep link as the canonical per-course URL. Avoid relying on in-page anchors, which are not stable."
+    },
+    "fields": [
+      "code",
+      "number",
+      "title",
+      "credits",
+      "description_summary",
+      "notes",
+      "prerequisites",
+      "corequisites",
+      "links"
+    ],
+    "courses": [
+      {
+        "code": "CSCD 300",
+        "number": 300,
+        "title": "DATA STRUCTURES",
+        "credits": "5",
+        "prerequisites": "CSCD 211 and MATH 142 (CSCD \u2265 C+, supporting \u2265 C).",
+        "description_summary": "Linked lists, stacks, queues, hashing, recursion, algorithm analysis, trees; documented programming projects.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20300",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 305",
+        "number": 305,
+        "title": "C++ PROGRAMMING",
+        "credits": "3",
+        "prerequisites": "CSCD 240 \u2265 C+ or EENG 255 \u2265 C+.",
+        "corequisites": "CSCD 305L.",
+        "description_summary": "C++ syntax, memory management, OOP, STL, exceptions, namespaces, GUI programming; with lab coreq.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20305",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 305L",
+        "number": 305,
+        "title": "C++ PROGRAMMING LAB",
+        "credits": "1",
+        "prerequisites": "CSCD 240 \u2265 C+ or EENG 255 \u2265 C+.",
+        "corequisites": "CSCD 305.",
+        "description_summary": "Lab companion to CSCD 305.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20305L",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 320",
+        "number": 320,
+        "title": "ALGORITHMS",
+        "credits": "5",
+        "prerequisites": "CSCD 300 \u2265 C+, MATH 301 \u2265 C, APE clearance.",
+        "description_summary": "Algorithm design/analysis, dynamic programming, trees/graphs; programming projects.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20320",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 327",
+        "number": 327,
+        "title": "RELATIONAL DATABASE SYSTEMS",
+        "credits": "3",
+        "prerequisites": "CSCD 211 \u2265 C+ and MATH 301 \u2265 C.",
+        "corequisites": "CSCD 327L.",
+        "description_summary": "Relational models, SQL, relational algebra, ER modeling; with required companion lab.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20327",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 327L",
+        "number": 327,
+        "title": "RELATIONAL DATABASE SYSTEMS LAB",
+        "credits": "1",
+        "prerequisites": "CSCD 211 \u2265 C+ and MATH 301 \u2265 C.",
+        "corequisites": "CSCD 327.",
+        "description_summary": "Lab companion to CSCD 327.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20327L",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 330",
+        "number": 330,
+        "title": "COMPUTER NETWORKS",
+        "credits": "3",
+        "prerequisites": "CSCD 210 \u2265 C+, CSCD 240 \u2265 C+.",
+        "corequisites": "CSCD 330L.",
+        "description_summary": "Networking fundamentals: media, ISO/OSI layers, Ethernet, collision detection, channel allocation; projects.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20330",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 330L",
+        "number": 330,
+        "title": "COMPUTER NETWORKS LAB",
+        "credits": "1",
+        "prerequisites": "CSCD 210 \u2265 C+, CSCD 240 \u2265 C+.",
+        "corequisites": "CSCD 330.",
+        "description_summary": "Lab companion to CSCD 330.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20330L",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 340",
+        "number": 340,
+        "title": "OPERATING SYSTEMS",
+        "credits": "5",
+        "prerequisites": "CSCD 240 \u2265 C+; and CSCD 260 \u2265 C+ or EENG 260 \u2265 C+.",
+        "description_summary": "OS concepts: memory, protection, I/O, scheduling, processes, file systems; programming/written reports.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20340",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 350",
+        "number": 350,
+        "title": "SOFTWARE DEVELOPMENT PRINCIPLES",
+        "credits": "3",
+        "prerequisites": "CSCD 300 \u2265 C+, APE clearance.",
+        "corequisites": "CSCD 350L.",
+        "description_summary": "Software engineering lifecycle, V&V, project/team management, legal/ethical issues; team project required.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20350",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 350L",
+        "number": 350,
+        "title": "SOFTWARE DEVELOPMENT PRINCIPLES LAB",
+        "credits": "1",
+        "prerequisites": "CSCD 300 \u2265 C+, APE clearance.",
+        "corequisites": "CSCD 350.",
+        "description_summary": "Lab companion to CSCD 350.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20350L",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 371",
+        "number": 371,
+        "title": ".NET PROGRAMMING",
+        "credits": "3",
+        "prerequisites": "CSCD 300 \u2265 C+, APE clearance.",
+        "corequisites": "CSCD 371L.",
+        "description_summary": ".NET framework fundamentals and OOP features; delegates, events, threading, serialization, DB connectivity, GUI.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20371",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 371L",
+        "number": 371,
+        "title": ".NET PROGRAMMING LAB",
+        "credits": "1",
+        "prerequisites": "CSCD 300 \u2265 C+, APE clearance.",
+        "corequisites": "CSCD 371.",
+        "description_summary": "Lab companion to CSCD 371.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20371L",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 377",
+        "number": 377,
+        "title": "INTRODUCTORY COMPUTER GRAPHICS",
+        "credits": "3",
+        "prerequisites": "CSCD 240 \u2265 C+, MATH 142 \u2265 C.",
+        "corequisites": "CSCD 377L.",
+        "description_summary": "3D modeling and animation with primitive building blocks; OpenGL Shading Language.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20377",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 377L",
+        "number": 377,
+        "title": "INTRODUCTORY COMPUTER GRAPHICS LAB",
+        "credits": "1",
+        "prerequisites": "CSCD 240 \u2265 C+, MATH 142 \u2265 C.",
+        "corequisites": "CSCD 377.",
+        "description_summary": "Lab companion to CSCD 377.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20377L",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 379",
+        "number": 379,
+        "title": ".NET WEB APPLICATION DEVELOPMENT",
+        "credits": "3",
+        "prerequisites": "CSCD 327 & 327L \u2265 C+, CSCD 371 & 371L \u2265 C+.",
+        "corequisites": "CSCD 379L.",
+        "description_summary": "Multi-tier web application development on .NET: web standards, portability, usability; programming projects.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20379",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 379L",
+        "number": 379,
+        "title": ".NET WEB APPLICATION DEVELOPMENT LAB",
+        "credits": "1",
+        "prerequisites": "CSCD 327 & 327L \u2265 C+, CSCD 371 & 371L \u2265 C+.",
+        "corequisites": "CSCD 379.",
+        "description_summary": "Lab companion to CSCD 379.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20379L",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 395",
+        "number": 395,
+        "title": "INTERNSHIP",
+        "credits": "1-10",
+        "notes": "Pass/Fail grading.",
+        "prerequisites": "Permission of instructor, department chair and college dean.",
+        "description_summary": "Supervised practical experience in a professional setting.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20395",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 396",
+        "number": 396,
+        "title": "EXPERIMENTAL COURSE",
+        "credits": "1-5",
+        "description_summary": "Variable topic offering for new or trial content.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20396",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      },
+      {
+        "code": "CSCD 399",
+        "number": 399,
+        "title": "DIRECTED STUDY",
+        "credits": "1-5",
+        "prerequisites": "Permission of instructor, department chair and college dean.",
+        "description_summary": "Independent study arranged with faculty oversight.",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=CSCD%20399",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/cscd/#contentarea"
+        }
+      }
+    ],
+    "level_filter": "300-level",
+    "course_count": 20
+  }
+}

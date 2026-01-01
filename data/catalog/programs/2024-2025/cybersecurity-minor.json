@@ -1,0 +1,119 @@
+{
+  "slug": "cybersecurity-minor",
+  "name": "Cybersecurity Minor",
+  "degreeType": "Minor",
+  "department": "Computer Science & Electrical Engineering",
+  "totalCredits": 24,
+  "minimumGPA": 2.0,
+  "coreCourses": [
+    {
+      "courseCode": "CYBR 100",
+      "title": "Introduction to Cybersecurity",
+      "credits": 4,
+      "type": "core",
+      "prerequisites": [],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "winter", "spring"],
+      "typicalCampuses": ["Cheney", "Online"],
+      "notes": "No prerequisites. Good starting point for any major."
+    },
+    {
+      "courseCode": "CSCD 210",
+      "title": "Programming Principles I",
+      "credits": 4,
+      "type": "core",
+      "prerequisites": [],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "winter", "spring"],
+      "typicalCampuses": ["Cheney"],
+      "notes": "Essential programming foundation."
+    },
+    {
+      "courseCode": "CYBR 210",
+      "title": "Network Security Fundamentals",
+      "credits": 4,
+      "type": "core",
+      "prerequisites": ["CYBR 100"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["winter", "spring"],
+      "typicalCampuses": ["Cheney"]
+    },
+    {
+      "courseCode": "CYBR 310",
+      "title": "Ethical Hacking and Penetration Testing",
+      "credits": 4,
+      "type": "core",
+      "prerequisites": ["CYBR 210"],
+      "corequisites": [],
+      "minimumGrade": "C",
+      "typicalQuarters": ["fall", "spring"],
+      "typicalCampuses": ["Cheney"]
+    }
+  ],
+  "electiveGroups": [
+    {
+      "id": "minor-electives",
+      "name": "Cybersecurity Minor Electives",
+      "description": "Choose 2 courses from the following",
+      "requiredCount": 2,
+      "requiredCredits": 8,
+      "courses": [
+        {
+          "courseCode": "CYBR 340",
+          "title": "Digital Forensics",
+          "credits": 4,
+          "type": "major-elective",
+          "prerequisites": ["CYBR 210"],
+          "corequisites": [],
+          "minimumGrade": "C",
+          "typicalQuarters": ["winter"],
+          "typicalCampuses": ["Cheney"]
+        },
+        {
+          "courseCode": "CYBR 320",
+          "title": "Malware Analysis",
+          "credits": 4,
+          "type": "major-elective",
+          "prerequisites": ["CYBR 210"],
+          "corequisites": [],
+          "minimumGrade": "C",
+          "typicalQuarters": ["spring"],
+          "typicalCampuses": ["Cheney"]
+        },
+        {
+          "courseCode": "CYBR 350",
+          "title": "Secure Software Development",
+          "credits": 4,
+          "type": "major-elective",
+          "prerequisites": ["CYBR 210", "CSCD 210"],
+          "corequisites": [],
+          "minimumGrade": "C",
+          "typicalQuarters": ["winter"],
+          "typicalCampuses": ["Cheney"]
+        },
+        {
+          "courseCode": "CSCD 330",
+          "title": "Network Programming",
+          "credits": 4,
+          "type": "major-elective",
+          "prerequisites": ["CSCD 210"],
+          "corequisites": [],
+          "minimumGrade": "C",
+          "typicalQuarters": ["fall", "winter"],
+          "typicalCampuses": ["Cheney"]
+        }
+      ]
+    }
+  ],
+  "supportCourses": [],
+  "specialRequirements": [
+    "Minor cannot duplicate courses in student's major",
+    "Minimum C grade required in all minor courses"
+  ],
+  "catalogUrl": "https://catalog.ewu.edu/stem/cs-ee/cybersecurity-minor/",
+  "catalogYear": "2024-2025",
+  "lastUpdated": "2024-12-31T00:00:00.000Z"
+}

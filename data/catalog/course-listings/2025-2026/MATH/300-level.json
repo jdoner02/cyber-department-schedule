@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalog": {
+    "institution": "Eastern Washington University",
+    "edition": "2025-2026",
+    "college": "College of Science, Technology, Engineering & Mathematics (CSTEM)",
+    "department": "Mathematics",
+    "subjectCode": "MATH",
+    "source": {
+      "listing_url": "https://catalog.ewu.edu/course-listings/math/",
+      "retrieved_at": "2025-08-15",
+      "deep_link_pattern": "https://catalog.ewu.edu/search/?P=MATH%20{NUMBER}",
+      "notes": "Extracted via minimal scraper using regex patterns. Manual verification recommended."
+    },
+    "fields": [
+      "code",
+      "number",
+      "title",
+      "credits",
+      "description_summary",
+      "notes",
+      "prerequisites",
+      "corequisites",
+      "links"
+    ],
+    "courses": [
+      {
+        "code": "MATH 301",
+        "number": 301,
+        "title": "DISCRETE MATHEMATICS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 301",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20301",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 311",
+        "number": 311,
+        "title": "FUNCTIONS AND RELATIONS FOR K-8 TEACHERS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 311",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20311",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 312",
+        "number": 312,
+        "title": "GEOMETRY FOR THE K-8 TEACHER",
+        "credits": "5",
+        "description_summary": "Course description for MATH 312",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20312",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 317",
+        "number": 317,
+        "title": "PUTNAM PREPARATION",
+        "credits": "1",
+        "description_summary": "Course description for MATH 317",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20317",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 318",
+        "number": 318,
+        "title": "MATHEMATICAL MODELING PREPARATION",
+        "credits": "1",
+        "description_summary": "Course description for MATH 318",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20318",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 321",
+        "number": 321,
+        "title": "PRECOLONIAL MATHEMATICS TRADITIONS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 321",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20321",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 331",
+        "number": 331,
+        "title": "DISCRETE MATHEMATICS WITH APPLICATIONS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 331",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20331",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 332",
+        "number": 332,
+        "title": "NUMBER THEORY",
+        "credits": "5",
+        "description_summary": "Course description for MATH 332",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20332",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 347",
+        "number": 347,
+        "title": "INTRODUCTORY DIFFERENTIAL EQUATIONS",
+        "credits": "4",
+        "description_summary": "Course description for MATH 347",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20347",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 350",
+        "number": 350,
+        "title": "BIOMATHEMATICS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 350",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20350",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 370",
+        "number": 370,
+        "title": "SURVEY OF GEOMETRIES",
+        "credits": "5",
+        "description_summary": "Course description for MATH 370",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20370",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 380",
+        "number": 380,
+        "title": "ELEMENTARY PROBABILITY AND STATISTICS",
+        "credits": "5",
+        "description_summary": "Course description for MATH 380",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20380",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 385",
+        "number": 385,
+        "title": "PROBABILITY AND STATISTICAL INFERENCE I",
+        "credits": "5",
+        "description_summary": "Course description for MATH 385",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20385",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 387",
+        "number": 387,
+        "title": "REGRESSION CONCEPTS",
+        "credits": "3",
+        "description_summary": "Course description for MATH 387",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20387",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 395",
+        "number": 395,
+        "title": "CO-OP FIELDWORK",
+        "credits": "1-5",
+        "description_summary": "Course description for MATH 395",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20395",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 396",
+        "number": 396,
+        "title": "EXPERIMENTAL COURSE",
+        "credits": "1-5",
+        "description_summary": "Course description for MATH 396",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20396",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      },
+      {
+        "code": "MATH 399",
+        "number": 399,
+        "title": "SPECIAL STUDIES IN MATH",
+        "credits": "1-5",
+        "description_summary": "Course description for MATH 399",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=MATH%20399",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/math/#contentarea"
+        }
+      }
+    ],
+    "level_filter": "300-level",
+    "course_count": 17
+  }
+}

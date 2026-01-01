@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalog": {
+    "institution": "Eastern Washington University",
+    "edition": "2025-2026",
+    "college": "College of Science, Technology, Engineering & Mathematics (CSTEM)",
+    "department": "Physics",
+    "subjectCode": "PHYS",
+    "source": {
+      "listing_url": "https://catalog.ewu.edu/course-listings/phys/",
+      "retrieved_at": "2025-08-15",
+      "deep_link_pattern": "https://catalog.ewu.edu/search/?P=PHYS%20{NUMBER}",
+      "notes": "Extracted via minimal scraper using regex patterns. Manual verification recommended."
+    },
+    "fields": [
+      "code",
+      "number",
+      "title",
+      "credits",
+      "description_summary",
+      "notes",
+      "prerequisites",
+      "corequisites",
+      "links"
+    ],
+    "courses": [
+      {
+        "code": "PHYS 221",
+        "number": 221,
+        "title": "GENERAL PHYSICS IV",
+        "credits": "4",
+        "description_summary": "Course description for PHYS 221",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20221",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 263",
+        "number": 263,
+        "title": "ELECTRONICS LABORATORY II",
+        "credits": "1",
+        "description_summary": "Course description for PHYS 263",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20263",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 296",
+        "number": 296,
+        "title": "EXPERIMENTAL COURSE",
+        "credits": "1-5",
+        "description_summary": "Course description for PHYS 296",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20296",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      },
+      {
+        "code": "PHYS 299",
+        "number": 299,
+        "title": "SPECIAL STUDIES",
+        "credits": "1-5",
+        "description_summary": "Course description for PHYS 299",
+        "links": {
+          "search": "https://catalog.ewu.edu/search/?P=PHYS%20299",
+          "listing_fallback": "https://catalog.ewu.edu/course-listings/phys/#contentarea"
+        }
+      }
+    ],
+    "level_filter": "200-level",
+    "course_count": 4
+  }
+}

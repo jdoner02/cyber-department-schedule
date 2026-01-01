@@ -1,0 +1,249 @@
+{
+  "academicYear": "2024-2025",
+  "institution": "Eastern Washington University",
+  "system": "quarter",
+  "weeksPerTerm": 10,
+  "dataSource": "https://25livepub.collegenet.com/calendars/academic-calendar-quarter.rss",
+  "lastUpdated": "2025-01-15",
+  "quarters": [
+    {
+      "id": "fall-2024",
+      "name": "Fall 2024",
+      "startDate": "2024-09-23",
+      "endDate": "2024-12-06",
+      "finalsStart": "2024-12-09",
+      "finalsEnd": "2024-12-12",
+      "weeks": 10
+    },
+    {
+      "id": "winter-2025",
+      "name": "Winter 2025",
+      "startDate": "2025-01-06",
+      "endDate": "2025-03-14",
+      "finalsStart": "2025-03-17",
+      "finalsEnd": "2025-03-20",
+      "weeks": 10
+    },
+    {
+      "id": "spring-2025",
+      "name": "Spring 2025",
+      "startDate": "2025-03-31",
+      "endDate": "2025-06-06",
+      "finalsStart": "2025-06-09",
+      "finalsEnd": "2025-06-12",
+      "weeks": 10
+    },
+    {
+      "id": "summer-2025",
+      "name": "Summer 2025",
+      "startDate": "2025-06-23",
+      "endDate": "2025-08-15",
+      "finalsStart": "2025-08-11",
+      "finalsEnd": "2025-08-14",
+      "weeks": 8
+    },
+    {
+      "id": "fall-2025",
+      "name": "Fall 2025",
+      "startDate": "2025-09-22",
+      "endDate": "2025-12-05",
+      "finalsStart": "2025-12-08",
+      "finalsEnd": "2025-12-11",
+      "weeks": 10
+    },
+    {
+      "id": "winter-2026",
+      "name": "Winter 2026",
+      "startDate": "2026-01-05",
+      "endDate": "2026-03-16",
+      "finalsStart": "2026-03-17",
+      "finalsEnd": "2026-03-20",
+      "weeks": 10
+    },
+    {
+      "id": "spring-2026",
+      "name": "Spring 2026",
+      "startDate": "2026-03-30",
+      "endDate": "2026-06-05",
+      "finalsStart": "2026-06-08",
+      "finalsEnd": "2026-06-11",
+      "weeks": 10
+    },
+    {
+      "id": "summer-2026",
+      "name": "Summer 2026",
+      "startDate": "2026-06-22",
+      "endDate": "2026-08-14",
+      "finalsStart": "2026-08-10",
+      "finalsEnd": "2026-08-13",
+      "weeks": 8
+    }
+  ],
+  "breaks": [
+    {
+      "name": "Thanksgiving Break",
+      "startDate": "2024-11-27",
+      "endDate": "2024-12-01",
+      "academicYear": "2024-2025"
+    },
+    {
+      "name": "Winter Break",
+      "startDate": "2024-12-13",
+      "endDate": "2025-01-05",
+      "academicYear": "2024-2025"
+    },
+    {
+      "name": "Spring Break",
+      "startDate": "2025-03-22",
+      "endDate": "2025-03-30",
+      "academicYear": "2024-2025"
+    },
+    {
+      "name": "Thanksgiving Break",
+      "startDate": "2025-11-26",
+      "endDate": "2025-11-30",
+      "academicYear": "2025-2026"
+    },
+    {
+      "name": "Winter Break",
+      "startDate": "2025-12-12",
+      "endDate": "2026-01-04",
+      "academicYear": "2025-2026"
+    },
+    {
+      "name": "Spring Break",
+      "startDate": "2026-03-23",
+      "endDate": "2026-03-27",
+      "academicYear": "2025-2026"
+    }
+  ],
+  "holidays": [
+    {
+      "name": "Labor Day",
+      "date": "2024-09-02",
+      "campusClosed": true
+    },
+    {
+      "name": "Veterans Day",
+      "date": "2024-11-11",
+      "campusClosed": true
+    },
+    {
+      "name": "Thanksgiving Day",
+      "date": "2024-11-28",
+      "campusClosed": true
+    },
+    {
+      "name": "Native American Heritage Day",
+      "date": "2024-11-29",
+      "campusClosed": true
+    },
+    {
+      "name": "New Year's Day",
+      "date": "2025-01-01",
+      "campusClosed": true
+    },
+    {
+      "name": "Martin Luther King Jr. Day",
+      "date": "2025-01-20",
+      "campusClosed": true
+    },
+    {
+      "name": "Presidents Day",
+      "date": "2025-02-17",
+      "campusClosed": true
+    },
+    {
+      "name": "Memorial Day",
+      "date": "2025-05-26",
+      "campusClosed": true
+    },
+    {
+      "name": "Juneteenth",
+      "date": "2025-06-19",
+      "campusClosed": true
+    },
+    {
+      "name": "Independence Day",
+      "date": "2025-07-04",
+      "campusClosed": true
+    },
+    {
+      "name": "Labor Day",
+      "date": "2025-09-01",
+      "campusClosed": true
+    },
+    {
+      "name": "Veterans Day",
+      "date": "2025-11-11",
+      "campusClosed": true
+    },
+    {
+      "name": "Thanksgiving Day",
+      "date": "2025-11-27",
+      "campusClosed": true
+    },
+    {
+      "name": "Native American Heritage Day",
+      "date": "2025-11-28",
+      "campusClosed": true
+    },
+    {
+      "name": "New Year's Day (Observed)",
+      "date": "2026-01-01",
+      "campusClosed": true
+    },
+    {
+      "name": "Martin Luther King Jr. Day",
+      "date": "2026-01-19",
+      "campusClosed": true
+    },
+    {
+      "name": "Presidents Day",
+      "date": "2026-02-16",
+      "campusClosed": true
+    },
+    {
+      "name": "Memorial Day",
+      "date": "2026-05-25",
+      "campusClosed": true
+    },
+    {
+      "name": "Juneteenth",
+      "date": "2026-06-19",
+      "campusClosed": true
+    }
+  ],
+  "importantDates": {
+    "winter-2025": {
+      "lastDayToDropWithoutW": "2025-01-17",
+      "lastDayToWithdraw": "2025-02-28",
+      "refund100Percent": "2025-01-12",
+      "refund50Percent": "2025-02-05",
+      "courseEvaluationsOpen": "2025-03-01",
+      "courseEvaluationsClose": "2025-03-14"
+    },
+    "spring-2025": {
+      "lastDayToDropWithoutW": "2025-04-11",
+      "lastDayToWithdraw": "2025-05-23",
+      "refund100Percent": "2025-04-06",
+      "refund50Percent": "2025-04-30",
+      "commencement": ["2025-06-13", "2025-06-14"]
+    },
+    "winter-2026": {
+      "lastDayToDropWithoutW": "2026-01-19",
+      "lastDayToWithdraw": "2026-03-04",
+      "refund100Percent": "2026-01-11",
+      "refund50Percent": "2026-02-04",
+      "courseEvaluationsOpen": "2026-03-07",
+      "courseEvaluationsClose": "2026-03-16"
+    },
+    "spring-2026": {
+      "lastDayToDropWithoutW": "2026-04-10",
+      "lastDayToWithdraw": "2026-05-22",
+      "refund100Percent": "2026-04-05",
+      "refund50Percent": "2026-04-29",
+      "commencement": ["2026-06-12", "2026-06-13"]
+    }
+  }
+}
