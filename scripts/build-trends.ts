@@ -133,6 +133,8 @@ async function main() {
   const courseMetaMap = new Map<string, CourseMeta>();
 
   let rows = 0;
+  let duplicates = 0;
+  const seenSections = new Set<string>();
 
   for (const filePath of scheduleFiles) {
     const text = await readFile(filePath, 'utf8');
@@ -140,11 +142,19 @@ async function main() {
     if (!data) continue;
 
     const courses: BannerCourse[] = data.data ?? [];
-    rows += courses.length;
 
     for (const course of courses) {
       const termCode = course.term;
-      if (!termCode) continue;
+      const crn = course.courseReferenceNumber;
+      if (!termCode || !crn) continue;
+
+      const sectionKey = `${termCode}|${crn}`;
+      if (seenSections.has(sectionKey)) {
+        duplicates += 1;
+        continue;
+      }
+      seenSections.add(sectionKey);
+      rows += 1;
 
       const termDescription = course.termDesc ? normalizeWhitespace(course.termDesc) : null;
       if (!termMetaMap.has(termCode)) {
@@ -300,6 +310,9 @@ async function main() {
   }
 
   console.log(`Built schedule trends dataset from ${scheduleFiles.length} files (${rows} sections)`);
+  if (duplicates > 0) {
+    console.log(`  Skipped ${duplicates} duplicate sections across overlapping snapshot files`);
+  }
   for (const outPath of OUTPUT_PATHS) {
     console.log(`  Wrote: ${path.relative(process.cwd(), outPath)}`);
   }

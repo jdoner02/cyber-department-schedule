@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-01-01T09:43:14.024Z",
+  "generatedAt": "2026-01-01T11:07:52.928Z",
   "source": {
     "schedulesDir": "data/schedules",
-    "files": 78,
-    "rows": 5464
+    "files": 83,
+    "rows": 5732
   },
   "terms": [
     {
@@ -422,17 +422,17 @@
     },
     {
       "termCode": "202540",
-      "sections": 757,
-      "capacity": 16666,
-      "enrollment": 12557,
+      "sections": 840,
+      "capacity": 18365,
+      "enrollment": 13679,
       "enrollmentPublished": true
     },
     {
       "termCode": "202610",
-      "sections": 642,
-      "capacity": 15257,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 827,
+      "capacity": 17211,
+      "enrollment": 4610,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -957,10 +957,18 @@
     },
     {
       "termCode": "202540",
+      "subject": "APTC",
+      "sections": 1,
+      "capacity": 1,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
       "subject": "BIOL",
-      "sections": 126,
-      "capacity": 2537,
-      "enrollment": 1875,
+      "sections": 127,
+      "capacity": 2538,
+      "enrollment": 1876,
       "enrollmentPublished": true
     },
     {
@@ -969,6 +977,14 @@
       "sections": 63,
       "capacity": 1499,
       "enrollment": 1256,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "subject": "CMTC",
+      "sections": 5,
+      "capacity": 68,
+      "enrollment": 62,
       "enrollmentPublished": true
     },
     {
@@ -984,7 +1000,7 @@
       "subject": "CYBR",
       "sections": 26,
       "capacity": 429,
-      "enrollment": 228,
+      "enrollment": 227,
       "enrollmentPublished": true
     },
     {
@@ -1016,7 +1032,7 @@
       "subject": "EENG",
       "sections": 31,
       "capacity": 378,
-      "enrollment": 285,
+      "enrollment": 283,
       "enrollmentPublished": true
     },
     {
@@ -1037,6 +1053,14 @@
     },
     {
       "termCode": "202540",
+      "subject": "ENVS",
+      "sections": 3,
+      "capacity": 72,
+      "enrollment": 58,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
       "subject": "FINC",
       "sections": 8,
       "capacity": 238,
@@ -1048,7 +1072,7 @@
       "subject": "GEOS",
       "sections": 47,
       "capacity": 1218,
-      "enrollment": 928,
+      "enrollment": 918,
       "enrollmentPublished": true
     },
     {
@@ -1064,7 +1088,23 @@
       "subject": "MATH",
       "sections": 70,
       "capacity": 1739,
-      "enrollment": 1256,
+      "enrollment": 1216,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "subject": "MENG",
+      "sections": 37,
+      "capacity": 846,
+      "enrollment": 546,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "subject": "METC",
+      "sections": 6,
+      "capacity": 150,
+      "enrollment": 76,
       "enrollmentPublished": true
     },
     {
@@ -1093,6 +1133,30 @@
     },
     {
       "termCode": "202540",
+      "subject": "MNTC",
+      "sections": 6,
+      "capacity": 84,
+      "enrollment": 68,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "subject": "MTED",
+      "sections": 4,
+      "capacity": 46,
+      "enrollment": 29,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "subject": "MTHD",
+      "sections": 7,
+      "capacity": 222,
+      "enrollment": 193,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
       "subject": "MUSC",
       "sections": 100,
       "capacity": 1200,
@@ -1112,7 +1176,31 @@
       "subject": "PHYS",
       "sections": 20,
       "capacity": 582,
-      "enrollment": 429,
+      "enrollment": 418,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "subject": "SCED",
+      "sections": 6,
+      "capacity": 33,
+      "enrollment": 11,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "subject": "SUST",
+      "sections": 1,
+      "capacity": 1,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "subject": "TECH",
+      "sections": 6,
+      "capacity": 175,
+      "enrollment": 140,
       "enrollmentPublished": true
     },
     {
@@ -1125,49 +1213,65 @@
     },
     {
       "termCode": "202610",
+      "subject": "APTC",
+      "sections": 3,
+      "capacity": 15,
+      "enrollment": 4,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
       "subject": "BIOL",
-      "sections": 75,
-      "capacity": 2156,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 112,
+      "capacity": 2287,
+      "enrollment": 76,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
       "subject": "CHEM",
-      "sections": 46,
-      "capacity": 1510,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 63,
+      "capacity": 1614,
+      "enrollment": 97,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
       "subject": "CMTC",
-      "sections": 6,
-      "capacity": 122,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 7,
+      "capacity": 123,
+      "enrollment": 1,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
       "subject": "CSCD",
-      "sections": 44,
-      "capacity": 1070,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 55,
+      "capacity": 1084,
+      "enrollment": 10,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
       "subject": "CYBR",
-      "sections": 19,
-      "capacity": 356,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 29,
+      "capacity": 438,
+      "enrollment": 230,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
       "subject": "DESN",
-      "sections": 18,
-      "capacity": 415,
+      "sections": 36,
+      "capacity": 479,
+      "enrollment": 345,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "subject": "DNTC",
+      "sections": 3,
+      "capacity": 15,
       "enrollment": 0,
       "enrollmentPublished": false
     },
@@ -1190,10 +1294,10 @@
     {
       "termCode": "202610",
       "subject": "EENG",
-      "sections": 22,
-      "capacity": 370,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 24,
+      "capacity": 391,
+      "enrollment": 335,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -1213,6 +1317,14 @@
     },
     {
       "termCode": "202610",
+      "subject": "ENVS",
+      "sections": 2,
+      "capacity": 29,
+      "enrollment": 11,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
       "subject": "FINC",
       "sections": 8,
       "capacity": 245,
@@ -1222,10 +1334,10 @@
     {
       "termCode": "202610",
       "subject": "GEOS",
-      "sections": 44,
-      "capacity": 1302,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 48,
+      "capacity": 1306,
+      "enrollment": 777,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -1238,10 +1350,26 @@
     {
       "termCode": "202610",
       "subject": "MATH",
-      "sections": 67,
-      "capacity": 1832,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 71,
+      "capacity": 1892,
+      "enrollment": 1284,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "subject": "MENG",
+      "sections": 32,
+      "capacity": 648,
+      "enrollment": 552,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "subject": "METC",
+      "sections": 7,
+      "capacity": 155,
+      "enrollment": 122,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -1258,6 +1386,30 @@
       "capacity": 310,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202610",
+      "subject": "MNTC",
+      "sections": 7,
+      "capacity": 77,
+      "enrollment": 43,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "subject": "MTED",
+      "sections": 5,
+      "capacity": 71,
+      "enrollment": 34,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "subject": "MTHD",
+      "sections": 6,
+      "capacity": 176,
+      "enrollment": 167,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -1279,9 +1431,25 @@
       "termCode": "202610",
       "subject": "PHYS",
       "sections": 20,
-      "capacity": 497,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "capacity": 526,
+      "enrollment": 389,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "subject": "SCED",
+      "sections": 9,
+      "capacity": 44,
+      "enrollment": 12,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "subject": "TECH",
+      "sections": 7,
+      "capacity": 214,
+      "enrollment": 121,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -2684,11 +2852,38 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "APTC 490",
+      "canonicalSubject": "APTC",
+      "courseNumber": "490",
+      "titles": [
+        "SENIOR CAPSTONE: PRODUCTION LAB"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "APTC 490L",
+      "canonicalSubject": "APTC",
+      "courseNumber": "490L",
+      "titles": [
+        "SENIOR CAPSTONE: PRODUCTION LAB LAB"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "APTC 491",
       "canonicalSubject": "APTC",
       "courseNumber": "491",
       "titles": [
         "SENIOR PROJECT"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "APTC 495",
+      "canonicalSubject": "APTC",
+      "courseNumber": "495",
+      "titles": [
+        "INTERNSHIP"
       ],
       "aliases": []
     },
@@ -3610,7 +3805,14 @@
         "DS/BEE MICROBIOME RESEARCH",
         "DS/HOST-PATHOGEN METABOLOMICS",
         "DS/LACTOCOCCUS",
-        "DS/MOLECULAR MICROBIOLOGY RES"
+        "DS/MOLECULAR MICROBIOLOGY RES",
+        "DS/FISH ECOLOGY RESEARCH",
+        "DS/PYRA_NUTRITION",
+        "DS/PYRA_SOILANALYSIS",
+        "DS/INVERTEBRATE ECOLOGY",
+        "DS/ENTOMOLOGY RESEARCH",
+        "DS/FRESHWATER ECOLOGY",
+        "DS/PYGMY WHITEFISH ID & AGE"
       ],
       "aliases": []
     },
@@ -3967,6 +4169,7 @@
       "titles": [
         "TROPICAL BIOL IN MONTSERRAT",
         "CONSERVATION BIOLOGY",
+        "STUDIES IN TROPICAL BIOLOGY",
         "RESTORATION ECOLOGY CONCEPTS"
       ],
       "aliases": []
@@ -4019,7 +4222,14 @@
         "DS/MAMMALHAIR",
         "DS/ECOLOGICAL RESTORATION",
         "DS/PRAIRIE RESTORATION",
-        "DS/SAP OF THE TOOTHBRUSH TREE"
+        "DS/SAP OF THE TOOTHBRUSH TREE",
+        "DS_MULTIMETHOD_OCCUPANCY_ID",
+        "DS/SIA_INWMAMMALS",
+        "DS/LACTOCOCCUS LACTIS ENGINEER",
+        "DS/HELICOBACTER PYLORI SRNAS",
+        "DS/PSEUDOMONAS BIOFILMS",
+        "DS/BACTERIAL GENETICS",
+        "DS/PLANT INSECT RESEARCH"
       ],
       "aliases": []
     },
@@ -4354,7 +4564,9 @@
         "IS/EDUCATION RESEARCH METHODS",
         "IS/JAW MECHANICS",
         "IS/POPULATION GENOMICS",
-        "IS/ELISA"
+        "IS/ELISA",
+        "DS/MUSCLE CELL RESEARCH",
+        "MONTSERRAT DECAPODS"
       ],
       "aliases": []
     },
@@ -4986,7 +5198,12 @@
         "DS/MOLECULAR MAGNETS",
         "DS/FORENSIC CHEMISTRY RESEARCH",
         "DS/BACTRIAL METABOLISM",
-        "DS/SPIN COAT FILM ANALYSIS"
+        "DS/SPIN COAT FILM ANALYSIS",
+        "DS/SYNTHETIC ORGANIC RESEARCH",
+        "DS/MOLECULAR MODELING",
+        "DS/BACTERIAL BIOCHEMISTRY",
+        "DS/BACTERIAL TRANSCRIPTION",
+        "DS/BOROBYDRIDE SYNTHESIS"
       ],
       "aliases": []
     },
@@ -5325,6 +5542,42 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "CMTC 345",
+      "canonicalSubject": "CMTC",
+      "courseNumber": "345",
+      "titles": [
+        "SOILS/SURVEYING"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "CMTC 345L",
+      "canonicalSubject": "CMTC",
+      "courseNumber": "345L",
+      "titles": [
+        "SOILS/SURVEYING LAB"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "CMTC 354",
+      "canonicalSubject": "CMTC",
+      "courseNumber": "354",
+      "titles": [
+        "BUILDING CODES"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "CMTC 399",
+      "canonicalSubject": "CMTC",
+      "courseNumber": "399",
+      "titles": [
+        "DS/BUILDING CODES"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "CMTC 490",
       "canonicalSubject": "CMTC",
       "courseNumber": "490",
@@ -5348,6 +5601,15 @@
       "courseNumber": "491",
       "titles": [
         "SENIOR PROJECT"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "CMTC 495",
+      "canonicalSubject": "CMTC",
+      "courseNumber": "495",
+      "titles": [
+        "INTERNSHIP"
       ],
       "aliases": []
     },
@@ -6118,7 +6380,9 @@
         "DS/ADVANCED WEB ARCHITECTURE I",
         "DS/ADVANCED WEB ARCHITECTUREII",
         "DS/HUMANREADABLE DECOMPILATION",
-        "DS/PREDICTIVE INPUT"
+        "DS/PREDICTIVE INPUT",
+        "DS/AI POWERED TRADING SYSTEM",
+        "DS/GENERATIVE AI"
       ],
       "aliases": []
     },
@@ -6379,7 +6643,8 @@
         "DS/HANDWRITING RECOGNITION IN VR",
         "IS/GRAPHICS TOPICS",
         "IS/PREDICTIVE INPUT USING A PREFIX TREE",
-        "IS/ENROLLMENT FORECASTING"
+        "IS/ENROLLMENT FORECASTING",
+        "IS/SCIENTIFIC AND INFO VIZ"
       ],
       "aliases": []
     },
@@ -6672,6 +6937,7 @@
       "courseNumber": "439L",
       "titles": [
         "AI FOR CYBERSECURITY",
+        "CYBERSECURITY RISKANALYSIS LAB",
         "AEROSPACE CYBERSECURITY LAB",
         "IOT SECURITY LAB"
       ],
@@ -7033,7 +7299,9 @@
         "IS/INTRUSION/ANOMALY DETECTION",
         "IS/CYBER OPS COURSE MATERIAL",
         "IS/THESIS LABS",
-        "IS/MICRO-PATCHING"
+        "IS/MICRO-PATCHING",
+        "IS/CRITICAL INFRASTRUCTURE SECURITY",
+        "IS/IOT TEST BED"
       ],
       "aliases": []
     },
@@ -7280,6 +7548,15 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "DESN 369",
+      "canonicalSubject": "DESN",
+      "courseNumber": "369",
+      "titles": [
+        "WEB DEVELOPMENT 1"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "DESN 374",
       "canonicalSubject": "DESN",
       "courseNumber": "374",
@@ -7332,7 +7609,9 @@
       "titles": [
         "DS/MODERN WEB SYSTEMS",
         "DS/DESIGN HISTORIES",
-        "DIRECTED STUDY"
+        "DIRECTED STUDY",
+        "DS/WEB DESIGN + CODE",
+        "DS/SYMPOSIUM TSHIRT DESIGN"
       ],
       "aliases": []
     },
@@ -7458,7 +7737,31 @@
         "DS/ZINE DESIGN LAB",
         "DS/PRINCIPLES OF VIBE CODING",
         "DS/VIBE CODING & DEVELOPMENT",
-        "DS/SOCIAL MEDIA STRATEGY & MANAGEMENT"
+        "DS/SOCIAL MEDIA STRATEGY & MANAGEMENT",
+        "DS/VIDEO FOR SOCIAL MEDIA",
+        "DS/VIDEO FOR SOCIAL MEDIA 2",
+        "DS/AI TRAINING FOR PCE",
+        "DS/TYPOGRAPHY 2",
+        "DS/COMMUNITY ART EVENT DESIGN",
+        "DIRECTED STUDY"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "DNTC 490",
+      "canonicalSubject": "DNTC",
+      "courseNumber": "490",
+      "titles": [
+        "SENIOR CAPSTONE: PRODUCTION LAB"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "DNTC 490L",
+      "canonicalSubject": "DNTC",
+      "courseNumber": "490L",
+      "titles": [
+        "SENIOR CAPSTONE: PRODUCTION LAB LAB"
       ],
       "aliases": []
     },
@@ -9819,6 +10122,33 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "ENVS 300",
+      "canonicalSubject": "ENVS",
+      "courseNumber": "300",
+      "titles": [
+        "ENVIRONMENTAL SCIENCE JUNIOR SEMINAR"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "ENVS 400",
+      "canonicalSubject": "ENVS",
+      "courseNumber": "400",
+      "titles": [
+        "ENVIRONMENTAL SCIENCE SENIOR SEMINAR"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "ENVS 449",
+      "canonicalSubject": "ENVS",
+      "courseNumber": "449",
+      "titles": [
+        "ADVANCED SPATIAL ANALYSIS"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "ENVS 490",
       "canonicalSubject": "ENVS",
       "courseNumber": "490",
@@ -10847,7 +11177,10 @@
         "DS/GIS FIRE MAPPING",
         "DS/GEOLOGY OF SAN JUAN ISLANDS",
         "DIRECTED STUDY",
-        "DS/PFAS Surface Water I"
+        "DS/PFAS Surface Water I",
+        "DS/Elemental Analysis",
+        "DS/SEDIMENT AT CLARKIA P37",
+        "Geospatial Exploration of Pesticides and Community Health"
       ],
       "aliases": []
     },
@@ -10930,7 +11263,8 @@
       "titles": [
         "IS/ELEMENTAL ANALYSIS",
         "IS/WILDFIRE ACTIVITY MAPPING",
-        "IS/SEM of Fossils Vert. Teeth"
+        "IS/SEM of Fossils Vert. Teeth",
+        "IS/Elemental Analysis"
       ],
       "aliases": []
     },
@@ -12240,7 +12574,8 @@
         "DS/TOPOLOGY OF DATA",
         "DS/MATHEMATICAL STATISTICS",
         "DS/GROUP THEORY",
-        "DS/STATISTICS 486"
+        "DS/STATISTICS 486",
+        "DS/FOURIER ANALYSIS"
       ],
       "aliases": []
     },
@@ -12372,6 +12707,42 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "MENG 101",
+      "canonicalSubject": "MENG",
+      "courseNumber": "101",
+      "titles": [
+        "INTRODUCTION TO ENGINEERING"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 101L",
+      "canonicalSubject": "MENG",
+      "courseNumber": "101L",
+      "titles": [
+        "INTRODUCTION TO ENGINEERING LAB"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 201",
+      "canonicalSubject": "MENG",
+      "courseNumber": "201",
+      "titles": [
+        "MATLAB"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 201L",
+      "canonicalSubject": "MENG",
+      "courseNumber": "201L",
+      "titles": [
+        "MATLAB LAB"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "MENG 207",
       "canonicalSubject": "MENG",
       "courseNumber": "207",
@@ -12395,6 +12766,15 @@
       "courseNumber": "217",
       "titles": [
         "3D PARAMETRIC COMPUTER AIDED DESIGN"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 240",
+      "canonicalSubject": "MENG",
+      "courseNumber": "240",
+      "titles": [
+        "STATICS"
       ],
       "aliases": []
     },
@@ -12426,6 +12806,24 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "MENG 300",
+      "canonicalSubject": "MENG",
+      "courseNumber": "300",
+      "titles": [
+        "LABORATORY ANALYSIS AND REPORTS"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 300L",
+      "canonicalSubject": "MENG",
+      "courseNumber": "300L",
+      "titles": [
+        "LABORATORY ANALYSIS AND REPORTS LAB"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "MENG 307",
       "canonicalSubject": "MENG",
       "courseNumber": "307",
@@ -12449,6 +12847,60 @@
       "courseNumber": "353L",
       "titles": [
         "INDUSTRIAL MATERIALS LAB"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 380",
+      "canonicalSubject": "MENG",
+      "courseNumber": "380",
+      "titles": [
+        "THERMODYNAMICS"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 380L",
+      "canonicalSubject": "MENG",
+      "courseNumber": "380L",
+      "titles": [
+        "THERMODYNAMICS LAB"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 382",
+      "canonicalSubject": "MENG",
+      "courseNumber": "382",
+      "titles": [
+        "FLUID MECHANICS"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 382L",
+      "canonicalSubject": "MENG",
+      "courseNumber": "382L",
+      "titles": [
+        "FLUID MECHANICS LAB"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 385",
+      "canonicalSubject": "MENG",
+      "courseNumber": "385",
+      "titles": [
+        "ROBOTICS AND AUTOMATION"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 385L",
+      "canonicalSubject": "MENG",
+      "courseNumber": "385L",
+      "titles": [
+        "ROBOTICS AND AUTOMATION LAB"
       ],
       "aliases": []
     },
@@ -12516,6 +12968,42 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "MENG 452",
+      "canonicalSubject": "MENG",
+      "courseNumber": "452",
+      "titles": [
+        "ENGINEERING ECONOMICS"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 453",
+      "canonicalSubject": "MENG",
+      "courseNumber": "453",
+      "titles": [
+        "MATERIALS AND DESIGN"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 453L",
+      "canonicalSubject": "MENG",
+      "courseNumber": "453L",
+      "titles": [
+        "MATERIALS AND DESIGN LAB"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 455",
+      "canonicalSubject": "MENG",
+      "courseNumber": "455",
+      "titles": [
+        "COMPOSITE MATERIALS"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "MENG 485",
       "canonicalSubject": "MENG",
       "courseNumber": "485",
@@ -12530,6 +13018,24 @@
       "courseNumber": "485L",
       "titles": [
         "ADVANCED ROBOTICS AND AUTOMATION LAB"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 486",
+      "canonicalSubject": "MENG",
+      "courseNumber": "486",
+      "titles": [
+        "PROGRAMMABLE LOGIC CONTROLLERS IN AUTOMATION"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 487",
+      "canonicalSubject": "MENG",
+      "courseNumber": "487",
+      "titles": [
+        "MECHATRONICS"
       ],
       "aliases": []
     },
@@ -12570,6 +13076,15 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "MENG 491",
+      "canonicalSubject": "MENG",
+      "courseNumber": "491",
+      "titles": [
+        "SENIOR THESIS"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "MENG 492",
       "canonicalSubject": "MENG",
       "courseNumber": "492",
@@ -12588,11 +13103,38 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "MENG 495",
+      "canonicalSubject": "MENG",
+      "courseNumber": "495",
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MENG 499",
+      "canonicalSubject": "MENG",
+      "courseNumber": "499",
+      "titles": [
+        "DS/3D PRINTING SURFACE TREATMT"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "METC 110",
       "canonicalSubject": "METC",
       "courseNumber": "110",
       "titles": [
         "ENGINEERING GRAPHICS"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "METC 340",
+      "canonicalSubject": "METC",
+      "courseNumber": "340",
+      "titles": [
+        "STATICS"
       ],
       "aliases": []
     },
@@ -12633,11 +13175,74 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "METC 388",
+      "canonicalSubject": "METC",
+      "courseNumber": "388",
+      "titles": [
+        "THERMODYNAMICS AND HEAT TRANSFER"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "METC 388L",
+      "canonicalSubject": "METC",
+      "courseNumber": "388L",
+      "titles": [
+        "THERMODYNAMICS AND HEAT TRANSFER LAB"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "METC 415",
       "canonicalSubject": "METC",
       "courseNumber": "415",
       "titles": [
         "DESIGN OF MACHINE ELEMENTS"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "METC 417",
+      "canonicalSubject": "METC",
+      "courseNumber": "417",
+      "titles": [
+        "ADVANCED PARAMETRIC DESIGN"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "METC 456",
+      "canonicalSubject": "METC",
+      "courseNumber": "456",
+      "titles": [
+        "ENGINEERING ETHICS, CONTRACTS AND PATENTS"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "METC 468",
+      "canonicalSubject": "METC",
+      "courseNumber": "468",
+      "titles": [
+        "QUALITY ASSURANCE AND INTRO TO LEAN"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "METC 468L",
+      "canonicalSubject": "METC",
+      "courseNumber": "468L",
+      "titles": [
+        "QUALITY ASSURANCE AND INTRO TO LEAN LAB"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "METC 491",
+      "canonicalSubject": "METC",
+      "courseNumber": "491",
+      "titles": [
+        "SENIOR PROJECT"
       ],
       "aliases": []
     },
@@ -13012,6 +13617,24 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "MNTC 208",
+      "canonicalSubject": "MNTC",
+      "courseNumber": "208",
+      "titles": [
+        "SURVEY OF ELECTRICITY"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MNTC 208L",
+      "canonicalSubject": "MNTC",
+      "courseNumber": "208L",
+      "titles": [
+        "SURVEY OF ELECTRICITY LAB"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "MNTC 301",
       "canonicalSubject": "MNTC",
       "courseNumber": "301",
@@ -13048,6 +13671,24 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "MNTC 402",
+      "canonicalSubject": "MNTC",
+      "courseNumber": "402",
+      "titles": [
+        "MACHINE TOOL I"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MNTC 402L",
+      "canonicalSubject": "MNTC",
+      "courseNumber": "402L",
+      "titles": [
+        "MACHINE TOOL I LAB"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "MNTC 404",
       "canonicalSubject": "MNTC",
       "courseNumber": "404",
@@ -13062,6 +13703,24 @@
       "courseNumber": "404L",
       "titles": [
         "COMPUTER NUMERICAL CONTROL LAB"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MNTC 490",
+      "canonicalSubject": "MNTC",
+      "courseNumber": "490",
+      "titles": [
+        "SENIOR CAPSTONE: PRODUCTION LAB"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MNTC 490L",
+      "canonicalSubject": "MNTC",
+      "courseNumber": "490L",
+      "titles": [
+        "SENIOR CAPSTONE: PRODUCTION LAB LAB"
       ],
       "aliases": []
     },
@@ -13084,6 +13743,24 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "MTED 425",
+      "canonicalSubject": "MTED",
+      "courseNumber": "425",
+      "titles": [
+        "ASSESSMENT IN THE MATHEMATICS CLASSROOM"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MTED 476",
+      "canonicalSubject": "MTED",
+      "courseNumber": "476",
+      "titles": [
+        "MATHEMATICAL PROGRESSIONS"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "MTED 477",
       "canonicalSubject": "MTED",
       "courseNumber": "477",
@@ -13098,6 +13775,15 @@
       "courseNumber": "490A",
       "titles": [
         "SENIOR CAPSTONE: ELEMENTARY PRACTICUM"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "MTED 490B",
+      "canonicalSubject": "MTED",
+      "courseNumber": "490B",
+      "titles": [
+        "SENIOR CAPSTONE: SECONDARY PRACTICUM"
       ],
       "aliases": []
     },
@@ -16002,11 +16688,38 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "SCED 390",
+      "canonicalSubject": "SCED",
+      "courseNumber": "390",
+      "titles": [
+        "SCIENCE TEACHING METHODS"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "SCED 395",
+      "canonicalSubject": "SCED",
+      "courseNumber": "395",
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "SCED 490A",
       "canonicalSubject": "SCED",
       "courseNumber": "490A",
       "titles": [
         "SCIENCE TEACHING CAPSTONE SEMINAR"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "SCED 490B",
+      "canonicalSubject": "SCED",
+      "courseNumber": "490B",
+      "titles": [
+        "SCIENCE TEACHING CAPSTONE FIELD APPLICATION"
       ],
       "aliases": []
     },
@@ -16587,6 +17300,15 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "SUST 495",
+      "canonicalSubject": "SUST",
+      "courseNumber": "495",
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "TCOM 309",
       "canonicalSubject": "TCOM",
       "courseNumber": "309",
@@ -16614,6 +17336,15 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "TECH 330",
+      "canonicalSubject": "TECH",
+      "courseNumber": "330",
+      "titles": [
+        "TECHNOLOGY PROBLEM ANALYSIS AND DESIGN I"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "TECH 331",
       "canonicalSubject": "TECH",
       "courseNumber": "331",
@@ -16632,6 +17363,15 @@
       "aliases": []
     },
     {
+      "canonicalCourseCode": "TECH 396",
+      "canonicalSubject": "TECH",
+      "courseNumber": "396",
+      "titles": [
+        "CONSTRUCTION INDUSTRY SEMINAR"
+      ],
+      "aliases": []
+    },
+    {
       "canonicalCourseCode": "TECH 403",
       "canonicalSubject": "TECH",
       "courseNumber": "403",
@@ -16646,6 +17386,15 @@
       "courseNumber": "452",
       "titles": [
         "ENGINEERING ECONOMICS"
+      ],
+      "aliases": []
+    },
+    {
+      "canonicalCourseCode": "TECH 454",
+      "canonicalSubject": "TECH",
+      "courseNumber": "454",
+      "titles": [
+        "ENVIRONMENTAL ENGINEERING"
       ],
       "aliases": []
     },
@@ -19593,6 +20342,57 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "APTC 490",
+      "codesUsed": [
+        "APTC 490"
+      ],
+      "titles": [
+        "SENIOR CAPSTONE: PRODUCTION LAB"
+      ],
+      "subjectsUsed": [
+        "APTC"
+      ],
+      "sections": 1,
+      "capacity": 5,
+      "enrollment": 2,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "APTC 490L",
+      "codesUsed": [
+        "APTC 490L"
+      ],
+      "titles": [
+        "SENIOR CAPSTONE: PRODUCTION LAB LAB"
+      ],
+      "subjectsUsed": [
+        "APTC"
+      ],
+      "sections": 1,
+      "capacity": 5,
+      "enrollment": 2,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "APTC 491",
+      "codesUsed": [
+        "APTC 491"
+      ],
+      "titles": [
+        "SENIOR PROJECT"
+      ],
+      "subjectsUsed": [
+        "APTC"
+      ],
+      "sections": 1,
+      "capacity": 5,
+      "enrollment": 0,
+      "enrollmentPublished": false
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "APTC 491",
       "codesUsed": [
@@ -19608,6 +20408,23 @@
       "capacity": 5,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "APTC 495",
+      "codesUsed": [
+        "APTC 495"
+      ],
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "subjectsUsed": [
+        "APTC"
+      ],
+      "sections": 1,
+      "capacity": 1,
+      "enrollment": 1,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -21904,10 +22721,10 @@
       "subjectsUsed": [
         "BIOL"
       ],
-      "sections": 1,
-      "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 2,
+      "capacity": 48,
+      "enrollment": 24,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202520",
@@ -22473,6 +23290,23 @@
       "enrollmentPublished": true
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "BIOL 395",
+      "codesUsed": [
+        "BIOL 395"
+      ],
+      "titles": [
+        "INTERNSHIP/CO-OP FIELDWK"
+      ],
+      "subjectsUsed": [
+        "BIOL"
+      ],
+      "sections": 2,
+      "capacity": 2,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202440",
       "canonicalCourseCode": "BIOL 396",
       "codesUsed": [
@@ -22590,6 +23424,29 @@
       "enrollmentPublished": true
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "BIOL 399",
+      "codesUsed": [
+        "BIOL 399"
+      ],
+      "titles": [
+        "DS/FISH ECOLOGY RESEARCH",
+        "DS/PYRA_NUTRITION",
+        "DS/PYRA_SOILANALYSIS",
+        "DS/INVERTEBRATE ECOLOGY",
+        "DS/ENTOMOLOGY RESEARCH",
+        "DS/FRESHWATER ECOLOGY",
+        "DS/PYGMY WHITEFISH ID & AGE"
+      ],
+      "subjectsUsed": [
+        "BIOL"
+      ],
+      "sections": 7,
+      "capacity": 8,
+      "enrollment": 5,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202520",
       "canonicalCourseCode": "BIOL 405",
       "codesUsed": [
@@ -22686,10 +23543,10 @@
       "subjectsUsed": [
         "BIOL"
       ],
-      "sections": 1,
-      "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 2,
+      "capacity": 48,
+      "enrollment": 13,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -22703,10 +23560,10 @@
       "subjectsUsed": [
         "BIOL"
       ],
-      "sections": 1,
-      "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 2,
+      "capacity": 48,
+      "enrollment": 8,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202510",
@@ -23687,6 +24544,40 @@
     },
     {
       "termCode": "202540",
+      "canonicalCourseCode": "BIOL 495",
+      "codesUsed": [
+        "BIOL 495"
+      ],
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "subjectsUsed": [
+        "BIOL"
+      ],
+      "sections": 1,
+      "capacity": 1,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "BIOL 495",
+      "codesUsed": [
+        "BIOL 495"
+      ],
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "subjectsUsed": [
+        "BIOL"
+      ],
+      "sections": 1,
+      "capacity": 1,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
       "canonicalCourseCode": "BIOL 496",
       "codesUsed": [
         "BIOL 496"
@@ -23709,15 +24600,16 @@
         "BIOL 496"
       ],
       "titles": [
-        "CONSERVATION BIOLOGY"
+        "CONSERVATION BIOLOGY",
+        "STUDIES IN TROPICAL BIOLOGY"
       ],
       "subjectsUsed": [
         "BIOL"
       ],
-      "sections": 1,
-      "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 2,
+      "capacity": 48,
+      "enrollment": 5,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -23849,6 +24741,30 @@
       "sections": 12,
       "capacity": 12,
       "enrollment": 12,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "BIOL 499",
+      "codesUsed": [
+        "BIOL 499"
+      ],
+      "titles": [
+        "DS_MULTIMETHOD_OCCUPANCY_ID",
+        "DS/SIA_INWMAMMALS",
+        "DS/LACTOCOCCUS LACTIS ENGINEER",
+        "DS/HELICOBACTER PYLORI SRNAS",
+        "DS/PSEUDOMONAS BIOFILMS",
+        "DS/BACTERIAL GENETICS",
+        "DS/PLANT INSECT RESEARCH",
+        "DS/BIOID PROTEIN INTERACTIONS"
+      ],
+      "subjectsUsed": [
+        "BIOL"
+      ],
+      "sections": 8,
+      "capacity": 8,
+      "enrollment": 7,
       "enrollmentPublished": true
     },
     {
@@ -24805,6 +25721,23 @@
     },
     {
       "termCode": "202610",
+      "canonicalCourseCode": "BIOL 595",
+      "codesUsed": [
+        "BIOL 595"
+      ],
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "subjectsUsed": [
+        "BIOL"
+      ],
+      "sections": 1,
+      "capacity": 1,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
       "canonicalCourseCode": "BIOL 596",
       "codesUsed": [
         "BIOL 596"
@@ -24923,6 +25856,24 @@
       "enrollmentPublished": true
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "BIOL 599",
+      "codesUsed": [
+        "BIOL 599"
+      ],
+      "titles": [
+        "DS/MUSCLE CELL RESEARCH",
+        "MONTSERRAT DECAPODS"
+      ],
+      "subjectsUsed": [
+        "BIOL"
+      ],
+      "sections": 2,
+      "capacity": 3,
+      "enrollment": 0,
+      "enrollmentPublished": false
+    },
+    {
       "termCode": "202440",
       "canonicalCourseCode": "BIOL 600",
       "codesUsed": [
@@ -24988,6 +25939,23 @@
       "sections": 14,
       "capacity": 14,
       "enrollment": 13,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "BIOL 600",
+      "codesUsed": [
+        "BIOL 600"
+      ],
+      "titles": [
+        "THESIS RESEARCH"
+      ],
+      "subjectsUsed": [
+        "BIOL"
+      ],
+      "sections": 12,
+      "capacity": 12,
+      "enrollment": 11,
       "enrollmentPublished": true
     },
     {
@@ -26222,15 +27190,16 @@
         "CHEM 171"
       ],
       "titles": [
-        "GENERAL CHEMISTRY (MESA)"
+        "GENERAL CHEMISTRY (MESA)",
+        "GENERAL CHEMISTRY I"
       ],
       "subjectsUsed": [
         "CHEM"
       ],
-      "sections": 1,
-      "capacity": 20,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 2,
+      "capacity": 80,
+      "enrollment": 56,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -26329,10 +27298,10 @@
       "subjectsUsed": [
         "CHEM"
       ],
-      "sections": 2,
-      "capacity": 44,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 3,
+      "capacity": 68,
+      "enrollment": 24,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -27766,6 +28735,23 @@
       "enrollmentPublished": true
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "CHEM 491",
+      "codesUsed": [
+        "CHEM 491"
+      ],
+      "titles": [
+        "FORENSIC CHEMISTRY EMPHASIS"
+      ],
+      "subjectsUsed": [
+        "CHEM"
+      ],
+      "sections": 1,
+      "capacity": 1,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202440",
       "canonicalCourseCode": "CHEM 499",
       "codesUsed": [
@@ -27851,6 +28837,30 @@
       "sections": 18,
       "capacity": 20,
       "enrollment": 19,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "CHEM 499",
+      "codesUsed": [
+        "CHEM 499"
+      ],
+      "titles": [
+        "DS/BIOCHEMISTRY RESEARCH",
+        "DS/ MOLECULAR MODELLING",
+        "DS/SYNTHETIC ORGANIC RESEARCH",
+        "DIRECTED STUDY",
+        "DS/MOLECULAR MODELING",
+        "DS/BACTERIAL BIOCHEMISTRY",
+        "DS/BACTERIAL TRANSCRIPTION",
+        "DS/BOROBYDRIDE SYNTHESIS"
+      ],
+      "subjectsUsed": [
+        "CHEM"
+      ],
+      "sections": 14,
+      "capacity": 19,
+      "enrollment": 16,
       "enrollmentPublished": true
     },
     {
@@ -28484,6 +29494,74 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "CMTC 345",
+      "codesUsed": [
+        "CMTC 345"
+      ],
+      "titles": [
+        "SOILS/SURVEYING"
+      ],
+      "subjectsUsed": [
+        "CMTC"
+      ],
+      "sections": 1,
+      "capacity": 16,
+      "enrollment": 16,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "CMTC 345L",
+      "codesUsed": [
+        "CMTC 345L"
+      ],
+      "titles": [
+        "SOILS/SURVEYING LAB"
+      ],
+      "subjectsUsed": [
+        "CMTC"
+      ],
+      "sections": 1,
+      "capacity": 16,
+      "enrollment": 16,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "CMTC 354",
+      "codesUsed": [
+        "CMTC 354"
+      ],
+      "titles": [
+        "BUILDING CODES"
+      ],
+      "subjectsUsed": [
+        "CMTC"
+      ],
+      "sections": 1,
+      "capacity": 25,
+      "enrollment": 28,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "CMTC 399",
+      "codesUsed": [
+        "CMTC 399"
+      ],
+      "titles": [
+        "DS/BUILDING CODES"
+      ],
+      "subjectsUsed": [
+        "CMTC"
+      ],
+      "sections": 1,
+      "capacity": 1,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202610",
       "canonicalCourseCode": "CMTC 490",
       "codesUsed": [
@@ -28550,6 +29628,23 @@
       "capacity": 20,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "CMTC 495",
+      "codesUsed": [
+        "CMTC 495"
+      ],
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "subjectsUsed": [
+        "CMTC"
+      ],
+      "sections": 2,
+      "capacity": 11,
+      "enrollment": 2,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -31287,15 +32382,17 @@
         "CSCD 499"
       ],
       "titles": [
-        "DS/PREDICTIVE INPUT"
+        "DS/PREDICTIVE INPUT",
+        "DS/AI POWERED TRADING SYSTEM",
+        "DS/GENERATIVE AI"
       ],
       "subjectsUsed": [
         "CSCD"
       ],
-      "sections": 1,
-      "capacity": 4,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 3,
+      "capacity": 9,
+      "enrollment": 2,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -31999,6 +33096,23 @@
       "enrollmentPublished": true
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "CSCD 599",
+      "codesUsed": [
+        "CSCD 599"
+      ],
+      "titles": [
+        "IS/SCIENTIFIC AND INFO VIZ"
+      ],
+      "subjectsUsed": [
+        "CSCD"
+      ],
+      "sections": 1,
+      "capacity": 1,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "CTED 300",
       "codesUsed": [
@@ -32335,7 +33449,7 @@
       ],
       "sections": 3,
       "capacity": 115,
-      "enrollment": 96,
+      "enrollment": 95,
       "enrollmentPublished": true
     },
     {
@@ -32352,8 +33466,8 @@
       ],
       "sections": 2,
       "capacity": 80,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 40,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -32783,8 +33897,8 @@
       ],
       "sections": 1,
       "capacity": 30,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 30,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -32800,8 +33914,8 @@
       ],
       "sections": 1,
       "capacity": 30,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 30,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202510",
@@ -32849,10 +33963,10 @@
       "subjectsUsed": [
         "CYBR"
       ],
-      "sections": 1,
-      "capacity": 30,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 2,
+      "capacity": 60,
+      "enrollment": 15,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -32891,6 +34005,23 @@
       "enrollmentPublished": true
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "CYBR 439L",
+      "codesUsed": [
+        "CYBR 439L"
+      ],
+      "titles": [
+        "CYBERSECURITY RISKANALYSIS LAB"
+      ],
+      "subjectsUsed": [
+        "CYBR"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 15,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "CYBR 439L",
       "codesUsed": [
@@ -32921,9 +34052,9 @@
         "CYBR"
       ],
       "sections": 1,
-      "capacity": 20,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "capacity": 24,
+      "enrollment": 21,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -32937,10 +34068,10 @@
       "subjectsUsed": [
         "CYBR"
       ],
-      "sections": 1,
-      "capacity": 20,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 2,
+      "capacity": 24,
+      "enrollment": 21,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -33058,8 +34189,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 10,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -33075,8 +34206,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 10,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202520",
@@ -33143,8 +34274,8 @@
       ],
       "sections": 1,
       "capacity": 20,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 7,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -33160,8 +34291,8 @@
       ],
       "sections": 1,
       "capacity": 20,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 7,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -33385,16 +34516,18 @@
       "termCode": "202610",
       "canonicalCourseCode": "CYBR 495",
       "codesUsed": [
-        "CSCD 495"
+        "CSCD 495",
+        "CYBR 495"
       ],
       "titles": [
         "INTERNSHIP"
       ],
       "subjectsUsed": [
-        "CSCD"
+        "CSCD",
+        "CYBR"
       ],
-      "sections": 2,
-      "capacity": 16,
+      "sections": 3,
+      "capacity": 24,
       "enrollment": 0,
       "enrollmentPublished": false
     },
@@ -33620,8 +34753,8 @@
       ],
       "sections": 1,
       "capacity": 20,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 6,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -33637,8 +34770,8 @@
       ],
       "sections": 1,
       "capacity": 20,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 6,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202510",
@@ -33792,8 +34925,8 @@
       ],
       "sections": 1,
       "capacity": 5,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 3,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -33809,8 +34942,8 @@
       ],
       "sections": 1,
       "capacity": 5,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 3,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202540",
@@ -34070,6 +35203,24 @@
       "enrollmentPublished": true
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "CYBR 599",
+      "codesUsed": [
+        "CYBR 599"
+      ],
+      "titles": [
+        "IS/CRITICAL INFRASTRUCTURE SECURITY",
+        "IS/IOT TEST BED"
+      ],
+      "subjectsUsed": [
+        "CYBR"
+      ],
+      "sections": 2,
+      "capacity": 2,
+      "enrollment": 2,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202440",
       "canonicalCourseCode": "CYBR 600",
       "codesUsed": [
@@ -34141,6 +35292,25 @@
       "sections": 12,
       "capacity": 12,
       "enrollment": 12,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "CYBR 600",
+      "codesUsed": [
+        "CSCD 600",
+        "CYBR 600"
+      ],
+      "titles": [
+        "THESIS"
+      ],
+      "subjectsUsed": [
+        "CSCD",
+        "CYBR"
+      ],
+      "sections": 9,
+      "capacity": 9,
+      "enrollment": 8,
       "enrollmentPublished": true
     },
     {
@@ -34219,6 +35389,23 @@
       "sections": 2,
       "capacity": 2,
       "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "CYBR 601",
+      "codesUsed": [
+        "CSCD 601"
+      ],
+      "titles": [
+        "GRADUATE RESEARCH REPORT"
+      ],
+      "subjectsUsed": [
+        "CSCD"
+      ],
+      "sections": 3,
+      "capacity": 3,
+      "enrollment": 3,
       "enrollmentPublished": true
     },
     {
@@ -34303,8 +35490,8 @@
       ],
       "sections": 2,
       "capacity": 48,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 27,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -34405,8 +35592,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 23,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -34507,8 +35694,8 @@
       ],
       "sections": 2,
       "capacity": 48,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 38,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -34609,8 +35796,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 16,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -34694,8 +35881,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 20,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -34898,8 +36085,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 22,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202520",
@@ -34916,6 +36103,23 @@
       "sections": 1,
       "capacity": 24,
       "enrollment": 21,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "DESN 336",
+      "codesUsed": [
+        "DESN 336"
+      ],
+      "titles": [
+        "3D ANIMATION"
+      ],
+      "subjectsUsed": [
+        "DESN"
+      ],
+      "sections": 1,
+      "capacity": 24,
+      "enrollment": 8,
       "enrollmentPublished": true
     },
     {
@@ -35000,8 +36204,8 @@
       ],
       "sections": 1,
       "capacity": 23,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 21,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -35085,8 +36289,8 @@
       ],
       "sections": 1,
       "capacity": 23,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 23,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -35187,8 +36391,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 24,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -35272,8 +36476,8 @@
       ],
       "sections": 1,
       "capacity": 23,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 23,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -35323,8 +36527,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 19,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202510",
@@ -35480,6 +36684,23 @@
       "enrollmentPublished": true
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "DESN 369",
+      "codesUsed": [
+        "DESN 369"
+      ],
+      "titles": [
+        "WEB DEVELOPMENT 1"
+      ],
+      "subjectsUsed": [
+        "DESN"
+      ],
+      "sections": 1,
+      "capacity": 24,
+      "enrollment": 5,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202540",
       "canonicalCourseCode": "DESN 374",
       "codesUsed": [
@@ -35510,8 +36731,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 12,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -35561,8 +36782,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 21,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -35629,8 +36850,8 @@
       ],
       "sections": 1,
       "capacity": 10,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 7,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202510",
@@ -35665,6 +36886,24 @@
       "sections": 2,
       "capacity": 2,
       "enrollment": 2,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "DESN 399",
+      "codesUsed": [
+        "DESN 399"
+      ],
+      "titles": [
+        "DS/WEB DESIGN + CODE",
+        "DS/SYMPOSIUM TSHIRT DESIGN"
+      ],
+      "subjectsUsed": [
+        "DESN"
+      ],
+      "sections": 2,
+      "capacity": 2,
+      "enrollment": 1,
       "enrollmentPublished": true
     },
     {
@@ -35902,8 +37141,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 12,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -35970,8 +37209,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 14,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202510",
@@ -36076,6 +37315,23 @@
       "sections": 6,
       "capacity": 10,
       "enrollment": 9,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "DESN 495",
+      "codesUsed": [
+        "DESN 495"
+      ],
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "subjectsUsed": [
+        "DESN"
+      ],
+      "sections": 6,
+      "capacity": 6,
+      "enrollment": 6,
       "enrollmentPublished": true
     },
     {
@@ -36190,6 +37446,79 @@
       "capacity": 3,
       "enrollment": 3,
       "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "DESN 499",
+      "codesUsed": [
+        "DESN 499"
+      ],
+      "titles": [
+        "DS/VIDEO FOR SOCIAL MEDIA",
+        "DS/VIDEO FOR SOCIAL MEDIA 2",
+        "DS/AI TRAINING FOR PCE",
+        "DS/TYPOGRAPHY 2",
+        "DS/COMMUNITY ART EVENT DESIGN",
+        "DIRECTED STUDY"
+      ],
+      "subjectsUsed": [
+        "DESN"
+      ],
+      "sections": 8,
+      "capacity": 8,
+      "enrollment": 3,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "DNTC 490",
+      "codesUsed": [
+        "DNTC 490"
+      ],
+      "titles": [
+        "SENIOR CAPSTONE: PRODUCTION LAB"
+      ],
+      "subjectsUsed": [
+        "DNTC"
+      ],
+      "sections": 1,
+      "capacity": 5,
+      "enrollment": 0,
+      "enrollmentPublished": false
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "DNTC 490L",
+      "codesUsed": [
+        "DNTC 490L"
+      ],
+      "titles": [
+        "SENIOR CAPSTONE: PRODUCTION LAB LAB"
+      ],
+      "subjectsUsed": [
+        "DNTC"
+      ],
+      "sections": 1,
+      "capacity": 5,
+      "enrollment": 0,
+      "enrollmentPublished": false
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "DNTC 491",
+      "codesUsed": [
+        "DNTC 491"
+      ],
+      "titles": [
+        "SENIOR PROJECT"
+      ],
+      "subjectsUsed": [
+        "DNTC"
+      ],
+      "sections": 1,
+      "capacity": 5,
+      "enrollment": 0,
+      "enrollmentPublished": false
     },
     {
       "termCode": "202620",
@@ -39538,7 +40867,7 @@
       ],
       "sections": 2,
       "capacity": 40,
-      "enrollment": 41,
+      "enrollment": 40,
       "enrollmentPublished": true
     },
     {
@@ -39555,8 +40884,8 @@
       ],
       "sections": 1,
       "capacity": 45,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 44,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -39589,7 +40918,7 @@
       ],
       "sections": 3,
       "capacity": 50,
-      "enrollment": 41,
+      "enrollment": 40,
       "enrollmentPublished": true
     },
     {
@@ -39606,8 +40935,8 @@
       ],
       "sections": 3,
       "capacity": 45,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 45,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -39674,8 +41003,8 @@
       ],
       "sections": 1,
       "capacity": 20,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 10,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202540",
@@ -39708,8 +41037,8 @@
       ],
       "sections": 1,
       "capacity": 20,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 10,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -39845,8 +41174,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 22,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -39877,10 +41206,10 @@
       "subjectsUsed": [
         "EENG"
       ],
-      "sections": 1,
-      "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 2,
+      "capacity": 30,
+      "enrollment": 22,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -39947,8 +41276,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 19,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -39964,8 +41293,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 19,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202520",
@@ -40067,8 +41396,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 20,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -40084,8 +41413,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 20,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202520",
@@ -40203,8 +41532,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 20,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202540",
@@ -40237,8 +41566,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 20,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202520",
@@ -40612,8 +41941,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 11,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -40646,8 +41975,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 11,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -40782,8 +42111,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 8,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -40799,8 +42128,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 8,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202520",
@@ -40918,8 +42247,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 4,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -40935,8 +42264,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 4,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -41071,8 +42400,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 9,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -41088,8 +42417,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 9,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202520",
@@ -41209,6 +42538,23 @@
       "capacity": 10,
       "enrollment": 4,
       "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "EENG 495",
+      "codesUsed": [
+        "EENG 495"
+      ],
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "subjectsUsed": [
+        "EENG"
+      ],
+      "sections": 1,
+      "capacity": 6,
+      "enrollment": 0,
+      "enrollmentPublished": false
     },
     {
       "termCode": "202520",
@@ -43694,6 +45040,23 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "ENVS 100",
+      "codesUsed": [
+        "ENVS 100"
+      ],
+      "titles": [
+        "INTRODUCTION TO ENVIRONMENTAL SCIENCE"
+      ],
+      "subjectsUsed": [
+        "ENVS"
+      ],
+      "sections": 1,
+      "capacity": 24,
+      "enrollment": 23,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "ENVS 100",
       "codesUsed": [
@@ -43711,6 +45074,23 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "ENVS 100L",
+      "codesUsed": [
+        "ENVS 100L"
+      ],
+      "titles": [
+        "INTRODUCTION TO ENVIRONMENTAL SCIENCE LAB"
+      ],
+      "subjectsUsed": [
+        "ENVS"
+      ],
+      "sections": 1,
+      "capacity": 24,
+      "enrollment": 23,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "ENVS 100L",
       "codesUsed": [
@@ -43726,6 +45106,57 @@
       "capacity": 24,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "ENVS 300",
+      "codesUsed": [
+        "ENVS 300"
+      ],
+      "titles": [
+        "ENVIRONMENTAL SCIENCE JUNIOR SEMINAR"
+      ],
+      "subjectsUsed": [
+        "ENVS"
+      ],
+      "sections": 1,
+      "capacity": 24,
+      "enrollment": 12,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "ENVS 400",
+      "codesUsed": [
+        "ENVS 400"
+      ],
+      "titles": [
+        "ENVIRONMENTAL SCIENCE SENIOR SEMINAR"
+      ],
+      "subjectsUsed": [
+        "ENVS"
+      ],
+      "sections": 1,
+      "capacity": 24,
+      "enrollment": 10,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "ENVS 449",
+      "codesUsed": [
+        "ENVS 449"
+      ],
+      "titles": [
+        "ADVANCED SPATIAL ANALYSIS"
+      ],
+      "subjectsUsed": [
+        "ENVS"
+      ],
+      "sections": 1,
+      "capacity": 5,
+      "enrollment": 1,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -45221,7 +46652,7 @@
       ],
       "sections": 6,
       "capacity": 332,
-      "enrollment": 266,
+      "enrollment": 262,
       "enrollmentPublished": true
     },
     {
@@ -45238,8 +46669,8 @@
       ],
       "sections": 6,
       "capacity": 368,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 193,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -45272,7 +46703,7 @@
       ],
       "sections": 6,
       "capacity": 332,
-      "enrollment": 266,
+      "enrollment": 262,
       "enrollmentPublished": true
     },
     {
@@ -45289,8 +46720,8 @@
       ],
       "sections": 6,
       "capacity": 368,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 193,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -45391,8 +46822,8 @@
       ],
       "sections": 3,
       "capacity": 80,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 77,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -45561,8 +46992,8 @@
       ],
       "sections": 2,
       "capacity": 40,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 39,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202510",
@@ -45595,8 +47026,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 18,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -45612,8 +47043,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 18,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -45629,8 +47060,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 20,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -45714,8 +47145,8 @@
       ],
       "sections": 1,
       "capacity": 40,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 40,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -45731,8 +47162,8 @@
       ],
       "sections": 2,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 16,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202540",
@@ -45782,8 +47213,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 9,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -45799,8 +47230,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 9,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -45969,8 +47400,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 21,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -45986,8 +47417,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 21,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -46054,8 +47485,8 @@
       ],
       "sections": 1,
       "capacity": 19,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 10,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -46275,8 +47706,8 @@
       ],
       "sections": 1,
       "capacity": 12,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 9,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202520",
@@ -46462,8 +47893,8 @@
       ],
       "sections": 3,
       "capacity": 30,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 14,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202520",
@@ -46530,8 +47961,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 13,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -46547,8 +47978,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 13,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202520",
@@ -46666,8 +48097,8 @@
       ],
       "sections": 1,
       "capacity": 14,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 8,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202510",
@@ -46717,8 +48148,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 14,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202610",
@@ -46734,8 +48165,8 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 14,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202520",
@@ -46785,7 +48216,7 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 24,
+      "enrollment": 23,
       "enrollmentPublished": true
     },
     {
@@ -46802,7 +48233,7 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 24,
+      "enrollment": 23,
       "enrollmentPublished": true
     },
     {
@@ -46836,8 +48267,8 @@
       ],
       "sections": 2,
       "capacity": 20,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 3,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -47158,6 +48589,25 @@
       "enrollmentPublished": true
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "GEOS 499",
+      "codesUsed": [
+        "GEOS 499"
+      ],
+      "titles": [
+        "DS/Elemental Analysis",
+        "DS/SEDIMENT AT CLARKIA P37",
+        "Geospatial Exploration of Pesticides and Community Health"
+      ],
+      "subjectsUsed": [
+        "GEOS"
+      ],
+      "sections": 3,
+      "capacity": 3,
+      "enrollment": 3,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202440",
       "canonicalCourseCode": "GEOS 523",
       "codesUsed": [
@@ -47324,8 +48774,8 @@
       ],
       "sections": 2,
       "capacity": 10,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 1,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202510",
@@ -47479,6 +48929,23 @@
       "sections": 2,
       "capacity": 6,
       "enrollment": 2,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "GEOS 599",
+      "codesUsed": [
+        "GEOS 599"
+      ],
+      "titles": [
+        "IS/Elemental Analysis"
+      ],
+      "subjectsUsed": [
+        "GEOS"
+      ],
+      "sections": 1,
+      "capacity": 1,
+      "enrollment": 1,
       "enrollmentPublished": true
     },
     {
@@ -49349,7 +50816,7 @@
       ],
       "sections": 6,
       "capacity": 169,
-      "enrollment": 160,
+      "enrollment": 158,
       "enrollmentPublished": true
     },
     {
@@ -49366,8 +50833,8 @@
       ],
       "sections": 7,
       "capacity": 190,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 188,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -49452,7 +50919,7 @@
       ],
       "sections": 4,
       "capacity": 120,
-      "enrollment": 111,
+      "enrollment": 105,
       "enrollmentPublished": true
     },
     {
@@ -49469,8 +50936,8 @@
       ],
       "sections": 3,
       "capacity": 120,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 89,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -49554,7 +51021,7 @@
       ],
       "sections": 2,
       "capacity": 70,
-      "enrollment": 70,
+      "enrollment": 69,
       "enrollmentPublished": true
     },
     {
@@ -49571,8 +51038,8 @@
       ],
       "sections": 2,
       "capacity": 70,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 70,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -49690,7 +51157,7 @@
       ],
       "sections": 1,
       "capacity": 24,
-      "enrollment": 20,
+      "enrollment": 19,
       "enrollmentPublished": true
     },
     {
@@ -49777,7 +51244,7 @@
       ],
       "sections": 5,
       "capacity": 190,
-      "enrollment": 150,
+      "enrollment": 143,
       "enrollmentPublished": true
     },
     {
@@ -49794,9 +51261,9 @@
         "MATH"
       ],
       "sections": 5,
-      "capacity": 175,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "capacity": 190,
+      "enrollment": 123,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -49882,7 +51349,7 @@
       ],
       "sections": 3,
       "capacity": 115,
-      "enrollment": 96,
+      "enrollment": 92,
       "enrollmentPublished": true
     },
     {
@@ -49899,9 +51366,9 @@
         "MATH"
       ],
       "sections": 5,
-      "capacity": 175,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "capacity": 190,
+      "enrollment": 109,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -49988,7 +51455,7 @@
       ],
       "sections": 4,
       "capacity": 150,
-      "enrollment": 125,
+      "enrollment": 116,
       "enrollmentPublished": true
     },
     {
@@ -50005,8 +51472,8 @@
       ],
       "sections": 3,
       "capacity": 120,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 63,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -50092,7 +51559,7 @@
       ],
       "sections": 2,
       "capacity": 80,
-      "enrollment": 67,
+      "enrollment": 65,
       "enrollmentPublished": true
     },
     {
@@ -50109,9 +51576,9 @@
         "MATH"
       ],
       "sections": 3,
-      "capacity": 95,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "capacity": 110,
+      "enrollment": 83,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -50196,7 +51663,7 @@
       ],
       "sections": 1,
       "capacity": 40,
-      "enrollment": 21,
+      "enrollment": 20,
       "enrollmentPublished": true
     },
     {
@@ -50213,8 +51680,8 @@
       ],
       "sections": 1,
       "capacity": 40,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 32,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -50265,8 +51732,8 @@
       ],
       "sections": 1,
       "capacity": 40,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 40,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202540",
@@ -50298,10 +51765,10 @@
       "subjectsUsed": [
         "MATH"
       ],
-      "sections": 4,
-      "capacity": 48,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 5,
+      "capacity": 60,
+      "enrollment": 34,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -50368,7 +51835,7 @@
       ],
       "sections": 4,
       "capacity": 160,
-      "enrollment": 108,
+      "enrollment": 107,
       "enrollmentPublished": true
     },
     {
@@ -50385,8 +51852,8 @@
       ],
       "sections": 5,
       "capacity": 160,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 124,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -50470,7 +51937,7 @@
       ],
       "sections": 2,
       "capacity": 50,
-      "enrollment": 48,
+      "enrollment": 46,
       "enrollmentPublished": true
     },
     {
@@ -50487,8 +51954,8 @@
       ],
       "sections": 2,
       "capacity": 49,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 48,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -50572,7 +52039,7 @@
       ],
       "sections": 1,
       "capacity": 25,
-      "enrollment": 24,
+      "enrollment": 23,
       "enrollmentPublished": true
     },
     {
@@ -50589,8 +52056,8 @@
       ],
       "sections": 2,
       "capacity": 48,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 36,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -50691,8 +52158,8 @@
       ],
       "sections": 2,
       "capacity": 48,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 28,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -50725,8 +52192,8 @@
       ],
       "sections": 1,
       "capacity": 30,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 10,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -50861,7 +52328,7 @@
       ],
       "sections": 2,
       "capacity": 80,
-      "enrollment": 33,
+      "enrollment": 32,
       "enrollmentPublished": true
     },
     {
@@ -50878,8 +52345,8 @@
       ],
       "sections": 2,
       "capacity": 80,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 31,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -50963,7 +52430,7 @@
       ],
       "sections": 1,
       "capacity": 40,
-      "enrollment": 35,
+      "enrollment": 33,
       "enrollmentPublished": true
     },
     {
@@ -50980,8 +52447,8 @@
       ],
       "sections": 1,
       "capacity": 40,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 13,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -51082,8 +52549,8 @@
       ],
       "sections": 1,
       "capacity": 40,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 29,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -51269,8 +52736,8 @@
       ],
       "sections": 1,
       "capacity": 40,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 38,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -51337,8 +52804,8 @@
       ],
       "sections": 1,
       "capacity": 14,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 7,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -51422,8 +52889,8 @@
       ],
       "sections": 2,
       "capacity": 80,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 40,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -51541,8 +53008,8 @@
       ],
       "sections": 1,
       "capacity": 25,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 7,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202520",
@@ -51779,8 +53246,8 @@
       ],
       "sections": 1,
       "capacity": 15,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 6,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202510",
@@ -51813,8 +53280,8 @@
       ],
       "sections": 1,
       "capacity": 25,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 16,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202510",
@@ -51847,8 +53314,8 @@
       ],
       "sections": 1,
       "capacity": 14,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 2,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -51898,8 +53365,8 @@
       ],
       "sections": 1,
       "capacity": 25,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 10,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -51998,10 +53465,10 @@
       "subjectsUsed": [
         "MATH"
       ],
-      "sections": 6,
-      "capacity": 6,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "sections": 7,
+      "capacity": 7,
+      "enrollment": 1,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -52145,6 +53612,23 @@
       "enrollmentPublished": true
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "MATH 499",
+      "codesUsed": [
+        "MATH 499"
+      ],
+      "titles": [
+        "DS/FOURIER ANALYSIS"
+      ],
+      "subjectsUsed": [
+        "MATH"
+      ],
+      "sections": 1,
+      "capacity": 1,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202520",
       "canonicalCourseCode": "MATH 516",
       "codesUsed": [
@@ -52226,8 +53710,8 @@
       ],
       "sections": 1,
       "capacity": 10,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 3,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -52345,8 +53829,8 @@
       ],
       "sections": 1,
       "capacity": 10,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 3,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -52468,6 +53952,176 @@
       "enrollmentPublished": true
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "MATH 600",
+      "codesUsed": [
+        "MATH 600"
+      ],
+      "titles": [
+        "THESIS"
+      ],
+      "subjectsUsed": [
+        "MATH"
+      ],
+      "sections": 1,
+      "capacity": 1,
+      "enrollment": 0,
+      "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 101",
+      "codesUsed": [
+        "MENG 101"
+      ],
+      "titles": [
+        "INTRODUCTION TO ENGINEERING"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 25,
+      "enrollment": 26,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 101",
+      "codesUsed": [
+        "MENG 101"
+      ],
+      "titles": [
+        "INTRODUCTION TO ENGINEERING"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 25,
+      "enrollment": 24,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 101L",
+      "codesUsed": [
+        "MENG 101L"
+      ],
+      "titles": [
+        "INTRODUCTION TO ENGINEERING LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 25,
+      "enrollment": 26,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 101L",
+      "codesUsed": [
+        "MENG 101L"
+      ],
+      "titles": [
+        "INTRODUCTION TO ENGINEERING LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 25,
+      "enrollment": 24,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 201",
+      "codesUsed": [
+        "MENG 201"
+      ],
+      "titles": [
+        "MATLAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 32,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 201",
+      "codesUsed": [
+        "MENG 201"
+      ],
+      "titles": [
+        "MATLAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 30,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 201L",
+      "codesUsed": [
+        "MENG 201L"
+      ],
+      "titles": [
+        "MATLAB LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 32,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 201L",
+      "codesUsed": [
+        "MENG 201L"
+      ],
+      "titles": [
+        "MATLAB LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 30,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 207",
+      "codesUsed": [
+        "MENG 207"
+      ],
+      "titles": [
+        "ELECTRICITY"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 30,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MENG 207",
       "codesUsed": [
@@ -52483,6 +54137,23 @@
       "capacity": 30,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 207L",
+      "codesUsed": [
+        "MENG 207L"
+      ],
+      "titles": [
+        "ELECTRICITY LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 2,
+      "capacity": 30,
+      "enrollment": 30,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -52502,6 +54173,40 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 217",
+      "codesUsed": [
+        "MENG 217"
+      ],
+      "titles": [
+        "3D PARAMETRIC COMPUTER AIDED DESIGN"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 16,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 217",
+      "codesUsed": [
+        "MENG 217"
+      ],
+      "titles": [
+        "3D PARAMETRIC COMPUTER AIDED DESIGN"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 20,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MENG 217",
       "codesUsed": [
@@ -52517,6 +54222,57 @@
       "capacity": 30,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 240",
+      "codesUsed": [
+        "MENG 240"
+      ],
+      "titles": [
+        "STATICS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 21,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 240",
+      "codesUsed": [
+        "MENG 240"
+      ],
+      "titles": [
+        "STATICS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 18,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 241",
+      "codesUsed": [
+        "MENG 241"
+      ],
+      "titles": [
+        "STRENGTH OF MATERIALS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 10,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -52536,6 +54292,23 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 242",
+      "codesUsed": [
+        "MENG 242"
+      ],
+      "titles": [
+        "DYNAMICS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 10,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MENG 242",
       "codesUsed": [
@@ -52551,6 +54324,23 @@
       "capacity": 30,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 242L",
+      "codesUsed": [
+        "MENG 242L"
+      ],
+      "titles": [
+        "DYNAMICS LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 10,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -52570,6 +54360,91 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 300",
+      "codesUsed": [
+        "MENG 300"
+      ],
+      "titles": [
+        "LABORATORY ANALYSIS AND REPORTS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 29,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 300",
+      "codesUsed": [
+        "MENG 300"
+      ],
+      "titles": [
+        "LABORATORY ANALYSIS AND REPORTS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 25,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 300L",
+      "codesUsed": [
+        "MENG 300L"
+      ],
+      "titles": [
+        "LABORATORY ANALYSIS AND REPORTS LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 2,
+      "capacity": 29,
+      "enrollment": 29,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 300L",
+      "codesUsed": [
+        "MENG 300L"
+      ],
+      "titles": [
+        "LABORATORY ANALYSIS AND REPORTS LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 2,
+      "capacity": 30,
+      "enrollment": 25,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 307",
+      "codesUsed": [
+        "MENG 307"
+      ],
+      "titles": [
+        "INDUSTRIAL CONTROLS AND INSTRUMENTATION"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 19,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MENG 307",
       "codesUsed": [
@@ -52585,6 +54460,23 @@
       "capacity": 30,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 353",
+      "codesUsed": [
+        "MENG 353"
+      ],
+      "titles": [
+        "INDUSTRIAL MATERIALS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 28,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -52604,6 +54496,23 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 353L",
+      "codesUsed": [
+        "MENG 353L"
+      ],
+      "titles": [
+        "INDUSTRIAL MATERIALS LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 2,
+      "capacity": 30,
+      "enrollment": 28,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MENG 353L",
       "codesUsed": [
@@ -52621,6 +54530,193 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 380",
+      "codesUsed": [
+        "MENG 380"
+      ],
+      "titles": [
+        "THERMODYNAMICS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 8,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 380",
+      "codesUsed": [
+        "MENG 380"
+      ],
+      "titles": [
+        "THERMODYNAMICS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 30,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 380L",
+      "codesUsed": [
+        "MENG 380L"
+      ],
+      "titles": [
+        "THERMODYNAMICS LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 2,
+      "capacity": 30,
+      "enrollment": 8,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 380L",
+      "codesUsed": [
+        "MENG 380L"
+      ],
+      "titles": [
+        "THERMODYNAMICS LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 2,
+      "capacity": 30,
+      "enrollment": 30,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 382",
+      "codesUsed": [
+        "MENG 382"
+      ],
+      "titles": [
+        "FLUID MECHANICS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 14,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 382",
+      "codesUsed": [
+        "MENG 382"
+      ],
+      "titles": [
+        "FLUID MECHANICS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 33,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 382L",
+      "codesUsed": [
+        "MENG 382L"
+      ],
+      "titles": [
+        "FLUID MECHANICS LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 2,
+      "capacity": 30,
+      "enrollment": 14,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 382L",
+      "codesUsed": [
+        "MENG 382L"
+      ],
+      "titles": [
+        "FLUID MECHANICS LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 2,
+      "capacity": 30,
+      "enrollment": 33,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 385",
+      "codesUsed": [
+        "MENG 385"
+      ],
+      "titles": [
+        "ROBOTICS AND AUTOMATION"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 16,
+      "enrollment": 16,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 385L",
+      "codesUsed": [
+        "MENG 385L"
+      ],
+      "titles": [
+        "ROBOTICS AND AUTOMATION LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 16,
+      "enrollment": 16,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 386",
+      "codesUsed": [
+        "MENG 386"
+      ],
+      "titles": [
+        "ENGINEERING NUMERICAL ANALYSIS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 26,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MENG 386",
       "codesUsed": [
@@ -52636,6 +54732,23 @@
       "capacity": 30,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 405",
+      "codesUsed": [
+        "MENG 405"
+      ],
+      "titles": [
+        "DESIGN OF MACHINE ELEMENTS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 28,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -52689,6 +54802,40 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 412",
+      "codesUsed": [
+        "MENG 412"
+      ],
+      "titles": [
+        "FUNDAMENTALS OF ENGINEERING"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 8,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 412",
+      "codesUsed": [
+        "MENG 412"
+      ],
+      "titles": [
+        "FUNDAMENTALS OF ENGINEERING"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 16,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MENG 412",
       "codesUsed": [
@@ -52704,6 +54851,23 @@
       "capacity": 30,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 444",
+      "codesUsed": [
+        "MENG 444"
+      ],
+      "titles": [
+        "HEAT TRANSFER"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 10,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -52723,6 +54887,23 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 444L",
+      "codesUsed": [
+        "MENG 444L"
+      ],
+      "titles": [
+        "HEAT TRANSFER LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 2,
+      "capacity": 30,
+      "enrollment": 10,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MENG 444L",
       "codesUsed": [
@@ -52738,6 +54919,91 @@
       "capacity": 32,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 452",
+      "codesUsed": [
+        "MENG 452"
+      ],
+      "titles": [
+        "ENGINEERING ECONOMICS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 22,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 452",
+      "codesUsed": [
+        "MENG 452"
+      ],
+      "titles": [
+        "ENGINEERING ECONOMICS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 30,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 453",
+      "codesUsed": [
+        "MENG 453"
+      ],
+      "titles": [
+        "MATERIALS AND DESIGN"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 13,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 453L",
+      "codesUsed": [
+        "MENG 453L"
+      ],
+      "titles": [
+        "MATERIALS AND DESIGN LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 2,
+      "capacity": 30,
+      "enrollment": 13,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 455",
+      "codesUsed": [
+        "MENG 455"
+      ],
+      "titles": [
+        "COMPOSITE MATERIALS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 2,
+      "capacity": 30,
+      "enrollment": 29,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -52774,6 +55040,57 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 486",
+      "codesUsed": [
+        "MENG 486"
+      ],
+      "titles": [
+        "PROGRAMMABLE LOGIC CONTROLLERS IN AUTOMATION"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 16,
+      "enrollment": 9,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 487",
+      "codesUsed": [
+        "MENG 487"
+      ],
+      "titles": [
+        "MECHATRONICS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 16,
+      "enrollment": 21,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 490A",
+      "codesUsed": [
+        "MENG 490A"
+      ],
+      "titles": [
+        "SENIOR CAPSTONE: DESIGN LABORATORY I"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 2,
+      "capacity": 30,
+      "enrollment": 19,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MENG 490A",
       "codesUsed": [
@@ -52789,6 +55106,23 @@
       "capacity": 30,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 490AL",
+      "codesUsed": [
+        "MENG 490AL"
+      ],
+      "titles": [
+        "SENIOR CAPSTONE: DESIGN LABORATORY I LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 2,
+      "capacity": 30,
+      "enrollment": 19,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -52808,6 +55142,23 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 490B",
+      "codesUsed": [
+        "MENG 490B"
+      ],
+      "titles": [
+        "SENIOR CAPSTONE: DESIGN LABORATORY II"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 15,
+      "enrollment": 15,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MENG 490B",
       "codesUsed": [
@@ -52823,6 +55174,23 @@
       "capacity": 30,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 490BL",
+      "codesUsed": [
+        "MENG 490BL"
+      ],
+      "titles": [
+        "SENIOR CAPSTONE: DESIGN LABORATORY II LAB"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 15,
+      "enrollment": 15,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -52842,6 +55210,23 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 491",
+      "codesUsed": [
+        "MENG 491"
+      ],
+      "titles": [
+        "SENIOR THESIS"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 5,
+      "enrollment": 5,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MENG 492",
       "codesUsed": [
@@ -52857,6 +55242,23 @@
       "capacity": 30,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 493",
+      "codesUsed": [
+        "MENG 493"
+      ],
+      "titles": [
+        "SENIOR SEMINAR"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 50,
+      "enrollment": 12,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -52876,6 +55278,91 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 495",
+      "codesUsed": [
+        "MENG 495"
+      ],
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 10,
+      "enrollment": 2,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MENG 495",
+      "codesUsed": [
+        "MENG 495"
+      ],
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 5,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MENG 499",
+      "codesUsed": [
+        "MENG 499"
+      ],
+      "titles": [
+        "DS/3D PRINTING SURFACE TREATMT"
+      ],
+      "subjectsUsed": [
+        "MENG"
+      ],
+      "sections": 1,
+      "capacity": 1,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "METC 110",
+      "codesUsed": [
+        "METC 110"
+      ],
+      "titles": [
+        "ENGINEERING GRAPHICS"
+      ],
+      "subjectsUsed": [
+        "METC"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 30,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "METC 110",
+      "codesUsed": [
+        "METC 110"
+      ],
+      "titles": [
+        "ENGINEERING GRAPHICS"
+      ],
+      "subjectsUsed": [
+        "METC"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 30,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "METC 110",
       "codesUsed": [
@@ -52891,6 +55378,57 @@
       "capacity": 30,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "METC 340",
+      "codesUsed": [
+        "METC 340"
+      ],
+      "titles": [
+        "STATICS"
+      ],
+      "subjectsUsed": [
+        "METC"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 3,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "METC 340",
+      "codesUsed": [
+        "METC 340"
+      ],
+      "titles": [
+        "STATICS"
+      ],
+      "subjectsUsed": [
+        "METC"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 25,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "METC 341",
+      "codesUsed": [
+        "METC 341"
+      ],
+      "titles": [
+        "STRENGTH OF MATERIALS"
+      ],
+      "subjectsUsed": [
+        "METC"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 5,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -52961,6 +55499,40 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "METC 388",
+      "codesUsed": [
+        "METC 388"
+      ],
+      "titles": [
+        "THERMODYNAMICS AND HEAT TRANSFER"
+      ],
+      "subjectsUsed": [
+        "METC"
+      ],
+      "sections": 1,
+      "capacity": 15,
+      "enrollment": 4,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "METC 388L",
+      "codesUsed": [
+        "METC 388L"
+      ],
+      "titles": [
+        "THERMODYNAMICS AND HEAT TRANSFER LAB"
+      ],
+      "subjectsUsed": [
+        "METC"
+      ],
+      "sections": 1,
+      "capacity": 15,
+      "enrollment": 4,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "METC 415",
       "codesUsed": [
@@ -52976,6 +55548,108 @@
       "capacity": 30,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "METC 417",
+      "codesUsed": [
+        "METC 417"
+      ],
+      "titles": [
+        "ADVANCED PARAMETRIC DESIGN"
+      ],
+      "subjectsUsed": [
+        "METC"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 5,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "METC 456",
+      "codesUsed": [
+        "METC 456"
+      ],
+      "titles": [
+        "ENGINEERING ETHICS, CONTRACTS AND PATENTS"
+      ],
+      "subjectsUsed": [
+        "METC"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 30,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "METC 456",
+      "codesUsed": [
+        "METC 456"
+      ],
+      "titles": [
+        "ENGINEERING ETHICS, CONTRACTS AND PATENTS"
+      ],
+      "subjectsUsed": [
+        "METC"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 30,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "METC 468",
+      "codesUsed": [
+        "METC 468"
+      ],
+      "titles": [
+        "QUALITY ASSURANCE AND INTRO TO LEAN"
+      ],
+      "subjectsUsed": [
+        "METC"
+      ],
+      "sections": 1,
+      "capacity": 15,
+      "enrollment": 15,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "METC 468L",
+      "codesUsed": [
+        "METC 468L"
+      ],
+      "titles": [
+        "QUALITY ASSURANCE AND INTRO TO LEAN LAB"
+      ],
+      "subjectsUsed": [
+        "METC"
+      ],
+      "sections": 1,
+      "capacity": 15,
+      "enrollment": 15,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "METC 491",
+      "codesUsed": [
+        "METC 491"
+      ],
+      "titles": [
+        "SENIOR PROJECT"
+      ],
+      "subjectsUsed": [
+        "METC"
+      ],
+      "sections": 1,
+      "capacity": 5,
+      "enrollment": 2,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202510",
@@ -54848,6 +57522,74 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MNTC 208",
+      "codesUsed": [
+        "MNTC 208"
+      ],
+      "titles": [
+        "SURVEY OF ELECTRICITY"
+      ],
+      "subjectsUsed": [
+        "MNTC"
+      ],
+      "sections": 1,
+      "capacity": 10,
+      "enrollment": 2,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MNTC 208L",
+      "codesUsed": [
+        "MNTC 208L"
+      ],
+      "titles": [
+        "SURVEY OF ELECTRICITY LAB"
+      ],
+      "subjectsUsed": [
+        "MNTC"
+      ],
+      "sections": 1,
+      "capacity": 10,
+      "enrollment": 2,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MNTC 301",
+      "codesUsed": [
+        "MNTC 301"
+      ],
+      "titles": [
+        "METALLIC PROCESSES"
+      ],
+      "subjectsUsed": [
+        "MNTC"
+      ],
+      "sections": 1,
+      "capacity": 16,
+      "enrollment": 16,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MNTC 301",
+      "codesUsed": [
+        "MNTC 301"
+      ],
+      "titles": [
+        "METALLIC PROCESSES"
+      ],
+      "subjectsUsed": [
+        "MNTC"
+      ],
+      "sections": 1,
+      "capacity": 16,
+      "enrollment": 16,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MNTC 301",
       "codesUsed": [
@@ -54863,6 +57605,40 @@
       "capacity": 16,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MNTC 301L",
+      "codesUsed": [
+        "MNTC 301L"
+      ],
+      "titles": [
+        "METALLIC PROCESSES LAB"
+      ],
+      "subjectsUsed": [
+        "MNTC"
+      ],
+      "sections": 1,
+      "capacity": 16,
+      "enrollment": 16,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MNTC 301L",
+      "codesUsed": [
+        "MNTC 301L"
+      ],
+      "titles": [
+        "METALLIC PROCESSES LAB"
+      ],
+      "subjectsUsed": [
+        "MNTC"
+      ],
+      "sections": 1,
+      "capacity": 16,
+      "enrollment": 16,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -54882,6 +57658,23 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MNTC 320",
+      "codesUsed": [
+        "MNTC 320"
+      ],
+      "titles": [
+        "NON-METALLIC PROCESSES"
+      ],
+      "subjectsUsed": [
+        "MNTC"
+      ],
+      "sections": 1,
+      "capacity": 16,
+      "enrollment": 16,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MNTC 320",
       "codesUsed": [
@@ -54899,6 +57692,23 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MNTC 320L",
+      "codesUsed": [
+        "MNTC 320L"
+      ],
+      "titles": [
+        "NON-METALLIC PROCESSES LAB"
+      ],
+      "subjectsUsed": [
+        "MNTC"
+      ],
+      "sections": 1,
+      "capacity": 16,
+      "enrollment": 16,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MNTC 320L",
       "codesUsed": [
@@ -54914,6 +57724,40 @@
       "capacity": 16,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MNTC 402",
+      "codesUsed": [
+        "MNTC 402"
+      ],
+      "titles": [
+        "MACHINE TOOL I"
+      ],
+      "subjectsUsed": [
+        "MNTC"
+      ],
+      "sections": 1,
+      "capacity": 15,
+      "enrollment": 4,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MNTC 402L",
+      "codesUsed": [
+        "MNTC 402L"
+      ],
+      "titles": [
+        "MACHINE TOOL I LAB"
+      ],
+      "subjectsUsed": [
+        "MNTC"
+      ],
+      "sections": 1,
+      "capacity": 15,
+      "enrollment": 4,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -54950,6 +57794,57 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "MNTC 490",
+      "codesUsed": [
+        "MNTC 490"
+      ],
+      "titles": [
+        "SENIOR CAPSTONE: PRODUCTION LAB"
+      ],
+      "subjectsUsed": [
+        "MNTC"
+      ],
+      "sections": 1,
+      "capacity": 5,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MNTC 490L",
+      "codesUsed": [
+        "MNTC 490L"
+      ],
+      "titles": [
+        "SENIOR CAPSTONE: PRODUCTION LAB LAB"
+      ],
+      "subjectsUsed": [
+        "MNTC"
+      ],
+      "sections": 1,
+      "capacity": 5,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MNTC 491",
+      "codesUsed": [
+        "MNTC 491"
+      ],
+      "titles": [
+        "SENIOR PROJECT"
+      ],
+      "subjectsUsed": [
+        "MNTC"
+      ],
+      "sections": 1,
+      "capacity": 5,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MNTC 491",
       "codesUsed": [
@@ -54965,6 +57860,23 @@
       "capacity": 5,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MTED 290",
+      "codesUsed": [
+        "MTED 290"
+      ],
+      "titles": [
+        "EARLY MATH PRACTICUM"
+      ],
+      "subjectsUsed": [
+        "MTED"
+      ],
+      "sections": 1,
+      "capacity": 10,
+      "enrollment": 2,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -54984,6 +57896,74 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MTED 425",
+      "codesUsed": [
+        "MTED 425"
+      ],
+      "titles": [
+        "ASSESSMENT IN THE MATHEMATICS CLASSROOM"
+      ],
+      "subjectsUsed": [
+        "MTED"
+      ],
+      "sections": 1,
+      "capacity": 15,
+      "enrollment": 11,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MTED 425",
+      "codesUsed": [
+        "MTED 425"
+      ],
+      "titles": [
+        "ASSESSMENT IN THE MATHEMATICS CLASSROOM"
+      ],
+      "subjectsUsed": [
+        "MTED"
+      ],
+      "sections": 1,
+      "capacity": 25,
+      "enrollment": 9,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MTED 476",
+      "codesUsed": [
+        "MTED 476"
+      ],
+      "titles": [
+        "MATHEMATICAL PROGRESSIONS"
+      ],
+      "subjectsUsed": [
+        "MTED"
+      ],
+      "sections": 1,
+      "capacity": 15,
+      "enrollment": 12,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MTED 476",
+      "codesUsed": [
+        "MTED 476"
+      ],
+      "titles": [
+        "MATHEMATICAL PROGRESSIONS"
+      ],
+      "subjectsUsed": [
+        "MTED"
+      ],
+      "sections": 1,
+      "capacity": 20,
+      "enrollment": 11,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MTED 477",
       "codesUsed": [
@@ -54999,6 +57979,40 @@
       "capacity": 25,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MTED 490A",
+      "codesUsed": [
+        "MTED 490A"
+      ],
+      "titles": [
+        "SENIOR CAPSTONE: ELEMENTARY PRACTICUM"
+      ],
+      "subjectsUsed": [
+        "MTED"
+      ],
+      "sections": 1,
+      "capacity": 8,
+      "enrollment": 3,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MTED 490A",
+      "codesUsed": [
+        "MTED 490A"
+      ],
+      "titles": [
+        "SENIOR CAPSTONE: ELEMENTARY PRACTICUM"
+      ],
+      "subjectsUsed": [
+        "MTED"
+      ],
+      "sections": 1,
+      "capacity": 8,
+      "enrollment": 5,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -55018,6 +58032,40 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MTED 490B",
+      "codesUsed": [
+        "MTED 490B"
+      ],
+      "titles": [
+        "SENIOR CAPSTONE: SECONDARY PRACTICUM"
+      ],
+      "subjectsUsed": [
+        "MTED"
+      ],
+      "sections": 1,
+      "capacity": 8,
+      "enrollment": 3,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MTED 490B",
+      "codesUsed": [
+        "MTED 490B"
+      ],
+      "titles": [
+        "SENIOR CAPSTONE: SECONDARY PRACTICUM"
+      ],
+      "subjectsUsed": [
+        "MTED"
+      ],
+      "sections": 1,
+      "capacity": 8,
+      "enrollment": 7,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MTED 496",
       "codesUsed": [
@@ -55033,6 +58081,40 @@
       "capacity": 8,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MTHD 103",
+      "codesUsed": [
+        "MTHD 103"
+      ],
+      "titles": [
+        "BASIC ALGEBRA/COLLEGE STUDENTS"
+      ],
+      "subjectsUsed": [
+        "MTHD"
+      ],
+      "sections": 3,
+      "capacity": 102,
+      "enrollment": 71,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MTHD 103",
+      "codesUsed": [
+        "MTHD 103"
+      ],
+      "titles": [
+        "BASIC ALGEBRA/COLLEGE STUDENTS"
+      ],
+      "subjectsUsed": [
+        "MTHD"
+      ],
+      "sections": 2,
+      "capacity": 60,
+      "enrollment": 60,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -55052,6 +58134,40 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "MTHD 104",
+      "codesUsed": [
+        "MTHD 104"
+      ],
+      "titles": [
+        "INTERMEDIATE ALGEBRA/COLLEGE STUDENTS"
+      ],
+      "subjectsUsed": [
+        "MTHD"
+      ],
+      "sections": 2,
+      "capacity": 60,
+      "enrollment": 63,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MTHD 104",
+      "codesUsed": [
+        "MTHD 104"
+      ],
+      "titles": [
+        "INTERMEDIATE ALGEBRA/COLLEGE STUDENTS"
+      ],
+      "subjectsUsed": [
+        "MTHD"
+      ],
+      "sections": 2,
+      "capacity": 58,
+      "enrollment": 57,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "MTHD 104",
       "codesUsed": [
@@ -55067,6 +58183,40 @@
       "capacity": 60,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "MTHD 106",
+      "codesUsed": [
+        "MTHD 106"
+      ],
+      "titles": [
+        "ALGEBRA REASONING"
+      ],
+      "subjectsUsed": [
+        "MTHD"
+      ],
+      "sections": 2,
+      "capacity": 60,
+      "enrollment": 59,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "MTHD 106",
+      "codesUsed": [
+        "MTHD 106"
+      ],
+      "titles": [
+        "ALGEBRA REASONING"
+      ],
+      "subjectsUsed": [
+        "MTHD"
+      ],
+      "sections": 2,
+      "capacity": 58,
+      "enrollment": 50,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -60698,8 +63848,8 @@
       ],
       "sections": 1,
       "capacity": 45,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 32,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -60783,7 +63933,7 @@
       ],
       "sections": 3,
       "capacity": 130,
-      "enrollment": 116,
+      "enrollment": 114,
       "enrollmentPublished": true
     },
     {
@@ -60817,8 +63967,8 @@
       ],
       "sections": 2,
       "capacity": 90,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 76,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -60919,7 +64069,7 @@
       ],
       "sections": 2,
       "capacity": 97,
-      "enrollment": 90,
+      "enrollment": 86,
       "enrollmentPublished": true
     },
     {
@@ -60935,9 +64085,9 @@
         "PHYS"
       ],
       "sections": 1,
-      "capacity": 20,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "capacity": 49,
+      "enrollment": 49,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202510",
@@ -60987,8 +64137,8 @@
       ],
       "sections": 2,
       "capacity": 90,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 58,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -61106,7 +64256,7 @@
       ],
       "sections": 8,
       "capacity": 176,
-      "enrollment": 168,
+      "enrollment": 164,
       "enrollmentPublished": true
     },
     {
@@ -61123,8 +64273,8 @@
       ],
       "sections": 2,
       "capacity": 40,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 39,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202510",
@@ -61174,8 +64324,8 @@
       ],
       "sections": 7,
       "capacity": 140,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 119,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -61242,7 +64392,7 @@
       ],
       "sections": 1,
       "capacity": 20,
-      "enrollment": 10,
+      "enrollment": 9,
       "enrollmentPublished": true
     },
     {
@@ -61446,8 +64596,8 @@
       ],
       "sections": 1,
       "capacity": 20,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 6,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -61480,8 +64630,8 @@
       ],
       "sections": 1,
       "capacity": 25,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 6,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -61582,8 +64732,8 @@
       ],
       "sections": 1,
       "capacity": 25,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 2,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202440",
@@ -61668,8 +64818,8 @@
       ],
       "sections": 2,
       "capacity": 2,
-      "enrollment": 0,
-      "enrollmentPublished": false
+      "enrollment": 2,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -63848,6 +66998,74 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "SCED 390",
+      "codesUsed": [
+        "SCED 390"
+      ],
+      "titles": [
+        "SCIENCE TEACHING METHODS"
+      ],
+      "subjectsUsed": [
+        "SCED"
+      ],
+      "sections": 2,
+      "capacity": 29,
+      "enrollment": 7,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "SCED 395",
+      "codesUsed": [
+        "SCED 395"
+      ],
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "subjectsUsed": [
+        "SCED"
+      ],
+      "sections": 4,
+      "capacity": 4,
+      "enrollment": 4,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "SCED 395",
+      "codesUsed": [
+        "SCED 395"
+      ],
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "subjectsUsed": [
+        "SCED"
+      ],
+      "sections": 4,
+      "capacity": 4,
+      "enrollment": 3,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "SCED 490A",
+      "codesUsed": [
+        "SCED 490A"
+      ],
+      "titles": [
+        "SCIENCE TEACHING CAPSTONE SEMINAR"
+      ],
+      "subjectsUsed": [
+        "SCED"
+      ],
+      "sections": 2,
+      "capacity": 25,
+      "enrollment": 5,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "SCED 490A",
       "codesUsed": [
@@ -63863,6 +67081,23 @@
       "capacity": 24,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "SCED 490B",
+      "codesUsed": [
+        "SCED 490B"
+      ],
+      "titles": [
+        "SCIENCE TEACHING CAPSTONE FIELD APPLICATION"
+      ],
+      "subjectsUsed": [
+        "SCED"
+      ],
+      "sections": 3,
+      "capacity": 15,
+      "enrollment": 4,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -64953,6 +68188,23 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "SUST 495",
+      "codesUsed": [
+        "SUST 495"
+      ],
+      "titles": [
+        "INTERNSHIP"
+      ],
+      "subjectsUsed": [
+        "SUST"
+      ],
+      "sections": 1,
+      "capacity": 1,
+      "enrollment": 1,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "TCOM 309",
       "codesUsed": [
@@ -65004,6 +68256,57 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "TECH 330",
+      "codesUsed": [
+        "TECH 330"
+      ],
+      "titles": [
+        "TECHNOLOGY PROBLEM ANALYSIS AND DESIGN I"
+      ],
+      "subjectsUsed": [
+        "TECH"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 23,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "TECH 330",
+      "codesUsed": [
+        "TECH 330"
+      ],
+      "titles": [
+        "TECHNOLOGY PROBLEM ANALYSIS AND DESIGN I"
+      ],
+      "subjectsUsed": [
+        "TECH"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 20,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "TECH 331",
+      "codesUsed": [
+        "TECH 331"
+      ],
+      "titles": [
+        "TECHNOLOGY PROBLEM ANALYSIS AND DESIGN II"
+      ],
+      "subjectsUsed": [
+        "TECH"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 15,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "TECH 331",
       "codesUsed": [
@@ -65019,6 +68322,40 @@
       "capacity": 30,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "TECH 393",
+      "codesUsed": [
+        "TECH 393"
+      ],
+      "titles": [
+        "TECHNOLOGY WORLD CIVILIZATION"
+      ],
+      "subjectsUsed": [
+        "TECH"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 32,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "TECH 393",
+      "codesUsed": [
+        "TECH 393"
+      ],
+      "titles": [
+        "TECHNOLOGY WORLD CIVILIZATION"
+      ],
+      "subjectsUsed": [
+        "TECH"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 29,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -65038,6 +68375,40 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "TECH 396",
+      "codesUsed": [
+        "TECH 396"
+      ],
+      "titles": [
+        "CONSTRUCTION INDUSTRY SEMINAR"
+      ],
+      "subjectsUsed": [
+        "TECH"
+      ],
+      "sections": 1,
+      "capacity": 40,
+      "enrollment": 6,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "TECH 403",
+      "codesUsed": [
+        "TECH 403"
+      ],
+      "titles": [
+        "COMPUTER-AIDED DESIGN AND PROJECT MANAGEMENT"
+      ],
+      "subjectsUsed": [
+        "TECH"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 29,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "TECH 403",
       "codesUsed": [
@@ -65053,6 +68424,23 @@
       "capacity": 30,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "TECH 452",
+      "codesUsed": [
+        "TECH 452"
+      ],
+      "titles": [
+        "ENGINEERING ECONOMICS"
+      ],
+      "subjectsUsed": [
+        "TECH"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 25,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
@@ -65072,6 +68460,57 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202540",
+      "canonicalCourseCode": "TECH 454",
+      "codesUsed": [
+        "TECH 454"
+      ],
+      "titles": [
+        "ENVIRONMENTAL ENGINEERING"
+      ],
+      "subjectsUsed": [
+        "TECH"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 13,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "TECH 454",
+      "codesUsed": [
+        "TECH 454"
+      ],
+      "titles": [
+        "ENVIRONMENTAL ENGINEERING"
+      ],
+      "subjectsUsed": [
+        "TECH"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 22,
+      "enrollmentPublished": true
+    },
+    {
+      "termCode": "202540",
+      "canonicalCourseCode": "TECH 456",
+      "codesUsed": [
+        "TECH 456"
+      ],
+      "titles": [
+        "ENGINEERING ETHICS, CONTRACTS AND PATENTS"
+      ],
+      "subjectsUsed": [
+        "TECH"
+      ],
+      "sections": 1,
+      "capacity": 25,
+      "enrollment": 18,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "TECH 456",
       "codesUsed": [
@@ -65089,6 +68528,23 @@
       "enrollmentPublished": false
     },
     {
+      "termCode": "202610",
+      "canonicalCourseCode": "TECH 458",
+      "codesUsed": [
+        "TECH 458"
+      ],
+      "titles": [
+        "QUALITY ASSURANCE"
+      ],
+      "subjectsUsed": [
+        "TECH"
+      ],
+      "sections": 1,
+      "capacity": 24,
+      "enrollment": 15,
+      "enrollmentPublished": true
+    },
+    {
       "termCode": "202620",
       "canonicalCourseCode": "TECH 458",
       "codesUsed": [
@@ -65104,6 +68560,23 @@
       "capacity": 30,
       "enrollment": 0,
       "enrollmentPublished": false
+    },
+    {
+      "termCode": "202610",
+      "canonicalCourseCode": "TECH 462",
+      "codesUsed": [
+        "TECH 462"
+      ],
+      "titles": [
+        "INDUSTRIAL SAFETY ENGINEERING"
+      ],
+      "subjectsUsed": [
+        "TECH"
+      ],
+      "sections": 1,
+      "capacity": 30,
+      "enrollment": 14,
+      "enrollmentPublished": true
     },
     {
       "termCode": "202620",
