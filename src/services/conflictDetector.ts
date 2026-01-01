@@ -1,4 +1,5 @@
 import type { Course, DayOfWeek } from '../types/schedule';
+import { isStackedPair } from './stackedCourseDetector';
 
 export interface Conflict {
   id: string;
@@ -12,10 +13,50 @@ export interface Conflict {
   description: string;
 }
 
+export interface ConflictDetectionOptions {
+  hideStackedCourses?: boolean;    // Filter out 400/500 level stacked courses
+  hideLabCorequisites?: boolean;   // Filter out lab+lecture with same instructor
+}
+
+/**
+ * Check if two courses appear to be lab corequisites
+ * (lecture + lab taught by same instructor at overlapping/adjacent times)
+ */
+export function isLabCorequisite(course1: Course, course2: Course): boolean {
+  // Must be same subject
+  if (course1.subject !== course2.subject) return false;
+
+  // Check meeting types for lab indicators
+  const getTypes = (c: Course) => c.meetings.map(m => m.type.toUpperCase());
+  const types1 = getTypes(course1);
+  const types2 = getTypes(course2);
+
+  // Check if one has LAB/LPD and other doesn't
+  const hasLab1 = types1.some(t => t.includes('LAB') || t === 'LPD');
+  const hasLab2 = types2.some(t => t.includes('LAB') || t === 'LPD');
+
+  // If both are labs or neither are labs, not a corequisite pair
+  if (hasLab1 === hasLab2) return false;
+
+  // Check if course numbers are related (same or within 1)
+  const num1 = parseInt(course1.courseNumber.replace(/[^0-9]/g, ''), 10);
+  const num2 = parseInt(course2.courseNumber.replace(/[^0-9]/g, ''), 10);
+
+  // Labs often have course number like X01L or same number as lecture
+  const sameBase = Math.abs(num1 - num2) <= 1 ||
+                   course1.courseNumber.replace(/L$/i, '') === course2.courseNumber.replace(/L$/i, '');
+
+  return sameBase;
+}
+
 /**
  * Detect all scheduling conflicts in a list of courses
+ * @param options - Options to filter out false positives
  */
-export function detectAllConflicts(courses: Course[]): Conflict[] {
+export function detectAllConflicts(
+  courses: Course[],
+  options: ConflictDetectionOptions = { hideStackedCourses: true, hideLabCorequisites: true }
+): Conflict[] {
   const conflicts: Conflict[] = [];
 
   // Get courses with valid meeting times
@@ -28,6 +69,16 @@ export function detectAllConflicts(courses: Course[]): Conflict[] {
     for (let j = i + 1; j < scheduledCourses.length; j++) {
       const course1 = scheduledCourses[i];
       const course2 = scheduledCourses[j];
+
+      // Skip stacked courses (400/500 level pairs) if option enabled
+      if (options.hideStackedCourses && isStackedPair(course1, course2)) {
+        continue;
+      }
+
+      // Skip lab corequisites if option enabled
+      if (options.hideLabCorequisites && isLabCorequisite(course1, course2)) {
+        continue;
+      }
 
       // Check instructor conflicts
       if (haveSameInstructor(course1, course2)) {
@@ -47,20 +98,22 @@ export function detectAllConflicts(courses: Course[]): Conflict[] {
         }
       }
 
-      // Check room conflicts
-      const roomConflict = findRoomConflict(course1, course2);
-      if (roomConflict) {
-        conflicts.push({
-          id: `room-${course1.id}-${course2.id}-${roomConflict.day}`,
-          type: 'room',
-          severity: 'error',
-          course1,
-          course2,
-          day: roomConflict.day,
-          overlapStart: roomConflict.start,
-          overlapEnd: roomConflict.end,
-          description: `Room ${roomConflict.location} is double-booked for ${course1.displayCode} and ${course2.displayCode}`,
-        });
+      // Check room conflicts (stacked courses sharing a room is also intentional)
+      if (!(options.hideStackedCourses && isStackedPair(course1, course2))) {
+        const roomConflict = findRoomConflict(course1, course2);
+        if (roomConflict) {
+          conflicts.push({
+            id: `room-${course1.id}-${course2.id}-${roomConflict.day}`,
+            type: 'room',
+            severity: 'error',
+            course1,
+            course2,
+            day: roomConflict.day,
+            overlapStart: roomConflict.start,
+            overlapEnd: roomConflict.end,
+            description: `Room ${roomConflict.location} is double-booked for ${course1.displayCode} and ${course2.displayCode}`,
+          });
+        }
       }
     }
   }

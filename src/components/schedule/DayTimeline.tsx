@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
-import { Clock, MapPin, User, AlertTriangle, Users } from 'lucide-react';
+import { Clock, MapPin, User, AlertTriangle, Users, Layers } from 'lucide-react';
 import type { Course, DayOfWeek } from '../../types/schedule';
+import type { StackedCourseInfo } from '../../services/stackedCourseDetector';
 import { SUBJECT_COLORS } from '../../constants/colors';
 import { minutesToDisplayTime, DAYS_OF_WEEK } from '../../constants/timeSlots';
 
@@ -8,6 +9,7 @@ interface DayTimelineProps {
   courses: Course[];
   selectedDay: DayOfWeek;
   onCourseClick: (course: Course) => void;
+  stackedPairs?: Map<string, StackedCourseInfo>;
 }
 
 interface TimelineCourse {
@@ -27,6 +29,7 @@ export default function DayTimeline({
   courses,
   selectedDay,
   onCourseClick,
+  stackedPairs,
 }: DayTimelineProps) {
   // Get courses for selected day, sorted by start time
   const dayCourses = useMemo(() => {
@@ -83,6 +86,9 @@ export default function DayTimeline({
           ? (course.enrollment.current / course.enrollment.maximum) * 100
           : 0;
         const isFull = course.enrollment.available <= 0;
+
+        // Check if this is a base course with a stacked pair
+        const stackedInfo = stackedPairs?.get(course.crn);
 
         return (
           <button
@@ -164,8 +170,8 @@ export default function DayTimeline({
                 )}
               </div>
 
-              {/* Delivery method badge */}
-              <div className="mt-3 flex items-center gap-2">
+              {/* Delivery method badge and stacked course indicator */}
+              <div className="mt-3 flex flex-wrap items-center gap-2">
                 <span className={`
                   inline-flex items-center px-2 py-0.5 rounded text-xs font-medium
                   ${course.delivery === 'Online' ? 'bg-purple-100 text-purple-700' :
@@ -174,6 +180,20 @@ export default function DayTimeline({
                 `}>
                   {course.delivery}
                 </span>
+
+                {/* Stacked course badge */}
+                {stackedInfo && (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-700">
+                    <Layers className="w-3 h-3" />
+                    Stacked: {stackedInfo.stackedCourse.displayCode}
+                    {stackedInfo.enrollmentDiff !== 0 && (
+                      <span className="text-indigo-500">
+                        ({stackedInfo.enrollmentDiff > 0 ? '+' : ''}{stackedInfo.enrollmentDiff})
+                      </span>
+                    )}
+                  </span>
+                )}
+
                 <span className="text-xs text-gray-400">
                   CRN: {course.crn}
                 </span>
