@@ -1,8 +1,11 @@
 import { useMemo, useState } from 'react';
-import { useFilteredCourses, useColorBy } from '../../contexts/FilterContext';
+import { useFilteredCourses, useColorBy, useViewMode } from '../../contexts/FilterContext';
 import { DAYS_OF_WEEK, TIME_SLOTS, SCHEDULE_START_HOUR, TIME_SLOT_HEIGHT } from '../../constants/timeSlots';
 import CourseBlock from './CourseBlock';
 import CourseDetailModal from './CourseDetailModal';
+import MobileDayTabs from './MobileDayTabs';
+import DayTimeline from './DayTimeline';
+import { useResponsiveView } from '../../hooks/useResponsiveView';
 import type { Course, DayOfWeek } from '../../types/schedule';
 
 interface CoursePlacement {
@@ -18,7 +21,33 @@ interface CoursePlacement {
 export default function WeeklyGrid() {
   const filteredCourses = useFilteredCourses();
   const { colorBy } = useColorBy();
+  const { selectedDay, setSelectedDay } = useViewMode();
+  const { isMobile } = useResponsiveView();
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+
+  // Default to Monday if no day selected
+  const currentDay: DayOfWeek = selectedDay || 'monday';
+
+  // Calculate course counts per day for mobile tabs
+  const courseCounts = useMemo(() => {
+    const counts: Record<DayOfWeek, number> = {
+      monday: 0,
+      tuesday: 0,
+      wednesday: 0,
+      thursday: 0,
+      friday: 0,
+    };
+
+    filteredCourses.forEach((course) => {
+      course.meetings.forEach((meeting) => {
+        meeting.days.forEach((day) => {
+          counts[day]++;
+        });
+      });
+    });
+
+    return counts;
+  }, [filteredCourses]);
 
   // Calculate course placements with overlap handling
   const coursePlacements = useMemo(() => {
@@ -109,6 +138,35 @@ export default function WeeklyGrid() {
   // Calculate the total grid height
   const gridHeight = TIME_SLOTS.length * TIME_SLOT_HEIGHT;
 
+  // Mobile view: Day tabs + timeline
+  if (isMobile) {
+    return (
+      <>
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <MobileDayTabs
+            selectedDay={currentDay}
+            onDayChange={setSelectedDay}
+            courseCounts={courseCounts}
+          />
+          <DayTimeline
+            courses={filteredCourses}
+            selectedDay={currentDay}
+            onCourseClick={setSelectedCourse}
+          />
+        </div>
+
+        {/* Course detail modal */}
+        {selectedCourse && (
+          <CourseDetailModal
+            course={selectedCourse}
+            onClose={() => setSelectedCourse(null)}
+          />
+        )}
+      </>
+    );
+  }
+
+  // Desktop view: Full weekly grid
   return (
     <>
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">

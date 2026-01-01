@@ -4,6 +4,7 @@ import { useFilteredCourses, usePresets, useFilters } from '../contexts/FilterCo
 import WeeklyGrid from '../components/schedule/WeeklyGrid';
 import ScheduleFilters from '../components/schedule/ScheduleFilters';
 import ColorLegend from '../components/schedule/ColorLegend';
+import ExecutiveSummary from '../components/schedule/ExecutiveSummary';
 import { Loader2, Calendar, Bookmark, Plus, X, Save, RotateCcw } from 'lucide-react';
 
 export default function Dashboard() {
@@ -60,6 +61,11 @@ export default function Dashboard() {
         <p className="text-sm sm:text-base text-gray-600 mt-1">
           Viewing {filteredCourses.length} course{filteredCourses.length !== 1 ? 's' : ''} • Spring Quarter 2026
         </p>
+      </div>
+
+      {/* Executive Summary - More prominent on mobile */}
+      <div className="mb-4">
+        <ExecutiveSummary courses={filteredCourses} />
       </div>
 
       {/* Quick Filter Presets */}

@@ -45,8 +45,38 @@ body {
     padding-bottom: env(safe-area-inset-bottom);
   }
 
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* Touch target: 44px minimum as per Apple HIG / WCAG */
   .touch-target {
     @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Thumb zone: position important elements at bottom for one-hand use */
+  .thumb-zone {
+    @apply fixed bottom-0 left-0 right-0 safe-bottom;
+  }
+
+  /* Hide on mobile, show on desktop */
+  .desktop-only {
+    @apply hidden md:block;
+  }
+
+  /* Show on mobile, hide on desktop */
+  .mobile-only {
+    @apply block md:hidden;
+  }
+
+  /* Readable line length for accessibility */
+  .readable-width {
+    @apply max-w-prose;
+  }
+
+  /* High contrast focus ring for accessibility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-ewu-red focus:ring-offset-2;
   }
 }
 
