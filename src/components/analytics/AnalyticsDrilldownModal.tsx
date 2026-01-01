@@ -248,6 +248,9 @@ export default function AnalyticsDrilldownModal({
         </>
       );
     }
+    if (drilldown.kind === 'faculty') {
+      return <>Shows each section taught by this instructor with all meeting times. Click a course to open full section details.</>;
+    }
     return <>Click a course to open full section details.</>;
   }, [drilldown, timeBucketView]);
 
@@ -461,7 +464,14 @@ export default function AnalyticsDrilldownModal({
               {sortedCourses.map((course) => {
                 const colors = SUBJECT_COLORS[course.subject];
                 const delivery = DELIVERY_COLORS[course.delivery];
-                const meeting = course.meetings[0] ?? null;
+                const showAllMeetingTimes = drilldown.kind === 'faculty';
+                const meetings = [...course.meetings].sort(
+                  (a, b) =>
+                    a.startMinutes - b.startMinutes ||
+                    a.endMinutes - b.endMinutes ||
+                    (a.location ?? '').localeCompare(b.location ?? '')
+                );
+                const meeting = meetings[0] ?? null;
                 const capacity = course.enrollment.maximum;
                 const enrollment = course.enrollment.current;
                 const fillRate = capacity > 0 ? Math.round((enrollment / capacity) * 100) : null;
@@ -490,7 +500,20 @@ export default function AnalyticsDrilldownModal({
                       {course.instructor?.displayName ?? <span className="text-gray-400">TBA</span>}
                     </td>
                     <td className="px-4 py-3 text-gray-700 whitespace-nowrap">
-                      {meeting ? (
+                      {meetings.length > 0 && showAllMeetingTimes ? (
+                        <div className="space-y-1 whitespace-normal">
+                          {meetings.map((row, meetingIndex) => (
+                            <div key={`${course.id}-meeting-${meetingIndex}`} className="text-xs">
+                              <span className="font-medium text-gray-800">{formatDays(row.days)}</span>{' '}
+                              <span className="text-gray-600">
+                                {formatTimeRange(row.startMinutes, row.endMinutes)}
+                                {row.typeDescription ? ` • ${row.typeDescription}` : ''}
+                                {row.location ? ` • ${row.location}` : ''}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      ) : meeting ? (
                         <>
                           <div className="font-medium">{formatDays(meeting.days)}</div>
                           <div className="text-xs text-gray-500">{formatTimeRange(meeting.startMinutes, meeting.endMinutes)}</div>

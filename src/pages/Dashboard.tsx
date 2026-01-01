@@ -86,7 +86,11 @@ export default function Dashboard() {
           <p className="text-sm text-gray-500 mt-0.5">
             {state.courses[0]?.termDescription ?? 'Term'}{state.courses[0]?.term ? ` (${state.courses[0].term})` : ''} •{' '}
             {displayCourses.length} sections
+            {state.lastUpdated ? ` • Updated ${state.lastUpdated.toLocaleString()}` : ''}
           </p>
+          {state.dataSource ? (
+            <p className="text-xs text-gray-400 mt-0.5">Source: {state.dataSource}</p>
+          ) : null}
         </div>
         <button
           onClick={() => setShowFilters(!showFilters)}

@@ -24,7 +24,7 @@ interface ScheduleState {
 // Action types
 type ScheduleAction =
   | { type: 'LOAD_START' }
-  | { type: 'LOAD_SUCCESS'; payload: { courses: Course[]; source: string } }
+  | { type: 'LOAD_SUCCESS'; payload: { courses: Course[]; source: string; lastUpdated?: Date | null } }
   | { type: 'LOAD_ERROR'; payload: string }
   | { type: 'CLEAR_DATA' };
 
@@ -58,7 +58,7 @@ function scheduleReducer(state: ScheduleState, action: ScheduleAction): Schedule
         courses,
         loading: false,
         error: null,
-        lastUpdated: new Date(),
+        lastUpdated: action.payload.lastUpdated ?? new Date(),
         dataSource: action.payload.source,
         conflicts: analysis.conflicts,
         stackedPairs: analysis.stackedPairs,
@@ -116,9 +116,19 @@ export function ScheduleProvider({ children }: ScheduleProviderProps) {
         throw new Error('No valid courses found in file');
       }
 
+      const generatedAtText = (data as unknown as { generatedAt?: unknown }).generatedAt;
+      const generatedAt = typeof generatedAtText === 'string' ? new Date(generatedAtText) : null;
+      const generatedAtDate = generatedAt && !Number.isNaN(generatedAt.getTime()) ? generatedAt : null;
+
       dispatch({
         type: 'LOAD_SUCCESS',
-        payload: { courses, source: file.name },
+        payload: {
+          courses,
+          source: file.name,
+          lastUpdated:
+            generatedAtDate ??
+            (Number.isFinite(file.lastModified) ? new Date(file.lastModified) : new Date()),
+        },
       });
     } catch (error) {
       dispatch({
@@ -138,6 +148,9 @@ export function ScheduleProvider({ children }: ScheduleProviderProps) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
 
+      const lastModifiedHeader = response.headers.get('last-modified');
+      const lastModified = lastModifiedHeader ? new Date(lastModifiedHeader) : null;
+
       const data: BannerDataResponse = await response.json();
       const courses = parseScheduleData(data);
 
@@ -145,9 +158,18 @@ export function ScheduleProvider({ children }: ScheduleProviderProps) {
         throw new Error('No valid courses found in data');
       }
 
+      const generatedAtText = (data as unknown as { generatedAt?: unknown }).generatedAt;
+      const generatedAt = typeof generatedAtText === 'string' ? new Date(generatedAtText) : null;
+      const generatedAtDate = generatedAt && !Number.isNaN(generatedAt.getTime()) ? generatedAt : null;
+
+      const lastUpdated =
+        (lastModified && !Number.isNaN(lastModified.getTime()) ? lastModified : null) ??
+        generatedAtDate ??
+        new Date();
+
       dispatch({
         type: 'LOAD_SUCCESS',
-        payload: { courses, source: url },
+        payload: { courses, source: url, lastUpdated },
       });
     } catch (error) {
       dispatch({
@@ -186,13 +208,25 @@ export function ScheduleProvider({ children }: ScheduleProviderProps) {
           const response = await fetch(url);
           if (!response.ok) continue;
 
+          const lastModifiedHeader = response.headers.get('last-modified');
+          const lastModified = lastModifiedHeader ? new Date(lastModifiedHeader) : null;
+
           const data: BannerDataResponse = await response.json();
           const courses = parseScheduleData(data);
           if (courses.length === 0) continue;
 
+          const generatedAtText = (data as unknown as { generatedAt?: unknown }).generatedAt;
+          const generatedAt = typeof generatedAtText === 'string' ? new Date(generatedAtText) : null;
+          const generatedAtDate = generatedAt && !Number.isNaN(generatedAt.getTime()) ? generatedAt : null;
+
+          const lastUpdated =
+            (lastModified && !Number.isNaN(lastModified.getTime()) ? lastModified : null) ??
+            generatedAtDate ??
+            new Date();
+
           dispatch({
             type: 'LOAD_SUCCESS',
-            payload: { courses, source: url },
+            payload: { courses, source: url, lastUpdated },
           });
           return;
         } catch {
