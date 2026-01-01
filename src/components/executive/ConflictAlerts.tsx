@@ -11,7 +11,6 @@ interface ConflictAlertsProps {
 /**
  * Executive-focused conflict alerts component
  * Shows ONLY real conflicts (after filtering stacked courses & lab corequisites)
- * Apple-quality design with tap-to-expand details
  */
 export default function ConflictAlerts({ conflicts, onConflictTap }: ConflictAlertsProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);

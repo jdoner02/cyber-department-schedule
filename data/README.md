@@ -238,7 +238,7 @@ export interface BannerSectionAttribute {
 
 **What it is:** A human-maintained mapping that defines **canonical course identities** for longitudinal analysis when the same course appears under multiple subject codes (e.g., CSCD → CYBR) or is cross-listed.
 
-**Why it exists:** Banner schedule snapshots use the *in-term* subject code. For trend reporting (Dr. Steiner / department planning), we sometimes need to treat multiple subject-coded rows as the “same course” over time.
+**Why it exists:** Banner schedule snapshots use the *in-term* subject code. For department trend reporting, we sometimes need to treat multiple subject-coded rows as the “same course” over time.
 
 **Schema:** `CourseAliasMapFile` (see `src/types/trends.ts`)
 

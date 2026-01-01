@@ -57,10 +57,10 @@ describe('scheduleParser', () => {
       const courseWithInstructor = courses[0];
 
       expect(courseWithInstructor.instructor).not.toBeNull();
-      expect(courseWithInstructor.instructor?.displayName).toBe('Steiner, Stu');
-      expect(courseWithInstructor.instructor?.email).toBe('ssteiner@ewu.edu');
-      expect(courseWithInstructor.instructor?.lastName).toBe('Steiner');
-      expect(courseWithInstructor.instructor?.firstName).toBe('Stu');
+      expect(courseWithInstructor.instructor?.displayName).toBe('Doe, Jane');
+      expect(courseWithInstructor.instructor?.email).toBe('jdoe@ewu.edu');
+      expect(courseWithInstructor.instructor?.lastName).toBe('Doe');
+      expect(courseWithInstructor.instructor?.firstName).toBe('Jane');
     });
 
     it('should parse meeting times correctly', () => {

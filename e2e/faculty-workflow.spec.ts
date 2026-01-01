@@ -13,8 +13,8 @@
  * - Mobile responsiveness
  *
  * PERSONAS TESTED:
- * - Dr. Stu Steiner (Director): Strategic overview, conflict detection
- * - Krystal (Deputy Director): Day-to-day scheduling, student advising
+ * - Director: Strategic overview, conflict detection
+ * - Deputy Director: Day-to-day scheduling, student advising
  *
  * WORKFLOWS COVERED:
  * 1. Morning Dashboard Review - Quick check of schedule and conflicts

@@ -1,15 +1,19 @@
-import { useState, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Search, Upload, Download, RefreshCw, Printer } from 'lucide-react';
 import { useSchedule } from '../../contexts/ScheduleContext';
 import { useFilters } from '../../contexts/FilterContext';
 import { downloadJson } from '../../utils/download';
+import { formatTerm } from '../../constants/academicTerms';
 
 export default function Header() {
-  const { state, loadFromFile, refreshData } = useSchedule();
+  const { state, loadFromFile, refreshData, availableTerms, selectedTermCode, selectTerm } = useSchedule();
   const { dispatch } = useFilters();
   const [searchQuery, setSearchQuery] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canRefresh = state.dataSource.startsWith('http') || state.dataSource.startsWith('/');
+  const termOptions = useMemo(() => {
+    return [...availableTerms].sort((a, b) => b.termCode.localeCompare(a.termCode));
+  }, [availableTerms]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
@@ -84,6 +88,30 @@ export default function Header() {
 
         {/* Right: Actions */}
         <div className="flex items-center gap-2">
+          {termOptions.length > 0 ? (
+            <div className="hidden md:block">
+              <label className="sr-only" htmlFor="term-select">
+                Select term
+              </label>
+              <select
+                id="term-select"
+                className="input py-1.5 pr-10 text-sm w-[220px]"
+                value={selectedTermCode ?? ''}
+                onChange={(e) => void selectTerm(e.target.value)}
+                disabled={state.loading}
+                title="Select term"
+              >
+                {selectedTermCode === null ? (
+                  <option value="">Imported file</option>
+                ) : null}
+                {termOptions.map((term) => (
+                  <option key={term.termCode} value={term.termCode}>
+                    {term.termDescription ?? formatTerm(term.termCode)} ({term.termCode})
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : null}
           <input
             ref={fileInputRef}
             type="file"

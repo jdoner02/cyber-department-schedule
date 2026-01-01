@@ -99,7 +99,6 @@ export default function Trends() {
     const preferredDept = ['CYBR', 'CSCD'].find((s) => dataset.subjects.some((subj) => subj.subject === s));
     if (preferredDept) setDeptSubject(preferredDept);
 
-    // Default course (stakeholder request)
     const preferredCourse = dataset.courses.find((c) => c.canonicalCourseCode === 'CYBR 330')
       ? 'CYBR 330'
       : dataset.courses[0]?.canonicalCourseCode ?? null;

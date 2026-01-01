@@ -17,7 +17,6 @@ interface InstructorWorkload {
 
 /**
  * Executive-focused quick insights component
- * Apple-quality design with key metrics at a glance
  */
 export default function QuickInsights({ courses }: QuickInsightsProps) {
   const calendarEvents = useAcademicCalendarEvents();

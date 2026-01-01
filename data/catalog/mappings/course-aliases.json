@@ -8,7 +8,7 @@
       "aliases": ["CSCD 330"],
       "type": "subject-transition",
       "confidence": "high",
-      "notes": "Requested special-case: CYBR 330 was historically offered as CSCD 330. Treat as one course for longitudinal reporting (Dr. Steiner tracking)."
+      "notes": "Requested special-case: CYBR 330 was historically offered as CSCD 330. Treat as one course for longitudinal reporting."
     },
     {
       "canonicalCourseCode": "CYBR 303",
@@ -82,4 +82,3 @@
     }
   ]
 }
-

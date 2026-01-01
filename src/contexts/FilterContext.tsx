@@ -25,12 +25,6 @@ const builtInPresets: FilterPreset[] = [
     isBuiltIn: true,
   },
   {
-    id: 'dr-steiner',
-    name: 'Dr. Steiner',
-    filters: { searchQuery: 'Steiner' },
-    isBuiltIn: true,
-  },
-  {
     id: 'conflicts',
     name: 'Show Conflicts',
     filters: { showConflictsOnly: true },

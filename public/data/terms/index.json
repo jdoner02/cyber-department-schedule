@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-01-01T20:20:27.962Z",
+  "defaultTermCode": "202610",
+  "terms": [
+    {
+      "termCode": "202440",
+      "termDescription": "Fall Quarter 2024",
+      "totalCount": 707,
+      "generatedAt": "2026-01-01T08:06:12.025Z"
+    },
+    {
+      "termCode": "202510",
+      "termDescription": "Winter Quarter 2025",
+      "totalCount": 715,
+      "generatedAt": "2026-01-01T08:06:12.000Z"
+    },
+    {
+      "termCode": "202520",
+      "termDescription": "Spring Quarter 2025",
+      "totalCount": 727,
+      "generatedAt": "2026-01-01T08:06:11.976Z"
+    },
+    {
+      "termCode": "202530",
+      "termDescription": "Summer Quarter 2025",
+      "totalCount": 86,
+      "generatedAt": "2026-01-01T11:11:46.502Z"
+    },
+    {
+      "termCode": "202540",
+      "termDescription": "Fall Quarter 2025",
+      "totalCount": 840,
+      "generatedAt": "2026-01-01T10:54:19.138Z"
+    },
+    {
+      "termCode": "202610",
+      "termDescription": "Winter Quarter 2026",
+      "totalCount": 827,
+      "generatedAt": "2026-01-01T10:59:02.245Z"
+    },
+    {
+      "termCode": "202620",
+      "termDescription": "Spring Quarter 2026",
+      "totalCount": 1916,
+      "generatedAt": "2026-01-01T04:59:59.755Z"
+    }
+  ]
+}

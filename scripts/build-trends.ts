@@ -96,6 +96,14 @@ async function listScheduleJsonFiles(): Promise<string[]> {
     if (!dirent.isDirectory()) continue;
     const termDir = path.join(SCHEDULES_DIR, dirent.name);
     const entries = await readdir(termDir, { withFileTypes: true });
+
+    // Prefer the monolithic schedule.json when present.
+    const monolith = entries.find((entry) => entry.isFile() && entry.name === 'schedule.json');
+    if (monolith) {
+      files.push(path.join(termDir, monolith.name));
+      continue;
+    }
+
     for (const entry of entries) {
       if (!entry.isFile()) continue;
       if (!entry.name.toLowerCase().endsWith('.json')) continue;

@@ -9,17 +9,16 @@ import QuickInsights from '../components/executive/QuickInsights';
 import AcademicCalendarCard from '../components/calendar/AcademicCalendarCard';
 import { Loader2, Calendar, Settings, Filter } from 'lucide-react';
 import type { Course, DayOfWeek } from '../types/schedule';
+import { formatTerm } from '../constants/academicTerms';
 
 /**
- * Executive Dashboard - Apple-quality design
- *
  * Priority 1: REAL conflicts (not stacked courses or lab corequisites)
  * Priority 2: Clean day-by-day schedule view
  * Priority 3: At-a-glance metrics
  */
 export default function Dashboard() {
   const { loading, error } = useScheduleLoading();
-  const { state } = useSchedule();
+  const { state, availableTerms, selectedTermCode, selectTerm } = useSchedule();
   const filteredCourses = useFilteredCourses();
   const { selectedDay, setSelectedDay } = useViewMode();
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
@@ -92,19 +91,39 @@ export default function Dashboard() {
             <p className="text-xs text-gray-400 mt-0.5">Source: {state.dataSource}</p>
           ) : null}
         </div>
-        <button
-          onClick={() => setShowFilters(!showFilters)}
-          className={`
-            p-2.5 rounded-xl border transition-colors touch-target
-            ${showFilters
-              ? 'bg-ewu-red text-white border-ewu-red'
-              : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'
-            }
-          `}
-          aria-label="Toggle filters"
-        >
-          <Filter className="w-5 h-5" />
-        </button>
+        <div className="flex items-center gap-2">
+          {availableTerms.length > 0 ? (
+            <select
+              className="md:hidden input py-1.5 pr-10 text-sm w-[190px]"
+              value={selectedTermCode ?? ''}
+              onChange={(e) => void selectTerm(e.target.value)}
+              disabled={state.loading}
+              title="Select term"
+            >
+              {selectedTermCode === null ? <option value="">Imported file</option> : null}
+              {[...availableTerms]
+                .sort((a, b) => b.termCode.localeCompare(a.termCode))
+                .map((term) => (
+                  <option key={term.termCode} value={term.termCode}>
+                    {formatTerm(term.termCode)}
+                  </option>
+                ))}
+            </select>
+          ) : null}
+          <button
+            onClick={() => setShowFilters(!showFilters)}
+            className={`
+              p-2.5 rounded-xl border transition-colors touch-target
+              ${showFilters
+                ? 'bg-ewu-red text-white border-ewu-red'
+                : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'
+              }
+            `}
+            aria-label="Toggle filters"
+          >
+            <Filter className="w-5 h-5" />
+          </button>
+        </div>
       </div>
 
       {/* Filters panel - collapsible */}
