@@ -8,7 +8,7 @@ import {
   getCoursesAtHour,
 } from './scheduleParser';
 import { mockScheduleResponse } from '../test/mocks/scheduleData';
-import type { BannerDataResponse } from '../types/schedule';
+import type { BannerDataResponse, DayOfWeek } from '../types/schedule';
 
 describe('scheduleParser', () => {
   describe('parseScheduleData', () => {
@@ -201,7 +201,7 @@ describe('scheduleParser', () => {
 
     it('should return empty array for Saturday', () => {
       const courses = parseScheduleData(mockScheduleResponse);
-      const saturdayCourses = filterCoursesByDay(courses, 'saturday' as any);
+      const saturdayCourses = filterCoursesByDay(courses, 'saturday' as unknown as DayOfWeek);
 
       expect(saturdayCourses).toHaveLength(0);
     });

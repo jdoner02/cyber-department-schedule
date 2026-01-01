@@ -1,0 +1,15 @@
+{
+  "fetchedAt": "2026-01-01T05:52:29.458Z",
+  "source": "govsalaries.com",
+  "results": {
+    "UW": {
+      "recordCount": 3000,
+      "file": "govsalaries-uw.json"
+    },
+    "EWU": {
+      "recordCount": 3000,
+      "file": "govsalaries-ewu.json"
+    }
+  },
+  "note": "Data scraped from public website. For complete current data, use fiscal.wa.gov bulk download."
+}

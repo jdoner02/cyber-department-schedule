@@ -39,6 +39,7 @@ test.describe('Conflicts Page', () => {
     if (!(await noConflictsMessage.isVisible())) {
       // If conflicts exist, check for conflict details
       const conflictCard = page.locator('[class*="card"]').filter({ hasText: /conflict/i }).first();
+      await expect(conflictCard).toBeVisible();
 
       // Should show course information
       await expect(page.getByText(/cscd|cybr|math/i).first()).toBeVisible();

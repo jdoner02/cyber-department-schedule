@@ -6,7 +6,7 @@ import {
   BarChart3,
   FileText,
   Settings,
-  Shield,
+  GraduationCap,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
@@ -30,15 +30,7 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
   const { state } = useSchedule();
 
-  // Check if running locally (for secure features)
-  const isLocal =
-    typeof window !== 'undefined' &&
-    (window.location.hostname === 'localhost' ||
-      window.location.hostname === '127.0.0.1' ||
-      window.location.protocol === 'file:');
-
-  // Count conflicts (placeholder - will be implemented with conflict detection)
-  const conflictCount = 0;
+  const conflictCount = state.conflicts.length;
 
   const navItems: NavItem[] = [
     {
@@ -68,17 +60,12 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
       label: 'Documentation',
       icon: <FileText className="w-5 h-5" />,
     },
-  ];
-
-  // Add secure features if running locally
-  if (isLocal) {
-    navItems.push({
+    {
       path: '/students',
-      label: 'Students',
-      icon: <Shield className="w-5 h-5" />,
-      localOnly: true,
-    });
-  }
+      label: 'Advising',
+      icon: <GraduationCap className="w-5 h-5" />,
+    },
+  ];
 
   navItems.push({
     path: '/settings',

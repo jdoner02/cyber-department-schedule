@@ -1,0 +1,46 @@
+{
+  "sources": [
+    {
+      "id": "data-wa-gov",
+      "name": "Washington State Open Data Portal",
+      "url": "https://data.wa.gov",
+      "type": "api",
+      "format": "JSON via Socrata API",
+      "notes": "Primary source - uses SODA (Socrata Open Data API). Free, no authentication required for public datasets."
+    },
+    {
+      "id": "fiscal-wa-gov",
+      "name": "Washington State Fiscal Information",
+      "url": "https://fiscal.wa.gov/Staffing/Salaries",
+      "type": "download",
+      "format": "CSV/Excel",
+      "notes": "Official state source. Request download via email to leap@leg.wa.gov. Contains 5 years of data."
+    },
+    {
+      "id": "govsalaries",
+      "name": "GovSalaries.com",
+      "url": "https://govsalaries.com/state/WA",
+      "type": "scrape",
+      "format": "HTML",
+      "notes": "Third-party aggregator. UW has ~57,300 records, EWU has ~2,657 records. Use as backup/supplement."
+    }
+  ],
+  "legalBasis": "All salary data is public record under RCW 42.56.210 (Washington Public Records Act)",
+  "exclusions": [
+    "Names withheld for domestic violence victims",
+    "Employees requiring confidentiality",
+    "Some student employment data (FERPA protected)"
+  ],
+  "lastUpdated": "2026-01-01T05:54:34.249Z",
+  "version": "1.0.0",
+  "statistics": {
+    "UW": {
+      "totalRecords": 193891,
+      "afterDeduplication": 193876
+    },
+    "EWU": {
+      "totalRecords": 11197,
+      "afterDeduplication": 11197
+    }
+  }
+}

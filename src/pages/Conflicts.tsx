@@ -1,82 +1,29 @@
 import { useMemo } from 'react';
 import { AlertTriangle, CheckCircle, Clock, User, MapPin } from 'lucide-react';
-import { useCourses } from '../contexts/ScheduleContext';
+import { useSchedule, useScheduleLoading } from '../contexts/ScheduleContext';
 import { DAYS_OF_WEEK, formatTimeRange } from '../constants/timeSlots';
-import type { Course, DayOfWeek } from '../types/schedule';
-
-interface Conflict {
-  id: string;
-  type: 'instructor' | 'room';
-  course1: Course;
-  course2: Course;
-  day: DayOfWeek;
-  overlapStart: number;
-  overlapEnd: number;
-  description: string;
-}
+import {
+  getInstructorConflicts,
+  getRoomConflicts,
+} from '../services/conflictDetector';
 
 export default function Conflicts() {
-  const courses = useCourses();
+  const { state } = useSchedule();
+  const { loading, error } = useScheduleLoading();
 
-  // Detect conflicts
   const conflicts = useMemo(() => {
-    const detected: Conflict[] = [];
+    const dayIndex = Object.fromEntries(DAYS_OF_WEEK.map((d, i) => [d.key, i] as const));
+    return [...state.conflicts].sort((a, b) => {
+      const dayDelta = (dayIndex[a.day] ?? 99) - (dayIndex[b.day] ?? 99);
+      if (dayDelta !== 0) return dayDelta;
+      const timeDelta = a.overlapStart - b.overlapStart;
+      if (timeDelta !== 0) return timeDelta;
+      return a.type.localeCompare(b.type);
+    });
+  }, [state.conflicts]);
 
-    // Get courses with scheduled meetings
-    const scheduledCourses = courses.filter(
-      (c) => c.meetings.length > 0 && c.meetings.some((m) => m.startMinutes > 0)
-    );
-
-    // Check each pair
-    for (let i = 0; i < scheduledCourses.length; i++) {
-      for (let j = i + 1; j < scheduledCourses.length; j++) {
-        const course1 = scheduledCourses[i];
-        const course2 = scheduledCourses[j];
-
-        // Check instructor conflicts
-        if (
-          course1.instructor &&
-          course2.instructor &&
-          course1.instructor.email === course2.instructor.email
-        ) {
-          const overlap = findTimeOverlap(course1, course2);
-          if (overlap) {
-            detected.push({
-              id: `instructor-${course1.id}-${course2.id}-${overlap.day}`,
-              type: 'instructor',
-              course1,
-              course2,
-              day: overlap.day,
-              overlapStart: overlap.start,
-              overlapEnd: overlap.end,
-              description: `${course1.instructor.displayName} is scheduled for both courses at the same time`,
-            });
-          }
-        }
-
-        // Check room conflicts (same building and room)
-        const roomOverlap = findRoomOverlap(course1, course2);
-        if (roomOverlap) {
-          detected.push({
-            id: `room-${course1.id}-${course2.id}-${roomOverlap.day}`,
-            type: 'room',
-            course1,
-            course2,
-            day: roomOverlap.day,
-            overlapStart: roomOverlap.start,
-            overlapEnd: roomOverlap.end,
-            description: `Both courses are scheduled in ${roomOverlap.location} at the same time`,
-          });
-        }
-      }
-    }
-
-    return detected;
-  }, [courses]);
-
-  // Group conflicts by type
-  const instructorConflicts = conflicts.filter((c) => c.type === 'instructor');
-  const roomConflicts = conflicts.filter((c) => c.type === 'room');
+  const instructorConflicts = useMemo(() => getInstructorConflicts(conflicts), [conflicts]);
+  const roomConflicts = useMemo(() => getRoomConflicts(conflicts), [conflicts]);
 
   return (
     <div>
@@ -138,7 +85,18 @@ export default function Conflicts() {
       </div>
 
       {/* Conflict list */}
-      {conflicts.length === 0 ? (
+      {loading ? (
+        <div className="card p-12 text-center">
+          <p className="text-gray-600">Loading schedule data...</p>
+        </div>
+      ) : error ? (
+        <div className="card p-12 text-center">
+          <p className="text-red-700">{error}</p>
+          <p className="text-sm text-gray-500 mt-2">
+            Import a schedule JSON file from the header to run conflict detection.
+          </p>
+        </div>
+      ) : conflicts.length === 0 ? (
         <div className="card p-12 text-center">
           <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
           <h2 className="text-xl font-semibold text-gray-900 mb-2">No Conflicts Detected</h2>
@@ -209,61 +167,4 @@ export default function Conflicts() {
       )}
     </div>
   );
-}
-
-// Helper function to find time overlap between two courses
-function findTimeOverlap(
-  course1: Course,
-  course2: Course
-): { day: DayOfWeek; start: number; end: number } | null {
-  for (const m1 of course1.meetings) {
-    for (const m2 of course2.meetings) {
-      const commonDays = m1.days.filter((d) => m2.days.includes(d));
-
-      for (const day of commonDays) {
-        if (m1.startMinutes < m2.endMinutes && m2.startMinutes < m1.endMinutes) {
-          return {
-            day,
-            start: Math.max(m1.startMinutes, m2.startMinutes),
-            end: Math.min(m1.endMinutes, m2.endMinutes),
-          };
-        }
-      }
-    }
-  }
-  return null;
-}
-
-// Helper function to find room overlap
-function findRoomOverlap(
-  course1: Course,
-  course2: Course
-): { day: DayOfWeek; start: number; end: number; location: string } | null {
-  for (const m1 of course1.meetings) {
-    for (const m2 of course2.meetings) {
-      // Check if same room (both have building and room, and they match)
-      if (
-        m1.building &&
-        m1.room &&
-        m2.building &&
-        m2.room &&
-        m1.building === m2.building &&
-        m1.room === m2.room
-      ) {
-        const commonDays = m1.days.filter((d) => m2.days.includes(d));
-
-        for (const day of commonDays) {
-          if (m1.startMinutes < m2.endMinutes && m2.startMinutes < m1.endMinutes) {
-            return {
-              day,
-              start: Math.max(m1.startMinutes, m2.startMinutes),
-              end: Math.min(m1.endMinutes, m2.endMinutes),
-              location: `${m1.building} ${m1.room}`,
-            };
-          }
-        }
-      }
-    }
-  }
-  return null;
 }

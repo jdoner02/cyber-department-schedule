@@ -2,6 +2,9 @@ import { createContext, useContext, useReducer, useEffect, ReactNode } from 'rea
 import type { Course, BannerDataResponse } from '../types/schedule';
 import { parseScheduleData, getUniqueInstructors, getUniqueSubjects, getUniqueCampuses } from '../services/scheduleParser';
 import type { Instructor, SubjectCode, CampusType } from '../types/schedule';
+import { analyzeSchedule } from '../services/scheduleAnalysis';
+import type { Conflict } from '../services/conflictDetector';
+import type { StackedCourseInfo } from '../services/stackedCourseDetector';
 
 // State interface
 interface ScheduleState {
@@ -10,6 +13,8 @@ interface ScheduleState {
   error: string | null;
   lastUpdated: Date | null;
   dataSource: string;
+  conflicts: Conflict[];
+  stackedPairs: Map<string, StackedCourseInfo>;
   // Derived data
   instructors: Instructor[];
   subjects: SubjectCode[];
@@ -30,6 +35,8 @@ const initialState: ScheduleState = {
   error: null,
   lastUpdated: null,
   dataSource: '',
+  conflicts: [],
+  stackedPairs: new Map(),
   instructors: [],
   subjects: [],
   campuses: [],
@@ -42,7 +49,10 @@ function scheduleReducer(state: ScheduleState, action: ScheduleAction): Schedule
       return { ...state, loading: true, error: null };
 
     case 'LOAD_SUCCESS': {
-      const courses = action.payload.courses;
+      const analysis = analyzeSchedule(action.payload.courses, {
+        hideStackedVersions: true,
+      });
+      const courses = analysis.courses;
       return {
         ...state,
         courses,
@@ -50,6 +60,8 @@ function scheduleReducer(state: ScheduleState, action: ScheduleAction): Schedule
         error: null,
         lastUpdated: new Date(),
         dataSource: action.payload.source,
+        conflicts: analysis.conflicts,
+        stackedPairs: analysis.stackedPairs,
         instructors: getUniqueInstructors(courses),
         subjects: getUniqueSubjects(courses),
         campuses: getUniqueCampuses(courses),
@@ -147,50 +159,45 @@ export function ScheduleProvider({ children }: ScheduleProviderProps) {
 
   // Refresh data from current source
   const refreshData = async (): Promise<void> => {
-    if (state.dataSource && state.dataSource.startsWith('http')) {
-      await loadFromUrl(state.dataSource);
-    }
+    const source = state.dataSource;
+    if (!source) return;
+
+    // File imports store only a filename (not fetchable). Refresh only when source is fetchable.
+    const isFetchable = source.startsWith('http') || source.startsWith('/');
+    if (!isFetchable) return;
+
+    await loadFromUrl(source);
   };
 
   // Auto-load data on mount
   useEffect(() => {
     // Try to load from the public data folder
     const loadInitialData = async () => {
-      // First try the main data.json in the project root
-      try {
-        const response = await fetch('/data.json');
-        if (response.ok) {
-          const data: BannerDataResponse = await response.json();
-          const courses = parseScheduleData(data);
-          if (courses.length > 0) {
-            dispatch({
-              type: 'LOAD_SUCCESS',
-              payload: { courses, source: '/data.json' },
-            });
-            return;
-          }
-        }
-      } catch {
-        // Continue to try other sources
-      }
+      const basePath = import.meta.env.BASE_URL || '/';
+      const candidates = [
+        `${basePath}data/schedule.json`, // canonical location (matches Settings instructions)
+        `${basePath}data.json`, // backward-compatible fallback
+        '/data/schedule.json', // fallback for root deployments
+        '/data.json', // legacy fallback
+      ];
 
-      // Try the base path version for GitHub Pages
-      try {
-        const basePath = import.meta.env.BASE_URL || '/';
-        const response = await fetch(`${basePath}data.json`);
-        if (response.ok) {
+      for (const url of candidates) {
+        try {
+          const response = await fetch(url);
+          if (!response.ok) continue;
+
           const data: BannerDataResponse = await response.json();
           const courses = parseScheduleData(data);
-          if (courses.length > 0) {
-            dispatch({
-              type: 'LOAD_SUCCESS',
-              payload: { courses, source: `${basePath}data.json` },
-            });
-            return;
-          }
+          if (courses.length === 0) continue;
+
+          dispatch({
+            type: 'LOAD_SUCCESS',
+            payload: { courses, source: url },
+          });
+          return;
+        } catch {
+          // Try next candidate
         }
-      } catch {
-        // Continue
       }
 
       dispatch({

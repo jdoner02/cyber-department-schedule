@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EmployeeSalary",
+  "description": "Normalized employee salary record from Washington State public data",
+  "type": "object",
+  "required": ["id", "name", "employer", "employerFull", "position", "salary", "year", "source", "lastUpdated"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier (SHA-256 hash of name + employer + year)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Employee full name"
+    },
+    "employer": {
+      "type": "string",
+      "enum": ["UW", "EWU"],
+      "description": "Institution code"
+    },
+    "employerFull": {
+      "type": "string",
+      "description": "Full institution name"
+    },
+    "department": {
+      "type": "string",
+      "description": "Department or unit name (if available)"
+    },
+    "position": {
+      "type": "string",
+      "description": "Job title or position"
+    },
+    "salary": {
+      "type": "number",
+      "description": "Annual salary in USD, rounded to nearest $100"
+    },
+    "year": {
+      "type": "integer",
+      "description": "Calendar or fiscal year"
+    },
+    "source": {
+      "type": "string",
+      "description": "Data source identifier (e.g., 'data-wa-gov', 'govsalaries')"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when record was last updated"
+    }
+  }
+}

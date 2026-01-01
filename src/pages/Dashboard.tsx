@@ -1,13 +1,11 @@
 import { useMemo, useState } from 'react';
-import { useScheduleLoading, useCourses } from '../contexts/ScheduleContext';
+import { useSchedule, useScheduleLoading } from '../contexts/ScheduleContext';
 import { useFilteredCourses, useViewMode } from '../contexts/FilterContext';
 import MobileDayTabs from '../components/schedule/MobileDayTabs';
 import DayTimeline from '../components/schedule/DayTimeline';
 import CourseDetailModal from '../components/schedule/CourseDetailModal';
 import ConflictAlerts from '../components/executive/ConflictAlerts';
 import QuickInsights from '../components/executive/QuickInsights';
-import { detectAllConflicts, markCoursesWithConflicts } from '../services/conflictDetector';
-import { findStackedPairs, isStackedVersion } from '../services/stackedCourseDetector';
 import { Loader2, Calendar, Settings, Filter } from 'lucide-react';
 import type { Course, DayOfWeek } from '../types/schedule';
 
@@ -20,7 +18,7 @@ import type { Course, DayOfWeek } from '../types/schedule';
  */
 export default function Dashboard() {
   const { loading, error } = useScheduleLoading();
-  const allCourses = useCourses();
+  const { state } = useSchedule();
   const filteredCourses = useFilteredCourses();
   const { selectedDay, setSelectedDay } = useViewMode();
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
@@ -29,43 +27,7 @@ export default function Dashboard() {
   // Default to Monday if no day selected
   const currentDay: DayOfWeek = selectedDay || 'monday';
 
-  // Detect REAL conflicts (filtering out stacked courses and lab corequisites)
-  const { realConflicts, stackedPairs, coursesWithConflictMarks } = useMemo(() => {
-    // Find stacked course pairs first
-    const stacked = findStackedPairs(allCourses);
-
-    // Detect conflicts with smart filtering
-    const conflicts = detectAllConflicts(allCourses, {
-      hideStackedCourses: true,
-      hideLabCorequisites: true,
-    });
-
-    // Mark courses with conflicts for visual indication
-    const marked = markCoursesWithConflicts(allCourses, conflicts);
-
-    return {
-      realConflicts: conflicts,
-      stackedPairs: stacked,
-      coursesWithConflictMarks: marked,
-    };
-  }, [allCourses]);
-
-  // Filter courses and exclude stacked 500-level versions (show only base 400-level)
-  const displayCourses = useMemo(() => {
-    // Start with filtered courses
-    let courses = filteredCourses;
-
-    // Apply conflict marks
-    courses = courses.map(course => {
-      const marked = coursesWithConflictMarks.find(c => c.id === course.id);
-      return marked ? { ...course, hasConflicts: marked.hasConflicts } : course;
-    });
-
-    // Filter out stacked 500-level courses (keep the 400-level base)
-    courses = courses.filter(course => !isStackedVersion(course, stackedPairs));
-
-    return courses;
-  }, [filteredCourses, coursesWithConflictMarks, stackedPairs]);
+  const displayCourses = filteredCourses;
 
   // Calculate course counts per day for mobile tabs
   const courseCounts = useMemo(() => {
@@ -154,7 +116,7 @@ export default function Dashboard() {
 
       {/* Conflict Alerts - PRIORITY 1 */}
       <ConflictAlerts
-        conflicts={realConflicts}
+        conflicts={state.conflicts}
         onConflictTap={(conflict) => {
           // Could navigate to the conflict or expand details
           console.log('Conflict tapped:', conflict);
@@ -178,7 +140,7 @@ export default function Dashboard() {
           courses={displayCourses}
           selectedDay={currentDay}
           onCourseClick={setSelectedCourse}
-          stackedPairs={stackedPairs}
+          stackedPairs={state.stackedPairs}
         />
       </div>
 

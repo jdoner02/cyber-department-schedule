@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { AlertTriangle, StickyNote } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
 import type { Course, ColorByOption } from '../../types/schedule';
 import { SUBJECT_COLORS, DELIVERY_COLORS, getInstructorColor } from '../../constants/colors';
 import { formatTimeRange } from '../../constants/timeSlots';
@@ -87,13 +87,6 @@ export default function CourseBlock({
       {course.hasConflicts && (
         <div className="conflict-badge" title="Schedule conflict">
           <AlertTriangle className="w-2.5 h-2.5" />
-        </div>
-      )}
-
-      {/* Note indicator - placeholder */}
-      {false && (
-        <div className="note-indicator" title="Has notes">
-          <StickyNote className="w-2.5 h-2.5" />
         </div>
       )}
 

@@ -90,7 +90,6 @@ test.describe('Notes Page', () => {
     await page.getByRole('button', { name: /save note/i }).click();
 
     // Find and click edit button
-    const editButton = page.locator('button').filter({ has: page.locator('svg') }).filter({ hasText: '' }).first();
     const noteCard = page.locator('[class*="card"]').filter({ hasText: 'Original note content' });
     const noteEditButton = noteCard.locator('button[class*="ghost"]').first();
 

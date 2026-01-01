@@ -24,8 +24,7 @@ test.describe('Accessibility', () => {
     expect(h1Count).toBeGreaterThanOrEqual(1);
 
     // H2s should exist if there are sections
-    const h2Count = await page.locator('h2, h3').count();
-    // Just verify page structure exists
+    await page.locator('h2, h3').count();
   });
 
   test('should have alt text for images', async ({ page }) => {
@@ -72,10 +71,8 @@ test.describe('Accessibility', () => {
       });
 
       // Should have some form of focus indicator
-      const hasFocusIndicator =
-        styles.outline !== 'none' ||
-        styles.boxShadow !== 'none';
-      // Note: This is a basic check; focus indicators might be handled differently
+      const hasFocusIndicator = styles.outline !== 'none' || styles.boxShadow !== 'none';
+      expect(hasFocusIndicator).toBeTruthy();
     }
   });
 
@@ -87,7 +84,10 @@ test.describe('Accessibility', () => {
 
     // Look for skip link (if implemented)
     const skipLink = page.locator('a[href="#main"], [class*="skip"]');
-    // Skip link is optional but recommended
+    const skipLinkCount = await skipLink.count();
+    if (skipLinkCount > 0) {
+      await expect(skipLink.first()).toBeVisible();
+    }
   });
 
   test('should have accessible form labels', async ({ page }) => {
@@ -118,8 +118,8 @@ test.describe('Accessibility', () => {
         const ariaLabel = await button.getAttribute('aria-label');
         const title = await button.getAttribute('title');
 
-        const hasAccessibleName = (text && text.trim()) || ariaLabel || title;
-        // Buttons with only icons might use aria-label
+        const hasAccessibleName = Boolean((text && text.trim()) || ariaLabel || title);
+        expect(hasAccessibleName).toBeTruthy();
       }
     }
   });
@@ -164,7 +164,7 @@ test.describe('Accessibility', () => {
     await expect(headerText).toBeVisible();
   });
 
-  test('should work without JavaScript for basic content', async ({ page, browser }) => {
+  test('should work without JavaScript for basic content', async ({ page }) => {
     // This test verifies SSR/hydration if implemented
     // For SPA, at minimum the loading state should be accessible
     await page.goto('/');
@@ -179,7 +179,7 @@ test.describe('Accessibility', () => {
 
     // Check for aria-live regions if dynamic content is updated
     const liveRegions = page.locator('[aria-live]');
-    // Having live regions is good for accessibility but not strictly required
+    await liveRegions.count();
   });
 });
 

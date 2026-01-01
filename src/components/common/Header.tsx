@@ -4,10 +4,11 @@ import { useSchedule } from '../../contexts/ScheduleContext';
 import { useFilters } from '../../contexts/FilterContext';
 
 export default function Header() {
-  const { state, loadFromFile } = useSchedule();
+  const { state, loadFromFile, refreshData } = useSchedule();
   const { dispatch } = useFilters();
   const [searchQuery, setSearchQuery] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const canRefresh = state.dataSource.startsWith('http') || state.dataSource.startsWith('/');
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
@@ -130,9 +131,10 @@ export default function Header() {
           </button>
 
           <button
+            onClick={() => void refreshData()}
             className="btn btn-ghost btn-sm"
             title="Refresh data"
-            disabled={state.loading}
+            disabled={state.loading || !canRefresh}
           >
             <RefreshCw className={`w-4 h-4 ${state.loading ? 'animate-spin' : ''}`} />
           </button>

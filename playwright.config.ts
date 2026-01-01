@@ -11,11 +11,18 @@ export default defineConfig({
     ['json', { outputFile: 'test-results/results.json' }],
     process.env.CI ? ['github'] : ['list'],
   ],
+  // Output directory for test artifacts (screenshots, videos, traces)
+  outputDir: 'test-results',
   use: {
     baseURL: 'http://localhost:5173/cyber-department-schedule/',
     trace: 'on-first-retry',
+    // Keep screenshots for the faculty workflow tests
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    // Default viewport for consistent screenshots
+    viewport: { width: 1280, height: 800 },
+    // Slow down actions slightly for more stable screenshots
+    actionTimeout: 10000,
   },
   projects: [
     {

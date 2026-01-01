@@ -13,7 +13,16 @@
     "test:ci": "vitest run",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:install": "playwright install"
+    "test:e2e:install": "playwright install",
+    "test:e2e:workflow": "playwright test faculty-workflow.spec.ts --project=chromium",
+    "test:e2e:workflow:headed": "playwright test faculty-workflow.spec.ts --project=chromium --headed",
+    "test:e2e:workflow:mobile": "playwright test faculty-workflow.spec.ts --project='Mobile Chrome'",
+    "test:e2e:screenshots": "rm -rf test-results/screenshots && playwright test faculty-workflow.spec.ts --project=chromium && echo 'Screenshots saved to test-results/screenshots/'",
+    "scrape:catalog": "tsx scripts/scrape-catalog.ts",
+    "scrape:catalog:list": "tsx scripts/scrape-catalog.ts --list",
+    "fetch:salaries": "tsx scripts/fetch-data-wa-gov.ts",
+    "fetch:salaries:govsalaries": "tsx scripts/fetch-govsalaries.ts",
+    "process:salaries": "tsx scripts/process-salaries.ts"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
@@ -39,6 +48,7 @@
     "jsdom": "^27.4.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
+    "tsx": "^4.21.0",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.5",
