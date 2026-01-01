@@ -24,6 +24,26 @@ export interface ConflictDetectionOptions {
 }
 
 /**
+ * Check if two courses are the same course (different sections)
+ * e.g., CSCD 350.01 and CSCD 350.02 should not conflict
+ */
+function isSameCourse(course1: Course, course2: Course): boolean {
+  return course1.subject === course2.subject &&
+         course1.courseNumber === course2.courseNumber;
+}
+
+/**
+ * Check if a course has "Arranged" scheduling (no fixed meeting times)
+ * These courses should never appear in conflict detection
+ */
+function isArrangedCourse(course: Course): boolean {
+  // Check delivery method
+  if (course.delivery === 'Arranged') return true;
+  // Check if all meetings lack real time slots
+  return course.meetings.every(m => m.startMinutes === 0 || m.days.length === 0);
+}
+
+/**
  * Check if two courses appear to be lab corequisites
  * (lecture + lab taught by same instructor at overlapping/adjacent times)
  */
@@ -64,9 +84,11 @@ export function detectAllConflicts(
 ): Conflict[] {
   const conflicts: Conflict[] = [];
 
-  // Get courses with valid meeting times
+  // Get courses with valid meeting times (exclude arranged courses)
   const scheduledCourses = courses.filter(
-    (c) => c.meetings.length > 0 && c.meetings.some((m) => m.startMinutes > 0)
+    (c) => c.meetings.length > 0 &&
+           c.meetings.some((m) => m.startMinutes > 0) &&
+           !isArrangedCourse(c)
   );
 
   // Check each pair of courses
@@ -74,6 +96,11 @@ export function detectAllConflicts(
     for (let j = i + 1; j < scheduledCourses.length; j++) {
       const course1 = scheduledCourses[i];
       const course2 = scheduledCourses[j];
+
+      // Skip different sections of the same course (e.g., CSCD 350.01 vs 350.02)
+      if (isSameCourse(course1, course2)) {
+        continue;
+      }
 
       // Skip stacked courses (400/500 level pairs) if option enabled
       if (options.hideStackedCourses && isStackedPair(course1, course2)) {
