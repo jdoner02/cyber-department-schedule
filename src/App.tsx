@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ScheduleProvider } from './contexts/ScheduleContext';
+import { DraftScheduleProvider } from './contexts/DraftScheduleContext';
 import { FilterProvider } from './contexts/FilterContext';
 import { StudentProvider } from './contexts/StudentContext';
 import { AcademicCalendarProvider } from './contexts/AcademicCalendarContext';
@@ -20,8 +21,9 @@ function App() {
     <BrowserRouter basename={basePath}>
       <AcademicCalendarProvider>
         <ScheduleProvider>
-          <FilterProvider>
-            <StudentProvider>
+          <DraftScheduleProvider>
+            <FilterProvider>
+              <StudentProvider>
               <Routes>
                 <Route path="/" element={<Layout />}>
                   <Route index element={<Dashboard />} />
@@ -37,8 +39,9 @@ function App() {
               </Routes>
             </StudentProvider>
           </FilterProvider>
-        </ScheduleProvider>
-      </AcademicCalendarProvider>
+        </DraftScheduleProvider>
+      </ScheduleProvider>
+    </AcademicCalendarProvider>
     </BrowserRouter>
   );
 }

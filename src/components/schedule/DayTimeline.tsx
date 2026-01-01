@@ -1,11 +1,12 @@
 import { useMemo } from 'react';
-import { Clock, MapPin, User, AlertTriangle, Users, Layers, Info } from 'lucide-react';
+import { Clock, MapPin, User, AlertTriangle, Users, Layers, Info, X, Pencil, Trash2, Undo2 } from 'lucide-react';
 import type { Course, DayOfWeek } from '../../types/schedule';
 import type { StackedCourseInfo } from '../../services/stackedCourseDetector';
 import { SUBJECT_COLORS } from '../../constants/colors';
 import { minutesToDisplayTime, DAYS_OF_WEEK } from '../../constants/timeSlots';
 import { useAcademicCalendarEvents } from '../../contexts/AcademicCalendarContext';
 import { findRegistrationOpensEvent } from '../../services/academicCalendar';
+import { useEditMode, useDraft, useDraftActions } from '../../contexts/DraftScheduleContext';
 
 interface DayTimelineProps {
   courses: Course[];
@@ -34,6 +35,9 @@ export default function DayTimeline({
   stackedPairs,
 }: DayTimelineProps) {
   const calendarEvents = useAcademicCalendarEvents();
+  const { isEditMode } = useEditMode();
+  const { getCourseState } = useDraft();
+  const { cancelCourse, restoreCourse } = useDraftActions();
 
   // Get courses for selected day, sorted by start time
   const dayCourses = useMemo(() => {
@@ -133,17 +137,33 @@ export default function DayTimeline({
         // Check if this is a base course with a stacked pair
         const stackedInfo = stackedPairs?.get(course.crn);
 
+        // Get draft state for this course
+        const draftState = isEditMode ? getCourseState(course.id) : 'live';
+        const isModified = draftState === 'modified';
+        const isCancelled = draftState === 'cancelled';
+        const isAdded = draftState === 'added';
+
+        // Compute styles based on draft state
+        const cardClasses = [
+          'w-full text-left bg-white rounded-lg shadow-sm hover:shadow-md transition-all touch-target overflow-hidden',
+          isCancelled ? 'opacity-50' : '',
+          isModified ? 'border-2 border-dashed border-blue-400' : '',
+          isCancelled ? 'border-2 border-dashed border-red-400' : '',
+          isAdded ? 'border-2 border-dashed border-green-400' : '',
+          !isModified && !isCancelled && !isAdded ? 'border border-gray-200' : '',
+        ].filter(Boolean).join(' ');
+
         return (
           <button
             key={`${course.crn}-${index}`}
             onClick={() => onCourseClick(course)}
-            className="w-full text-left bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow touch-target overflow-hidden"
+            className={cardClasses}
             aria-label={`${course.displayCode}: ${course.title}`}
           >
             {/* Color accent bar at top */}
             <div
               className="h-1.5"
-              style={{ backgroundColor: colors.bg }}
+              style={{ backgroundColor: isCancelled ? '#9CA3AF' : colors.bg }}
             />
 
             <div className="p-3 sm:p-4">
@@ -155,23 +175,79 @@ export default function DayTimeline({
                     {minutesToDisplayTime(meeting.startMinutes)} - {minutesToDisplayTime(meeting.endMinutes)}
                   </span>
                 </div>
-                {course.hasConflicts && (
-                  <div className="flex items-center gap-1 text-red-600 text-xs font-medium">
-                    <AlertTriangle className="w-4 h-4" />
-                    <span>Conflict</span>
-                  </div>
-                )}
+                <div className="flex items-center gap-2">
+                  {course.hasConflicts && (
+                    <div className="flex items-center gap-1 text-red-600 text-xs font-medium">
+                      <AlertTriangle className="w-4 h-4" />
+                      <span>Conflict</span>
+                    </div>
+                  )}
+                  {/* Quick actions in edit mode */}
+                  {isEditMode && (
+                    <div className="flex items-center gap-1">
+                      <span
+                        role="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onCourseClick(course);
+                        }}
+                        className="p-1.5 rounded-md bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors"
+                        title="Edit course"
+                      >
+                        <Pencil className="w-3.5 h-3.5" />
+                      </span>
+                      <span
+                        role="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (isCancelled) {
+                            restoreCourse(course.id);
+                          } else {
+                            cancelCourse(course.id);
+                          }
+                        }}
+                        className={`p-1.5 rounded-md transition-colors ${
+                          isCancelled
+                            ? 'bg-green-50 text-green-600 hover:bg-green-100'
+                            : 'bg-red-50 text-red-600 hover:bg-red-100'
+                        }`}
+                        title={isCancelled ? 'Restore course' : 'Cancel course'}
+                      >
+                        {isCancelled ? <Undo2 className="w-3.5 h-3.5" /> : <Trash2 className="w-3.5 h-3.5" />}
+                      </span>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Course title row */}
               <div className="mb-2">
-                <h3 className="font-semibold text-gray-900 text-base">
-                  {course.displayCode}
-                  <span className="font-normal text-gray-500 text-sm ml-2">
-                    {course.section}
-                  </span>
-                </h3>
-                <p className="text-sm text-gray-600 line-clamp-1 mt-0.5">
+                <div className="flex items-center gap-2">
+                  <h3 className={`font-semibold text-base ${isCancelled ? 'line-through text-gray-500' : 'text-gray-900'}`}>
+                    {course.displayCode}
+                    <span className="font-normal text-gray-500 text-sm ml-2">
+                      {course.section}
+                    </span>
+                  </h3>
+                  {/* Draft state badges */}
+                  {isModified && (
+                    <span className="px-1.5 py-0.5 text-xs font-bold bg-blue-100 text-blue-700 rounded">
+                      MODIFIED
+                    </span>
+                  )}
+                  {isCancelled && (
+                    <span className="px-1.5 py-0.5 text-xs font-bold bg-red-100 text-red-700 rounded flex items-center gap-0.5">
+                      <X className="w-3 h-3" />
+                      CANCELLED
+                    </span>
+                  )}
+                  {isAdded && (
+                    <span className="px-1.5 py-0.5 text-xs font-bold bg-green-100 text-green-700 rounded">
+                      NEW
+                    </span>
+                  )}
+                </div>
+                <p className={`text-sm line-clamp-1 mt-0.5 ${isCancelled ? 'text-gray-400' : 'text-gray-600'}`}>
                   {course.title}
                 </p>
               </div>

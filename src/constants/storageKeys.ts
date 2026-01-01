@@ -5,4 +5,5 @@ export const STORAGE_KEYS = {
   scheduleSelectedTerm: 'ewu-cyber-schedule-selected-term',
   studentPersonas: 'ewu-student-personas',
   privacyReminderShown: 'ewu-privacy-reminder-shown',
+  draftSchedule: 'ewu-draft-schedule',
 } as const;

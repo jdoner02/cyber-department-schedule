@@ -1,13 +1,16 @@
 import { useMemo, useState } from 'react';
 import { useSchedule, useScheduleLoading } from '../contexts/ScheduleContext';
 import { useFilteredCourses, useFilteredConflicts, useViewMode } from '../contexts/FilterContext';
+import { useEditMode, useDraft } from '../contexts/DraftScheduleContext';
 import MobileDayTabs from '../components/schedule/MobileDayTabs';
 import DayTimeline from '../components/schedule/DayTimeline';
 import CourseDetailModal from '../components/schedule/CourseDetailModal';
+import CourseEditModal from '../components/whatif/CourseEditModal';
+import ChangesSummary from '../components/whatif/ChangesSummary';
 import ConflictAlerts from '../components/executive/ConflictAlerts';
 import QuickInsights from '../components/executive/QuickInsights';
 import AcademicCalendarCard from '../components/calendar/AcademicCalendarCard';
-import { Loader2, Calendar, Settings, Filter } from 'lucide-react';
+import { Loader2, Calendar, Settings, Filter, Eye, Pencil } from 'lucide-react';
 import type { Course, DayOfWeek } from '../types/schedule';
 import { formatTerm } from '../constants/academicTerms';
 
@@ -22,6 +25,8 @@ export default function Dashboard() {
   const filteredCourses = useFilteredCourses();
   const filteredConflicts = useFilteredConflicts();
   const { selectedDay, setSelectedDay } = useViewMode();
+  const { isEditMode, toggleEditMode } = useEditMode();
+  const { changeCount } = useDraft();
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [showFilters, setShowFilters] = useState(false);
 
@@ -111,6 +116,35 @@ export default function Dashboard() {
                 ))}
             </select>
           ) : null}
+          {/* Edit Mode Toggle */}
+          <button
+            onClick={toggleEditMode}
+            className={`
+              flex items-center gap-2 px-3 py-2 rounded-xl border transition-all touch-target
+              ${isEditMode
+                ? 'bg-blue-600 text-white border-blue-600 shadow-md'
+                : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+              }
+            `}
+            aria-label={isEditMode ? 'Exit edit mode' : 'Enter edit mode'}
+          >
+            {isEditMode ? (
+              <>
+                <Pencil className="w-4 h-4" />
+                <span className="text-sm font-medium hidden sm:inline">Editing</span>
+                {changeCount > 0 && (
+                  <span className="ml-1 px-1.5 py-0.5 text-xs font-bold bg-white text-blue-600 rounded-full">
+                    {changeCount}
+                  </span>
+                )}
+              </>
+            ) : (
+              <>
+                <Eye className="w-4 h-4" />
+                <span className="text-sm font-medium hidden sm:inline">View</span>
+              </>
+            )}
+          </button>
           <button
             onClick={() => setShowFilters(!showFilters)}
             className={`
@@ -173,12 +207,29 @@ export default function Dashboard() {
         />
       </div>
 
-      {/* Course detail modal */}
-      {selectedCourse && (
-        <CourseDetailModal
-          course={selectedCourse}
-          onClose={() => setSelectedCourse(null)}
+      {/* Changes Summary - only visible in edit mode */}
+      {isEditMode && (
+        <ChangesSummary
+          onCourseClick={(courseId) => {
+            const course = displayCourses.find((c) => c.id === courseId);
+            if (course) setSelectedCourse(course);
+          }}
         />
+      )}
+
+      {/* Course modals - show edit modal in edit mode, detail modal otherwise */}
+      {selectedCourse && (
+        isEditMode ? (
+          <CourseEditModal
+            course={selectedCourse}
+            onClose={() => setSelectedCourse(null)}
+          />
+        ) : (
+          <CourseDetailModal
+            course={selectedCourse}
+            onClose={() => setSelectedCourse(null)}
+          />
+        )
       )}
     </div>
   );
