@@ -1,10 +1,56 @@
-import React, { createContext, useContext, useReducer, ReactNode, useMemo } from 'react';
+import React, { createContext, useContext, useReducer, ReactNode, useMemo, useEffect } from 'react';
 import type { ScheduleFilters, SubjectCode, DayOfWeek, DeliveryMethod, CampusType, Course, ColorByOption } from '../types/schedule';
 import { useCourses } from './ScheduleContext';
 
-// Default filters
+// Storage keys
+const STORAGE_KEY = 'ewu-cyber-schedule-filters';
+const PRESETS_STORAGE_KEY = 'ewu-cyber-schedule-presets';
+
+// Quick filter presets
+export interface FilterPreset {
+  id: string;
+  name: string;
+  filters: Partial<ScheduleFilters>;
+  isBuiltIn?: boolean;
+}
+
+// Built-in presets
+const builtInPresets: FilterPreset[] = [
+  {
+    id: 'cyber-only',
+    name: 'CSCD & CYBR Only',
+    filters: { subjects: ['CSCD', 'CYBR'] },
+    isBuiltIn: true,
+  },
+  {
+    id: 'dr-steiner',
+    name: 'Dr. Steiner',
+    filters: { searchQuery: 'Steiner' },
+    isBuiltIn: true,
+  },
+  {
+    id: 'conflicts',
+    name: 'Show Conflicts',
+    filters: { showConflictsOnly: true },
+    isBuiltIn: true,
+  },
+  {
+    id: 'in-person',
+    name: 'In-Person Only',
+    filters: { delivery: ['F2F'] },
+    isBuiltIn: true,
+  },
+  {
+    id: 'online',
+    name: 'Online Only',
+    filters: { delivery: ['Online'] },
+    isBuiltIn: true,
+  },
+];
+
+// Default filters - start with CSCD and CYBR
 const defaultFilters: ScheduleFilters = {
-  subjects: [],
+  subjects: ['CSCD', 'CYBR'], // Default to department courses
   instructors: [],
   days: [],
   timeRange: { start: 7 * 60, end: 22 * 60 }, // 7 AM to 10 PM
@@ -20,6 +66,8 @@ interface FilterState {
   colorBy: ColorByOption;
   viewMode: 'week' | 'day' | 'list';
   selectedDay: DayOfWeek | null;
+  presets: FilterPreset[];
+  activePresetId: string | null;
 }
 
 // Action types
@@ -40,14 +88,58 @@ type FilterAction =
   | { type: 'SET_COLOR_BY'; payload: ColorByOption }
   | { type: 'SET_VIEW_MODE'; payload: 'week' | 'day' | 'list' }
   | { type: 'SET_SELECTED_DAY'; payload: DayOfWeek | null }
-  | { type: 'RESET_FILTERS' };
+  | { type: 'APPLY_PRESET'; payload: FilterPreset }
+  | { type: 'SAVE_PRESET'; payload: { name: string } }
+  | { type: 'DELETE_PRESET'; payload: string }
+  | { type: 'CLEAR_PRESET' }
+  | { type: 'RESET_FILTERS' }
+  | { type: 'LOAD_STATE'; payload: Partial<FilterState> };
+
+// Load state from localStorage
+function loadSavedState(): Partial<FilterState> {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      // Merge with defaults to handle new fields
+      return {
+        filters: { ...defaultFilters, ...parsed.filters },
+        colorBy: parsed.colorBy || 'subject',
+        viewMode: parsed.viewMode || 'week',
+        selectedDay: parsed.selectedDay || null,
+        activePresetId: parsed.activePresetId || null,
+      };
+    }
+  } catch (e) {
+    console.error('Failed to load filter state:', e);
+  }
+  return {};
+}
+
+// Load custom presets
+function loadCustomPresets(): FilterPreset[] {
+  try {
+    const saved = localStorage.getItem(PRESETS_STORAGE_KEY);
+    if (saved) {
+      return JSON.parse(saved);
+    }
+  } catch (e) {
+    console.error('Failed to load presets:', e);
+  }
+  return [];
+}
 
 // Initial state
+const savedState = loadSavedState();
+const customPresets = loadCustomPresets();
+
 const initialState: FilterState = {
-  filters: defaultFilters,
-  colorBy: 'subject',
-  viewMode: 'week',
-  selectedDay: null,
+  filters: savedState.filters || defaultFilters,
+  colorBy: savedState.colorBy || 'subject',
+  viewMode: savedState.viewMode || 'week',
+  selectedDay: savedState.selectedDay || null,
+  presets: [...builtInPresets, ...customPresets],
+  activePresetId: savedState.activePresetId || 'cyber-only', // Default to CSCD & CYBR preset
 };
 
 // Helper to toggle item in array
@@ -63,7 +155,11 @@ function toggleInArray<T>(array: T[], item: T): T[] {
 function filterReducer(state: FilterState, action: FilterAction): FilterState {
   switch (action.type) {
     case 'SET_SUBJECTS':
-      return { ...state, filters: { ...state.filters, subjects: action.payload } };
+      return {
+        ...state,
+        filters: { ...state.filters, subjects: action.payload },
+        activePresetId: null,
+      };
 
     case 'TOGGLE_SUBJECT':
       return {
@@ -72,10 +168,15 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
           ...state.filters,
           subjects: toggleInArray(state.filters.subjects, action.payload),
         },
+        activePresetId: null,
       };
 
     case 'SET_INSTRUCTORS':
-      return { ...state, filters: { ...state.filters, instructors: action.payload } };
+      return {
+        ...state,
+        filters: { ...state.filters, instructors: action.payload },
+        activePresetId: null,
+      };
 
     case 'TOGGLE_INSTRUCTOR':
       return {
@@ -84,10 +185,15 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
           ...state.filters,
           instructors: toggleInArray(state.filters.instructors, action.payload),
         },
+        activePresetId: null,
       };
 
     case 'SET_DAYS':
-      return { ...state, filters: { ...state.filters, days: action.payload } };
+      return {
+        ...state,
+        filters: { ...state.filters, days: action.payload },
+        activePresetId: null,
+      };
 
     case 'TOGGLE_DAY':
       return {
@@ -96,13 +202,22 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
           ...state.filters,
           days: toggleInArray(state.filters.days, action.payload),
         },
+        activePresetId: null,
       };
 
     case 'SET_TIME_RANGE':
-      return { ...state, filters: { ...state.filters, timeRange: action.payload } };
+      return {
+        ...state,
+        filters: { ...state.filters, timeRange: action.payload },
+        activePresetId: null,
+      };
 
     case 'SET_DELIVERY':
-      return { ...state, filters: { ...state.filters, delivery: action.payload } };
+      return {
+        ...state,
+        filters: { ...state.filters, delivery: action.payload },
+        activePresetId: null,
+      };
 
     case 'TOGGLE_DELIVERY':
       return {
@@ -111,10 +226,15 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
           ...state.filters,
           delivery: toggleInArray(state.filters.delivery, action.payload),
         },
+        activePresetId: null,
       };
 
     case 'SET_CAMPUS':
-      return { ...state, filters: { ...state.filters, campus: action.payload } };
+      return {
+        ...state,
+        filters: { ...state.filters, campus: action.payload },
+        activePresetId: null,
+      };
 
     case 'TOGGLE_CAMPUS':
       return {
@@ -123,13 +243,22 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
           ...state.filters,
           campus: toggleInArray(state.filters.campus, action.payload),
         },
+        activePresetId: null,
       };
 
     case 'SET_CONFLICTS_ONLY':
-      return { ...state, filters: { ...state.filters, showConflictsOnly: action.payload } };
+      return {
+        ...state,
+        filters: { ...state.filters, showConflictsOnly: action.payload },
+        activePresetId: null,
+      };
 
     case 'SET_SEARCH_QUERY':
-      return { ...state, filters: { ...state.filters, searchQuery: action.payload } };
+      return {
+        ...state,
+        filters: { ...state.filters, searchQuery: action.payload },
+        activePresetId: null,
+      };
 
     case 'SET_COLOR_BY':
       return { ...state, colorBy: action.payload };
@@ -140,8 +269,52 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
     case 'SET_SELECTED_DAY':
       return { ...state, selectedDay: action.payload };
 
+    case 'APPLY_PRESET': {
+      const preset = action.payload;
+      return {
+        ...state,
+        filters: { ...defaultFilters, ...preset.filters },
+        activePresetId: preset.id,
+      };
+    }
+
+    case 'SAVE_PRESET': {
+      const newPreset: FilterPreset = {
+        id: `custom-${Date.now()}`,
+        name: action.payload.name,
+        filters: { ...state.filters },
+        isBuiltIn: false,
+      };
+      const newPresets = [...state.presets, newPreset];
+      // Save custom presets to localStorage
+      const customOnly = newPresets.filter(p => !p.isBuiltIn);
+      localStorage.setItem(PRESETS_STORAGE_KEY, JSON.stringify(customOnly));
+      return {
+        ...state,
+        presets: newPresets,
+        activePresetId: newPreset.id,
+      };
+    }
+
+    case 'DELETE_PRESET': {
+      const newPresets = state.presets.filter(p => p.id !== action.payload);
+      const customOnly = newPresets.filter(p => !p.isBuiltIn);
+      localStorage.setItem(PRESETS_STORAGE_KEY, JSON.stringify(customOnly));
+      return {
+        ...state,
+        presets: newPresets,
+        activePresetId: state.activePresetId === action.payload ? null : state.activePresetId,
+      };
+    }
+
+    case 'CLEAR_PRESET':
+      return { ...state, activePresetId: null };
+
     case 'RESET_FILTERS':
-      return { ...state, filters: defaultFilters };
+      return { ...state, filters: defaultFilters, activePresetId: 'cyber-only' };
+
+    case 'LOAD_STATE':
+      return { ...state, ...action.payload };
 
     default:
       return state;
@@ -154,6 +327,9 @@ interface FilterContextValue {
   dispatch: React.Dispatch<FilterAction>;
   filteredCourses: Course[];
   activeFilterCount: number;
+  applyPreset: (preset: FilterPreset) => void;
+  saveCurrentAsPreset: (name: string) => void;
+  deletePreset: (id: string) => void;
 }
 
 // Create context
@@ -240,6 +416,18 @@ export function FilterProvider({ children }: FilterProviderProps) {
   const [state, dispatch] = useReducer(filterReducer, initialState);
   const courses = useCourses();
 
+  // Save state to localStorage whenever it changes
+  useEffect(() => {
+    const toSave = {
+      filters: state.filters,
+      colorBy: state.colorBy,
+      viewMode: state.viewMode,
+      selectedDay: state.selectedDay,
+      activePresetId: state.activePresetId,
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+  }, [state.filters, state.colorBy, state.viewMode, state.selectedDay, state.activePresetId]);
+
   // Compute filtered courses
   const filteredCourses = useMemo(() => {
     return applyFilters(courses, state.filters);
@@ -258,6 +446,19 @@ export function FilterProvider({ children }: FilterProviderProps) {
     return count;
   }, [state.filters]);
 
+  // Helper functions
+  const applyPreset = (preset: FilterPreset) => {
+    dispatch({ type: 'APPLY_PRESET', payload: preset });
+  };
+
+  const saveCurrentAsPreset = (name: string) => {
+    dispatch({ type: 'SAVE_PRESET', payload: { name } });
+  };
+
+  const deletePreset = (id: string) => {
+    dispatch({ type: 'DELETE_PRESET', payload: id });
+  };
+
   return (
     <FilterContext.Provider
       value={{
@@ -265,6 +466,9 @@ export function FilterProvider({ children }: FilterProviderProps) {
         dispatch,
         filteredCourses,
         activeFilterCount,
+        applyPreset,
+        saveCurrentAsPreset,
+        deletePreset,
       }}
     >
       {children}
@@ -302,5 +506,16 @@ export function useViewMode() {
     setViewMode: (value: 'week' | 'day' | 'list') => dispatch({ type: 'SET_VIEW_MODE', payload: value }),
     selectedDay: state.selectedDay,
     setSelectedDay: (value: DayOfWeek | null) => dispatch({ type: 'SET_SELECTED_DAY', payload: value }),
+  };
+}
+
+export function usePresets() {
+  const { state, applyPreset, saveCurrentAsPreset, deletePreset } = useFilters();
+  return {
+    presets: state.presets,
+    activePresetId: state.activePresetId,
+    applyPreset,
+    saveCurrentAsPreset,
+    deletePreset,
   };
 }
