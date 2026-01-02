@@ -3,9 +3,18 @@ import { Outlet } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import Header from './Header';
 import Sidebar from './Sidebar';
+import { useScheduleLoading } from '../../contexts/ScheduleContext';
 
 export default function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { loading, error } = useScheduleLoading();
+
+  // Determine status indicator
+  const statusConfig = error
+    ? { color: 'bg-red-500', text: 'Error loading' }
+    : loading
+      ? { color: 'bg-yellow-500 animate-pulse', text: 'Loading...' }
+      : { color: 'bg-green-500', text: 'Data loaded' };
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -52,8 +61,8 @@ export default function Layout() {
             <span className="sm:hidden">EWU Cyber Schedule</span>
             <span className="flex items-center gap-2 sm:gap-4">
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                <span className="hidden sm:inline">Data loaded</span>
+                <span className={`w-2 h-2 ${statusConfig.color} rounded-full`}></span>
+                <span className="hidden sm:inline">{statusConfig.text}</span>
               </span>
               <span>© {new Date().getFullYear()} EWU</span>
             </span>

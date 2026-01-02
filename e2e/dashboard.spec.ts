@@ -2,156 +2,167 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Dashboard - Schedule Grid', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
-    // Wait for data to load
-    await page.waitForSelector('[class*="WeeklyGrid"], [class*="schedule"]', {
-      timeout: 10000,
-    });
-  });
-
-  test('should display the main dashboard with schedule grid', async ({ page }) => {
-    // Check page title and header
-    await expect(page.locator('h1')).toContainText('Weekly Schedule');
-
-    // Check that day columns are visible
-    await expect(page.getByText('Monday')).toBeVisible();
-    await expect(page.getByText('Tuesday')).toBeVisible();
-    await expect(page.getByText('Wednesday')).toBeVisible();
-    await expect(page.getByText('Thursday')).toBeVisible();
-    await expect(page.getByText('Friday')).toBeVisible();
-  });
-
-  test('should display course blocks in the grid', async ({ page }) => {
-    // Wait for course blocks to load
+    await page.goto('./');
+    // Wait for the schedule overview to load
     await page.waitForTimeout(1000);
-
-    // Check that at least some course blocks are visible
-    const courseBlocks = page.locator('[class*="course-block"], [role="button"]');
-    await expect(courseBlocks.first()).toBeVisible({ timeout: 5000 });
   });
 
-  test('should show time labels on the left', async ({ page }) => {
-    // Check for time labels
-    await expect(page.getByText('8:00 AM')).toBeVisible();
-    await expect(page.getByText('12:00 PM')).toBeVisible();
+  test('should display the main dashboard with schedule overview', async ({ page }) => {
+    // Check page title and header
+    await expect(page.getByRole('heading', { name: /schedule overview/i })).toBeVisible();
+
+    // Check that day tabs are visible
+    await expect(page.getByRole('button', { name: /monday/i })).toBeVisible();
+    await expect(page.getByRole('button', { name: /tuesday/i })).toBeVisible();
+    await expect(page.getByRole('button', { name: /wednesday/i })).toBeVisible();
+    await expect(page.getByRole('button', { name: /thursday/i })).toBeVisible();
+    await expect(page.getByRole('button', { name: /friday/i })).toBeVisible();
   });
 
-  test('should display color legend', async ({ page }) => {
-    // Check that color legend is visible
-    const legend = page.locator('[class*="legend"], [class*="Legend"]');
-    await expect(legend.first()).toBeVisible({ timeout: 5000 });
+  test('should display course cards in the grid', async ({ page }) => {
+    // Check that at least some course cards are visible (they are buttons with aria-labels)
+    const courseCards = page.locator('button[aria-label*="CSCD"], button[aria-label*="CYBR"]');
+    await expect(courseCards.first()).toBeVisible({ timeout: 5000 });
+  });
+
+  test('should show time information on course cards', async ({ page }) => {
+    // Check for time labels on course cards
+    await expect(page.getByText(/\d+:\d+ [AP]M/i).first()).toBeVisible();
+  });
+
+  test('should display quick stats in sidebar', async ({ page }) => {
+    // Check that quick stats are visible
+    await expect(page.getByText('Total Courses')).toBeVisible();
+    await expect(page.getByText('CSCD').first()).toBeVisible();
+    await expect(page.getByText('CYBR').first()).toBeVisible();
   });
 
   test('should open course detail modal when clicking a course', async ({ page }) => {
-    // Find and click a course block
-    const courseBlock = page.locator('[class*="course-block"], [role="button"]').first();
-    await courseBlock.click();
+    // Find and click a course card
+    const courseCard = page.locator('button[aria-label*="CSCD"], button[aria-label*="CYBR"]').first();
+    await courseCard.click();
 
     // Modal should appear with course details
-    await expect(page.locator('[class*="modal"], [role="dialog"]')).toBeVisible({
-      timeout: 5000,
-    });
+    const modal = page.locator('[role="dialog"]');
+    await expect(modal).toBeVisible({ timeout: 5000 });
 
-    // Check for CRN label
-    await expect(page.getByText('CRN')).toBeVisible();
+    // Check for CRN label within the modal (to avoid matching course cards)
+    await expect(modal.getByText('CRN')).toBeVisible();
 
-    // Close the modal
-    const closeButton = page.locator('button[aria-label="Close modal"], button:has-text("Close")');
-    await closeButton.click();
+    // Close the modal by clicking close button or pressing Escape
+    await page.keyboard.press('Escape');
 
     // Modal should be closed
-    await expect(page.locator('[class*="modal-overlay"]')).not.toBeVisible();
+    await expect(page.locator('[role="dialog"]')).not.toBeVisible({ timeout: 3000 });
+  });
+
+  test('should navigate to notes page when clicking Add Note button', async ({ page }) => {
+    // Find and click a course card
+    const courseCard = page.locator('button[aria-label*="CSCD"], button[aria-label*="CYBR"]').first();
+    await courseCard.click();
+
+    // Modal should appear
+    const modal = page.locator('[role="dialog"]');
+    await expect(modal).toBeVisible({ timeout: 5000 });
+
+    // Click the Add Note button
+    await modal.getByRole('button', { name: /add note/i }).click();
+
+    // Should navigate to notes page
+    await expect(page).toHaveURL(/\/notes/);
+
+    // Notes form should be visible (auto-opened when coming from course modal)
+    await expect(page.getByText(/create new note/i)).toBeVisible({ timeout: 5000 });
   });
 });
 
-test.describe('Dashboard - Filters', () => {
+test.describe('Dashboard - Day Selection', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto('./');
     await page.waitForTimeout(1000);
   });
 
-  test('should toggle filter panel', async ({ page }) => {
-    // Click on Filters button
-    const filterButton = page.getByRole('button', { name: /filters/i });
-    await filterButton.click();
+  test('should switch between days', async ({ page }) => {
+    // Click Tuesday
+    await page.getByRole('button', { name: /tuesday/i }).click();
+    await page.waitForTimeout(300);
 
-    // Filter options should be visible
-    await expect(page.getByText('Subjects')).toBeVisible();
-    await expect(page.getByText('Days')).toBeVisible();
-    await expect(page.getByText('Delivery')).toBeVisible();
+    // Click Wednesday
+    await page.getByRole('button', { name: /wednesday/i }).click();
+    await page.waitForTimeout(300);
+
+    // The day tabs should still be visible
+    await expect(page.getByRole('button', { name: /monday/i })).toBeVisible();
   });
 
-  test('should filter by subject', async ({ page }) => {
-    // Expand filters
-    await page.getByRole('button', { name: /filters/i }).click();
-
-    // Click on CSCD subject filter
-    const cscdButton = page.getByRole('button', { name: 'CSCD' });
-    await cscdButton.click();
-
-    // Active filter badge should show
-    await expect(page.locator('[class*="badge"], .px-2.py-0\\.5')).toContainText('1');
+  test('should show course count badges on day tabs', async ({ page }) => {
+    // Day tabs should show course counts
+    const mondayTab = page.getByRole('button', { name: /monday/i });
+    await expect(mondayTab).toBeVisible();
+    // The tab should contain a number (course count)
+    await expect(mondayTab).toContainText(/\d+/);
   });
+});
 
-  test('should filter by day', async ({ page }) => {
-    // Expand filters
-    await page.getByRole('button', { name: /filters/i }).click();
-
-    // Click on Monday filter
-    const mondayButton = page.getByRole('button', { name: 'Mon' });
-    await mondayButton.click();
-
-    // Should show filtered results
-    await page.waitForTimeout(500);
-  });
-
-  test('should clear all filters', async ({ page }) => {
-    // Expand filters and apply some
-    await page.getByRole('button', { name: /filters/i }).click();
-    await page.getByRole('button', { name: 'CSCD' }).click();
-
-    // Click clear all
-    const clearButton = page.getByRole('button', { name: /clear all/i });
-    if (await clearButton.isVisible()) {
-      await clearButton.click();
-    }
+test.describe('Dashboard - Search', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('./');
+    await page.waitForTimeout(1000);
   });
 
   test('should search for courses', async ({ page }) => {
     // Find the search input in header
     const searchInput = page.getByPlaceholder(/search/i);
-    await searchInput.fill('CSCD');
+    await expect(searchInput).toBeVisible();
+
+    // Type in search
+    await searchInput.fill('CSCD 300');
 
     // Wait for filter to apply
     await page.waitForTimeout(500);
-  });
-
-  test('should change color by option', async ({ page }) => {
-    // Expand filters
-    await page.getByRole('button', { name: /filters/i }).click();
-
-    // Find the color by dropdown
-    const colorBySelect = page.locator('select').filter({ hasText: /color by/i });
-    if (await colorBySelect.isVisible()) {
-      await colorBySelect.selectOption('instructor');
-    }
   });
 });
 
 test.describe('Dashboard - Responsive Design', () => {
   test('should be responsive on mobile', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
-    await page.goto('/');
+    await page.goto('./');
+    await page.waitForTimeout(1000);
 
-    // Sidebar might be collapsed on mobile
-    // Main content should still be visible
-    await expect(page.locator('h1')).toBeVisible();
+    // Schedule overview heading should be visible
+    await expect(page.getByRole('heading', { name: /schedule overview/i })).toBeVisible();
   });
 
   test('should be responsive on tablet', async ({ page }) => {
     await page.setViewportSize({ width: 768, height: 1024 });
-    await page.goto('/');
+    await page.goto('./');
+    await page.waitForTimeout(1000);
 
-    await expect(page.locator('h1')).toBeVisible();
+    await expect(page.getByRole('heading', { name: /schedule overview/i })).toBeVisible();
+  });
+});
+
+test.describe('Dashboard - Header Actions', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('./');
+    await page.waitForTimeout(1000);
+  });
+
+  test('should display term selector', async ({ page }) => {
+    // Look for the term selector dropdown
+    const termSelector = page.getByRole('combobox', { name: /select term/i });
+    await expect(termSelector).toBeVisible();
+  });
+
+  test('should display action buttons', async ({ page }) => {
+    // Check for import, export, print, refresh buttons
+    await expect(page.getByText('Import')).toBeVisible();
+    await expect(page.getByText('Export')).toBeVisible();
+    await expect(page.getByText('Print')).toBeVisible();
+  });
+
+  test('should show course count in header', async ({ page }) => {
+    // Header should show course count
+    await expect(page.getByText(/\d+ courses loaded/i)).toBeVisible();
   });
 });

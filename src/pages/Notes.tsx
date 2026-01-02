@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { StickyNote, Plus, Search, Trash2, Edit2, Save, X, Tag } from 'lucide-react';
 import { useCourses } from '../contexts/ScheduleContext';
 import { STORAGE_KEYS } from '../constants/storageKeys';
@@ -22,6 +23,7 @@ const STORAGE_KEY = STORAGE_KEYS.scheduleNotes;
 
 export default function Notes() {
   const courses = useCourses();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [notes, setNotes] = useState<Note[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterPriority, setFilterPriority] = useState<string>('all');
@@ -34,6 +36,20 @@ export default function Notes() {
     attachedTo: 'general' as string,
     tags: '',
   });
+
+  // Handle course query param - auto-open new note form with course pre-selected
+  useEffect(() => {
+    const courseId = searchParams.get('course');
+    if (courseId && courses.length > 0) {
+      const course = courses.find((c) => c.id === courseId);
+      if (course) {
+        setNewNote((prev) => ({ ...prev, attachedTo: course.id }));
+        setShowNewNote(true);
+        // Clear the query param so refreshing doesn't re-trigger
+        setSearchParams({}, { replace: true });
+      }
+    }
+  }, [searchParams, courses, setSearchParams]);
 
   // Load notes from localStorage
   useEffect(() => {

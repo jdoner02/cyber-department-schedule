@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Info, Search } from 'lucide-react';
-import type { Course, DeliveryMethod, SubjectCode, DayOfWeek } from '../../types/schedule';
-import { DAYS_OF_WEEK, formatTimeRange } from '../../constants/timeSlots';
+import type { Course, DeliveryMethod, SubjectCode } from '../../types/schedule';
+import { formatTimeRange, formatDays } from '../../constants/timeSlots';
 import { DELIVERY_COLORS, SUBJECT_COLORS } from '../../constants/colors';
 import type { EnrollmentDataStatus } from '../../services/scheduleAnalytics';
 import DrilldownModal from '../common/DrilldownModal';
@@ -30,12 +30,6 @@ interface AnalyticsDrilldownModalProps {
   registrationDateLabel: string | null;
   isBeforeRegistration: boolean;
   onOpenCourse: (course: Course) => void;
-}
-
-function formatDays(days: DayOfWeek[]): string {
-  return days
-    .map((day) => DAYS_OF_WEEK.find((d) => d.key === day)?.short ?? day)
-    .join(', ');
 }
 
 function getCourseSearchText(course: Course): string {

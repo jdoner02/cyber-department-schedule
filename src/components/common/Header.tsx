@@ -5,6 +5,24 @@ import { useFilters } from '../../contexts/FilterContext';
 import { downloadJson } from '../../utils/download';
 import { formatTerm } from '../../constants/academicTerms';
 
+// Format lastUpdated to show date if not today, otherwise just time
+function formatLastUpdated(date: Date): string {
+  const now = new Date();
+  const isToday = date.toDateString() === now.toDateString();
+
+  if (isToday) {
+    return date.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+  }
+
+  // Show date and time for older updates
+  return date.toLocaleDateString(undefined, {
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit'
+  });
+}
+
 export default function Header() {
   const { state, loadFromFile, refreshData, availableTerms, selectedTermCode, selectTerm } = useSchedule();
   const { dispatch } = useFilters();
@@ -64,7 +82,7 @@ export default function Header() {
                 {state.lastUpdated && (
                   <span>
                     {' '}
-                    • Last updated {state.lastUpdated.toLocaleTimeString()}
+                    • Last updated {formatLastUpdated(state.lastUpdated)}
                   </span>
                 )}
               </p>

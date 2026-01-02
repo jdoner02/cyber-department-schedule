@@ -143,13 +143,13 @@ export default function PersonaCard({
         </div>
 
         {/* Meta info */}
-        <div className="mt-3 flex items-center gap-4 text-xs text-gray-400">
-          <div className="flex items-center gap-1">
-            <Calendar className="w-3.5 h-3.5" />
+        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-400">
+          <div className="flex items-center gap-1 whitespace-nowrap">
+            <Calendar className="w-3.5 h-3.5 flex-shrink-0" />
             <span>Started {formatTerm(persona.startTerm)}</span>
           </div>
-          <div className="flex items-center gap-1">
-            <GraduationCap className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-1 whitespace-nowrap">
+            <GraduationCap className="w-3.5 h-3.5 flex-shrink-0" />
             <span>Expected {formatTerm(persona.expectedGraduation)}</span>
           </div>
         </div>

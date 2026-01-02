@@ -53,8 +53,9 @@ export function isStackedPair(course1: Course, course2: Course): boolean {
   const levelDiff = Math.abs(level1 - level2);
   if (levelDiff !== 1) return false;
 
-  // At least one must be 400+ level
-  if (level1 < 4 && level2 < 4) return false;
+  // BOTH must be 400+ level for valid stacking (400/500 or 500/600 pairs only)
+  // This prevents incorrect stacking of 300/400 pairs like CYBR 303 + CYBR 403
+  if (level1 < 4 || level2 < 4) return false;
 
   return true;
 }
@@ -84,6 +85,15 @@ export function findStackedPairs(courses: Course[]): Map<string, StackedCourseIn
 
         // Skip if already processed
         if (processed.has(baseCourse.crn)) continue;
+
+        // Stacked courses must have the same instructor AND overlapping times
+        // to be truly cross-listed sections taught together
+        const sameInstructor = haveSameInstructor(baseCourse, stackedCourse);
+        const sameTime = hasTimeOverlap(baseCourse, stackedCourse);
+
+        // Only consider it a stacked pair if both conditions are met
+        if (!sameInstructor || !sameTime) continue;
+
         processed.add(baseCourse.crn);
 
         const info: StackedCourseInfo = {
@@ -93,8 +103,8 @@ export function findStackedPairs(courses: Course[]): Map<string, StackedCourseIn
           stackedLevel: getCourseLevel(stackedCourse.courseNumber),
           enrollmentDiff: stackedCourse.enrollment.current - baseCourse.enrollment.current,
           capacityDiff: stackedCourse.enrollment.maximum - baseCourse.enrollment.maximum,
-          sameInstructor: haveSameInstructor(baseCourse, stackedCourse),
-          sameTime: hasTimeOverlap(baseCourse, stackedCourse),
+          sameInstructor,
+          sameTime,
           sameRoom: haveSameRoom(baseCourse, stackedCourse),
         };
 

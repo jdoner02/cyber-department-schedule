@@ -2,20 +2,22 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Conflicts Page', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/conflicts');
+    await page.goto('./conflicts');
     await page.waitForTimeout(1000);
   });
 
   test('should display conflict detection page', async ({ page }) => {
-    await expect(page.locator('h1')).toContainText('Conflict');
-    await expect(page.getByText(/automatically detect/i)).toBeVisible();
+    // The main content h1 says "Conflict Detection"
+    await expect(page.getByRole('heading', { name: /conflict detection/i })).toBeVisible();
+    // Check for page description
+    await expect(page.getByText(/scheduling conflicts/i)).toBeVisible();
   });
 
   test('should show conflict summary cards', async ({ page }) => {
-    // Check for summary cards
-    await expect(page.getByText(/total conflicts/i)).toBeVisible();
-    await expect(page.getByText(/instructor conflicts/i)).toBeVisible();
-    await expect(page.getByText(/room conflicts/i)).toBeVisible();
+    // Check for summary cards (use .first() to avoid multiple matches)
+    await expect(page.getByText(/total conflicts/i).first()).toBeVisible();
+    await expect(page.getByText(/instructor conflicts/i).first()).toBeVisible();
+    await expect(page.getByText(/room conflicts/i).first()).toBeVisible();
   });
 
   test('should display conflict count', async ({ page }) => {

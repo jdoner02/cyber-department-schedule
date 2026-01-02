@@ -6,4 +6,5 @@ export const STORAGE_KEYS = {
   studentPersonas: 'ewu-student-personas',
   privacyReminderShown: 'ewu-privacy-reminder-shown',
   draftSchedule: 'ewu-draft-schedule',
+  appSettings: 'ewu-app-settings',
 } as const;

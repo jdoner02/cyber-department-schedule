@@ -8,7 +8,7 @@ import {
   YAxis,
   Tooltip,
 } from 'recharts';
-import { Loader2, TrendingUp, Search, Info } from 'lucide-react';
+import { Loader2, TrendingUp, Search, Info, Link2 } from 'lucide-react';
 import type { ScheduleTrendsDataset } from '../types/trends';
 import { loadScheduleTrendsFromPublic } from '../services/trends';
 import { formatTerm } from '../constants/academicTerms';
@@ -181,11 +181,6 @@ export default function Trends() {
   const selectedCourseMeta = useMemo(() => {
     if (!dataset || !selectedCourseCode) return null;
     return dataset.courses.find((c) => c.canonicalCourseCode === selectedCourseCode) ?? null;
-  }, [dataset, selectedCourseCode]);
-
-  const selectedCourseAliasEntry = useMemo(() => {
-    if (!dataset || !selectedCourseCode) return null;
-    return dataset.courseAliases.find((e) => e.canonicalCourseCode.toUpperCase() === selectedCourseCode.toUpperCase()) ?? null;
   }, [dataset, selectedCourseCode]);
 
   const courseMetricsByTerm = useMemo(() => {
@@ -465,14 +460,12 @@ export default function Trends() {
       <div className="card">
         <div className="card-header">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-	            <div>
-	              <h2 className="font-semibold text-gray-900">Course Trends (Canonical Identity)</h2>
-	              <p className="text-sm text-gray-600">
-	                Tracks a course across historical subject codes (e.g., <span className="font-medium">CSCD 330</span> →{' '}
-	                <span className="font-medium">CYBR 330</span>) using an explicit alias map.
-	              </p>
-	              <p className="text-xs text-gray-500 mt-1">Tip: click a point (or a term row) to drill down.</p>
-	            </div>
+            <div>
+              <h2 className="font-semibold text-gray-900">Course Trends</h2>
+              <p className="text-sm text-gray-600">
+                Track individual courses over time. <Link2 className="w-3.5 h-3.5 inline text-blue-500" /> indicates courses with historical aliases.
+              </p>
+            </div>
             <div className="flex flex-wrap items-center gap-2">
               <select
                 value={courseMetric}
@@ -497,7 +490,7 @@ export default function Trends() {
             <input
               value={courseQuery}
               onChange={(e) => setCourseQuery(e.target.value)}
-              placeholder="Search course code, alias, or title (e.g., “330”, “CSCD 330”, “NETWORKS”)"
+              placeholder="Search course code or title..."
               className="w-full pl-9 pr-3 py-2 rounded-lg border border-gray-300 text-sm"
             />
             {courseSearchResults.length > 0 && (
@@ -511,14 +504,15 @@ export default function Trends() {
                       setCourseQuery('');
                     }}
                   >
-                    <div className="text-sm font-medium text-gray-900">
-                      {course.canonicalCourseCode}{course.titles[0] ? ` — ${course.titles[0]}` : ''}
+                    <div className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
+                      {course.canonicalCourseCode}
+                      {course.aliases.length > 0 && (
+                        <span title={`Aliases: ${course.aliases.join(', ')}`}>
+                          <Link2 className="w-3.5 h-3.5 text-blue-500" />
+                        </span>
+                      )}
+                      {course.titles[0] ? <span className="font-normal text-gray-600">— {course.titles[0]}</span> : ''}
                     </div>
-                    {course.aliases.length > 0 && (
-                      <div className="text-xs text-gray-500 mt-0.5">
-                        Aliases: {course.aliases.join(', ')}
-                      </div>
-                    )}
                   </button>
                 ))}
               </div>
@@ -527,23 +521,24 @@ export default function Trends() {
 
           {/* Selected course summary */}
           {selectedCourseMeta && (
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-              <div className="flex items-start gap-3">
-                <Info className="w-5 h-5 text-gray-600 flex-shrink-0 mt-0.5" />
-                <div className="min-w-0">
-                  <div className="font-semibold text-gray-900">
-                    {selectedCourseMeta.canonicalCourseCode}
-                    {selectedCourseMeta.titles[0] ? ` — ${selectedCourseMeta.titles[0]}` : ''}
-                  </div>
+            <div className="flex items-center gap-3 px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg">
+              <div className="min-w-0 flex-1">
+                <div className="font-semibold text-gray-900 flex items-center gap-2">
+                  {selectedCourseMeta.canonicalCourseCode}
                   {selectedCourseMeta.aliases.length > 0 && (
-                    <div className="text-sm text-gray-700 mt-1">
-                      Historical / cross-listed codes: <span className="font-medium">{selectedCourseMeta.aliases.join(', ')}</span>
-                    </div>
+                    <span title={`Also known as: ${selectedCourseMeta.aliases.join(', ')}`}>
+                      <Link2 className="w-4 h-4 text-blue-500" />
+                    </span>
                   )}
-                  {selectedCourseAliasEntry?.notes && (
-                    <div className="text-sm text-gray-700 mt-1">{selectedCourseAliasEntry.notes}</div>
+                  {selectedCourseMeta.titles[0] && (
+                    <span className="font-normal text-gray-600">— {selectedCourseMeta.titles[0]}</span>
                   )}
                 </div>
+                {selectedCourseMeta.aliases.length > 0 && (
+                  <div className="text-xs text-gray-500 mt-1">
+                    Also tracked as: {selectedCourseMeta.aliases.join(', ')}
+                  </div>
+                )}
               </div>
             </div>
           )}

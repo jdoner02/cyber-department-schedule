@@ -1,9 +1,9 @@
 import { X, Clock, MapPin, User, Users, BookOpen, Calendar, Mail, StickyNote, Info } from 'lucide-react';
-import { useMemo } from 'react';
+import { useMemo, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import type { Course } from '../../types/schedule';
 import { SUBJECT_COLORS } from '../../constants/colors';
-import { formatTimeRange } from '../../constants/timeSlots';
-import { DAYS_OF_WEEK } from '../../constants/timeSlots';
+import { formatTimeRange, formatDays } from '../../constants/timeSlots';
 import { useAcademicCalendarEvents } from '../../contexts/AcademicCalendarContext';
 import { findRegistrationOpensEvent } from '../../services/academicCalendar';
 
@@ -13,6 +13,7 @@ interface CourseDetailModalProps {
 }
 
 export default function CourseDetailModal({ course, onClose }: CourseDetailModalProps) {
+  const navigate = useNavigate();
   const colors = SUBJECT_COLORS[course.subject];
   const calendarEvents = useAcademicCalendarEvents();
 
@@ -41,13 +42,6 @@ export default function CourseDetailModal({ course, onClose }: CourseDetailModal
   const isEnrollmentLikelyUnavailable =
     course.enrollment.current === 0 && isBeforeRegistration && registrationDateLabel !== null;
 
-  // Format days for display
-  const formatDays = (days: Course['meetings'][0]['days']) => {
-    return days
-      .map((day) => DAYS_OF_WEEK.find((d) => d.key === day)?.short || day)
-      .join(', ');
-  };
-
   // Calculate enrollment status
   const enrollmentStatus = () => {
     if (isEnrollmentLikelyUnavailable) {
@@ -63,6 +57,23 @@ export default function CourseDetailModal({ course, onClose }: CourseDetailModal
 
   const status = enrollmentStatus();
 
+  // Handle Escape key to close modal
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    },
+    [onClose]
+  );
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
   return (
     <div
       className="modal-overlay z-50 animate-fade-in"
@@ -70,7 +81,13 @@ export default function CourseDetailModal({ course, onClose }: CourseDetailModal
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="modal-content animate-slide-in" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="modal-content animate-slide-in"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="course-modal-title"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Header */}
         <div
           className="modal-header"
@@ -88,7 +105,7 @@ export default function CourseDetailModal({ course, onClose }: CourseDetailModal
                 {status.label}
               </span>
             </div>
-            <h2 className="text-xl font-bold text-gray-900 mt-1">
+            <h2 id="course-modal-title" className="text-xl font-bold text-gray-900 mt-1">
               {course.displayCode} - Section {course.section}
             </h2>
             <p className="text-gray-600">{course.title}</p>
@@ -252,7 +269,13 @@ export default function CourseDetailModal({ course, onClose }: CourseDetailModal
           <button onClick={onClose} className="btn btn-secondary">
             Close
           </button>
-          <button className="btn btn-primary flex items-center gap-2">
+          <button
+            onClick={() => {
+              onClose();
+              navigate(`/notes?course=${encodeURIComponent(course.id)}`);
+            }}
+            className="btn btn-primary flex items-center gap-2"
+          >
             <StickyNote className="w-4 h-4" />
             Add Note
           </button>

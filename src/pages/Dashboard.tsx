@@ -10,7 +10,7 @@ import ChangesSummary from '../components/whatif/ChangesSummary';
 import ConflictAlerts from '../components/executive/ConflictAlerts';
 import QuickInsights from '../components/executive/QuickInsights';
 import AcademicCalendarCard from '../components/calendar/AcademicCalendarCard';
-import { Loader2, Calendar, Settings, Filter, Eye, Pencil } from 'lucide-react';
+import { Loader2, Calendar, Eye, Pencil } from 'lucide-react';
 import type { Course, DayOfWeek } from '../types/schedule';
 import { formatTerm } from '../constants/academicTerms';
 
@@ -28,7 +28,6 @@ export default function Dashboard() {
   const { isEditMode, toggleEditMode } = useEditMode();
   const { changeCount } = useDraft();
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
-  const [showFilters, setShowFilters] = useState(false);
 
   // Default to Monday if no day selected
   const currentDay: DayOfWeek = selectedDay || 'monday';
@@ -145,41 +144,15 @@ export default function Dashboard() {
               </>
             )}
           </button>
-          <button
-            onClick={() => setShowFilters(!showFilters)}
-            className={`
-              p-2.5 rounded-xl border transition-colors touch-target
-              ${showFilters
-                ? 'bg-ewu-red text-white border-ewu-red'
-                : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'
-              }
-            `}
-            aria-label="Toggle filters"
-          >
-            <Filter className="w-5 h-5" />
-          </button>
         </div>
       </div>
-
-      {/* Filters panel - collapsible */}
-      {showFilters && (
-        <div className="bg-gray-50 rounded-2xl p-4 border border-gray-200">
-          <div className="flex items-center gap-2 mb-3">
-            <Settings className="w-4 h-4 text-gray-500" />
-            <span className="text-sm font-medium text-gray-700">Filters</span>
-          </div>
-          <p className="text-sm text-gray-500">
-            Use the sidebar navigation to access detailed filters and settings.
-          </p>
-        </div>
-      )}
 
       {/* Conflict Alerts - PRIORITY 1 (filtered to match current subject filter) */}
       <ConflictAlerts
         conflicts={filteredConflicts}
         onConflictTap={(conflict) => {
-          // Could navigate to the conflict or expand details
-          console.log('Conflict tapped:', conflict);
+          // Navigate to the day where the conflict occurs
+          setSelectedDay(conflict.day);
         }}
       />
 

@@ -12,13 +12,31 @@ import {
   Copy,
   Check,
   HardDrive,
+  Filter,
+  GraduationCap,
+  Layers,
+  Bug,
 } from 'lucide-react';
 import { useSchedule } from '../contexts/ScheduleContext';
+import { useAppSettings } from '../contexts/AppSettingsContext';
 import { STORAGE_KEYS } from '../constants/storageKeys';
 import { downloadJson } from '../utils/download';
+import { CATALOG_PROGRAMS } from '../constants/catalogPrograms';
+import type { SubjectCode } from '../types/schedule';
+
+// Available subjects that can be toggled
+const AVAILABLE_SUBJECTS: { code: SubjectCode; name: string; description: string }[] = [
+  { code: 'CSCD', name: 'Computer Science', description: 'CSCD courses' },
+  { code: 'CYBR', name: 'Cybersecurity', description: 'CYBR courses' },
+  { code: 'MATH', name: 'Mathematics', description: 'MATH courses (for prerequisites)' },
+];
+
+// Programs available for filtering
+const ADVISING_PROGRAMS = CATALOG_PROGRAMS.filter((p) => p.includeInAdvising !== false);
 
 export default function Settings() {
   const { state, loadFromFile } = useSchedule();
+  const { settings, toggleSubject, setProgramFilter, setShowStackedVersions, resetSettings } = useAppSettings();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [copiedText, setCopiedText] = useState<string | null>(null);
@@ -58,12 +76,14 @@ export default function Settings() {
   };
 
   const handleClearLocalData = () => {
-    localStorage.removeItem(STORAGE_KEYS.scheduleNotes);
-    localStorage.removeItem(STORAGE_KEYS.scheduleFilters);
-    localStorage.removeItem(STORAGE_KEYS.schedulePresets);
-    localStorage.removeItem(STORAGE_KEYS.studentPersonas);
+    // Clear ALL localStorage keys (not just a subset)
+    Object.values(STORAGE_KEYS).forEach((key) => {
+      localStorage.removeItem(key);
+    });
     setShowClearConfirm(false);
-    window.location.reload();
+    // Navigate to root instead of reload to avoid 404 on GitHub Pages SPA routing
+    const basePath = import.meta.env.BASE_URL || '/';
+    window.location.href = window.location.origin + basePath;
   };
 
   const copyToClipboard = (text: string, id: string) => {
@@ -204,6 +224,171 @@ export default function Settings() {
                   </button>
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+
+        {/* Schedule Filtering */}
+        <div className="card">
+          <div className="card-header">
+            <div className="flex items-center gap-3">
+              <Filter className="w-5 h-5 text-gray-600" />
+              <h2 className="font-semibold text-gray-900">Schedule Filtering</h2>
+            </div>
+          </div>
+          <div className="card-body space-y-6">
+            {/* Subject Visibility */}
+            <div>
+              <h3 className="font-medium text-gray-900 mb-3 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-ewu-red"></span>
+                Visible Subjects
+              </h3>
+              <p className="text-sm text-gray-600 mb-4">
+                Choose which course subjects to display throughout the dashboard. At least one subject must be selected.
+              </p>
+              <div className="space-y-3">
+                {AVAILABLE_SUBJECTS.map((subject) => {
+                  const isEnabled = settings.visibleSubjects.includes(subject.code);
+                  const isOnlyOne = settings.visibleSubjects.length === 1 && isEnabled;
+
+                  return (
+                    <label
+                      key={subject.code}
+                      className={`flex items-center gap-4 p-3 rounded-lg border transition-all cursor-pointer ${
+                        isEnabled
+                          ? 'bg-blue-50 border-blue-200'
+                          : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
+                      } ${isOnlyOne ? 'opacity-75' : ''}`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={isEnabled}
+                        onChange={() => toggleSubject(subject.code)}
+                        disabled={isOnlyOne}
+                        className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      />
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium text-gray-900">{subject.code}</span>
+                          <span className="text-gray-600">-</span>
+                          <span className="text-gray-700">{subject.name}</span>
+                        </div>
+                        <p className="text-sm text-gray-500">{subject.description}</p>
+                      </div>
+                      {isEnabled && (
+                        <span className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded">
+                          Visible
+                        </span>
+                      )}
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Program Filter */}
+            <div className="pt-4 border-t border-gray-200">
+              <h3 className="font-medium text-gray-900 mb-3 flex items-center gap-2">
+                <GraduationCap className="w-4 h-4 text-gray-600" />
+                Program Filter
+              </h3>
+              <p className="text-sm text-gray-600 mb-4">
+                Optionally filter courses to only show those that are part of a specific degree program.
+                This helps focus on courses relevant to a particular major or minor.
+              </p>
+              <select
+                value={settings.programFilter || ''}
+                onChange={(e) => setProgramFilter(e.target.value || null)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+              >
+                <option value="">All Courses (no program filter)</option>
+                <optgroup label="Bachelor's Degrees">
+                  {ADVISING_PROGRAMS.filter((p) => p.degreeType === 'BS' || p.degreeType === 'BCS').map((program) => (
+                    <option key={program.slug} value={program.slug}>
+                      {program.name}
+                    </option>
+                  ))}
+                </optgroup>
+                <optgroup label="Master's Degrees">
+                  {ADVISING_PROGRAMS.filter((p) => p.degreeType === 'MS').map((program) => (
+                    <option key={program.slug} value={program.slug}>
+                      {program.name}
+                    </option>
+                  ))}
+                </optgroup>
+                <optgroup label="Minors">
+                  {ADVISING_PROGRAMS.filter((p) => p.degreeType === 'Minor').map((program) => (
+                    <option key={program.slug} value={program.slug}>
+                      {program.name}
+                    </option>
+                  ))}
+                </optgroup>
+              </select>
+              {settings.programFilter && (
+                <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                  <p className="text-sm text-amber-800">
+                    <strong>Program filter active:</strong> Only courses that are part of the selected program
+                    will be shown. This filter is applied across all dashboard views.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Debug Options */}
+            <div className="pt-4 border-t border-gray-200">
+              <h3 className="font-medium text-gray-900 mb-3 flex items-center gap-2">
+                <Bug className="w-4 h-4 text-gray-600" />
+                Debug Options
+              </h3>
+              <p className="text-sm text-gray-600 mb-4">
+                Advanced options for inspecting and validating schedule data.
+              </p>
+
+              <label className="flex items-center gap-4 p-3 rounded-lg border border-gray-200 bg-gray-50 hover:bg-gray-100 cursor-pointer transition-all">
+                <input
+                  type="checkbox"
+                  checked={settings.showStackedVersions}
+                  onChange={(e) => setShowStackedVersions(e.target.checked)}
+                  className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                />
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <Layers className="w-4 h-4 text-indigo-600" />
+                    <span className="font-medium text-gray-900">Show Stacked Versions</span>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Display 500-level cross-listed courses separately instead of merging with 400-level.
+                    Enable this to inspect all course sections individually.
+                  </p>
+                </div>
+                {settings.showStackedVersions && (
+                  <span className="px-2 py-1 text-xs font-medium bg-indigo-100 text-indigo-700 rounded">
+                    Active
+                  </span>
+                )}
+              </label>
+
+              {settings.showStackedVersions && (
+                <div className="mt-3 p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+                  <p className="text-sm text-indigo-800">
+                    <strong>Debug mode active:</strong> All courses are displayed separately, including
+                    500-level sections that are normally merged with their 400-level equivalents.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Reset Button */}
+            <div className="pt-4 border-t border-gray-200">
+              <button
+                onClick={resetSettings}
+                className="btn btn-secondary text-sm"
+              >
+                Reset to Defaults
+              </button>
+              <p className="text-xs text-gray-500 mt-2">
+                Resets subject visibility to CSCD & CYBR only and clears the program filter.
+              </p>
             </div>
           </div>
         </div>

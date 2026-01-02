@@ -2,29 +2,31 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Analytics Page', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/analytics');
+    await page.goto('./analytics');
     await page.waitForTimeout(1000);
   });
 
   test('should display analytics dashboard', async ({ page }) => {
-    await expect(page.locator('h1')).toContainText('Analytics');
-    await expect(page.getByText(/comprehensive.*analytics/i)).toBeVisible();
+    // The main content h1 says "Analytics Dashboard"
+    await expect(page.getByRole('heading', { name: /analytics dashboard/i })).toBeVisible();
+    // Check for term information
+    await expect(page.getByText(/term:/i)).toBeVisible();
   });
 
   test('should show summary cards', async ({ page }) => {
-    // Check for summary statistics cards
-    await expect(page.getByText(/courses/i).first()).toBeVisible();
-    await expect(page.getByText(/enrolled/i).first()).toBeVisible();
-    await expect(page.getByText(/capacity/i).first()).toBeVisible();
+    // Check for summary statistics in the main section (using exact matches to avoid duplicates)
+    const main = page.locator('main');
+    await expect(main.locator('div').filter({ hasText: /^Courses$/ }).first()).toBeVisible();
+    await expect(main.locator('div').filter({ hasText: /^Seats Filled$/ }).first()).toBeVisible();
+    await expect(main.locator('div').filter({ hasText: /^Seats Offered$/ }).first()).toBeVisible();
   });
 
   test('should display enrollment chart', async ({ page }) => {
-    // Look for chart container
-    const chartSection = page.locator('[class*="card"]').filter({ hasText: /enrollment/i });
-    await expect(chartSection.first()).toBeVisible();
+    // Chart title is "Seats Filled vs Remaining by Subject"
+    await expect(page.getByText(/seats filled vs remaining/i)).toBeVisible();
 
-    // Recharts creates SVG elements
-    await expect(page.locator('svg').first()).toBeVisible();
+    // Recharts creates SVG elements - wait for any img (Recharts uses role=img for SVG)
+    await expect(page.locator('[role="img"]').first()).toBeVisible({ timeout: 10000 });
   });
 
   test('should display faculty workload chart', async ({ page }) => {
@@ -65,22 +67,22 @@ test.describe('Analytics Page', () => {
     await expect(table.getByText('CYBR')).toBeVisible();
   });
 
-  test('should show utilization percentages', async ({ page }) => {
-    // Look for percentage values in the table
-    const utilColumn = page.getByRole('columnheader', { name: /utilization/i });
-    await expect(utilColumn).toBeVisible();
+  test('should show fill rate percentages', async ({ page }) => {
+    // Look for Fill Rate column header
+    const fillRateColumn = page.getByRole('columnheader', { name: /fill rate/i });
+    await expect(fillRateColumn).toBeVisible();
 
-    // There should be percentage values
+    // There should be percentage values in the table
     const percentages = page.locator('td').filter({ hasText: /%/ });
     await expect(percentages.first()).toBeVisible();
   });
 
-  test('should have interactive chart tooltips', async ({ page }) => {
-    // Hover over a chart to trigger tooltip
-    const chart = page.locator('svg').first();
-    await chart.hover();
+  test('should have chart elements', async ({ page }) => {
+    // Verify charts are rendered (Recharts uses role=img for SVG)
+    const chartImages = page.locator('[role="img"]');
+    await expect(chartImages.first()).toBeVisible({ timeout: 10000 });
 
-    // Wait a bit for tooltip
-    await page.waitForTimeout(500);
+    // Verify at least one chart exists
+    expect(await chartImages.count()).toBeGreaterThan(0);
   });
 });

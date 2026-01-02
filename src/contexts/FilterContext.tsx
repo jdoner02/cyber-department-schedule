@@ -1,9 +1,13 @@
-import React, { createContext, useContext, useReducer, ReactNode, useMemo, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, ReactNode, useMemo, useEffect, useState } from 'react';
 import type { ScheduleFilters, SubjectCode, DayOfWeek, DeliveryMethod, CampusType, Course, ColorByOption } from '../types/schedule';
 import { useCourses, useSchedule } from './ScheduleContext';
+import { useAppSettings } from './AppSettingsContext';
 import { STORAGE_KEYS } from '../constants/storageKeys';
 import type { Conflict } from '../services/conflictDetector';
 import { SCHEDULE_END_HOUR, SCHEDULE_START_HOUR } from '../constants/timeSlots';
+import { loadProgram, getAllProgramCourses } from '../services/catalogParser';
+import type { DegreeProgram } from '../types/advising';
+import { isStackedVersion } from '../services/stackedCourseDetector';
 
 // Storage keys
 const STORAGE_KEY = STORAGE_KEYS.scheduleFilters;
@@ -446,6 +450,33 @@ function countActiveFilters(filters: ScheduleFilters): number {
 export function FilterProvider({ children }: FilterProviderProps) {
   const [state, dispatch] = useReducer(filterReducer, initialState);
   const courses = useCourses();
+  const { settings } = useAppSettings();
+
+  // State for loaded program data (for program filtering)
+  // loadedProgram is kept for potential future use (e.g., showing program name)
+  const [_loadedProgram, setLoadedProgram] = useState<DegreeProgram | null>(null);
+  const [programCourseSet, setProgramCourseSet] = useState<Set<string>>(new Set());
+
+  // Load program data when programFilter changes
+  useEffect(() => {
+    if (settings.programFilter) {
+      loadProgram(settings.programFilter).then((program) => {
+        setLoadedProgram(program);
+        if (program) {
+          // Build a set of course codes in this program (e.g., "CSCD 210", "CYBR 101")
+          const courseCodes = getAllProgramCourses(program).map((c) =>
+            c.courseCode.toUpperCase().replace(/\s+/g, ' ')
+          );
+          setProgramCourseSet(new Set(courseCodes));
+        } else {
+          setProgramCourseSet(new Set());
+        }
+      });
+    } else {
+      setLoadedProgram(null);
+      setProgramCourseSet(new Set());
+    }
+  }, [settings.programFilter]);
 
   // Save state to localStorage whenever it changes
   useEffect(() => {
@@ -473,10 +504,43 @@ export function FilterProvider({ children }: FilterProviderProps) {
     }
   }, [state.presets]);
 
-  // Compute filtered courses
+  // Get stackedPairs from schedule state for filtering
+  const { state: scheduleState } = useSchedule();
+  const stackedPairs = scheduleState.stackedPairs;
+
+  // Pre-filter courses based on app settings (visible subjects, program filter, stacked versions)
+  const settingsFilteredCourses = useMemo(() => {
+    let filtered = courses;
+
+    // Filter by visible subjects from app settings
+    if (settings.visibleSubjects.length > 0) {
+      filtered = filtered.filter((course) =>
+        settings.visibleSubjects.includes(course.subject)
+      );
+    }
+
+    // Filter by program if set and loaded
+    if (settings.programFilter && programCourseSet.size > 0) {
+      filtered = filtered.filter((course) => {
+        // Build the course code in the same format as program data
+        const courseCode = `${course.subject} ${course.courseNumber}`.toUpperCase();
+        return programCourseSet.has(courseCode);
+      });
+    }
+
+    // Hide 500-level stacked versions unless showStackedVersions is enabled
+    // This prevents duplicate display of cross-listed courses like CSCD 475 + CSCD 575
+    if (!settings.showStackedVersions) {
+      filtered = filtered.filter((course) => !isStackedVersion(course, stackedPairs));
+    }
+
+    return filtered;
+  }, [courses, settings.visibleSubjects, settings.programFilter, programCourseSet, settings.showStackedVersions, stackedPairs]);
+
+  // Compute filtered courses (apply regular filters on top of settings-filtered courses)
   const filteredCourses = useMemo(() => {
-    return applyFilters(courses, state.filters);
-  }, [courses, state.filters]);
+    return applyFilters(settingsFilteredCourses, state.filters);
+  }, [settingsFilteredCourses, state.filters]);
 
   // Count active filters
   const activeFilterCount = useMemo(() => {

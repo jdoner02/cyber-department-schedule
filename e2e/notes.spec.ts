@@ -2,12 +2,14 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Notes Page', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/notes');
+    await page.goto('./notes');
     await page.waitForTimeout(500);
   });
 
   test('should display notes page', async ({ page }) => {
-    await expect(page.locator('h1')).toContainText('Notes');
+    // The main content h1 says "Notes & Annotations"
+    await expect(page.getByRole('heading', { name: /notes & annotations/i })).toBeVisible();
+    // Check for page description
     await expect(page.getByText(/saved locally/i)).toBeVisible();
   });
 
@@ -16,10 +18,10 @@ test.describe('Notes Page', () => {
     await page.evaluate(() => localStorage.removeItem('ewu-schedule-notes'));
     await page.reload();
 
-    // Check for empty state
-    const emptyState = page.getByText(/no notes yet|create your first/i);
-    if (await emptyState.isVisible()) {
-      await expect(emptyState).toBeVisible();
+    // Check for empty state (use specific heading)
+    const emptyStateHeading = page.getByRole('heading', { name: /no notes yet/i });
+    if (await emptyStateHeading.isVisible()) {
+      await expect(emptyStateHeading).toBeVisible();
     }
   });
 
@@ -37,19 +39,18 @@ test.describe('Notes Page', () => {
     // Open new note form
     await page.getByRole('button', { name: /new note/i }).click();
 
-    // Fill in the note
+    // Wait for form to appear
     const textarea = page.locator('textarea');
+    await expect(textarea).toBeVisible();
+
+    // Fill in the note
     await textarea.fill('Test note content for E2E testing');
 
-    // Select priority
-    const prioritySelect = page.locator('select').filter({ hasText: /medium|priority/i });
-    if (await prioritySelect.isVisible()) {
-      await prioritySelect.selectOption('high');
-    }
+    // Save the note (button contains Save icon and text)
+    await page.getByRole('button', { name: /save/i }).first().click();
 
-    // Save the note
-    const saveButton = page.getByRole('button', { name: /save note/i });
-    await saveButton.click();
+    // Wait a bit for the note to be saved and displayed
+    await page.waitForTimeout(500);
 
     // Note should appear in the list
     await expect(page.getByText('Test note content for E2E testing')).toBeVisible();
@@ -104,8 +105,8 @@ test.describe('Notes Page', () => {
     await page.locator('textarea').fill('Note for export test');
     await page.getByRole('button', { name: /save note/i }).click();
 
-    // Click export button
-    const exportButton = page.getByRole('button', { name: /export/i });
+    // Click export button (use exact name to avoid matching header Export button)
+    const exportButton = page.getByRole('button', { name: 'Export Notes' });
     if (await exportButton.isEnabled()) {
       // Note: Can't actually verify download in Playwright easily
       // Just verify the button is clickable

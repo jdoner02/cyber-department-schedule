@@ -7,11 +7,13 @@ test.describe('Accessibility', () => {
   });
 
   test('should have main heading on each page', async ({ page }) => {
-    const pages = ['/', '/conflicts', '/notes', '/analytics', '/docs', '/settings'];
+    // Use relative URLs to work with base URL configuration
+    const pages = ['./', './conflicts', './notes', './analytics', './docs', './settings'];
 
     for (const path of pages) {
       await page.goto(path);
-      const h1 = page.locator('h1');
+      // Use .first() since there may be multiple h1 elements (header + main content)
+      const h1 = page.locator('h1').first();
       await expect(h1).toBeVisible();
     }
   });
@@ -91,7 +93,8 @@ test.describe('Accessibility', () => {
   });
 
   test('should have accessible form labels', async ({ page }) => {
-    await page.goto('/notes');
+    // Use relative URL for notes page
+    await page.goto('./notes');
 
     // Open new note form
     await page.getByRole('button', { name: /new note/i }).click();
@@ -160,7 +163,7 @@ test.describe('Accessibility', () => {
 
     // This is a basic check - full contrast testing would require additional tools
     // Just verify text is visible against backgrounds
-    const headerText = page.locator('h1');
+    const headerText = page.getByRole('heading', { name: 'Cyber Schedule Dashboard' });
     await expect(headerText).toBeVisible();
   });
 

@@ -65,8 +65,10 @@ function scheduleReducer(state: ScheduleState, action: ScheduleAction): Schedule
       return { ...state, loading: true, error: null };
 
     case 'LOAD_SUCCESS': {
+      // Keep ALL courses (including 500-level stacked versions) in state
+      // Filtering is done downstream based on user settings
       const analysis = analyzeSchedule(action.payload.courses, {
-        hideStackedVersions: true,
+        hideStackedVersions: false,
       });
       const courses = analysis.courses;
       return {

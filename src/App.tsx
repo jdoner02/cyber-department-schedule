@@ -4,6 +4,7 @@ import { DraftScheduleProvider } from './contexts/DraftScheduleContext';
 import { FilterProvider } from './contexts/FilterContext';
 import { StudentProvider } from './contexts/StudentContext';
 import { AcademicCalendarProvider } from './contexts/AcademicCalendarContext';
+import { AppSettingsProvider } from './contexts/AppSettingsContext';
 import Layout from './components/common/Layout';
 import Dashboard from './pages/Dashboard';
 import Conflicts from './pages/Conflicts';
@@ -20,28 +21,30 @@ function App() {
   return (
     <BrowserRouter basename={basePath}>
       <AcademicCalendarProvider>
-        <ScheduleProvider>
-          <DraftScheduleProvider>
-            <FilterProvider>
-              <StudentProvider>
-              <Routes>
-                <Route path="/" element={<Layout />}>
-                  <Route index element={<Dashboard />} />
-                  <Route path="conflicts" element={<Conflicts />} />
-                <Route path="notes" element={<Notes />} />
-                <Route path="analytics" element={<Analytics />} />
-                <Route path="trends" element={<Trends />} />
-                <Route path="students" element={<Students />} />
-                <Route path="docs" element={<Documentation />} />
-                <Route path="docs/:section" element={<Documentation />} />
-                <Route path="settings" element={<Settings />} />
-                </Route>
-              </Routes>
-            </StudentProvider>
-          </FilterProvider>
-        </DraftScheduleProvider>
-      </ScheduleProvider>
-    </AcademicCalendarProvider>
+        <AppSettingsProvider>
+          <ScheduleProvider>
+            <DraftScheduleProvider>
+              <FilterProvider>
+                <StudentProvider>
+                  <Routes>
+                    <Route path="/" element={<Layout />}>
+                      <Route index element={<Dashboard />} />
+                      <Route path="conflicts" element={<Conflicts />} />
+                      <Route path="notes" element={<Notes />} />
+                      <Route path="analytics" element={<Analytics />} />
+                      <Route path="trends" element={<Trends />} />
+                      <Route path="students" element={<Students />} />
+                      <Route path="docs" element={<Documentation />} />
+                      <Route path="docs/:section" element={<Documentation />} />
+                      <Route path="settings" element={<Settings />} />
+                    </Route>
+                  </Routes>
+                </StudentProvider>
+              </FilterProvider>
+            </DraftScheduleProvider>
+          </ScheduleProvider>
+        </AppSettingsProvider>
+      </AcademicCalendarProvider>
     </BrowserRouter>
   );
 }

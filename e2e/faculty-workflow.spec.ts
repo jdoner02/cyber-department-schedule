@@ -80,7 +80,7 @@ async function waitForStableState(page: Page): Promise<void> {
 test.describe('Workflow 1: Morning Dashboard Review (Desktop)', () => {
   test('Director reviews daily schedule and checks for conflicts', async ({ page }) => {
     // STEP 1: Initial Landing - First impression of the dashboard
-    await page.goto('/');
+    await page.goto('./');
     await waitForStableState(page);
     await captureState(page, '01-morning-review', '01', 'landing-page-first-impression');
 
@@ -154,60 +154,31 @@ test.describe('Workflow 1: Morning Dashboard Review (Desktop)', () => {
 // Finding specific courses and viewing details
 // =============================================================================
 
-test.describe('Workflow 2: Schedule Filtering & Course Details', () => {
-  test('Faculty member filters schedule and views course details', async ({ page }) => {
-    await page.goto('/');
+test.describe('Workflow 2: Schedule Search & Course Details', () => {
+  test('Faculty member searches schedule and views course details', async ({ page }) => {
+    await page.goto('./');
     await waitForStableState(page);
 
-    // STEP 1: Open the filters panel
-    const filterButton = page.getByRole('button', { name: /filters/i });
-    await filterButton.click();
-    await page.waitForTimeout(300);
-    await captureState(page, '02-filtering', '01', 'filters-panel-open');
+    // STEP 1: Use the search functionality in the header
+    const searchInput = page.getByPlaceholder(/search/i);
+    await expect(searchInput).toBeVisible();
+    await captureState(page, '02-search', '01', 'search-bar-visible');
 
-    // STEP 2: View available filter options (may have different labels)
-    // The filter panel should be open - capture whatever is visible
+    // STEP 2: Search for CSCD courses
+    await searchInput.fill('CSCD');
     await page.waitForTimeout(500);
-    await captureState(page, '02-filtering', '02', 'filter-options-visible');
+    await captureState(page, '02-search', '02', 'cscd-search-applied');
 
-    // STEP 3: Try to filter by subject if filter buttons exist
-    const cscdButton = page.getByRole('button', { name: 'CSCD' });
-    if (await cscdButton.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await cscdButton.click();
-      await page.waitForTimeout(500);
-      await captureState(page, '02-filtering', '03', 'cscd-filter-applied');
+    // STEP 3: Clear and search for CYBR
+    await searchInput.clear();
+    await searchInput.fill('CYBR');
+    await page.waitForTimeout(500);
+    await captureState(page, '02-search', '03', 'cybr-search-applied');
 
-      // STEP 4: View filtered results
-      await captureState(page, '02-filtering', '04', 'cscd-courses-only');
-
-      // STEP 5: Clear CSCD and filter by CYBR
-      await cscdButton.click(); // Deselect CSCD
-      const cybrButton = page.getByRole('button', { name: 'CYBR' });
-      if (await cybrButton.isVisible().catch(() => false)) {
-        await cybrButton.click();
-        await page.waitForTimeout(500);
-        await captureState(page, '02-filtering', '05', 'cybr-filter-applied');
-      }
-
-      // STEP 6: Filter by day (Monday only)
-      const mondayButton = page.getByRole('button', { name: 'Mon' });
-      if (await mondayButton.isVisible().catch(() => false)) {
-        await mondayButton.click();
-        await page.waitForTimeout(500);
-        await captureState(page, '02-filtering', '06', 'monday-cybr-filtered');
-      }
-
-      // STEP 7: Clear all filters
-      const clearButton = page.getByRole('button', { name: /clear all/i });
-      if (await clearButton.isVisible().catch(() => false)) {
-        await clearButton.click();
-        await page.waitForTimeout(500);
-        await captureState(page, '02-filtering', '07', 'filters-cleared');
-      }
-    } else {
-      // No filter buttons - just capture the current state
-      await captureState(page, '02-filtering', '03', 'filter-panel-state');
-    }
+    // STEP 4: Clear search
+    await searchInput.clear();
+    await page.waitForTimeout(300);
+    await captureState(page, '02-search', '04', 'search-cleared');
 
     // STEP 8: Try to click on a course block to view details
     // Course blocks may have various class names
@@ -247,7 +218,7 @@ test.describe('Workflow 2: Schedule Filtering & Course Details', () => {
 test.describe('Workflow 3: Student Advising Session', () => {
   test('Advisor creates and reviews student personas', async ({ page }) => {
     // STEP 1: Navigate to Student Advising page
-    await page.goto('/');
+    await page.goto('./');
     await waitForStableState(page);
     await page.locator('nav').getByText('Advising').click();
     await waitForStableState(page);
@@ -481,7 +452,7 @@ test.describe('Workflow 8: Mobile Experience', () => {
     await page.setViewportSize({ width: 375, height: 812 });
 
     // STEP 1: Mobile landing page
-    await page.goto('/');
+    await page.goto('./');
     await waitForStableState(page);
     await captureState(page, '08-mobile', '01', 'mobile-landing-page');
 
@@ -528,7 +499,7 @@ test.describe('Workflow 9: Tablet Experience', () => {
 
   test('Tablet user navigates the dashboard', async ({ page }) => {
     // STEP 1: Tablet landing page
-    await page.goto('/');
+    await page.goto('./');
     await waitForStableState(page);
     await captureState(page, '09-tablet', '01', 'tablet-landing-page');
 
@@ -564,7 +535,7 @@ test.describe('Workflow 9: Tablet Experience', () => {
 test.describe('Workflow 10: Accessibility Audit', () => {
   test('Audit key accessibility features across pages', async ({ page }) => {
     // STEP 1: Dashboard accessibility
-    await page.goto('/');
+    await page.goto('./');
     await waitForStableState(page);
 
     // Check for proper heading hierarchy
@@ -627,7 +598,7 @@ test.describe('Workflow 10: Accessibility Audit', () => {
 test.describe('Workflow 11: Keyboard Navigation', () => {
   test('User navigates using keyboard only', async ({ page }) => {
     // STEP 1: Start at landing page
-    await page.goto('/');
+    await page.goto('./');
     await waitForStableState(page);
     await captureState(page, '11-keyboard', '01', 'initial-focus');
 
@@ -663,7 +634,7 @@ test.describe('Workflow 11: Keyboard Navigation', () => {
 test.describe('Workflow 12: Visual Modes', () => {
   test('Check visual presentation in different modes', async ({ page }) => {
     // STEP 1: Standard view
-    await page.goto('/');
+    await page.goto('./');
     await waitForStableState(page);
     await captureState(page, '12-visual', '01', 'standard-mode');
 
@@ -673,7 +644,7 @@ test.describe('Workflow 12: Visual Modes', () => {
     await captureState(page, '12-visual', '02', 'theme-options');
 
     // STEP 3: Return to dashboard
-    await page.goto('/');
+    await page.goto('./');
     await waitForStableState(page);
 
     // STEP 4: Check color contrast of key elements
@@ -700,7 +671,7 @@ test.describe('Workflow 12: Visual Modes', () => {
 
 test.describe('Workflow 13: Sidebar Interaction', () => {
   test('User interacts with collapsible sidebar', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('./');
     await waitForStableState(page);
 
     // STEP 1: Sidebar expanded state
@@ -740,7 +711,7 @@ test.describe('Workflow 13: Sidebar Interaction', () => {
 test.describe('Workflow 14: Print Preview', () => {
   test('Check print-friendly rendering', async ({ page }) => {
     // STEP 1: Dashboard print view
-    await page.goto('/');
+    await page.goto('./');
     await waitForStableState(page);
 
     // Emulate print media
@@ -775,7 +746,7 @@ test.describe('Workflow 14: Print Preview', () => {
 test.describe('Workflow 15: Error States', () => {
   test('Check behavior with various states', async ({ page }) => {
     // STEP 1: Navigate to a valid page first
-    await page.goto('/');
+    await page.goto('./');
     await waitForStableState(page);
     await captureState(page, '15-errors', '01', 'valid-page-baseline');
 
@@ -785,7 +756,7 @@ test.describe('Workflow 15: Error States', () => {
     await captureState(page, '15-errors', '02', '404-page');
 
     // STEP 3: Return to valid page
-    await page.goto('/');
+    await page.goto('./');
     await waitForStableState(page);
     await captureState(page, '15-errors', '03', 'recovery-from-404');
 

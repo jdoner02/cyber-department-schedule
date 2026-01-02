@@ -70,3 +70,10 @@ export function isWithinScheduleHours(minutes: number): boolean {
   const endMinutes = SCHEDULE_END_HOUR * 60;
   return minutes >= startMinutes && minutes <= endMinutes;
 }
+
+// Format array of days to display string (e.g., "Mon, Wed, Fri")
+export function formatDays(days: DayOfWeek[]): string {
+  return days
+    .map((day) => DAYS_OF_WEEK.find((d) => d.key === day)?.short ?? day)
+    .join(', ');
+}

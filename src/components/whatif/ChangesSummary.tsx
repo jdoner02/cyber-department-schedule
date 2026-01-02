@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
-import { X, Undo2, Pencil, Plus } from 'lucide-react';
+import { X, Undo2, Pencil, Plus, Download } from 'lucide-react';
 import { useDraft, useDraftActions } from '../../contexts/DraftScheduleContext';
 import { useCourses } from '../../contexts/ScheduleContext';
+import { downloadJson } from '../../utils/download';
 
 interface ChangesSummaryProps {
   onCourseClick?: (courseId: string) => void;
@@ -167,9 +168,25 @@ export default function ChangesSummary({ onCourseClick }: ChangesSummaryProps) {
         ))}
       </div>
 
-      {/* Footer with export option (placeholder for now) */}
+      {/* Footer with export option */}
       <div className="px-4 py-3 bg-gray-50 border-t border-gray-200">
-        <button className="w-full btn btn-secondary text-sm py-2">
+        <button
+          onClick={() => {
+            const exportData = {
+              exportDate: new Date().toISOString(),
+              changeCount,
+              changes: changesSummary.map((change) => ({
+                courseId: change.id,
+                courseCode: change.courseCode,
+                changeType: change.type,
+                description: change.description,
+              })),
+            };
+            downloadJson(exportData, `schedule-changes-${new Date().toISOString().split('T')[0]}.json`);
+          }}
+          className="w-full btn btn-secondary text-sm py-2 flex items-center justify-center gap-2"
+        >
+          <Download className="w-4 h-4" />
           Export Changes
         </button>
       </div>
