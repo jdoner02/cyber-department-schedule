@@ -7,10 +7,10 @@ This file is a **pomodoro-ready checklist** for sourcing and maintaining the dat
 ### 1) Schedule snapshots (Banner schedule search JSON)
 - Terms with per-subject snapshots (12 subjects each): `202440`, `202510`, `202520`, `202540`, `202610`
   - Subjects present: `acct`, `biol`, `busn`, `chem`, `cscd`, `cybr`, `desn`, `eeng`, `engl-musc`, `geos`, `math`, `phys`
-- Spring 2026 (`202620`) has a **multi-file split** snapshot: `data/schedules/202620/*_schedule.json` (a…t)
+- Spring 2026 (`202620`) has a **multi-file split** snapshot: `data/schedules/raw/202620/subjects-*.json`
 
 Where it lives:
-- Raw archive: `data/schedules/<TERM_CODE>/...`
+- Raw archive: `data/schedules/raw/<TERM_CODE>/...`
 - App default runtime file: `public/data/schedule.json`
 
 ### 2) Catalog snapshots (catalog.ewu.edu)
@@ -42,7 +42,7 @@ Where it lives:
 ### A) Schedule snapshots (Banner → JSON)
 - [ ] Pick a target term code (e.g., `202640`) and 1–3 subject codes to capture.
 - [ ] Export 1 subject’s schedule JSON from Banner (keep the raw response intact).
-- [ ] Save to `data/schedules/<TERM_CODE>/<subject>.json` (lowercase subject naming matches existing files).
+- [ ] Save to `data/schedules/raw/<TERM_CODE>/<slug>.json` (kebab-case; avoid underscores/spaces; reserve `schedule.json` for generated files).
 - [ ] Quick validation: confirm the JSON has top-level `success`, `totalCount`, and `data` array.
 - [ ] Spot-check 2–3 records: `term`, `courseReferenceNumber`, `subject`, `courseNumber`, `meetingsFaculty`.
 
@@ -83,7 +83,7 @@ Repeat per subject until the term has the coverage you want.
 - [ ] Rebuild trends: `npm run build:trends` and verify `/trends` shows the combined history.
 
 ### H) Build/update quarterly trends dataset
-- [ ] Run `npm run build:trends` (reads `data/schedules/**`, writes `public/data/trends/schedule-trends.json`).
+- [ ] Run `npm run build:trends` (reads `data/schedules/processed/**`, writes `public/data/trends/schedule-trends.json`).
 - [ ] Open `/trends` and verify:
   - Department chart changes as you switch departments/metrics.
   - Course chart for `CYBR 330` shows history and lists `CSCD 330` as an alias.

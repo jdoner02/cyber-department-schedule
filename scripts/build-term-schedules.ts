@@ -17,7 +17,8 @@ type TermScheduleManifest = {
   }>;
 };
 
-const SCHEDULES_DIR = path.join(process.cwd(), 'data/schedules');
+const RAW_SCHEDULES_DIR = path.join(process.cwd(), 'data/schedules/raw');
+const PROCESSED_SCHEDULES_DIR = path.join(process.cwd(), 'data/schedules/processed');
 const PUBLIC_TERMS_DIR = path.join(process.cwd(), 'public/data/terms');
 const PUBLIC_DEFAULT_SCHEDULE_PATH = path.join(process.cwd(), 'public/data/schedule.json');
 const PUBLIC_TERMS_MANIFEST_PATH = path.join(PUBLIC_TERMS_DIR, 'index.json');
@@ -134,7 +135,7 @@ async function buildTermSchedule(termCode: string): Promise<{
   sourceFiles: string[];
   mismatchedRows: number;
 }> {
-  const termDir = path.join(SCHEDULES_DIR, termCode);
+  const termDir = path.join(RAW_SCHEDULES_DIR, termCode);
   const entries = await readdir(termDir, { withFileTypes: true });
   const jsonFiles = entries
     .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith('.json'))
@@ -213,7 +214,7 @@ async function buildTermSchedule(termCode: string): Promise<{
 async function main() {
   await mkdir(PUBLIC_TERMS_DIR, { recursive: true });
 
-  const termDirents = await readdir(SCHEDULES_DIR, { withFileTypes: true });
+  const termDirents = await readdir(RAW_SCHEDULES_DIR, { withFileTypes: true });
   const terms = termDirents
     .filter((dirent) => dirent.isDirectory() && /^\d{6}$/.test(dirent.name))
     .map((dirent) => dirent.name)
@@ -226,7 +227,7 @@ async function main() {
 
     if (result.mismatchedRows > 0) {
       console.warn(
-        `Warning: ${result.mismatchedRows} rows in data/schedules/${termCode}/ were skipped due to term mismatch.`
+        `Warning: ${result.mismatchedRows} rows in data/schedules/raw/${termCode}/ were skipped due to term mismatch.`
       );
     }
 
@@ -238,7 +239,9 @@ async function main() {
       data: result.data,
     } satisfies BannerDataResponse & { generatedAt: string | null; sourceFiles: string[] };
 
-    const termOutputPath = path.join(SCHEDULES_DIR, termCode, 'schedule.json');
+    const processedDir = path.join(PROCESSED_SCHEDULES_DIR, termCode);
+    await mkdir(processedDir, { recursive: true });
+    const termOutputPath = path.join(processedDir, 'schedule.json');
     await writeFile(termOutputPath, JSON.stringify(payload, null, 2) + '\n', 'utf8');
 
     const publicOutputPath = path.join(PUBLIC_TERMS_DIR, `${termCode}.json`);
@@ -282,4 +285,3 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
-

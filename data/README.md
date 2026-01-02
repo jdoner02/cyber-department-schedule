@@ -42,12 +42,14 @@ data/
 ├── README.md
 ├── input/                             # Planning + sourcing checklists (human-maintained)
 ├── schedules/                          # EWU schedule snapshots (Banner schedule search JSON)
-│   ├── 202440/                         # Fall 2024 (YYYYTT)
-│   ├── 202510/                         # Winter 2025
-│   ├── 202520/                         # Spring 2025
-│   ├── 202540/                         # Fall 2025
-│   ├── 202610/                         # Winter 2026
-│   └── 202620/                         # Spring 2026
+│   ├── raw/                            # Raw schedule-search responses (as captured)
+│   │   ├── 202440/                     # Fall 2024 (YYYYTT)
+│   │   ├── 202510/                     # Winter 2025
+│   │   └── ...                         # More terms as collected
+│   └── processed/                      # Generated, deduplicated per-term schedules
+│       ├── 202440/
+│       │   └── schedule.json
+│       └── ...
 ├── trends/                             # Derived cross-term aggregates (generated)
 │   └── schedule-trends.json            # Per-term/per-subject/per-course aggregates
 ├── catalog/
@@ -68,16 +70,29 @@ data/
 
 ## Data Dictionary
 
-### 1) EWU Schedules (`data/schedules/*/*.json`)
+### 1) EWU Schedules (`data/schedules/raw/<TERM_CODE>/*.json`)
 
-**What it is:** Direct schedule-search JSON responses from EWU’s Banner/Ellucian schedule system.
+**What it is:** Raw schedule-search JSON responses from EWU’s Banner/Ellucian schedule system.
 
-**Filename convention:** Not standardized across sources; the stable organizing key is the **term folder** (`YYYYTT`).
+See `data/schedules/README.md` for the full schedule dataset layout and naming rules.
+
+**Structure:**
+
+- Raw snapshots live under `data/schedules/raw/<TERM_CODE>/` (term folders use `YYYYTT`).
+- Generated, deduplicated per-term schedules live under `data/schedules/processed/<TERM_CODE>/schedule.json` (built by `npm run build:schedules`).
+- The UI loads schedules from `public/data/terms/<TERM_CODE>.json` (also built by `npm run build:schedules`).
+
+**Raw snapshot filename convention:**
+
+- `kebab-case.json` (no spaces/underscores)
+- Name reflects the query captured (examples: `cscd.json`, `engl-musc.json`, `subjects-a.json`)
+- `schedule.json` is reserved for **generated** outputs (do not use it for raw captures)
 
 **Top-level schema:** `BannerDataResponse`
 
 ```ts
-// The full JSON document in each schedule snapshot file.
+// Minimal required shape for raw schedule snapshots.
+// (Raw files often include additional Banner metadata fields like page sizes, offsets, etc.)
 export interface BannerDataResponse {
   success: boolean;      // True when the schedule search request succeeded.
   totalCount: number;    // Total number of section records included in `data`.
@@ -230,7 +245,7 @@ export interface BannerSectionAttribute {
 
 **Notes**
 
-- Some schedule snapshot files may be empty or incomplete depending on how they were collected. For example, `data/schedules/202620/k_schedule.json` is currently 0 bytes.
+- Some schedule snapshot files may be empty or incomplete depending on how they were collected. For example, `data/schedules/raw/202620/subjects-k.json` is currently 0 bytes.
 
 ---
 
@@ -252,7 +267,7 @@ Key fields:
 
 ### 1c) Schedule Trends Dataset (`data/trends/schedule-trends.json`)
 
-**What it is:** A generated aggregate dataset built from `data/schedules/**` that powers the UI’s cross-term trend charts.
+**What it is:** A generated aggregate dataset built from `data/schedules/processed/**` that powers the UI’s cross-term trend charts.
 
 **Runtime copy:** `public/data/trends/schedule-trends.json` (served to the browser).
 

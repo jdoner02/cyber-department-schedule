@@ -1,4 +1,4 @@
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import type { BannerCourse, BannerDataResponse } from '../src/types/schedule';
@@ -13,7 +13,8 @@ import type {
   TermTotals,
 } from '../src/types/trends';
 
-const SCHEDULES_DIR = path.join(process.cwd(), 'data/schedules');
+const RAW_SCHEDULES_DIR = path.join(process.cwd(), 'data/schedules/raw');
+const PROCESSED_SCHEDULES_DIR = path.join(process.cwd(), 'data/schedules/processed');
 const COURSE_ALIAS_MAP_PATH = path.join(process.cwd(), 'data/catalog/mappings/course-aliases.json');
 
 const OUTPUT_PATHS = [
@@ -89,25 +90,50 @@ function buildCanonicalMap(aliasMap: CourseAliasMapFile | null): Map<string, str
 }
 
 async function listScheduleJsonFiles(): Promise<string[]> {
-  const termDirents = await readdir(SCHEDULES_DIR, { withFileTypes: true });
+  const termCodes = new Set<string>();
+
+  const addTermCodesFrom = async (dirPath: string) => {
+    try {
+      const entries = await readdir(dirPath, { withFileTypes: true });
+      for (const entry of entries) {
+        if (!entry.isDirectory()) continue;
+        if (!/^\d{6}$/.test(entry.name)) continue;
+        termCodes.add(entry.name);
+      }
+    } catch {
+      // Directory may not exist in older layouts.
+    }
+  };
+
+  await addTermCodesFrom(RAW_SCHEDULES_DIR);
+  await addTermCodesFrom(PROCESSED_SCHEDULES_DIR);
+
   const files: string[] = [];
 
-  for (const dirent of termDirents) {
-    if (!dirent.isDirectory()) continue;
-    const termDir = path.join(SCHEDULES_DIR, dirent.name);
-    const entries = await readdir(termDir, { withFileTypes: true });
+  for (const termCode of Array.from(termCodes).sort()) {
+    const processedSchedulePath = path.join(PROCESSED_SCHEDULES_DIR, termCode, 'schedule.json');
+    try {
+      const processedStat = await stat(processedSchedulePath);
+      if (processedStat.isFile() && processedStat.size > 0) {
+        files.push(processedSchedulePath);
+        continue;
+      }
+    } catch {
+      // Fall back to raw snapshots when processed output is missing.
+    }
 
-    // Prefer the monolithic schedule.json when present.
-    const monolith = entries.find((entry) => entry.isFile() && entry.name === 'schedule.json');
-    if (monolith) {
-      files.push(path.join(termDir, monolith.name));
+    const rawTermDir = path.join(RAW_SCHEDULES_DIR, termCode);
+    let rawEntries;
+    try {
+      rawEntries = await readdir(rawTermDir, { withFileTypes: true });
+    } catch {
       continue;
     }
 
-    for (const entry of entries) {
+    for (const entry of rawEntries) {
       if (!entry.isFile()) continue;
       if (!entry.name.toLowerCase().endsWith('.json')) continue;
-      files.push(path.join(termDir, entry.name));
+      files.push(path.join(rawTermDir, entry.name));
     }
   }
 
@@ -297,7 +323,7 @@ async function main() {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
     source: {
-      schedulesDir: 'data/schedules',
+      schedulesDir: 'data/schedules/processed',
       files: scheduleFiles.length,
       rows,
     },
