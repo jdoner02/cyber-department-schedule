@@ -1,15 +1,24 @@
 import { useMemo, useState } from 'react';
 import { useFilteredCourses, useColorBy, useViewMode } from '../../contexts/FilterContext';
-import { DAYS_OF_WEEK, TIME_SLOTS, SCHEDULE_START_HOUR, TIME_SLOT_HEIGHT } from '../../constants/timeSlots';
+import {
+  DAYS_OF_WEEK,
+  TIME_SLOTS,
+  SCHEDULE_START_HOUR,
+  TIME_SLOT_HEIGHT,
+  getHourBlockBgStyle,
+  getHourBlockBorderStyle,
+} from '../../constants/timeSlots';
 import CourseBlock from './CourseBlock';
+import CourseGroupBlock from './CourseGroupBlock';
 import CourseDetailModal from './CourseDetailModal';
 import MobileDayTabs from './MobileDayTabs';
 import DayTimeline from './DayTimeline';
 import { useResponsiveView } from '../../hooks/useResponsiveView';
-import type { Course, DayOfWeek } from '../../types/schedule';
+import { buildCourseGroups } from '../../services/courseGroupDetector';
+import type { Course, CourseGroup, DayOfWeek } from '../../types/schedule';
 
-interface CoursePlacement {
-  course: Course;
+interface GroupPlacement {
+  group: CourseGroup;
   meeting: Course['meetings'][0];
   day: DayOfWeek;
   top: number;
@@ -24,11 +33,17 @@ export default function WeeklyGrid() {
   const { selectedDay, setSelectedDay } = useViewMode();
   const { isMobile } = useResponsiveView();
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+  const [selectedGroup, setSelectedGroup] = useState<CourseGroup | null>(null);
 
   // Default to Monday if no day selected
   const currentDay: DayOfWeek = selectedDay || 'monday';
 
-  // Calculate course counts per day for mobile tabs
+  // Build course groups from filtered courses
+  const courseGroups = useMemo(() => {
+    return buildCourseGroups(filteredCourses);
+  }, [filteredCourses]);
+
+  // Calculate course counts per day for mobile tabs (count groups, not individual courses)
   const courseCounts = useMemo(() => {
     const counts: Record<DayOfWeek, number> = {
       monday: 0,
@@ -38,8 +53,8 @@ export default function WeeklyGrid() {
       friday: 0,
     };
 
-    filteredCourses.forEach((course) => {
-      course.meetings.forEach((meeting) => {
+    courseGroups.forEach((group) => {
+      group.primaryCourse.meetings.forEach((meeting) => {
         meeting.days.forEach((day) => {
           counts[day]++;
         });
@@ -47,72 +62,75 @@ export default function WeeklyGrid() {
     });
 
     return counts;
-  }, [filteredCourses]);
+  }, [courseGroups]);
 
-  // Calculate course placements with overlap handling
-  const coursePlacements = useMemo(() => {
-    const placements: CoursePlacement[] = [];
+  // Calculate group placements with overlap handling
+  const groupPlacements = useMemo(() => {
+    const placements: GroupPlacement[] = [];
 
-    // Group courses by day
-    const coursesByDay = new Map<DayOfWeek, { course: Course; meeting: Course['meetings'][0] }[]>();
+    // Group by day
+    const groupsByDay = new Map<DayOfWeek, { group: CourseGroup; meeting: Course['meetings'][0] }[]>();
 
     DAYS_OF_WEEK.forEach(({ key }) => {
-      coursesByDay.set(key, []);
+      groupsByDay.set(key, []);
     });
 
-    // Collect all course-meeting combinations for each day
-    filteredCourses.forEach((course) => {
-      course.meetings.forEach((meeting) => {
+    // Collect all group-meeting combinations for each day
+    // Use the primary course's meetings for positioning
+    courseGroups.forEach((group) => {
+      group.primaryCourse.meetings.forEach((meeting) => {
         meeting.days.forEach((day) => {
-          coursesByDay.get(day)?.push({ course, meeting });
+          groupsByDay.get(day)?.push({ group, meeting });
         });
       });
     });
 
-    // Process each day
-    coursesByDay.forEach((dayMeetings, day) => {
+    // Process each day with two-pass algorithm for correct column widths
+    groupsByDay.forEach((dayMeetings, day) => {
       // Sort by start time
       dayMeetings.sort((a, b) => a.meeting.startMinutes - b.meeting.startMinutes);
 
-      // Find overlapping groups and assign columns
+      // First pass: assign columns
+      const columnAssignments: { group: CourseGroup; meeting: Course['meetings'][0]; column: number }[] = [];
       const activeColumns: { end: number; column: number }[] = [];
 
-      dayMeetings.forEach(({ course, meeting }) => {
+      dayMeetings.forEach(({ group, meeting }) => {
         // Remove expired columns
         const stillActive = activeColumns.filter((col) => col.end > meeting.startMinutes);
+        activeColumns.length = 0;
+        activeColumns.push(...stillActive);
 
         // Find available column
         let column = 0;
-        const usedColumns = new Set(stillActive.map((c) => c.column));
+        const usedColumns = new Set(activeColumns.map((c) => c.column));
         while (usedColumns.has(column)) {
           column++;
         }
+
+        activeColumns.push({ end: meeting.endMinutes, column });
+        columnAssignments.push({ group, meeting, column });
+      });
+
+      // Second pass: calculate totalColumns for each placement
+      // All overlapping courses must share the same totalColumns
+      columnAssignments.forEach(({ group, meeting, column }) => {
+        // Find all courses that overlap with this one
+        const overlapping = columnAssignments.filter(
+          (other) =>
+            other.meeting.startMinutes < meeting.endMinutes &&
+            other.meeting.endMinutes > meeting.startMinutes
+        );
+
+        // totalColumns = max column among all overlapping + 1
+        const totalColumns = Math.max(...overlapping.map((o) => o.column)) + 1;
 
         // Calculate position
         const startOffset = meeting.startMinutes - SCHEDULE_START_HOUR * 60;
         const top = (startOffset / 60) * TIME_SLOT_HEIGHT;
         const height = (meeting.durationMinutes / 60) * TIME_SLOT_HEIGHT;
 
-        stillActive.push({ end: meeting.endMinutes, column });
-
-        // Calculate total columns for this time range
-        const overlapping = dayMeetings.filter(
-          (other) =>
-            other.meeting.startMinutes < meeting.endMinutes &&
-            other.meeting.endMinutes > meeting.startMinutes
-        );
-        const totalColumns = Math.max(
-          ...overlapping.map((o) => {
-            const cols = activeColumns.filter(
-              (c) => c.end > o.meeting.startMinutes && o.meeting.endMinutes > meeting.startMinutes
-            );
-            return cols.length;
-          }),
-          column + 1
-        );
-
         placements.push({
-          course,
+          group,
           meeting,
           day,
           top,
@@ -120,19 +138,21 @@ export default function WeeklyGrid() {
           column,
           totalColumns,
         });
-
-        // Update active columns
-        activeColumns.length = 0;
-        activeColumns.push(...stillActive);
       });
     });
 
     return placements;
-  }, [filteredCourses]);
+  }, [courseGroups]);
 
   // Get placements for a specific day
   const getPlacementsForDay = (day: DayOfWeek) => {
-    return coursePlacements.filter((p) => p.day === day);
+    return groupPlacements.filter((p) => p.day === day);
+  };
+
+  // Handle click on a group - open modal with primary course
+  const handleGroupClick = (group: CourseGroup) => {
+    setSelectedGroup(group);
+    setSelectedCourse(group.primaryCourse);
   };
 
   // Calculate the total grid height
@@ -194,13 +214,15 @@ export default function WeeklyGrid() {
             {TIME_SLOTS.map(({ hour, label }) => (
               <div
                 key={hour}
-                className="absolute left-0 right-0 border-b border-gray-100 px-2 py-1"
+                className="absolute left-0 right-0 px-2 py-1"
                 style={{
                   top: (hour - SCHEDULE_START_HOUR) * TIME_SLOT_HEIGHT,
                   height: TIME_SLOT_HEIGHT,
+                  ...getHourBlockBgStyle(hour),
+                  ...getHourBlockBorderStyle(hour),
                 }}
               >
-                <span className="text-xs text-gray-500">{label}</span>
+                <span className="text-xs text-gray-500 font-medium">{label}</span>
               </div>
             ))}
           </div>
@@ -212,31 +234,47 @@ export default function WeeklyGrid() {
               className="relative border-l border-gray-200"
               style={{ height: gridHeight }}
             >
-              {/* Hour grid lines */}
+              {/* Hour grid lines with alternating backgrounds (z-0 = behind courses) */}
               {TIME_SLOTS.map(({ hour }) => (
                 <div
                   key={hour}
-                  className="absolute left-0 right-0 border-b border-gray-100"
+                  className="absolute left-0 right-0 z-0"
                   style={{
                     top: (hour - SCHEDULE_START_HOUR) * TIME_SLOT_HEIGHT,
                     height: TIME_SLOT_HEIGHT,
+                    ...getHourBlockBgStyle(hour),
+                    ...getHourBlockBorderStyle(hour),
                   }}
                 />
               ))}
 
-              {/* Course blocks */}
+              {/* Course group blocks */}
               {getPlacementsForDay(key).map((placement, index) => (
-                <CourseBlock
-                  key={`${placement.course.id}-${placement.meeting.startTime}-${index}`}
-                  course={placement.course}
-                  meeting={placement.meeting}
-                  top={placement.top}
-                  height={placement.height}
-                  column={placement.column}
-                  totalColumns={placement.totalColumns}
-                  colorBy={colorBy}
-                  onClick={() => setSelectedCourse(placement.course)}
-                />
+                placement.group.isStandalone ? (
+                  <CourseBlock
+                    key={`${placement.group.id}-${placement.meeting.startTime}-${index}`}
+                    course={placement.group.primaryCourse}
+                    meeting={placement.meeting}
+                    top={placement.top}
+                    height={placement.height}
+                    column={placement.column}
+                    totalColumns={placement.totalColumns}
+                    colorBy={colorBy}
+                    onClick={() => handleGroupClick(placement.group)}
+                  />
+                ) : (
+                  <CourseGroupBlock
+                    key={`${placement.group.id}-${placement.meeting.startTime}-${index}`}
+                    group={placement.group}
+                    meeting={placement.meeting}
+                    top={placement.top}
+                    height={placement.height}
+                    column={placement.column}
+                    totalColumns={placement.totalColumns}
+                    colorBy={colorBy}
+                    onClick={() => handleGroupClick(placement.group)}
+                  />
+                )
               ))}
             </div>
           ))}
@@ -247,7 +285,11 @@ export default function WeeklyGrid() {
       {selectedCourse && (
         <CourseDetailModal
           course={selectedCourse}
-          onClose={() => setSelectedCourse(null)}
+          courseGroup={selectedGroup || undefined}
+          onClose={() => {
+            setSelectedCourse(null);
+            setSelectedGroup(null);
+          }}
         />
       )}
     </>

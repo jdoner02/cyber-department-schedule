@@ -5,6 +5,7 @@ import {
   StickyNote,
   BarChart3,
   TrendingUp,
+  Wand2,
   FileText,
   Settings,
   GraduationCap,
@@ -62,6 +63,11 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
       path: '/trends',
       label: 'Trends',
       icon: <TrendingUp className="w-5 h-5" />,
+    },
+    {
+      path: '/optimizer',
+      label: 'Optimizer',
+      icon: <Wand2 className="w-5 h-5" />,
     },
     {
       path: '/docs',

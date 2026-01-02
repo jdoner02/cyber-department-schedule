@@ -1,7 +1,7 @@
-import { X, Clock, MapPin, User, Users, BookOpen, Calendar, Mail, StickyNote, Info } from 'lucide-react';
+import { X, Clock, MapPin, User, Users, BookOpen, Calendar, Mail, StickyNote, Info, Layers } from 'lucide-react';
 import { useMemo, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Course } from '../../types/schedule';
+import type { Course, CourseGroup } from '../../types/schedule';
 import { SUBJECT_COLORS } from '../../constants/colors';
 import { formatTimeRange, formatDays } from '../../constants/timeSlots';
 import { useAcademicCalendarEvents } from '../../contexts/AcademicCalendarContext';
@@ -9,10 +9,11 @@ import { findRegistrationOpensEvent } from '../../services/academicCalendar';
 
 interface CourseDetailModalProps {
   course: Course;
+  courseGroup?: CourseGroup;
   onClose: () => void;
 }
 
-export default function CourseDetailModal({ course, onClose }: CourseDetailModalProps) {
+export default function CourseDetailModal({ course, courseGroup, onClose }: CourseDetailModalProps) {
   const navigate = useNavigate();
   const colors = SUBJECT_COLORS[course.subject];
   const calendarEvents = useAcademicCalendarEvents();
@@ -121,6 +122,41 @@ export default function CourseDetailModal({ course, onClose }: CourseDetailModal
 
         {/* Body */}
         <div className="modal-body space-y-6">
+          {/* Course Group info (if this is a grouped course) */}
+          {courseGroup && !courseGroup.isStandalone && (
+            <div className="p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
+              <h4 className="text-sm font-semibold text-indigo-800 mb-3 flex items-center gap-2">
+                <Layers className="w-4 h-4" />
+                Grouped Courses ({courseGroup.allCourses.length} sections)
+              </h4>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                {courseGroup.allCourses.map((c) => (
+                  <div
+                    key={c.crn}
+                    className={`p-2 rounded text-center ${
+                      c.crn === course.crn
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-white text-indigo-800 border border-indigo-200'
+                    }`}
+                  >
+                    <div className="font-medium text-sm">{c.subject} {c.courseNumber}</div>
+                    <div className="text-xs opacity-75">CRN: {c.crn}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-3 text-sm text-indigo-700">
+                <span className="font-medium">Combined Enrollment:</span>{' '}
+                {courseGroup.totalEnrollment}/{courseGroup.totalCapacity}
+                {courseGroup.hasCorequisite && (
+                  <span className="ml-3">• Includes lab corequisite</span>
+                )}
+                {courseGroup.hasStackedPair && (
+                  <span className="ml-3">• Stacked with graduate section</span>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Quick info grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-3 bg-gray-50 rounded-lg">

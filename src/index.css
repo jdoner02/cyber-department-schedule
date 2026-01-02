@@ -106,9 +106,10 @@ body {
   }
 
   .course-block {
-    @apply absolute left-1 right-1 rounded-md shadow-sm cursor-pointer
+    @apply absolute z-10 rounded-md shadow-sm cursor-pointer
            transition-all duration-150 ease-in-out
-           hover:shadow-md hover:z-10 hover:scale-[1.02];
+           hover:shadow-md hover:z-20 hover:scale-[1.02];
+    /* left, width are set inline by component for column positioning */
   }
 
   .course-block-content {

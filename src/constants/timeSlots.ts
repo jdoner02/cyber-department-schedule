@@ -77,3 +77,51 @@ export function formatDays(days: DayOfWeek[]): string {
     .map((day) => DAYS_OF_WEEK.find((d) => d.key === day)?.short ?? day)
     .join(', ');
 }
+
+// Hour block styling helpers for visual time grouping
+
+/**
+ * Check if an hour should have alternating background (even hours)
+ * Used to create visual bands across the schedule grid
+ * Even hours (8, 10, 12, 14, 16, 18, 20) get gray background
+ */
+export function isEvenHour(hour: number): boolean {
+  return hour % 2 === 0;
+}
+
+/**
+ * Check if this is a "major" hour that should have stronger visual separation
+ * Major hours: 8am, 10am, 12pm, 2pm, 4pm, 6pm (every 2 hours starting at 8)
+ * These get thicker border lines for clear visual breaks
+ */
+export function isMajorHour(hour: number): boolean {
+  return hour >= 8 && hour % 2 === 0;
+}
+
+/**
+ * Get the inline style for hour block background
+ * Uses a pronounced alternating pattern for visual clarity:
+ * - Even hours (8, 10, 12...) get a visible blue tint
+ * - Odd hours (7, 9, 11...) stay white
+ * This makes it immediately obvious which courses share the same time block
+ */
+export function getHourBlockBgStyle(hour: number): React.CSSProperties {
+  return {
+    backgroundColor: isEvenHour(hour) ? '#DBEAFE' : '#DCFCE7', // blue-100 vs green-100
+  };
+}
+
+/**
+ * Get the inline style for hour block border
+ * Major hours get thicker, darker borders for clear visual breaks
+ */
+export function getHourBlockBorderStyle(hour: number): React.CSSProperties {
+  if (isMajorHour(hour)) {
+    return {
+      borderBottom: '2px solid #93C5FD', // blue-300
+    };
+  }
+  return {
+    borderBottom: '1px solid #E5E7EB', // gray-200
+  };
+}

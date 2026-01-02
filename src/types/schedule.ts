@@ -203,3 +203,48 @@ export interface ScheduleFilters {
 }
 
 export type ColorByOption = 'subject' | 'instructor' | 'delivery';
+
+// Course grouping types - for corequisites and stacked courses
+export interface CourseGroup {
+  /** Unique identifier for the group (primary course CRN) */
+  id: string;
+
+  /** Primary course (e.g., CSCD 477) */
+  primaryCourse: Course;
+
+  /** Lab/corequisite course if exists (e.g., CSCD 477L) */
+  corequisite?: Course;
+
+  /** Stacked pair at higher level (e.g., 577 + 577L) */
+  stackedPair?: {
+    primaryCourse: Course;    // CSCD 577
+    corequisite?: Course;     // CSCD 577L
+  };
+
+  /** Display title for UI (e.g., "CSCD 477/477L/577/577L") */
+  displayTitle: string;
+
+  /** Short display code (e.g., "477/577") */
+  displayCode: string;
+
+  /** All CRNs in this group - used for conflict detection */
+  allCRNs: string[];
+
+  /** All courses in this group */
+  allCourses: Course[];
+
+  /** Combined enrollment across all sections */
+  totalEnrollment: number;
+
+  /** Combined maximum capacity */
+  totalCapacity: number;
+
+  /** Whether this is a simple standalone course (no coreq or stacking) */
+  isStandalone: boolean;
+
+  /** Whether this group includes a lab corequisite */
+  hasCorequisite: boolean;
+
+  /** Whether this group is stacked with higher-level courses */
+  hasStackedPair: boolean;
+}
